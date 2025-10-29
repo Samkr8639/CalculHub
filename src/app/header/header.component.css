@@ -1,0 +1,66 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background-color: var(--card-black);
+  border-bottom: 1px solid var(--border-grey);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--pure-white-text);
+}
+
+.app-name {
+  font-size: 1.8em;
+  font-weight: 700;
+  margin-left: 10px;
+  letter-spacing: 1px;
+  color: var(--primary-red);
+}
+
+.navigation a {
+  color: var(--light-grey-text);
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 1.1em;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navigation a:hover,
+.navigation a.active {
+  color: var(--primary-red);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .header {
+    padding: 10px 20px;
+  }
+
+  .navigation {
+    display: none; /* Hide navigation on small screens, could add a hamburger menu later */
+  }
+
+  .app-name {
+    font-size: 1.5em;
+  }
+}

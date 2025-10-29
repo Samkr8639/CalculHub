@@ -1,0 +1,37 @@
+.navigation ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navigation a {
+  color: var(--text-primary);
+  font-weight: 500;
+  padding: 0.5rem 0;
+  position: relative;
+}
+
+.navigation a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-cyan) 0%, var(--accent-purple) 100%);
+  transition: width 0.3s ease-in-out;
+}
+
+.navigation a:hover::after,
+.navigation a.active::after {
+  width: 100%;
+}
+
+/* Mobile Styles (Hamburger Menu - will be implemented later) */
+@media (max-width: 768px) {
+  .navigation ul {
+    display: none; /* Hide by default, will be toggled by a hamburger menu */
+  }
+}

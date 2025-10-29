@@ -1,0 +1,8 @@
+main {
+  display: flex;
+  flex-direction: column; /* Allow content to stack vertically */
+  align-items: stretch; /* Stretch content to full width */
+  padding: 0;
+  min-height: calc(100vh - 68px); /* Adjust based on header height, ensure footer doesn't overlap */
+  overflow-x: hidden; /* Prevent horizontal scroll from GSAP animations */
+}

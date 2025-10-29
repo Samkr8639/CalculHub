@@ -1,1 +1,89 @@
-/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Color Palette */
+  --primary-red: #E11931;
+  --background-black: #0A0A0A;
+  --card-black: #151515;
+  --pure-white-text: #FFFFFF;
+  --light-grey-text: #8F8F8F;
+  --border-grey: #2A2A2A;
+
+  /* Typography */
+  --font-family-sans-serif: 'Inter', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-sans-serif);
+  background-color: var(--background-black);
+  color: var(--pure-white-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* General Styling for a Clean Look */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--pure-white-text);
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+p {
+  color: var(--light-grey-text);
+  line-height: 1.6;
+}
+
+a {
+  color: var(--primary-red);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  background-color: var(--primary-red);
+  color: var(--pure-white-text);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: darken(var(--primary-red), 10%); /* This won't work in plain CSS, but illustrates intent */
+}
+
+/* Card Styling for Depth */
+.card {
+  background-color: var(--card-black);
+  border: 1px solid var(--border-grey);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+/* Layout helpers (basic grid/flex) */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

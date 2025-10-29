@@ -1,0 +1,112 @@
+import { ChangeDetectionStrategy, Component, OnInit, signal, computed, ElementRef, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SplitText } from 'gsap/SplitText';
+import { RouterLink } from '@angular/router';
+
+gsap.registerPlugin(ScrollTrigger, SplitText);
+
+interface CalculatorCard {
+  icon: string;
+  title: string;
+  description: string;
+  link: string;
+  category: string; // Added category property
+}
+
+@Component({
+  selector: 'app-home',
+  imports: [CommonModule, RouterLink],
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class HomeComponent implements OnInit {
+  @ViewChild('calculatorsSection') calculatorsSection!: ElementRef;
+
+  calculatorCards = signal<CalculatorCard[]>([
+    { icon: '💰', title: 'Mortgage Calculator', description: 'Calculate your monthly mortgage payments and amortization schedule.', link: '/financial/mortgage', category: 'Financial' },
+    { icon: '📈', title: 'Compound Interest', description: 'See how your investments grow over time with compound interest.', link: '/financial/compound-interest', category: 'Financial' },
+    { icon: '🧾', title: 'GST Calculator', description: 'Quickly add or remove GST from any amount.', link: '/financial/gst', category: 'Financial' },
+    { icon: '📊', title: 'SIP Calculator', description: 'Estimate the future value of your Systematic Investment Plans.', link: '/financial/sip', category: 'Financial' },
+    { icon: ' paycheck', title: 'Paycheck Calculator', description: 'Figure out your net salary after taxes and deductions.', link: '/financial/paycheck', category: 'Financial' },
+    { icon: 'ax', title: 'Tax Calculator', description: 'Determine your annual tax liability and effective tax rate.', link: '/financial/tax', category: 'Financial' },
+    { icon: '%', title: 'Percentage Calculator', description: 'Solve various percentage problems instantly.', link: '/mathematical/percentage', category: 'Mathematical' },
+    { icon: '✖️', title: 'Scientific Calculator', description: 'Perform complex scientific and mathematical operations.', link: '/mathematical/scientific', category: 'Mathematical' },
+    { icon: '🧩', title: 'Matrix Calculator', description: 'Execute matrix operations like addition, multiplication, and inverse.', link: '/mathematical/matrix', category: 'Mathematical' },
+    { icon: '🏃‍♀️', title: 'Calorie Calculator', description: 'Find your daily calorie needs for weight loss, gain, or maintenance.', link: '/health/calorie', category: 'Health & Fitness' },
+    { icon: '🤰', title: 'Pregnancy Calculator', description: 'Estimate your due date and track your pregnancy progress.', link: '/health/pregnancy', category: 'Health & Fitness' },
+    { icon: '🏠', title: 'Buy vs. Rent', description: 'Compare the costs of buying and renting a home to make an informed decision.', link: '/other/buy-vs-rent', category: 'Lifestyle & Home' },
+    { icon: '🤑', title: 'Millionaire Calculator', description: 'Discover how long it will take to reach your millionaire goal.', link: '/other/millionaire', category: 'Lifestyle & Home' },
+  ]);
+
+  categorizedCalculators = computed(() => {
+    const categories: { [key: string]: CalculatorCard[] } = {};
+    this.calculatorCards().forEach(card => {
+      if (!categories[card.category]) {
+        categories[card.category] = [];
+      }
+      categories[card.category].push(card);
+    });
+    return categories;
+  });
+
+  categoryKeys = computed(() => Object.keys(this.categorizedCalculators()));
+
+  ngOnInit() {
+    // Parallax effect for hero background
+    gsap.to('.hero-background', {
+      yPercent: 20,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.hero-section',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true,
+      },
+    });
+
+    // Text reveal animation
+    const split = new SplitText('.hero-title', { type: 'words,chars' });
+    gsap.from(split.chars, {
+      opacity: 0,
+      y: 20,
+      stagger: 0.05,
+      ease: 'back.out(1.7)',
+      duration: 0.6,
+      delay: 0.5, // Delay after page load fade-in
+    });
+
+    // Floating calculator icons
+    gsap.to('.floating-icon', {
+      y: -20,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut',
+      duration: 3,
+      stagger: {
+        each: 0.5,
+        from: 'random',
+      },
+    });
+
+    // Calculator card stagger animation
+    gsap.from('.calculator-card', {
+      opacity: 0,
+      y: 50,
+      stagger: 0.1,
+      ease: 'power2.out',
+      duration: 0.8,
+      scrollTrigger: {
+        trigger: '.calculator-grid',
+        start: 'top 80%',
+        // scrub: true,
+      },
+    });
+  }
+
+  scrollToCalculators() {
+    this.calculatorsSection.nativeElement.scrollIntoView({ behavior: 'smooth' });
+  }
+}
