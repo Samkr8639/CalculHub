@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
   @ViewChild('calculatorsSection') calculatorsSection!: ElementRef;
 
   calculatorCards = signal<CalculatorCard[]>([
-    { icon: '💰', title: 'Mortgage Calculator', description: 'Calculate your monthly mortgage payments and amortization schedule.', link: '/financial', category: 'Financial' },
+    { icon: '💰', title: 'Mortgage Calculator', description: 'Calculate your monthly mortgage payments and amortization schedule.', link: '/financial/mortgage', category: 'Financial' },
     { icon: '📈', title: 'Compound Interest', description: 'See how your investments grow over time with compound interest.', link: '/financial/compound-interest', category: 'Financial' },
     { icon: '🧾', title: 'GST Calculator', description: 'Quickly add or remove GST from any amount.', link: '/financial/gst', category: 'Financial' },
     { icon: '📊', title: 'SIP Calculator', description: 'Estimate the future value of your Systematic Investment Plans.', link: '/financial/sip', category: 'Financial' },

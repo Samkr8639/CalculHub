@@ -37,23 +37,20 @@ CalculHub is a comprehensive online calculator application designed to provide a
     *   Active link highlighting.
     *   Paycheck calculator icon updated to wallet SVG.
 
-## Current Requested Change: Fix Side Panel and Content Scrolling
+## Current Requested Change: Revert Page Scroll and Footer Height Changes
 
 ### Plan Overview
 
-The goal is to modify the layout of the calculator pages to ensure the side panel remains fixed in position while the main calculator content area is independently scrollable. This provides a more consistent navigation experience.
+The goal is to revert the previous changes made to implement the "sticky footer" pattern. The `src/styles.css` file will be restored to its state before the modifications related to page scroll and footer positioning.
 
-### Detailed Outline for Fixed Side Panel
+### Detailed Outline for Reverting Changes
 
-*   **Layout Structure:** The `financial-page-container` will serve as the main flex container, occupying the full height of the viewport (minus the header). It will prevent overall page scrolling.
-*   **Side Panel:** The `SidePanelComponent` will occupy a fixed width and its content will be scrollable if it exceeds its height. It will be positioned to stay in view.
-*   **Calculator Content:** The `financial-calculator-content` area will take up the remaining horizontal space and will be independently scrollable, allowing users to view all calculator details without affecting the side panel.
+*   **Revert Global HTML/Body Styling:** The `height: 100%` will be removed from `html, body`.
+*   **Revert Flex Container for Body:** The `display: flex; flex-direction: column;` will be removed from `body`.
+*   **Revert Expanding Main Content:** The `flex: 1;` will be removed from `main`.
 
 ### Plan and Steps for Current Change
 
-1.  **Update `blueprint.md`:** (Already done)
-2.  **Modify `src/app/financial/financial.component.css`:**
-    *   Update `.financial-page-container` to set `height: calc(100vh - 68px);` (assuming 68px is header height) and `overflow: hidden;`.
-    *   Update `.side-panel` (or ensure its existing styles support) `height: 100%;` and `overflow-y: auto;`.
-    *   Update `.financial-calculator-content` to set `height: 100%;` and `overflow-y: auto;`.
-3.  **Run `ng build`:** After implementing the changes, I will run `ng build` to check for compilation errors.
+1.  **Modify `src/styles.css`:** Reverted to its state before the sticky footer implementation.
+2.  **Run `ng build`:** Verified that the changes compile without errors.
+3.  **Update `blueprint.md`:** Documented the reversion of the sticky footer changes. (This step)

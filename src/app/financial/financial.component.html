@@ -49,7 +49,7 @@
             id="loanTermYears"
             type="number"
             [(ngModel)]="loanTermYears"
-            [placeholder]="loanTermUnit() === 'years' ? 'e.g., 30' : 'e.g., 360'"
+            [placeholder]="loanTermUnit() === 'years' ? 'e.g., 3 years' : 'e.g., 6 months'"
             [min]="loanTermUnit() === 'years' ? 1 : 1"
           />
           <div class="loan-term-toggle">

@@ -410,3 +410,7 @@
     height: 300px;
   }
 }
+
+#loanTermYears{
+  width: 80% !important;
+}
