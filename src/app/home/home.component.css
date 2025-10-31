@@ -9,6 +9,10 @@
   padding: 0 1.5rem;
 }
 
+#loanAmount{
+  width: 80% !important;
+}
+
 .hero-background {
   position: absolute;
   top: 0;
@@ -34,6 +38,7 @@
 .hero-text {
   flex: 1;
   text-align: left;
+  z-index: 2; /* Ensure text is on top */
 }
 
 .hero-title {
@@ -41,23 +46,29 @@
   font-weight: 800;
   margin-bottom: 1rem;
   color: #E11931;
+  width: 55%;
+  text-align: left;
   line-height: 1.1;
 }
 
 .hero-subtitle {
   font-size: 1.5rem;
   color: #fff;
+  width: 55%;
   margin-bottom: 2rem;
 }
 
 .hero-image {
-  flex: 1;
-  text-align: right;
-}
-
-.hero-image img {
-  max-width: 300px;
-  border-radius: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 50%;
+  background-image: url('https://images.pexels.com/photos/5491023/pexels-photo-5491023.jpeg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.2;
+  z-index: 1; /* Positioned behind text but above background */
 }
 
 .button.primary-button {
@@ -159,6 +170,23 @@
   color: var(--text-light-color);
   margin-bottom: 2.5rem;
   flex-grow: 1;
+}
+
+.button.small-button.calculator-button {
+  background-color: #E11931;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.button.small-button.calculator-button:hover {
+  background-color: #b3001a;
 }
 
 /* Responsive adjustments */

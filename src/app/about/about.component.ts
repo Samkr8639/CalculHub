@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-about',
   imports: [CommonModule],
-  template: '<p>about works!</p>',
-  styles: [],
+  templateUrl: './about.component.html',
+  styleUrl: './about.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AboutComponent {}

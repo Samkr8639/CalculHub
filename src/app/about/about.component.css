@@ -1,0 +1,144 @@
+.about-container {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: var(--text-color);
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.about-header h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--primary-red);
+  margin-bottom: 1rem;
+}
+
+.about-header .subtitle {
+  font-size: 1.5rem;
+  color: var(--text-light-color);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.content-section,
+.mission-section,
+.advantage-section,
+.story-section {
+  margin-bottom: 4rem;
+}
+
+h2 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--primary-red);
+  margin-bottom: 2rem;
+  text-align: center;
+  border-bottom: 3px solid var(--border-grey);
+  padding-bottom: 1rem;
+}
+
+h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+}
+
+p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-light-color);
+  margin-bottom: 1.5rem;
+}
+
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.principle-card {
+  background-color: var(--card-black);
+  padding: 2.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-grey);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.principle-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.principle-card h3 {
+  color: var(--primary-red);
+  margin-bottom: 1rem;
+}
+
+.category-list p,
+.feature-list p,
+.commitment-list p {
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.category-list p::before,
+.feature-list p::before,
+.commitment-list p::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--primary-red);
+  font-weight: bold;
+}
+
+strong {
+  color: var(--pure-white-text);
+  font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .about-header h1 {
+    font-size: 2.8rem;
+  }
+  
+  .about-header .subtitle {
+    font-size: 1.3rem;
+  }
+  
+  h2 {
+    font-size: 2.2rem;
+  }
+  
+  h3 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    padding: 3rem 1.5rem;
+  }
+  
+  .about-header h1 {
+    font-size: 2.2rem;
+  }
+  
+  .about-header .subtitle {
+    font-size: 1.1rem;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+  }
+}

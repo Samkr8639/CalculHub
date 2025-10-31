@@ -1,36 +1,31 @@
-import { ChangeDetectionStrategy, Component, OnInit, signal, computed, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SplitText } from 'gsap/SplitText';
-import { RouterLink } from '@angular/router';
-
-gsap.registerPlugin(ScrollTrigger, SplitText);
+import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 
 interface CalculatorCard {
   icon: string;
   title: string;
   description: string;
   link: string;
-  category: string; // Added category property
+  category: string;
 }
 
 @Component({
-  selector: 'app-home',
-  imports: [CommonModule, RouterLink],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  selector: 'app-side-panel',
+  imports: [CommonModule, RouterLink, RouterLinkActive],
+  templateUrl: './side-panel.component.html',
+  styleUrls: ['./side-panel.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent implements OnInit {
-  @ViewChild('calculatorsSection') calculatorsSection!: ElementRef;
+export class SidePanelComponent {
+  private router = inject(Router);
 
   calculatorCards = signal<CalculatorCard[]>([
     { icon: '💰', title: 'Mortgage Calculator', description: 'Calculate your monthly mortgage payments and amortization schedule.', link: '/financial', category: 'Financial' },
     { icon: '📈', title: 'Compound Interest', description: 'See how your investments grow over time with compound interest.', link: '/financial/compound-interest', category: 'Financial' },
     { icon: '🧾', title: 'GST Calculator', description: 'Quickly add or remove GST from any amount.', link: '/financial/gst', category: 'Financial' },
     { icon: '📊', title: 'SIP Calculator', description: 'Estimate the future value of your Systematic Investment Plans.', link: '/financial/sip', category: 'Financial' },
-    { icon: '', title: 'Paycheck Calculator', description: 'Figure out your net salary after taxes and deductions.', link: '/financial/paycheck', category: 'Financial' },
+    { icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucude-wallet"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path></svg>', title: 'Paycheck Calculator', description: 'Figure out your net salary after taxes and deductions.', link: '/financial/paycheck', category: 'Financial' },
     { icon: 'ax', title: 'Tax Calculator', description: 'Determine your annual tax liability and effective tax rate.', link: '/financial/tax', category: 'Financial' },
     { icon: '%', title: 'Percentage Calculator', description: 'Solve various percentage problems instantly.', link: '/mathematical/percentage', category: 'Mathematical' },
     { icon: '✖️', title: 'Scientific Calculator', description: 'Perform complex scientific and mathematical operations.', link: '/mathematical/scientific', category: 'Mathematical' },
@@ -54,84 +49,7 @@ export class HomeComponent implements OnInit {
 
   categoryKeys = computed(() => Object.keys(this.categorizedCalculators()));
 
-  ngOnInit() {
-    // Parallax effect for hero background
-    gsap.to('.hero-background', {
-      yPercent: 20,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '.hero-section',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true,
-      },
-    });
-
-    const splitTitle = new SplitText('.hero-title', { type: 'words,chars' });
-    gsap.from(splitTitle.chars, {
-      opacity: 0,
-      scale: 0,
-      rotation: 360,
-      ease: 'back.out(2)',
-      stagger: 0.03,
-      duration: 0.8,
-      delay: 0.5,
-    });
-
-
-    const splitSubtitle = new SplitText('.hero-subtitle', { type: 'words' });
-    gsap.from(splitSubtitle.words, {
-      opacity: 0,
-      y: 30,
-      ease: 'power2.out',
-      stagger: 0.1,
-      duration: 0.8,
-      delay: 1.5
-    });
-
-    // Add continuous float
-    gsap.to(splitSubtitle.words, {
-      y: -5,
-      ease: 'sine.inOut',
-      stagger: {
-        each: 0.1,
-        repeat: -1,
-        yoyo: true
-      },
-      duration: 2,
-      delay: 2.5
-    });
-
-
-    // Floating calculator icons
-    gsap.to('.floating-icon', {
-      y: -20,
-      repeat: -1,
-      yoyo: true,
-      ease: 'sine.inOut',
-      duration: 3,
-      stagger: {
-        each: 0.5,
-        from: 'random',
-      },
-    });
-
-    // Calculator card stagger animation
-    gsap.from('.calculator-card', {
-      opacity: 0,
-      y: 50,
-      stagger: 0.1,
-      ease: 'power2.out',
-      duration: 0.8,
-      scrollTrigger: {
-        trigger: '.calculator-grid',
-        start: 'top 80%',
-        // scrub: true,
-      },
-    });
-  }
-
-  scrollToCalculators() {
-    this.calculatorsSection.nativeElement.scrollIntoView({ behavior: 'smooth' });
+  isActive(link: string): boolean {
+    return this.router.url === link;
   }
 }

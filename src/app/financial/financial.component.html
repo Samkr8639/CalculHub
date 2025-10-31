@@ -1,0 +1,135 @@
+<div class="financial-page-container">
+  <app-side-panel />
+
+  <div class="financial-calculator-content">
+    <div class="financial-calculator">
+      <h1>Mortgage Calculator</h1>
+
+      <div class="input-group">
+        <label for="loanAmount">Loan Amount ($)</label>
+        <input 
+          id="loanAmount"
+          type="number"
+          [(ngModel)]="loanAmount"
+          placeholder="e.g., 200000"
+          min="0"
+        />
+        <input
+          type="range"
+          [(ngModel)]="loanAmount"
+          min="0"
+          max="1000000"
+          step="1000"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="interestRate">Interest Rate (% Annual)</label>
+        <input
+          id="interestRate"
+          type="number"
+          [(ngModel)]="interestRate"
+          placeholder="e.g., 3.5"
+          min="0"
+          step="0.01"
+        />
+        <input
+          type="range"
+          [(ngModel)]="interestRate"
+          min="0"
+          max="15"
+          step="0.01"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="loanTermYears">Loan Term</label>
+        <div class="loan-term-input-group">
+          <input
+            id="loanTermYears"
+            type="number"
+            [(ngModel)]="loanTermYears"
+            [placeholder]="loanTermUnit() === 'years' ? 'e.g., 30' : 'e.g., 360'"
+            [min]="loanTermUnit() === 'years' ? 1 : 1"
+          />
+          <div class="loan-term-toggle">
+            <button
+              [class.active]="loanTermUnit() === 'years'"
+              (click)="loanTermUnit.set('years')"
+            >Years</button>
+            <button
+              [class.active]="loanTermUnit() === 'months'"
+              (click)="loanTermUnit.set('months')"
+            >Months</button>
+          </div>
+        </div>
+        <input
+          type="range"
+          [(ngModel)]="loanTermYears"
+          [min]="loanTermUnit() === 'years' ? 1 : 1"
+          [max]="loanTermUnit() === 'years' ? 40 : 480"
+          [step]="loanTermUnit() === 'years' ? 1 : 12"
+        />
+      </div>
+
+      <div class="button-group">
+        <button class="clear" (click)="clearInputs()">Clear</button>
+      </div>
+
+      @if (monthlyPayment()) {
+      <div class="results-section">
+        <h2>Calculation Results</h2>
+
+        <div class="summary-box">
+          <div class="summary-item">
+            <p>Monthly Payment</p>
+            <strong>{{ monthlyPayment() | currency:'USD':'symbol':'1.2-2' }}</strong>
+          </div>
+          <div class="summary-item">
+            <p>Total Principal Paid</p>
+            <strong>{{ loanAmount() | currency:'USD':'symbol':'1.2-2' }}</strong>
+          </div>
+          <div class="summary-item">
+            <p>Total Interest Paid</p>
+            <strong>{{ (amortizationSchedule() ? amortizationSchedule()![amortizationSchedule()!.length - 1].cumulativeInterest : 0) | currency:'USD':'symbol':'1.2-2' }}</strong>
+          </div>
+        </div>
+
+        @if (amortizationSchedule(); as schedule) {
+        <h3>Amortization Schedule</h3>
+        <div style="overflow-x:auto;">
+          <table class="amortization-table">
+            <thead>
+              <tr>
+                <th>Month</th>
+                <th>Payment</th>
+                <th>Principal</th>
+                <th>Interest</th>
+                <th>Remaining Balance</th>
+                <th>Cumulative Interest</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (entry of schedule; track entry.month) {
+              <tr>
+                <td>{{ entry.month }}</td>
+                <td>{{ monthlyPayment() | currency:'USD':'symbol':'1.2-2' }}</td>
+                <td>{{ entry.principalPayment | currency:'USD':'symbol':'1.2-2' }}</td>
+                <td>{{ entry.interestPayment | currency:'USD':'symbol':'1.2-2' }}</td>
+                <td>{{ entry.remainingBalance | currency:'USD':'symbol':'1.2-2' }}</td>
+                <td>{{ entry.cumulativeInterest | currency:'USD':'symbol':'1.2-2' }}</td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <div class="chart-container">
+          <canvas #amortizationChart></canvas>
+        </div>
+        }
+      </div>
+      }
+    </div>
+  </div>
+</div>

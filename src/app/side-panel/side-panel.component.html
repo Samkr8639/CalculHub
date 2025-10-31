@@ -1,0 +1,17 @@
+<div class="side-panel">
+  @for (category of categoryKeys(); track category) {
+  <div class="category-section">
+    <h3>{{ category }}</h3>
+    <ul>
+      @for (card of categorizedCalculators()[category]; track card.title) {
+      <li>
+        <a [routerLink]="card.link" routerLinkActive="active" [class.active-link]="isActive(card.link)">
+          <span class="icon" [innerHTML]="card.icon"></span>
+          {{ card.title }}
+        </a>
+      </li>
+      }
+    </ul>
+  </div>
+  }
+</div>
