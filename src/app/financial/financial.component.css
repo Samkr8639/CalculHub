@@ -4,7 +4,7 @@
   min-height: calc(100vh - 68px); /* Adjust based on header height */
   height: calc(100vh - 68px); /* Fixed height for the container */
   overflow: hidden; /* Prevent overall page scrolling */
-}
+} 
 
 .side-panel {
   width: 280px;
