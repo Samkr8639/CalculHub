@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit, signal, computed, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, signal, computed, ElementRef, ViewChild, CUSTOM_ELEMENTS_SCHEMA, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { RouterLink } from '@angular/router';
+import { SwiperContainer } from 'swiper/element';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -21,9 +22,12 @@ interface CalculatorCard {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('calculatorsSection') calculatorsSection!: ElementRef;
+  @ViewChild('swiperContainer') swiperContainer!: ElementRef<SwiperContainer>;
+
 
   calculatorCards = signal<CalculatorCard[]>([
     { icon: '💰', title: 'Mortgage Calculator', description: 'Calculate your monthly mortgage payments and amortization schedule.', link: '/financial/mortgage', category: 'Financial' },
@@ -132,6 +136,33 @@ export class HomeComponent implements OnInit {
         // scrub: true,
       },
     });
+  }
+
+  ngAfterViewInit() {
+    if (this.swiperContainer) {
+      const swiperParams = {
+        breakpoints: {
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 10
+          },
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 30
+          },
+          1280: {
+            slidesPerView: 4,
+            spaceBetween: 40
+          }
+        }
+      };
+      Object.assign(this.swiperContainer.nativeElement, swiperParams);
+      this.swiperContainer.nativeElement.initialize();
+    }
   }
 
   scrollToCalculators() {
