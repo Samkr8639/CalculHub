@@ -1,0 +1,93 @@
+<div class="gst-calculator-container">
+  <div class="financial-calculator">
+    <h1>Home Loan EMI Calculator</h1>
+
+    <div class="calculator-inputs">
+      <div class="input-group">
+        <label for="loanAmount">Loan Amount (₹)</label>
+        <input
+          id="loanAmount"
+          type="number"
+          [value]="loanAmount() || ''"
+          (input)="onLoanAmountChange($event)"
+          placeholder="e.g., 5000000"
+        />
+        <input
+          type="range"
+          [value]="loanAmount() || 0"
+          (input)="onLoanAmountChange($event)"
+          min="100000"
+          max="20000000"
+          step="100000"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="interestRate">Interest Rate (%)</label>
+        <input
+          id="interestRate"
+          type="number"
+          [value]="interestRate() || ''"
+          (input)="onInterestRateChange($event)"
+          placeholder="e.g., 8"
+        />
+        <input
+          type="range"
+          [value]="interestRate() || 8"
+          (input)="onInterestRateChange($event)"
+          min="1"
+          max="20"
+          step="0.1"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="loanTenure">Loan Tenure (Years)</label>
+        <input
+          id="loanTenure"
+          type="number"
+          [value]="loanTenure() || ''"
+          (input)="onLoanTenureChange($event)"
+          placeholder="e.g., 20"
+        />
+        <input
+          type="range"
+          [value]="loanTenure() || 20"
+          (input)="onLoanTenureChange($event)"
+          min="1"
+          max="30"
+          step="1"
+        />
+      </div>
+    </div>
+
+    @if (monthlyEmi() !== null && monthlyEmi()! > 0) {
+      <section class="results-section">
+        <h2>EMI Details</h2>
+        <div class="summary-box">
+          <div class="summary-item">
+            <p>Monthly EMI</p>
+            <strong>{{ monthlyEmi() | number: '1.2-2' }}</strong>
+          </div>
+          <div class="summary-item">
+            <p>Total Interest Payable</p>
+            <strong>{{ totalInterest() | number: '1.2-2' }}</strong>
+          </div>
+          <div class="summary-item">
+            <p>Total Payable Amount</p>
+            <strong>{{ totalPayable() | number: '1.2-2' }}</strong>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <canvas #emiChart></canvas>
+        </div>
+      </section>
+    } @else {
+      <div class="placeholder-message">
+        <p>Enter loan details to calculate your EMI.</p>
+      </div>
+    }
+
+  </div>
+</div>

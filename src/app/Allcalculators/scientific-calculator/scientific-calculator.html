@@ -1,0 +1,57 @@
+<div class="scientific-calculator-container">
+    <div class="display-area">
+      <div class="mode-indicators">
+        <span>{{ isSecondFunction() ? '2nd' : '' }}</span>
+        <span>{{ isRadianMode() ? 'Rad' : 'Deg' }}</span>
+        <span>{{ memory() !== 0 ? 'M' : '' }}</span>
+      </div>
+      <div class="display" [class.error]="isError">{{ display() }}</div>
+    </div>
+  
+    <div class="keypad">
+      <button (click)="toggleSecondFunction()" [class.active]="isSecondFunction()">2nd</button>
+      <button (click)="performScientificFunction('pi')">π</button>
+      <button (click)="performScientificFunction('e')">e</button>
+      <button (click)="clear()">C</button>
+      <button (click)="backspace()">⌫</button>
+  
+      <button (click)="performScientificFunction('sqr')">x²</button>
+      <button (click)="performScientificFunction('inv')">1/x</button>
+      <button (click)="performScientificFunction('abs')">|x|</button>
+      <button (click)="appendOperator('/')">÷</button>
+      <button (click)="performScientificFunction('fact')">n!</button>
+  
+      <button (click)="performScientificFunction('sqrt')">√</button>
+      <button (click)="appendNumber('7')">7</button>
+      <button (click)="appendNumber('8')">8</button>
+      <button (click)="appendNumber('9')">9</button>
+      <button (click)="appendOperator('*')">×</button>
+  
+      <button (click)="toggleAngleMode()">{{ isRadianMode() ? 'Deg' : 'Rad' }}</button>
+      <button (click)="appendNumber('4')">4</button>
+      <button (click)="appendNumber('5')">5</button>
+      <button (click)="appendNumber('6')">6</button>
+      <button (click)="appendOperator('-')">−</button>
+  
+      <button (click)="performScientificFunction('sin')">{{ isSecondFunction() ? 'sin⁻¹' : 'sin' }}</button>
+      <button (click)="appendNumber('1')">1</button>
+      <button (click)="appendNumber('2')">2</button>
+      <button (click)="appendNumber('3')">3</button>
+      <button (click)="appendOperator('+')">+</button>
+
+      <button (click)="performScientificFunction('cos')">{{ isSecondFunction() ? 'cos⁻¹' : 'cos' }}</button>
+      <button (click)="performScientificFunction('tan')">{{ isSecondFunction() ? 'tan⁻¹' : 'tan' }}</button>
+      <button (click)="toggleSign()">+/-</button>
+      <button (click)="appendNumber('0')">0</button>
+      <button (click)="appendDecimal()">.</button>
+      <button class="equals" (click)="calculate()">=</button>
+
+      <button (click)="performScientificFunction('log')">{{ isSecondFunction() ? '10^x' : 'log' }}</button>
+      <button (click)="performScientificFunction('ln')">{{ isSecondFunction() ? 'e^x' : 'ln' }}</button>
+      <button (click)="memoryClear()">MC</button>
+      <button (click)="memoryRecall()">MR</button>
+      <button (click)="memoryAdd()">M+</button>
+      <button (click)="memorySubtract()">M-</button>
+    </div>
+  </div>
+  

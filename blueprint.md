@@ -59,12 +59,24 @@ The goal was to enhance the user experience by adding an auto-sliding carousel f
 4.  **Enable Custom Elements:** Added `CUSTOM_ELEMENTS_SCHEMA` to `home.component.ts`.
 5.  **Fix Uneven Card Height:** Added CSS to ensure all cards in the slider have the same height and that the buttons are aligned at the bottom.
 
-### Current Change: Improve Slider Responsiveness and Controls
+### Previous Change: Improve Slider Responsiveness and Controls
 
 #### Plan
-The goal is to make the financial calculator slider more responsive and user-friendly by adding navigation controls, pagination, and breakpoints for different screen sizes.
+The goal was to make the financial calculator slider more responsive and user-friendly by adding navigation controls, pagination, and breakpoints for different screen sizes.
 
 #### Steps
 1.  **Enable Navigation and Pagination:** Added `navigation="true"` and `pagination="true"` to the `<swiper-container>` in `home.component.html`.
 2.  **Implement Responsive Breakpoints:** In `home.component.ts`, used the `ngAfterViewInit` lifecycle hook to programmatically set the `slidesPerView` and `spaceBetween` based on the screen width. This makes the slider show 1 card on small screens, 2 on medium, and 3 on large screens.
 3.  **Style Navigation and Pagination:** In `home.component.css`, added the `--swiper-theme-color` CSS variable to style the navigation arrows and pagination dots to match the application's red and black theme.
+
+### Current Change: Implement Home Loan EMI Calculator
+
+#### Plan
+The goal is to implement a Home Loan EMI Calculator with a bar chart, following the design of the other calculators.
+
+#### Steps
+1. **Create `home-loan-emi-calculator.component.ts`:** Created the TypeScript file for the Home Loan EMI Calculator component, including signals for inputs, the EMI calculation logic, and Chart.js integration.
+2. **Create `home-loan-emi-calculator.component.html`:** Created the HTML template with input sliders for loan amount, interest rate, and tenure, a results section, and a canvas for the chart.
+3. **Create `home-loan-emi-calculator.component.css`:** Added CSS to style the component to match the existing calculator designs.
+4. **Integrate into `app.routes.ts`:** Added a new route to make the calculator accessible at `/financial/home-loan-emi-calculator`.
+5. **Add to Home Page:** Updated `home.component.ts` to include the Home Loan EMI Calculator in the financial calculators list on the home page.

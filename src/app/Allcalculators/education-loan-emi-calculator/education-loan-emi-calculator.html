@@ -1,0 +1,60 @@
+<div class="gst-calculator-container">
+  <div class="financial-calculator">
+    <h1>Education Loan EMI Calculator</h1>
+
+    <div class="calculator-inputs">
+      <div class="input-group">
+        <label for="loanAmount">Loan Amount (₹)</label>
+        <input id="loanAmount" type="number" [value]="loanAmount() || ''" (input)="onInputChange($event, loanAmount.set)" placeholder="e.g., 1000000" />
+        <input type="range" [value]="loanAmount() || 0" (input)="onInputChange($event, loanAmount.set)" min="50000" max="10000000" step="10000" />
+      </div>
+
+      <div class="input-group">
+        <label for="interestRate">Annual Interest Rate (%)</label>
+        <input id="interestRate" type="number" [value]="interestRate() || ''" (input)="onInputChange($event, interestRate.set)" placeholder="e.g., 8.5" />
+        <input type="range" [value]="interestRate() || 8.5" (input)="onInputChange($event, interestRate.set)" min="5" max="15" step="0.1" />
+      </div>
+
+      <div class="input-group">
+        <label for="loanTenure">Loan Tenure (Years)</label>
+        <input id="loanTenure" type="number" [value]="loanTenure() || ''" (input)="onInputChange($event, loanTenure.set)" placeholder="e.g., 10" />
+        <input type="range" [value]="loanTenure() || 10" (input)="onInputChange($event, loanTenure.set)" min="1" max="15" />
+      </div>
+
+      <div class="input-group">
+        <label for="moratoriumPeriod">Moratorium Period (Years)</label>
+        <input id="moratoriumPeriod" type="number" [value]="moratoriumPeriod() || ''" (input)="onInputChange($event, moratoriumPeriod.set)" placeholder="e.g., 2" />
+        <input type="range" [value]="moratoriumPeriod() || 2" (input)="onInputChange($event, moratoriumPeriod.set)" min="0" max="5" />
+      </div>
+    </div>
+
+    @if (monthlyEMI() !== null && monthlyEMI()! > 0) {
+      <section class="results-section">
+        <h2>Loan EMI Details</h2>
+        <div class="summary-box">
+          <div class="summary-item">
+            <p>Monthly EMI</p>
+            <strong>{{ monthlyEMI() | number: '1.2-2' }}</strong>
+          </div>
+          <div class="summary-item">
+            <p>Total Interest</p>
+            <strong>{{ totalInterest() | number: '1.2-2' }}</strong>
+          </div>
+          <div class="summary-item">
+            <p>Total Payment</p>
+            <strong>{{ totalPayment() | number: '1.2-2' }}</strong>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <canvas #emiChart></canvas>
+        </div>
+      </section>
+    } @else {
+      <div class="placeholder-message">
+        <p>Enter your loan details to calculate your EMI.</p>
+      </div>
+    }
+
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="gst-calculator-container">
+  <div class="financial-calculator">
+    <h1>Investment Calculator</h1>
+
+    <div class="calculator-inputs">
+      <div class="input-group">
+        <label for="initialInvestment">Initial Investment (₹)</label>
+        <input id="initialInvestment" type="number" [value]="initialInvestment() || ''" (input)="onInputChange($event, initialInvestment.set)" placeholder="e.g., 100000" />
+        <input type="range" [value]="initialInvestment() || 0" (input)="onInputChange($event, initialInvestment.set)" min="0" max="10000000" step="10000" />
+      </div>
+
+      <div class="input-group">
+        <label for="monthlyInvestment">Monthly Investment (₹)</label>
+        <input id="monthlyInvestment" type="number" [value]="monthlyInvestment() || ''" (input)="onInputChange($event, monthlyInvestment.set)" placeholder="e.g., 10000" />
+        <input type="range" [value]="monthlyInvestment() || 0" (input)="onInputChange($event, monthlyInvestment.set)" min="0" max="500000" step="1000" />
+      </div>
+
+      <div class="input-group">
+        <label for="investmentPeriod">Investment Period (Years)</label>
+        <input id="investmentPeriod" type="number" [value]="investmentPeriod() || ''" (input)="onInputChange($event, investmentPeriod.set)" placeholder="e.g., 10" />
+        <input type="range" [value]="investmentPeriod() || 10" (input)="onInputChange($event, investmentPeriod.set)" min="1" max="50" />
+      </div>
+
+      <div class="input-group">
+        <label for="expectedReturnRate">Expected Annual Return Rate (%)</label>
+        <input id="expectedReturnRate" type="number" [value]="expectedReturnRate() || ''" (input)="onInputChange($event, expectedReturnRate.set)" placeholder="e.g., 12" />
+        <input type="range" [value]="expectedReturnRate() || 12" (input)="onInputChange($event, expectedReturnRate.set)" min="1" max="30" step="0.5" />
+      </div>
+    </div>
+
+    @if (futureValue() !== null && futureValue()! > 0) {
+      <section class="results-section">
+        <h2>Investment Details</h2>
+        <div class="summary-box">
+          <div class="summary-item">
+            <p>Future Value</p>
+            <strong>{{ futureValue() | number: '1.2-2' }}</strong>
+          </div>
+          <div class="summary-item">
+            <p>Total Investment</p>
+            <strong>{{ totalInvestment() | number: '1.2-2' }}</strong>
+          </div>
+          <div class="summary-item">
+            <p>Total Interest Earned</p>
+            <strong>{{ totalInterest() | number: '1.2-2' }}</strong>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <canvas #investmentChart></canvas>
+        </div>
+      </section>
+    } @else {
+      <div class="placeholder-message">
+        <p>Enter your details to calculate your investment growth.</p>
+      </div>
+    }
+
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="percentage-calculator-container">
+    <div class="calculator-section">
+      <h2>Basic Percentage</h2>
+      <div class="input-row">
+        <label>What is</label>
+        <input type="number" [value]="percentage1() || ''" (input)="onInput($event, percentage1.set)" placeholder="e.g., 15">
+        <label>% of</label>
+        <input type="number" [value]="value1() || ''" (input)="onInput($event, value1.set)" placeholder="e.g., 750">
+        <label>?</label>
+      </div>
+      @if (result1() !== null) {
+        <div class="result">
+          <p>Result: <strong>{{ result1() | number:'1.2-5' }}</strong></p>
+        </div>
+      }
+    </div>
+  
+    <div class="calculator-section">
+      <h2>Percentage of a Value</h2>
+      <div class="input-row">
+        <input type="number" [value]="value2X() || ''" (input)="onInput($event, value2X.set)" placeholder="e.g., 112.5">
+        <label>is what % of</label>
+        <input type="number" [value]="value2Y() || ''" (input)="onInput($event, value2Y.set)" placeholder="e.g., 750">
+        <label>?</label>
+      </div>
+      @if (result2() !== null) {
+        <div class="result">
+          <p>Result: <strong>{{ result2() | number:'1.2-2' }}%</strong></p>
+        </div>
+      }
+    </div>
+  
+    <div class="calculator-section">
+      <h2>Percentage Change</h2>
+      <div class="input-row">
+        <label>% change from</label>
+        <input type="number" [value]="value3X() || ''" (input)="onInput($event, value3X.set)" placeholder="e.g., 600">
+        <label>to</label>
+        <input type="number" [value]="value3Y() || ''" (input)="onInput($event, value3Y.set)" placeholder="e.g., 750">
+        <label>?</label>
+      </div>
+      @if (result3() !== null) {
+        <div class="result">
+          <p>Result:
+            <strong [class.increase]="result3()! >= 0" [class.decrease]="result3()! < 0">
+              {{ result3()! >= 0 ? '+' : '' }}{{ result3() | number:'1.2-2' }}%
+            </strong>
+          </p>
+        </div>
+      }
+    </div>
+  </div>
+  

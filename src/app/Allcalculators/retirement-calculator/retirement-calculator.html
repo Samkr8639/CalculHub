@@ -1,0 +1,66 @@
+<div class="gst-calculator-container">
+  <div class="financial-calculator">
+    <h1>Retirement Calculator</h1>
+
+    <div class="calculator-inputs">
+      <div class="input-group">
+        <label for="currentAge">Current Age (Years)</label>
+        <input id="currentAge" type="number" [value]="currentAge() || ''" (input)="onInputChange($event, currentAge.set)" placeholder="e.g., 30" />
+        <input type="range" [value]="currentAge() || 30" (input)="onInputChange($event, currentAge.set)" min="18" max="100" />
+      </div>
+
+      <div class="input-group">
+        <label for="retirementAge">Retirement Age (Years)</label>
+        <input id="retirementAge" type="number" [value]="retirementAge() || ''" (input)="onInputChange($event, retirementAge.set)" placeholder="e.g., 60" />
+        <input type="range" [value]="retirementAge() || 60" (input)="onInputChange($event, retirementAge.set)" min="18" max="100" />
+      </div>
+
+      <div class="input-group">
+        <label for="currentSavings">Current Savings (₹)</label>
+        <input id="currentSavings" type="number" [value]="currentSavings() || ''" (input)="onInputChange($event, currentSavings.set)" placeholder="e.g., 500000" />
+        <input type="range" [value]="currentSavings() || 0" (input)="onInputChange($event, currentSavings.set)" min="0" max="50000000" step="10000" />
+      </div>
+
+      <div class="input-group">
+        <label for="monthlyContribution">Monthly Contribution (₹)</label>
+        <input id="monthlyContribution" type="number" [value]="monthlyContribution() || ''" (input)="onInputChange($event, monthlyContribution.set)" placeholder="e.g., 20000" />
+        <input type="range" [value]="monthlyContribution() || 0" (input)="onInputChange($event, monthlyContribution.set)" min="0" max="500000" step="1000" />
+      </div>
+
+      <div class="input-group">
+        <label for="annualReturnRate">Expected Annual Return Rate (%)</label>
+        <input id="annualReturnRate" type="number" [value]="annualReturnRate() || ''" (input)="onInputChange($event, annualReturnRate.set)" placeholder="e.g., 10" />
+        <input type="range" [value]="annualReturnRate() || 10" (input)="onInputChange($event, annualReturnRate.set)" min="1" max="30" step="0.5" />
+      </div>
+    </div>
+
+    @if (retirementCorpus() !== null && retirementCorpus()! > 0) {
+      <section class="results-section">
+        <h2>Retirement Details</h2>
+        <div class="summary-box">
+          <div class="summary-item">
+            <p>Retirement Corpus</p>
+            <strong>{{ retirementCorpus() | number: '1.2-2' }}</strong>
+          </div>
+          <div class="summary-item">
+            <p>Total Investment</p>
+            <strong>{{ totalInvestment() | number: '1.2-2' }}</strong>
+          </div>
+          <div class="summary-item">
+            <p>Total Interest Earned</p>
+            <strong>{{ totalInterest() | number: '1.2-2' }}</strong>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <canvas #retirementChart></canvas>
+        </div>
+      </section>
+    } @else {
+      <div class="placeholder-message">
+        <p>Enter your details to calculate your retirement corpus.</p>
+      </div>
+    }
+
+  </div>
+</div>
