@@ -1,0 +1,105 @@
+<div class="gst-calculator-container">
+  <div class="financial-calculator">
+    <h1>GST Calculator</h1>
+
+    <div class="calculator-inputs">
+      <div class="input-group">
+        <label for="amount">Amount (₹):</label>
+        <input id="amount" type="number" [value]="amount() || ''" (input)="onAmountChange($event)">
+        <input
+          type="range"
+          [value]="amount() || 0"
+          (input)="onAmountChange($event)"
+          min="0"
+          max="1000000"
+          step="1000"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="gstRate">GST Rate (%):</label>
+        <input id="gstRate" type="number" [value]="gstRate() || ''" (input)="onGstRateChange($event)">
+        <input
+          type="range"
+          [value]="gstRate() || 0"
+          (input)="onGstRateChange($event)"
+          min="0"
+          max="50"
+          step="0.1"
+        />
+      </div>
+
+      <div class="radio-group">
+        <label class="radio-option">
+          <input
+            type="radio"
+            name="gstMode"
+            value="exclude"
+            [checked]="calculationMode() === 'exclude'"
+            (change)="calculationMode.set('exclude'); calculateGst()"
+          />
+          <span class="radio-custom"></span>
+          Exclude GST
+        </label>
+        <label class="radio-option">
+          <input
+            type="radio"
+            name="gstMode"
+            value="include"
+            [checked]="calculationMode() === 'include'"
+            (change)="calculationMode.set('include'); calculateGst()"
+          />
+          <span class="radio-custom"></span>
+          Include GST
+        </label>
+      </div>
+
+      <div class="button-group">
+        <button class="clear" (click)="resetCalculations()">Clear</button>
+      </div>
+    </div>
+
+    @if (calculatedGstAmount() !== null && (calculatedNetPrice() !== null || calculatedBasePrice() !== null)) {
+      <section class="results-section">
+        <h2>Calculation Summary</h2>
+        <div class="summary-box">
+          @if (calculationMode() === 'exclude') {
+            <div class="summary-item">
+              <p>Original Amount</p>
+              <strong>₹{{ amount() | number:'1.2-2' }}</strong>
+            </div>
+            <div class="summary-item">
+              <p>GST Amount</p>
+              <strong>₹{{ calculatedGstAmount() | number:'1.2-2' }}</strong>
+            </div>
+            <div class="summary-item">
+              <p>Net Price (incl. GST)</p>
+              <strong>₹{{ calculatedNetPrice() | number:'1.2-2' }}</strong>
+            </div>
+          } @else {
+            <div class="summary-item">
+              <p>GST Inclusive Price</p>
+              <strong>₹{{ amount() | number:'1.2-2' }}</strong>
+            </div>
+            <div class="summary-item">
+              <p>GST Amount</p>
+              <strong>₹{{ calculatedGstAmount() | number:'1.2-2' }}</strong>
+            </div>
+            <div class="summary-item">
+              <p>Base Price (excl. GST)</p>
+              <strong>₹{{ calculatedBasePrice() | number:'1.2-2' }}</strong>
+            </div>
+          }
+        </div>
+
+        <div class="chart-container">
+          <canvas #gstPieChart></canvas>
+        </div>
+      </section>
+    } @else {
+      <div class="placeholder-message">
+        <p>Enter values and select a mode to see results and chart.</p>
+      </div>
+    }
+  </div>
+</div>

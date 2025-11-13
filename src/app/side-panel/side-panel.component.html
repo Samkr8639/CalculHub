@@ -5,7 +5,7 @@
     <ul>
       @for (card of categorizedCalculators()[category]; track card.title) {
       <li>
-        <a [routerLink]="card.link" routerLinkActive="active" [class.active-link]="isActive(card.link)">
+        <a [routerLink]="card.link" [class.active-link]="isActive(card.link)" (click)="onCalculatorClick(card.title)">
           <span class="icon" [innerHTML]="card.icon"></span>
           {{ card.title }}
         </a>

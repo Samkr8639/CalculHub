@@ -1,0 +1,92 @@
+<div class="gst-calculator-container">
+  <div class="financial-calculator">
+    <h1>PPF Calculator</h1>
+
+    <div class="calculator-inputs">
+      <div class="input-group">
+        <label for="yearlyInvestment">Yearly Investment (₹)</label>
+        <input
+          id="yearlyInvestment"
+          type="number"
+          [value]="yearlyInvestment() || ''"
+          (input)="onYearlyInvestmentChange($event)"
+          placeholder="e.g., 150000"
+        />
+        <input
+          type="range"
+          [value]="yearlyInvestment() || 0"
+          (input)="onYearlyInvestmentChange($event)"
+          min="500"
+          max="150000"
+          step="500"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="investmentPeriod">Investment Period (Years)</label>
+        <input
+          id="investmentPeriod"
+          type="number"
+          [value]="investmentPeriod() || ''"
+          (input)="onInvestmentPeriodChange($event)"
+          placeholder="e.g., 15"
+        />
+        <input
+          type="range"
+          [value]="investmentPeriod() || 15"
+          (input)="onInvestmentPeriodChange($event)"
+          min="15"
+          max="50"
+          step="1"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="annualRate">Annual Interest Rate (%)</label>
+        <input
+          id="annualRate"
+          type="number"
+          [value]="annualRate() || ''"
+          (input)="onAnnualRateChange($event)"
+          placeholder="e.g., 7.1"
+        />
+        <input
+          type="range"
+          [value]="annualRate() || 7.1"
+          (input)="onAnnualRateChange($event)"
+          min="1"
+          max="15"
+          step="0.1"
+        />
+      </div>
+    </div>
+
+    @if (maturityValue() !== null) {
+    <section class="results-section">
+      <h2>Investment Projection</h2>
+      <div class="summary-box">
+        <div class="summary-item">
+          <p>Total Investment</p>
+          <strong>₹{{ totalInvestment() | number: '1.2-2' }}</strong>
+        </div>
+        <div class="summary-item">
+          <p>Total Interest</p>
+          <strong>₹{{ totalInterest() | number: '1.2-2' }}</strong>
+        </div>
+        <div class="summary-item">
+          <p>Maturity Value</p>
+          <strong>₹{{ maturityValue() | number: '1.2-2' }}</strong>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <canvas #returnsChart></canvas>
+      </div>
+    </section>
+    } @else {
+    <div class="placeholder-message">
+      <p>Enter your investment details to see the PPF projection.</p>
+    </div>
+    }
+  </div>
+</div>

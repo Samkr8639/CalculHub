@@ -1,0 +1,111 @@
+<div class="gst-calculator-container">
+  <div class="financial-calculator">
+    <h1>Mutual Fund Returns Calculator</h1>
+
+    <div class="calculator-inputs">
+      <div class="input-group">
+        <label for="initialInvestment">Initial Investment (₹)</label>
+        <input
+          id="initialInvestment"
+          type="number"
+          [value]="initialInvestment() || ''"
+          (input)="onInitialInvestmentChange($event)"
+          placeholder="e.g., 100000"
+        />
+        <input
+          type="range"
+          [value]="initialInvestment() || 0"
+          (input)="onInitialInvestmentChange($event)"
+          min="0"
+          max="1000000"
+          step="1000"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="monthlyContribution">Monthly Contribution (₹)</label>
+        <input
+          id="monthlyContribution"
+          type="number"
+          [value]="monthlyContribution() || ''"
+          (input)="onMonthlyContributionChange($event)"
+          placeholder="e.g., 5000"
+        />
+        <input
+          type="range"
+          [value]="monthlyContribution() || 0"
+          (input)="onMonthlyContributionChange($event)"
+          min="0"
+          max="100000"
+          step="500"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="investmentPeriod">Investment Period (Years)</label>
+        <input
+          id="investmentPeriod"
+          type="number"
+          [value]="investmentPeriod() || ''"
+          (input)="onInvestmentPeriodChange($event)"
+          placeholder="e.g., 10"
+        />
+        <input
+          type="range"
+          [value]="investmentPeriod() || 0"
+          (input)="onInvestmentPeriodChange($event)"
+          min="1"
+          max="50"
+          step="1"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="annualReturn">Expected Annual Return (%)</label>
+        <input
+          id="annualReturn"
+          type="number"
+          [value]="annualReturn() || ''"
+          (input)="onAnnualReturnChange($event)"
+          placeholder="e.g., 12"
+        />
+        <input
+          type="range"
+          [value]="annualReturn() || 0"
+          (input)="onAnnualReturnChange($event)"
+          min="1"
+          max="30"
+          step="0.5"
+        />
+      </div>
+    </div>
+
+    @if (futureValue() !== null) {
+    <section class="results-section">
+      <h2>Investment Projection</h2>
+      <div class="summary-box">
+        <div class="summary-item">
+          <p>Total Investment</p>
+          <strong>₹{{ totalInvestment() | number: '1.2-2' }}</strong>
+        </div>
+        <div class="summary-item">
+          <p>Future Value</p>
+          <strong>₹{{ futureValue() | number: '1.2-2' }}</strong>
+        </div>
+        <div class="summary-item">
+          <p>Total Returns</p>
+          <strong>₹{{ totalReturns() | number: '1.2-2' }}</strong>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <canvas #returnsChart></canvas>
+      </div>
+    </section>
+    } @else {
+    <div class="placeholder-message">
+      <p>Enter your investment details to calculate the future value.</p>
+    </div>
+    }
+  </div>
+</div>

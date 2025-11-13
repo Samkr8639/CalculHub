@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, signal, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, computed, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { RouterLink, Router, NavigationEnd } from '@angular/router';
+import { CalculatorSelectionService } from '../calculator-selection.service';
+import { Subscription, filter } from 'rxjs';
 
 interface CalculatorCard {
   icon: string;
@@ -12,28 +14,35 @@ interface CalculatorCard {
 
 @Component({
   selector: 'app-side-panel',
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterLink],
   templateUrl: './side-panel.component.html',
   styleUrls: ['./side-panel.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidePanelComponent {
+export class SidePanelComponent implements OnInit, OnDestroy {
   private router = inject(Router);
+  private calculatorSelectionService = inject(CalculatorSelectionService);
+  private subscription = new Subscription();
+
+  activeLink = signal<string | null>(null);
 
   calculatorCards = signal<CalculatorCard[]>([
-    { icon: '💰', title: 'Mortgage Calculator', description: 'Calculate your monthly mortgage payments and amortization schedule.', link: '/financial', category: 'Financial' },
-    { icon: '📈', title: 'Compound Interest', description: 'See how your investments grow over time with compound interest.', link: '/financial/compound-interest', category: 'Financial' },
-    { icon: '🧾', title: 'GST Calculator', description: 'Quickly add or remove GST from any amount.', link: '/financial/gst', category: 'Financial' },
-    { icon: '📊', title: 'SIP Calculator', description: 'Estimate the future value of your Systematic Investment Plans.', link: '/financial/sip', category: 'Financial' },
-    { icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucude-wallet"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path></svg>', title: 'Paycheck Calculator', description: 'Figure out your net salary after taxes and deductions.', link: '/financial/paycheck', category: 'Financial' },
-    { icon: 'ax', title: 'Tax Calculator', description: 'Determine your annual tax liability and effective tax rate.', link: '/financial/tax', category: 'Financial' },
-    { icon: '%', title: 'Percentage Calculator', description: 'Solve various percentage problems instantly.', link: '/mathematical/percentage', category: 'Mathematical' },
-    { icon: '✖️', title: 'Scientific Calculator', description: 'Perform complex scientific and mathematical operations.', link: '/mathematical/scientific', category: 'Mathematical' },
-    { icon: '🧩', title: 'Matrix Calculator', description: 'Execute matrix operations like addition, multiplication, and inverse.', link: '/mathematical/matrix', category: 'Mathematical' },
-    { icon: '🏃‍♀️', title: 'Calorie Calculator', description: 'Find your daily calorie needs for weight loss, gain, or maintenance.', link: '/health/calorie', category: 'Health & Fitness' },
-    { icon: '🤰', title: 'Pregnancy Calculator', description: 'Estimate your due date and track your pregnancy progress.', link: '/health/pregnancy', category: 'Health & Fitness' },
-    { icon: '🏠', title: 'Buy vs. Rent', description: 'Compare the costs of buying and renting a home to make an informed decision.', link: '/other/buy-vs-rent', category: 'Lifestyle & Home' },
-    { icon: '🤑', title: 'Millionaire Calculator', description: 'Discover how long it will take to reach your millionaire goal.', link: '/other/millionaire', category: 'Lifestyle & Home' },
+    { icon: '', title: 'Mortgage Calculator', description: 'Calculate your monthly mortgage payments and amortization schedule.', link: '/financial/mortgage', category: 'Financial' },
+    { icon: '', title: 'Compound Interest', description: 'See how your investments grow over time with compound interest.', link: '/financial/compound-interest', category: 'Financial' },
+    { icon: '', title: 'GST Calculator', description: 'Quickly add or remove GST from any amount.', link: '/financial/gst-calculator', category: 'Financial' },
+    { icon: '', title: 'SIP Calculator', description: 'Estimate the future value of your Systematic Investment Plans.', link: '/financial/sip-calculator', category: 'Financial' },
+    { icon: '', title: 'Mutual Fund Calculator', description: 'Helps you calculate the absolute or annualized (XIRR) returns on your existing mutual fund investments.', link: '/financial/mutual-fund-calculator', category: 'Financial' },
+    { icon: '', title: 'FD Calculator', description: 'Calculate FD returns with simple or compound interest.', link: '/financial/fd-calculator', category: 'Financial' },
+    { icon: '', title: 'PPF Calculator', description: 'Estimates the maturity value of your PPF account, which has a 15-year lock-in period.', link: '/financial/ppf-calculator', category: 'Financial' },
+    { icon: '', title: 'Income Tax Calculator', description: 'Determine your annual tax liability and effective tax rate.', link: '/financial/tax-calculator', category: 'Financial' },
+    { icon: '', title: 'Loan Eligibility Calculator', description: 'Estimates the maximum loan amount you are likely to be approved for based on your income and existing debts.', link: '/financial/loan-eligibility-calculator', category: 'Financial' },
+    { icon: '', title: 'Percentage Calculator', description: 'Solve various percentage problems instantly.', link: '/mathematical/percentage', category: 'Mathematical' },
+    { icon: '', title: 'Scientific Calculator', description: 'Perform complex scientific and mathematical operations.', link: '/mathematical/scientific', category: 'Mathematical' },
+    { icon: '', title: 'Matrix Calculator', description: 'Execute matrix operations like addition, multiplication, and inverse.', link: '/mathematical/matrix', category: 'Mathematical' },
+    { icon: '', title: 'Calorie Calculator', description: 'Find your daily calorie needs for weight loss, gain, or maintenance.', link: '/health/calorie', category: 'Health & Fitness' },
+    { icon: '', title: 'Pregnancy Calculator', description: 'Estimate your due date and track your pregnancy progress.', link: '/health/pregnancy', category: 'Health & Fitness' },
+    { icon: '', title: 'Buy vs. Rent', description: 'Compare the costs of buying and renting a home to make an informed decision.', link: '/other/buy-vs-rent', category: 'Lifestyle & Home' },
+    { icon: '', title: 'Millionaire Calculator', description: 'Discover how long it will take to reach your millionaire goal.', link: '/other/millionaire', category: 'Lifestyle & Home' },
   ]);
 
   categorizedCalculators = computed(() => {
@@ -49,7 +58,54 @@ export class SidePanelComponent {
 
   categoryKeys = computed(() => Object.keys(this.categorizedCalculators()));
 
+  ngOnInit(): void {
+    this.subscription.add(
+      this.router.events.pipe(
+        filter(event => event instanceof NavigationEnd)
+      ).subscribe(() => {
+        this.updateActiveLinkFromRoute();
+      })
+    );
+    this.subscription.add(
+      this.calculatorSelectionService.selectedCalculator$.subscribe(title => {
+        if (title) {
+          const card = this.calculatorCards().find(c => c.title === title);
+          if (card) {
+            this.activeLink.set(card.link);
+          }
+        }
+      })
+    );
+    this.updateActiveLinkFromRoute();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  private updateActiveLinkFromRoute(): void {
+    const currentUrl = this.router.url;
+    let mostSpecificMatch: string | null = null;
+
+    this.calculatorCards().forEach(card => {
+      if (currentUrl.startsWith(card.link)) {
+        if (!mostSpecificMatch || card.link.length > mostSpecificMatch.length) {
+          mostSpecificMatch = card.link;
+        }
+      }
+    });
+    this.activeLink.set(mostSpecificMatch);
+  }
+
   isActive(link: string): boolean {
-    return this.router.url === link;
+    return this.activeLink() === link;
+  }
+
+  onCalculatorClick(cardTitle: string): void {
+    this.calculatorSelectionService.setSelectedCalculator(cardTitle);
+    const card = this.calculatorCards().find(c => c.title === cardTitle);
+    if (card) {
+      this.activeLink.set(card.link);
+    }
   }
 }

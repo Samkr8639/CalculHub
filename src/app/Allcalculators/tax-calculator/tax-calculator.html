@@ -1,0 +1,77 @@
+<div class="gst-calculator-container">
+  <div class="financial-calculator">
+    <h1>Income Tax Calculator</h1>
+
+    <div class="calculator-inputs">
+      <div class="input-group">
+        <label for="grossIncome">Gross Income (₹)</label>
+        <input
+          id="grossIncome"
+          type="number"
+          [value]="grossIncome() || ''"
+          (input)="onIncomeChange($event)"
+          placeholder="e.g., 60000"
+        />
+        <input
+          type="range"
+          [value]="grossIncome() || 0"
+          (input)="onIncomeChange($event)"
+          min="0"
+          max="1000000"
+          step="1000"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="deductions">Deductions (₹)</label>
+        <input
+          id="deductions"
+          type="number"
+          [value]="deductions() || ''"
+          (input)="onDeductionsChange($event)"
+          placeholder="e.g., 2000"
+        />
+        <input
+          type="range"
+          [value]="deductions() || 0"
+          (input)="onDeductionsChange($event)"
+          min="0"
+          max="200000"
+          step="500"
+        />
+      </div>
+    </div>
+
+    @if (taxableIncome() !== null) {
+    <section class="results-section">
+      <h2>Tax Calculation Summary</h2>
+      <div class="summary-box">
+        <div class="summary-item">
+          <p>Gross Income</p>
+          <strong>₹{{ grossIncome() | number: '1.2-2' }}</strong>
+        </div>
+        <div class="summary-item">
+          <p>Deductions</p>
+          <strong>₹{{ deductions() | number: '1.2-2' }}</strong>
+        </div>
+        <div class="summary-item">
+          <p>Taxable Income</p>
+          <strong>₹{{ taxableIncome() | number: '1.2-2' }}</strong>
+        </div>
+        <div class="summary-item">
+          <p>Total Tax Due</p>
+          <strong>₹{{ totalTax() | number: '1.2-2' }}</strong>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <canvas #taxChart></canvas>
+      </div>
+    </section>
+    } @else {
+    <div class="placeholder-message">
+      <p>Enter your income and deductions to calculate your tax liability.</p>
+    </div>
+    }
+  </div>
+</div>

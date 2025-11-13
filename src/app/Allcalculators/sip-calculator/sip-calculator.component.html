@@ -1,0 +1,92 @@
+<div class="gst-calculator-container">
+  <div class="financial-calculator">
+    <h1>SIP Calculator</h1>
+
+    <div class="calculator-inputs">
+      <div class="input-group">
+        <label for="monthlyInvestment">Monthly Investment (₹)</label>
+        <input
+          id="monthlyInvestment"
+          type="number"
+          [value]="monthlyInvestment() || ''"
+          (input)="onMonthlyInvestmentChange($event)"
+          placeholder="e.g., 10000"
+        />
+        <input
+          type="range"
+          [value]="monthlyInvestment() || 0"
+          (input)="onMonthlyInvestmentChange($event)"
+          min="500"
+          max="100000"
+          step="500"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="annualReturn">Expected Annual Return (%)</label>
+        <input
+          id="annualReturn"
+          type="number"
+          [value]="annualReturnRate() || ''"
+          (input)="onAnnualReturnRateChange($event)"
+          placeholder="e.g., 12"
+        />
+        <input
+          type="range"
+          [value]="annualReturnRate() || 0"
+          (input)="onAnnualReturnRateChange($event)"
+          min="1"
+          max="30"
+          step="0.5"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="tenure">Investment Tenure (Years)</label>
+        <input
+          id="tenure"
+          type="number"
+          [value]="investmentTenureYears() || ''"
+          (input)="onInvestmentTenureChange($event)"
+          placeholder="e.g., 10"
+        />
+        <input
+          type="range"
+          [value]="investmentTenureYears() || 0"
+          (input)="onInvestmentTenureChange($event)"
+          min="1"
+          max="40"
+          step="1"
+        />
+      </div>
+    </div>
+
+    @if (maturityAmount() !== null) {
+      <section class="results-section">
+        <h2>Calculation Summary</h2>
+        <div class="summary-box">
+          <div class="summary-item">
+            <p>Maturity Amount</p>
+            <strong>₹{{ maturityAmount() | number:'1.2-2' }}</strong>
+          </div>
+          <div class="summary-item">
+            <p>Total Invested</p>
+            <strong>₹{{ totalInvested() | number:'1.2-2' }}</strong>
+          </div>
+          <div class="summary-item">
+            <p>Estimated Gains</p>
+            <strong>₹{{ estimatedGains() | number:'1.2-2' }}</strong>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <canvas #sipChart></canvas>
+        </div>
+      </section>
+    } @else {
+      <div class="placeholder-message">
+        <p>Enter your investment details to see the potential growth.</p>
+      </div>
+    }
+  </div>
+</div>

@@ -38,6 +38,8 @@
   font-size: 1.1em;
   font-weight: 500;
   transition: color 0.3s ease;
+  text-align: end;
+  
 }
 
 .navigation a:hover,
