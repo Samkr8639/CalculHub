@@ -45,6 +45,7 @@ export class SidePanelComponent implements OnInit, OnDestroy {
     { icon: '', title: 'Loan Eligibility Calculator', description: 'Estimates the maximum loan amount you are likely to be approved for based on your income and existing debts.', link: '/financial/loan-eligibility-calculator', category: 'Financial' },
     { icon: '', title: 'Percentage Calculator', description: 'Solve various percentage problems instantly.', link: '/mathematical/percentage-calculator', category: 'Mathematical' },
     { icon: '', title: 'Scientific Calculator', description: 'Perform complex scientific and mathematical operations.', link: '/mathematical/scientific-calculator', category: 'Mathematical' },
+    { icon: '', title: 'Algebra Calculator', description: 'Solve equations, factor polynomials, and graph inequalities.', link: '/mathematical/algebra-calculator', category: 'Mathematical' },
     { icon: '', title: 'Calorie Calculator', description: 'Find your daily calorie needs for weight loss, gain, or maintenance.', link: '/health/calorie', category: 'Health & Fitness' },
     { icon: '', title: 'Pregnancy Calculator', description: 'Estimate your due date and track your pregnancy progress.', link: '/health/pregnancy', category: 'Health & Fitness' },
     { icon: '', title: 'Buy vs. Rent', description: 'Compare the costs of buying and renting a home to make an informed decision.', link: '/other/buy-vs-rent', category: 'Lifestyle & Home' },

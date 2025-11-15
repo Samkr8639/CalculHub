@@ -1,83 +1,53 @@
-# Project Blueprint
 
-## Overview
-This project is an Angular application that provides various financial calculators. It aims to offer a visually appealing, interactive, and cutting-edge user experience by leveraging the latest Angular features, including signals, standalone components, and new control flow.
+# Blueprint: My Calculator Application
 
-## Project Outline
+This document outlines the architecture, design, features, and development plans for the My Calculator application.
 
-### Initial Version
-- **Styling:** Modern, dark-themed UI with a focus on good readability and interactive elements.
-- **Components:**
-    - `AppComponent`: Main application shell.
-    - `HeaderComponent`: Application header with navigation.
-    - `FooterComponent`: Application footer.
-    - `NavigationComponent`: Handles primary navigation.
-    - `SidePanelComponent`: Placeholder for future sidebar functionality.
-    - `HomeComponent`: Landing page.
-    - `AboutComponent`: About page.
-    - `BlogComponent`: Blog page.
-    - `FinancialComponent`: Parent component for financial calculators.
-    - `HealthComponent`: Parent component for health calculators.
-    - `MathematicalComponent`: Parent component for mathematical calculators.
-    - `OtherComponent`: Parent component for other calculators.
-    - `CompoundInterestCalculatorComponent`: Calculates compound interest.
-    - `GstCalculatorComponent`: Calculates GST.
-    - `MortgageCalculatorComponent`: Calculates mortgage details.
-- **Features:**
-    - Routing for different calculator categories and informational pages.
-    - Interactive input fields with sliders for various financial parameters.
-    - Dynamic calculation results displayed in a clear summary.
-    - Chart.js integration for visual representation of calculation outcomes.
-    - Responsive design for mobile and web.
-- **Best Practices:**
-    - All components are standalone.
-    - `ChangeDetectionStrategy.OnPush` is used for all components.
-    - Native Angular control flow (`@if`, `@for`, `@switch`) is implemented.
-    - Signals are used for state management.
-    - `inject()` is used for dependency injection.
+## 1. Overview
 
-### Previous Change: Implementing SIP Calculator
+My Calculator is a modern, web-based application designed to provide users with a suite of powerful and intuitive calculators. Built on Angular v20+, it leverages the latest framework features, including standalone components, signals for state management, and modern CSS for a responsive and visually appealing user experience.
 
-#### Plan
-The goal was to implement a SIP Calculator with identical CSS and functionality to the existing GST Calculator. This involved creating new component files and integrating them into the application.
+The application is designed to be modular, with each calculator functioning as a self-contained feature, ensuring scalability and ease of maintenance.
 
-#### Steps
-1.  **Create `sip-calculator.component.ts`:** Created the TypeScript file for the SIP Calculator component, including signals for inputs and outputs, and the calculation logic.
-2.  **Create `sip-calculator.component.html`:** Created the HTML template for the SIP Calculator, replicating the layout and input structure of the GST Calculator.
-3.  **Create `sip-calculator.component.css`:** Copied the CSS from `gst-calculator.component.css` to ensure consistent styling.
-4.  **Integrate into `app.routes.ts`:** Added a new route to enable navigation to the SIP Calculator.
+## 2. Style and Design Guide
 
-### Previous Change: Add Slider to Financial Section and Fix Card Height
+The application adheres to a modern, dark-theme aesthetic, prioritizing clarity, ease of use, and visual appeal.
 
-#### Plan
-The goal was to enhance the user experience by adding an auto-sliding carousel for the financial calculators on the home page and to fix the alignment of the buttons on the cards.
+*   **Theme:** Dark mode with high-contrast text and vibrant accent colors.
+*   **Primary Accent Color:** A bold red (`#e11931`) used for active states, buttons, and highlights.
+*   **Typography:** Clean, sans-serif fonts for readability.
+*   **Layout:** Responsive, component-based layout with clean spacing and a clear visual hierarchy.
+*   **Interactivity:** Smooth animations and transitions provide a dynamic user experience. Buttons and interactive elements feature hover effects and shadows to create a sense of depth.
 
-#### Steps
-1.  **Install Swiper Library:** Installed the `swiper` library.
-2.  **Configure Swiper:** Imported and registered the `swiper/element/bundle` in `main.ts`.
-3.  **Implement Slider:** Wrapped the financial calculator cards in a `<swiper-container>`.
-4.  **Enable Custom Elements:** Added `CUSTOM_ELEMENTS_SCHEMA` to `home.component.ts`.
-5.  **Fix Uneven Card Height:** Added CSS to ensure all cards in the slider have the same height and that the buttons are aligned at the bottom.
+## 3. Existing Features
 
-### Previous Change: Improve Slider Responsiveness and Controls
+### Algebra Calculator (`/algebra`)
 
-#### Plan
-The goal was to make the financial calculator slider more responsive and user-friendly by adding navigation controls, pagination, and breakpoints for different screen sizes.
+A multi-function calculator for common algebraic tasks, organized into a tabbed interface.
 
-#### Steps
-1.  **Enable Navigation and Pagination:** Added `navigation="true"` and `pagination="true"` to the `<swiper-container>` in `home.component.html`.
-2.  **Implement Responsive Breakpoints:** In `home.component.ts`, used the `ngAfterViewInit` lifecycle hook to programmatically set the `slidesPerView` and `spaceBetween` based on the screen width. This makes the slider show 1 card on small screens, 2 on medium, and 3 on large screens.
-3.  **Style Navigation and Pagination:** In `home.component.css`, added the `--swiper-theme-color` CSS variable to style the navigation arrows and pagination dots to match the application's red and black theme.
+*   **Equation Solver:** Solves linear equations, providing a step-by-step solution.
+*   **Polynomial Factorer:** Factors quadratic polynomials and displays the process.
+*   **Complex Number Arithmetic:** Performs addition, subtraction, and multiplication on complex numbers.
+*   **Inequality Grapher:** A powerful tool that graphs multiple inequalities on a shared canvas, each with a unique color for clarity. Users can dynamically add and remove inequalities.
 
-### Current Change: Implement Algebra Calculator
+## 4. Current Development Plan: Statistics Calculator
 
-#### Plan
-The goal is to implement a comprehensive Algebra Calculator with a tabbed interface for solving equations, factoring polynomials, handling complex numbers, and graphing inequalities.
+This section outlines the plan for implementing the new Statistics Calculator.
 
-#### Steps
-1. **Create `algebra-calculator.component.ts`:** Created the TypeScript file with signals for each calculator's inputs and outputs, and methods for the tab switching and placeholder calculation logic.
-2. **Create `algebra-calculator.component.html`:** Created the HTML template with a tabbed navigation and separate panels for each algebra tool. Used `@if` blocks to conditionally display the active panel.
-3. **Create `algebra-calculator.component.css`:** Added CSS to style the tabbed interface, input fields, and results to match the application's theme.
-4. **Integrate into `app.routes.ts`:** Added a new route to make the calculator accessible at `/mathematical/algebra-calculator`.
-5. **Add to Home Page:** Updated `home.component.ts` to include the Algebra Calculator in the mathematical calculators list on the home page.
-6. **Update Mathematical Component:** Added the Algebra Calculator to the list of calculators in `mathematical.component.ts`.
+### Phase 1: Foundational Statistics Calculator
+
+**Objective:** To create a new, fully functional statistics calculator for essential statistical measures.
+
+**Actionable Steps:**
+
+1.  **Generate Component:** Create a new standalone `StatisticsCalculatorComponent`.
+2.  **Establish Routing:** Add a new route, `/statistics`, to `app.routes.ts` to navigate to the new component.
+3.  **Update Navigation:** Add a "Statistics" link to the main application header in `app.component.html`.
+4.  **Build the UI:**
+    *   Create an input field for users to enter a comma-separated list of numbers.
+    *   Add a "Calculate" button to trigger the calculations.
+    *   Design a results area to display the calculated values.
+5.  **Implement Core Logic:**
+    *   Implement functions to calculate the **Mean**, **Median (P50)**, and **Mode** from the user's input.
+    *   Use signals to manage the state of the input and results.
+6.  **Styling:** Apply the application's dark-theme styling to the new component to ensure a consistent look and feel.

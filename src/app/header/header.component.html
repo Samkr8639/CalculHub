@@ -7,11 +7,12 @@
 
   <div class="header-right">
     <nav class="navigation">
-      <a routerLink="/home" routerLinkActive="active">Home</a>
-      <a routerLink="/financial/mortgage" routerLinkActive="active">Calculators</a>
+      <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+      <a routerLink="/financial" routerLinkActive="active">Financial</a>
+      <a routerLink="/mathematical" routerLinkActive="active">Mathematical</a>
+      <a routerLink="/statistics" routerLinkActive="active">Statistics</a>
       <a routerLink="/about" routerLinkActive="active">About</a>
       <a routerLink="/blog" routerLinkActive="active">Blog</a>
     </nav>
-    <!-- Search and Theme Toggle removed as per user request -->
   </div>
 </header>

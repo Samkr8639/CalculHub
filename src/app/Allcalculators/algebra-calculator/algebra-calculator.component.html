@@ -10,13 +10,25 @@
     @if (activeTab() === 'equation') {
       <div class="calculator-panel">
         <h2>Equation Solver</h2>
-        <div class="input-row">
-          <input type="text" [(ngModel)]="equation" placeholder="e.g., 2x + 4 = 10">
+        <div class="input-row single-input-row">
+          <input type="text" [ngModel]="equation()" (ngModelChange)="equation.set($event)" placeholder="e.g., 2x + 4 = 10">
         </div>
         <button class="calculate-button" (click)="solveEquation()">Solve</button>
+
         @if (equationResult()) {
           <div class="result">
-            <p><strong>Result:</strong> {{ equationResult() }}</p>
+            <p class="final-answer">{{ equationResult() }}</p>
+          </div>
+        }
+
+        @if (equationSteps().length > 0) {
+          <div class="solution-steps">
+            <h3>Step-by-step Solution:</h3>
+            <ol>
+              @for (step of equationSteps(); track $index) {
+                <li>{{ step }}</li>
+              }
+            </ol>
           </div>
         }
       </div>
@@ -25,13 +37,25 @@
     @if (activeTab() === 'polynomial') {
       <div class="calculator-panel">
         <h2>Polynomial Factorer</h2>
-        <div class="input-row">
-          <input type="text" [(ngModel)]="polynomial" placeholder="e.g., x^2 + x - 6">
+        <div class="input-row single-input-row">
+          <input type="text" [ngModel]="polynomial()" (ngModelChange)="polynomial.set($event)" placeholder="e.g., x^2 - 5x + 6">
         </div>
         <button class="calculate-button" (click)="factorPolynomial()">Factor</button>
+
         @if (polynomialResult()) {
           <div class="result">
-            <p><strong>Result:</strong> {{ polynomialResult() }}</p>
+            <p class="final-answer">{{ polynomialResult() }}</p>
+          </div>
+        }
+
+        @if (polynomialSteps().length > 0) {
+          <div class="solution-steps">
+            <h3>Step-by-step Solution:</h3>
+            <ol>
+              @for (step of polynomialSteps(); track $index) {
+                <li>{{ step }}</li>
+              }
+            </ol>
           </div>
         }
       </div>
@@ -41,18 +65,18 @@
       <div class="calculator-panel">
         <h2>Complex Number Arithmetic</h2>
         <div class="input-row">
-          <input type="text" [(ngModel)]="complexNum1" placeholder="e.g., 3+2i">
-          <select [(ngModel)]="complexOperation">
+          <input type="text" [ngModel]="complexNum1()" (ngModelChange)="complexNum1.set($event)" placeholder="e.g., 3+2i">
+          <select [ngModel]="complexOperation()" (ngModelChange)="complexOperation.set($event)">
             <option value="add">+</option>
             <option value="subtract">-</option>
             <option value="multiply">*</option>
           </select>
-          <input type="text" [(ngModel)]="complexNum2" placeholder="e.g., 2+1i">
+          <input type="text" [ngModel]="complexNum2()" (ngModelChange)="complexNum2.set($event)" placeholder="e.g., 2+1i">
         </div>
         <button class="calculate-button" (click)="calculateComplex()">Calculate</button>
         @if (complexResult()) {
           <div class="result">
-            <p><strong>Result:</strong> {{ complexResult() }}</p>
+            <p>{{ complexResult() }}</p>
           </div>
         }
       </div>
@@ -61,12 +85,21 @@
     @if (activeTab() === 'inequality') {
       <div class="calculator-panel">
         <h2>Inequality Grapher</h2>
-        <div class="input-row">
-          <input type="text" [(ngModel)]="inequality" placeholder="e.g., y < 2x + 1">
+        <div class="inequality-list">
+          @for (ineq of inequalities(); track ineq.id) {
+            <div class="inequality-item">
+              <span class="color-dot" [style.backgroundColor]="ineq.color"></span>
+              <input type="text" [(ngModel)]="ineq.value" (ngModelChange)="graphAllInequalities()" placeholder="e.g., y > x^2">
+              <button (click)="removeInequality(ineq.id)" class="remove-button">&times;</button>
+            </div>
+          }
         </div>
-        <button class="calculate-button" (click)="graphInequality()">Graph</button>
-        <div class="result">
-          <p>Graph will appear here.</p>
+        <div class="button-group">
+          <button class="add-button" (click)="addInequality()">+ Add Inequality</button>
+          <button class="calculate-button" (click)="graphAllInequalities()">Graph All</button>
+        </div>
+        <div class="chart-container">
+          <canvas #inequalityCanvas width="600" height="600"></canvas>
         </div>
       </div>
     }

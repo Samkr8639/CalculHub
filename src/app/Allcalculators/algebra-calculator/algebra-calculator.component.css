@@ -1,3 +1,8 @@
+:host {
+  width: 100%;
+  display: block;
+}
+
 .algebra-calculator-container {
   width: 100%;
   margin: 0;
@@ -20,27 +25,26 @@
 
 .tab-navigation {
   display: flex;
-  justify-content: center;
+  gap: 10px;
   border-bottom: 2px solid var(--border-grey);
-  margin-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 .tab-navigation button {
   padding: 10px 20px;
-  background-color: transparent;
   border: none;
+  background-color: transparent;
   color: var(--light-grey-text);
   font-size: 1.1em;
   font-weight: 500;
   cursor: pointer;
-  transition: color 0.3s ease, border-bottom-color 0.3s ease;
-  border-bottom: 3px solid transparent;
-  margin-bottom: -2px; 
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+  border-bottom: 2px solid transparent;
 }
 
 .tab-navigation button.active-tab {
   color: var(--primary-red);
-  border-bottom-color: var(--primary-red);
+  border-bottom: 2px solid var(--primary-red);
 }
 
 .calculator-panel {
@@ -55,10 +59,9 @@
   color: var(--primary-red);
   margin-top: 0;
   margin-bottom: 20px;
-  text-align: left;
   font-size: 1.6em;
   font-weight: 600;
-  border-bottom: 2px solid var(--primary-red);
+  border-bottom: 1px solid var(--primary-red);
   padding-bottom: 10px;
 }
 
@@ -67,10 +70,9 @@
   align-items: center;
   gap: 15px;
   flex-wrap: wrap;
-  margin-top: 15px;
 }
 
-.input-row input,
+.input-row input[type="text"],
 .input-row select {
   flex: 1;
   min-width: 120px;
@@ -83,34 +85,41 @@
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.input-row input:focus,
+.input-row input[type="text"]:focus,
 .input-row select:focus {
   border-color: var(--primary-red);
   outline: none;
   box-shadow: 0 0 0 3px rgba(225, 25, 49, 0.3);
 }
 
-.calculate-button {
-  display: block;
-  width: 100%;
-  padding: 14px;
-  margin-top: 25px;
+.calculate-button, .add-button {
+  margin-top: 20px;
+  padding: 12px 25px;
   border: none;
   border-radius: 8px;
   background-color: var(--primary-red);
   color: var(--pure-white-text);
-  font-size: 1.3em;
+  font-size: 1.2em;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.calculate-button:hover {
-  background-color: #ff3344;
+.calculate-button:hover, .add-button:hover {
+  background-color: #ff3d57; /* Lighter red for hover */
   transform: translateY(-2px);
 }
 
-.result {
+.add-button {
+  background-color: #4CAF50; /* Green */
+}
+
+.add-button:hover {
+  background-color: #66BB6A; /* Lighter green */
+}
+
+.result,
+.solution-steps {
   margin-top: 20px;
   padding: 15px;
   background-color: #2c2c2c;
@@ -124,19 +133,141 @@
   to { opacity: 1; transform: translateX(0); }
 }
 
-.result p {
+.result p,
+.solution-steps li {
   margin: 0;
-  font-size: 1.2em;
+  font-size: 1.1em;
   color: var(--light-grey-text);
 }
 
-.result strong {
-  color: var(--pure-white-text);
+.result .final-answer {
   font-size: 1.3em;
   font-weight: 700;
+  color: var(--pure-white-text);
 }
 
-:host {
-  width: 100%;
-  display: block;
+.solution-steps h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: var(--pure-white-text);
+  font-size: 1.2em;
+  border-bottom: 1px solid var(--border-grey);
+  padding-bottom: 10px;
+}
+
+.solution-steps ol {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.solution-steps li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.inequality-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.inequality-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.color-dot {
+  min-width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+}
+
+.inequality-item input[type="text"] {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border: 1px solid var(--border-grey);
+    border-radius: 8px;
+    background-color: #2c2c2c;
+    color: var(--pure-white-text);
+    font-size: 1.1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inequality-item input[type="text"]:focus {
+  border-color: var(--primary-red);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(225, 25, 49, 0.3);
+}
+
+.remove-button {
+  background: transparent;
+  border: none;
+  color: #ff3d57;
+  font-size: 2em;
+  cursor: pointer;
+  padding: 0 10px;
+  line-height: 1;
+}
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.chart-container {
+  margin-top: 20px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2c2c2c;
+  border-radius: 8px;
+  padding: 15px;
+  overflow: auto;
+}
+
+canvas {
+  background-color: #333;
+  border-radius: 8px;
+}
+
+@media (max-width: 1024px) {
+  .algebra-calculator-page-layout {
+    flex-direction: column;
+  }
+  .side-navigation {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 15px;
+  }
+  .side-navigation button {
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .algebra-calculator-container {
+    padding: 20px;
+  }
+  .input-row.single-input-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .inequality-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .chart-container {
+    padding: 10px;
+  }
+  canvas {
+    width: 100%;
+    height: auto;
+  }
 }
