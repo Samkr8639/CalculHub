@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal, computed, inject, OnInit, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, computed, inject, OnInit, OnDestroy, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, Router, NavigationEnd } from '@angular/router';
 import { CalculatorSelectionService } from '../calculator-selection.service';
@@ -23,6 +23,8 @@ export class SidePanelComponent implements OnInit, OnDestroy {
   private router = inject(Router);
   private calculatorSelectionService = inject(CalculatorSelectionService);
   private subscription = new Subscription();
+
+  public calculators = input<any[]>();
 
   activeLink = signal<string | null>(null);
 

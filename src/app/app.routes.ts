@@ -19,6 +19,7 @@ import { BikeLoanEmiCalculatorComponent } from './Allcalculators/bike-loan-emi-c
 import { EducationLoanEmiCalculatorComponent } from './Allcalculators/education-loan-emi-calculator/education-loan-emi-calculator';
 import { PercentageCalculatorComponent } from './Allcalculators/percentage-calculator/percentage-calculator';
 import { ScientificCalculatorComponent } from './Allcalculators/scientific-calculator/scientific-calculator';
+import { AlgebraCalculatorComponent } from './Allcalculators/algebra-calculator/algebra-calculator.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -50,6 +51,7 @@ export const routes: Routes = [
     children: [
       { path: 'percentage-calculator', component: PercentageCalculatorComponent, data: { title: 'Percentage Calculator' } },
       { path: 'scientific-calculator', component: ScientificCalculatorComponent, data: { title: 'Scientific Calculator' } },
+      { path: 'algebra-calculator', component: AlgebraCalculatorComponent, data: { title: 'Algebra Calculator' } },
       { path: '', redirectTo: 'percentage-calculator', pathMatch: 'full' },
     ]
   },
