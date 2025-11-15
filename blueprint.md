@@ -1,13 +1,12 @@
-
 # Blueprint: My Calculator Application
 
 This document outlines the architecture, design, features, and development plans for the My Calculator application.
 
 ## 1. Overview
 
-My Calculator is a modern, web-based application designed to provide users with a suite of powerful and intuitive calculators. Built on Angular v20+, it leverages the latest framework features, including standalone components, signals for state management, and modern CSS for a responsive and visually appealing user experience.
+My Calculator is a modern, web-based application designed to provide users with a comprehensive suite of powerful and intuitive calculators. Built on Angular v20+, it leverages the latest framework features, including standalone components, signals for state management, and modern CSS for a responsive and visually appealing user experience.
 
-The application is designed to be modular, with each calculator functioning as a self-contained feature, ensuring scalability and ease of maintenance.
+The application is organized into logical categories (Financial, Mathematical, Health, etc.), with each calculator functioning as a self-contained feature. This modular architecture ensures scalability and ease of maintenance.
 
 ## 2. Style and Design Guide
 
@@ -21,33 +20,46 @@ The application adheres to a modern, dark-theme aesthetic, prioritizing clarity,
 
 ## 3. Existing Features
 
-### Algebra Calculator (`/algebra`)
+This section provides a definitive list of all calculators currently implemented in the application.
 
-A multi-function calculator for common algebraic tasks, organized into a tabbed interface.
+### Financial Calculators (`/financial`)
 
-*   **Equation Solver:** Solves linear equations, providing a step-by-step solution.
-*   **Polynomial Factorer:** Factors quadratic polynomials and displays the process.
-*   **Complex Number Arithmetic:** Performs addition, subtraction, and multiplication on complex numbers.
-*   **Inequality Grapher:** A powerful tool that graphs multiple inequalities on a shared canvas, each with a unique color for clarity. Users can dynamically add and remove inequalities.
+*   **Mortgage Calculator:** Calculates mortgage payments.
+*   **Compound Interest Calculator:** Computes compound interest.
+*   **GST Calculator:** Calculates Goods and Services Tax.
+*   **SIP Calculator:** Models Systematic Investment Plans.
+*   **FD Calculator:** Calculates returns on Fixed Deposits.
+*   **Tax Calculator:** Computes income tax.
+*   **Mutual Fund Calculator:** Estimates returns from mutual funds.
+*   **PPF Calculator:** Calculates Public Provident Fund savings.
+*   **Loan Eligibility Calculator:** Estimates loan eligibility.
+*   **Home Loan EMI Calculator:** Calculates Equated Monthly Installments for home loans.
+*   **Retirement Calculator:** Helps plan for retirement savings.
+*   **Investment Calculator:** General-purpose investment calculator.
+*   **Bike Loan EMI Calculator:** Calculates EMIs for bike loans.
+*   **Education Loan EMI Calculator:** Calculates EMIs for education loans.
 
-## 4. Current Development Plan: Statistics Calculator
+### Mathematical Calculators (`/mathematical`)
 
-This section outlines the plan for implementing the new Statistics Calculator.
+*   **Percentage Calculator:** Performs various percentage-based calculations.
+*   **Scientific Calculator:** A full-featured scientific calculator.
+*   **Algebra Calculator:** Solves equations and performs algebraic manipulations.
+*   **Matrix Calculator:**
+    *   **Description:** Performs a wide range of matrix operations, including addition, subtraction, multiplication, scalar multiplication, transpose, determinant, and inverse calculations.
+    *   **Interface:** Users input matrix data into text areas, with rows separated by newlines and values separated by spaces or commas. The interface is styled with a premium dark theme, featuring responsive controls and a clear results display.
+    *   **Functionality:** Includes a "Clear" button to reset all fields and robust error handling for invalid input.
 
-### Phase 1: Foundational Statistics Calculator
+### Statistics Calculators (`/statistics`)
 
-**Objective:** To create a new, fully functional statistics calculator for essential statistical measures.
+*   **Statistics Calculator:** A tool for calculating fundamental statistical measures like mean, median, and mode.
 
-**Actionable Steps:**
+### Other Sections
 
-1.  **Generate Component:** Create a new standalone `StatisticsCalculatorComponent`.
-2.  **Establish Routing:** Add a new route, `/statistics`, to `app.routes.ts` to navigate to the new component.
-3.  **Update Navigation:** Add a "Statistics" link to the main application header in `app.component.html`.
-4.  **Build the UI:**
-    *   Create an input field for users to enter a comma-separated list of numbers.
-    *   Add a "Calculate" button to trigger the calculations.
-    *   Design a results area to display the calculated values.
-5.  **Implement Core Logic:**
-    *   Implement functions to calculate the **Mean**, **Median (P50)**, and **Mode** from the user's input.
-    *   Use signals to manage the state of the input and results.
-6.  **Styling:** Apply the application's dark-theme styling to the new component to ensure a consistent look and feel.
+*   **Health:** A placeholder section for future health-related calculators.
+*   **Other:** A placeholder for uncategorized calculators.
+*   **About:** Provides information about the application.
+*   **Blog:** A section for articles and updates.
+
+## 4. Current Development Plan
+
+There are no active development plans at this time. The previous task was reverted, and the application is in a stable, clean state.

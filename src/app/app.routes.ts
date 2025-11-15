@@ -156,6 +156,14 @@ export const routes: Routes = [
           ).then((m) => m.AlgebraCalculatorComponent),
         data: { title: 'Algebra Calculator' },
       },
+      {
+        path: 'matrix-calculator',
+        loadComponent: () =>
+          import(
+            './Allcalculators/matrix-calculator/matrix-calculator'
+          ).then((m) => m.MatrixCalculatorComponent),
+        data: { title: 'Matrix Calculator' },
+      },
       { path: '', redirectTo: 'percentage-calculator', pathMatch: 'full' },
     ],
   },

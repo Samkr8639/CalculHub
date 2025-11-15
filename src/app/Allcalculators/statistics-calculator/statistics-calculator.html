@@ -1,31 +1,36 @@
-<div class="container">
-  <div class="calculator-card">
-    <h2>Statistics Calculator</h2>
-    <p>Enter a comma-separated list of numbers to calculate the mean, median, and mode.</p>
+<div class="statistics-calculator-card">
+  <h2>Statistics Calculator</h2>
 
-    <div class="form-group">
-      <label for="data-input">Data Input</label>
-      <textarea id="data-input" [(ngModel)]="data" placeholder="e.g., 1, 2, 3, 4, 5"></textarea>
+  <div class="form-group">
+    <label for="data">Data</label>
+    <input type="text" id="data" class="form-control" [value]="data()" (input)="onDataChange($event)" placeholder="Enter comma-separated numbers, e.g., 1, 2, 3, 4, 5">
+  </div>
+
+  <button (click)="calculate()" class="btn btn-calculate">Calculate</button>
+
+  @if (error()) {
+    <div class="error-message">
+      <p>{{ error() }}</p>
     </div>
+  }
 
-    @if (dataset().length > 0) {
-      <div class="results">
-        <h3>Results</h3>
+  @if (mean() !== null) {
+    <div class="result-section">
+      <h3>Results</h3>
+      <div class="result-grid">
         <div class="result-item">
-          <span class="label">Mean:</span>
-          <span class="value">{{ results().mean.toFixed(2) }}</span>
+          <span class="label">Mean</span>
+          <span class="value">{{ mean()?.toFixed(2) }}</span>
         </div>
         <div class="result-item">
-          <span class="label">Median:</span>
-          <span class="value">{{ results().median.toFixed(2) }}</span>
+          <span class="label">Median</span>
+          <span class="value">{{ median()?.toFixed(2) }}</span>
         </div>
         <div class="result-item">
-          <span class="label">Mode:</span>
-          <span class="value">{{ results().mode }}</span>
+          <span class="label">Mode</span>
+          <span class="value">{{ mode()?.join(', ') || 'N/A' }}</span>
         </div>
       </div>
-    } @else {
-      <p class="no-data">Enter some data to see the results.</p>
-    }
-  </div>
+    </div>
+  }
 </div>

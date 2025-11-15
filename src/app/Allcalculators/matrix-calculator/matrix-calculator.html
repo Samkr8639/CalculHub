@@ -1,0 +1,63 @@
+<div class="matrix-calculator-card">
+  <h2>Matrix Calculator</h2>
+
+  <div class="form-grid">
+    <div class="form-group">
+      <label for="operation">Operation</label>
+      <select id="operation" class="form-control" [value]="operation()" (change)="onOperationChange($event)">
+        @for (op of operations; track op.id) {
+          <option [value]="op.id">{{ op.name }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="matrixA">Matrix A</label>
+      <textarea id="matrixA" class="form-control" [value]="matrixA()" (input)="onMatrixAChange($event)" placeholder="Enter matrix values, e.g., 1, 2, 3; 4, 5, 6"></textarea>
+    </div>
+
+    @if (operationRequiresTwoMatrices()) {
+      <div class="form-group">
+        <label for="matrixB">Matrix B</label>
+        <textarea id="matrixB" class="form-control" [value]="matrixB()" (input)="onMatrixBChange($event)" placeholder="Enter matrix values, e.g., 7, 8, 9; 10, 11, 12"></textarea>
+      </div>
+    }
+
+    @if (isScalarMultiplication()) {
+      <div class="form-group">
+        <label for="scalar">Scalar</label>
+        <input type="number" id="scalar" class="form-control" [value]="scalar()" (input)="onScalarChange($event)" placeholder="Enter a scalar value, e.g., 2">
+      </div>
+    }
+  </div>
+
+  <div class="button-group">
+    <button (click)="calculate()" class="btn btn-calculate">Calculate</button>
+    <button (click)="clear()" class="btn btn-clear">Clear</button>
+  </div>
+
+  @if (error()) {
+    <div class="error-message">
+      <p>{{ error() }}</p>
+    </div>
+  }
+
+  @if (result() !== null) {
+    <div class="result-section">
+      <h3>Result</h3>
+      @if (isMatrix(result())) {
+        <div class="result-matrix" [style.grid-template-columns]="'repeat(' + matrixResult()?.[0]?.length + ', auto)'">
+          @for (row of matrixResult(); track row) {
+            @for (val of row; track val) {
+              <span>{{ val.toFixed(2) }}</span>
+            }
+          }
+        </div>
+      } @else {
+        <div class="result-scalar">
+          {{ scalarResult()?.toFixed(2) }}
+        </div>
+      }
+    </div>
+  }
+</div>
