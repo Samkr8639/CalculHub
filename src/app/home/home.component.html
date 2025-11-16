@@ -1,3 +1,4 @@
+
 <section class="hero-section">
   <div class="hero-background">
     <div class="hero-image"></div>
@@ -19,61 +20,46 @@
   @for (category of categoryKeys(); track category) {
   <div class="category-section">
     <h3>{{ category }}</h3>
-    @if (category === 'Financial') {
-    <swiper-container #swiperContainer slides-per-view="1" speed="500" loop="true" autoplay-delay="2500"
-      autoplay-disable-on-interaction="false"  pagination="false">
-      @for (card of categorizedCalculators()[category]; track card.title) {
-      <swiper-slide>
-        <div class="calculator-card">
-          <div class="icon" [innerHTML]="card.icon">
-          </div>
-          @if(card.title==='Paycheck Calculator'){
-          <div class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="lucide lucide-wallet">
-              <path
-                d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1">
-              </path>
-              <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path>
-            </svg>
-          </div>
-          }
-          <h4>{{ card.title }}</h4>
-          <p>{{ card.description }}</p>
-          <button [routerLink]="card.link" class="button small-button calculator-button">
-            Use Calculator
-          </button>
-        </div>
-      </swiper-slide>
-      }
-    </swiper-container>
-    } @else {
-    <div class="calculator-grid">
-      @for (card of categorizedCalculators()[category]; track card.title) {
-      <div class="calculator-card">
-        <div class="icon" [innerHTML]="card.icon">
-        </div>
-        @if(card.title==='Paycheck Calculator'){
-        <div class="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="lucide lucide-wallet">
-            <path
-              d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1">
-            </path>
-            <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path>
-          </svg>
-        </div>
+
+    @if (category === 'Financial' && categorizedCalculators()[category].length > 0) {
+      <swiper-container class="calculator-swiper" slides-per-view="4" speed="500" loop="true" autoplay-delay="2500"
+        autoplay-disable-on-interaction="false" pagination="false">
+        @for (card of categorizedCalculators()[category]; track card.title) {
+          <swiper-slide>
+            <div class="calculator-card">
+              <div class="icon" [innerHTML]="card.icon | safeHtml"></div>
+              <h4>{{ card.title }}</h4>
+              <p>{{ card.description }}</p>
+              <button [routerLink]="card.link" class="button small-button calculator-button">Use Calculator</button>
+            </div>
+          </swiper-slide>
         }
-        <h4>{{ card.title }}</h4>
-        <p>{{ card.description }}</p>
-        <button [routerLink]="card.link" class="button small-button calculator-button">
-          Use Calculator
-        </button>
+      </swiper-container>
+    } @else if (category === 'Mathematical' && categorizedCalculators()[category].length > 0) {
+      <swiper-container class="calculator-swiper" slides-per-view="4" speed="500" loop="true" autoplay-delay="2500"
+        autoplay-disable-on-interaction="false" pagination="false">
+        @for (card of categorizedCalculators()[category]; track card.title) {
+          <swiper-slide>
+            <div class="calculator-card">
+              <div class="icon" [innerHTML]="card.icon | safeHtml"></div>
+              <h4>{{ card.title }}</h4>
+              <p>{{ card.description }}</p>
+              <button [routerLink]="card.link" class="button small-button calculator-button">Use Calculator</button>
+            </div>
+          </swiper-slide>
+        }
+      </swiper-container>
+    } @else {
+      <div class="calculator-grid">
+        @for (card of categorizedCalculators()[category]; track card.title) {
+          <div class="calculator-card">
+            <div class="icon" [innerHTML]="card.icon | safeHtml"></div>
+            <h4>{{ card.title }}</h4>
+            <p>{{ card.description }}</p>
+            <button [routerLink]="card.link" class="button small-button calculator-button">Use Calculator</button>
+          </div>
+        }
       </div>
-      }
-    </div>
     }
   </div>
   }

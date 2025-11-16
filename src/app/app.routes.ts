@@ -164,16 +164,16 @@ export const routes: Routes = [
           ).then((m) => m.MatrixCalculatorComponent),
         data: { title: 'Matrix Calculator' },
       },
+      {
+        path: 'statistics-calculator',
+        loadComponent: () =>
+          import(
+            './Allcalculators/statistics-calculator/statistics-calculator'
+          ).then((m) => m.StatisticsCalculator),
+        data: { title: 'Statistics Calculator' },
+      },
       { path: '', redirectTo: 'percentage-calculator', pathMatch: 'full' },
     ],
-  },
-  {
-    path: 'statistics',
-    loadComponent: () =>
-      import('./Allcalculators/statistics-calculator/statistics-calculator').then(
-        (m) => m.StatisticsCalculator
-      ),
-    data: { title: 'Statistics Calculator' },
   },
   {
     path: 'health',

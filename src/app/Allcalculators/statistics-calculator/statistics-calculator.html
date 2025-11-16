@@ -30,6 +30,26 @@
           <span class="label">Mode</span>
           <span class="value">{{ mode()?.join(', ') || 'N/A' }}</span>
         </div>
+        <div class="result-item">
+          <span class="label">Standard Deviation</span>
+          <span class="value">{{ standardDeviation()?.toFixed(2) }}</span>
+        </div>
+        <div class="result-item">
+          <span class="label">Variance</span>
+          <span class="value">{{ variance()?.toFixed(2) }}</span>
+        </div>
+        <div class="result-item">
+          <span class="label">25th Percentile (Q1)</span>
+          <span class="value">{{ p25()?.toFixed(2) }}</span>
+        </div>
+        <div class="result-item">
+          <span class="label">75th Percentile (Q3)</span>
+          <span class="value">{{ p75()?.toFixed(2) }}</span>
+        </div>
+        <div class="result-item">
+          <span class="label">Interquartile Range (IQR)</span>
+          <span class="value">{{ iqr()?.toFixed(2) }}</span>
+        </div>
       </div>
     </div>
   }

@@ -48,10 +48,7 @@ This section provides a definitive list of all calculators currently implemented
     *   **Description:** Performs a wide range of matrix operations, including addition, subtraction, multiplication, scalar multiplication, transpose, determinant, and inverse calculations.
     *   **Interface:** Users input matrix data into text areas, with rows separated by newlines and values separated by spaces or commas. The interface is styled with a premium dark theme, featuring responsive controls and a clear results display.
     *   **Functionality:** Includes a "Clear" button to reset all fields and robust error handling for invalid input.
-
-### Statistics Calculators (`/statistics`)
-
-*   **Statistics Calculator:** A tool for calculating fundamental statistical measures like mean, median, and mode.
+*   **Statistics Calculator:** A tool for calculating fundamental and advanced statistical measures, including mean, median, mode, standard deviation, variance, 25th percentile (Q1), 75th percentile (Q3), and the interquartile range (IQR).
 
 ### Other Sections
 
@@ -62,4 +59,4 @@ This section provides a definitive list of all calculators currently implemented
 
 ## 4. Current Development Plan
 
-There are no active development plans at this time. The previous task was reverted, and the application is in a stable, clean state.
+There are no active development plans at this time. The Statistics Calculator has been enhanced with advanced statistical measures, and the application is in a stable, clean state.

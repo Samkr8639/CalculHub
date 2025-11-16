@@ -1,12 +1,12 @@
 
-import { ChangeDetectionStrategy, Component, OnInit, signal, computed, ElementRef, ViewChild, CUSTOM_ELEMENTS_SCHEMA, AfterViewInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, signal, computed, ElementRef, ViewChild, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { RouterLink } from '@angular/router';
 import { SwiperContainer } from 'swiper/element';
-import { AlgebraCalculatorComponent } from '../Allcalculators/algebra-calculator/algebra-calculator.component';
+import { SafeHtmlPipe } from '../safe-html.pipe';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -20,16 +20,14 @@ interface CalculatorCard {
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, SafeHtmlPipe],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit {
   @ViewChild('calculatorsSection') calculatorsSection!: ElementRef;
-  @ViewChild('swiperContainer') swiperContainer!: ElementRef<SwiperContainer>;
-
 
   calculatorCards = signal<CalculatorCard[]>([
     { icon: '💰', title: 'Mortgage Calculator', description: 'Calculate your monthly mortgage payments and amortization schedule.', link: '/financial/mortgage', category: 'Financial' },
@@ -42,11 +40,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
     { icon: '🪙', title: 'Income Tax Calculator', description: 'Determine your annual tax liability and effective tax rate.', link: '/financial/tax', category: 'Financial' },
     { icon: '🎫', title: 'Loan Eligibility / Affordability Calculator', description: 'Estimates the maximum loan amount you are likely to be approved for based on your income and existing debts.', link: '/financial/tax', category: 'Financial' },
     { icon: '🏠', title: 'Home Loan EMI Calculator', description: 'Calculate your monthly home loan payments (EMI) and see a breakdown of principal and interest.', link: '/financial/home-loan-emi-calculator', category: 'Financial' },
-    { icon: '%', title: 'Percentage Calculator', description: 'Solve various percentage problems instantly.', link: '/mathematical/percentage', category: 'Mathematical' },
-    { icon: '✖️', title: 'Scientific Calculator', description: 'Perform complex scientific and mathematical operations.', link: '/mathematical/scientific', category: 'Mathematical' },
+    { icon: '%', title: 'Percentage Calculator', description: 'Solve various percentage problems instantly.', link: '/mathematical/percentage-calculator', category: 'Mathematical' },
+    { icon: '✖️', title: 'Scientific Calculator', description: 'Perform complex scientific and mathematical operations.', link: '/mathematical/scientific-calculator', category: 'Mathematical' },
     { icon: '🧮', title: 'Algebra Calculator', description: 'Solve equations, factor polynomials, and graph inequalities.', link: '/mathematical/algebra-calculator', category: 'Mathematical' },
     { icon: '🔢', title: 'Matrix Calculator', description: 'Perform matrix operations, such as addition, subtraction, and multiplication.', link: '/mathematical/matrix-calculator', category: 'Mathematical' },
-    { icon: '📈', title: 'Statistics Calculator', description: 'Calculate various statistics, such as mean, median, and mode.', link: '/mathematical/statistics', category:'Mathematical'},
+    { icon: '📈', title: 'Statistics Calculator', description: 'Calculate various statistics, such as mean, median, and mode.', link: '/mathematical/statistics-calculator', category: 'Mathematical' },
+   
     { icon: '🏃‍♀️', title: 'Calorie Calculator', description: 'Find your daily calorie needs for weight loss, gain, or maintenance.', link: '/health/calorie', category: 'Health & Fitness' },
     { icon: '🤰', title: 'Pregnancy Calculator', description: 'Estimate your due date and track your pregnancy progress.', link: '/health/pregnancy', category: 'Health & Fitness' },
     { icon: '🏠', title: 'Buy vs. Rent', description: 'Compare the costs of buying and renting a home to make an informed decision.', link: '/other/buy-vs-rent', category: 'Lifestyle & Home' },
@@ -141,33 +140,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
         // scrub: true,
       },
     });
-  }
-
-  ngAfterViewInit() {
-    if (this.swiperContainer) {
-      const swiperParams = {
-        breakpoints: {
-          320: {
-            slidesPerView: 1,
-            spaceBetween: 10
-          },
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 20
-          },
-          1024: {
-            slidesPerView: 3,
-            spaceBetween: 30
-          },
-          1280: {
-            slidesPerView: 4,
-            spaceBetween: 40
-          }
-        }
-      };
-      Object.assign(this.swiperContainer.nativeElement, swiperParams);
-      this.swiperContainer.nativeElement.initialize();
-    }
   }
 
   scrollToCalculators() {

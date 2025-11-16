@@ -195,19 +195,21 @@
   background-color: #b3001a;
 }
 
-swiper-container {
+.calculator-swiper {
   padding-bottom: 2.5rem;
 }
 
-swiper-slide {
+.calculator-swiper swiper-slide {
   height: auto;
   display: flex;
+  justify-content: center;
 }
 
-swiper-slide .calculator-card {
+.calculator-swiper .calculator-card {
   height: 85%;
   width: 75%;
 }
+
 :host ::ng-deep .swiper-pagination-bullet {
   background-color: #fff !important;
 }
