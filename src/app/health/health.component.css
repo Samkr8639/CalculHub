@@ -1,0 +1,37 @@
+.financial-container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .side-panel {
+    width: 280px; /* Adjust width as needed */
+    background-color: #f4f4f4; /* Example background color */
+    border-right: 1px solid #ccc; /* Example border */
+  }
+  
+  .main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevent scrolling issues */
+  }
+  
+  .main-header {
+    padding: 1.5rem 2rem;
+    background-color: var(--background-black);
+    border-bottom: 1px solid var(--border-grey);
+  }
+  
+  h1 {
+    color: var(--primary-red);
+    margin: 0;
+    font-size: 1.8rem;
+  }
+  
+  .calculator-outlet {
+    flex-grow: 1;
+    overflow-y: auto; /* Allow scrolling for calculator content */
+    padding: 2rem;
+    background-color: var(--background-black);
+  }
+  

@@ -1,17 +1,22 @@
 <div class="side-panel">
   @for (category of categoryKeys(); track category) {
   <div class="category-section">
-    <h3>{{ category }}</h3>
+    <h3 (click)="toggleCategory(category)" [class.collapsed]="collapsedCategories()[category]">
+      {{ category }}
+      <span class="toggle-icon"></span>
+    </h3>
+    @if (!collapsedCategories()[category]) {
     <ul>
       @for (card of categorizedCalculators()[category]; track card.title) {
       <li>
-        <a [routerLink]="card.link" [class.active-link]="isActive(card.link)" (click)="onCalculatorClick(card.title)">
+        <a [routerLink]="card.link" [class.active-link]="isActive(card.link)">
           <span class="icon" [innerHTML]="card.icon"></span>
           {{ card.title }}
         </a>
       </li>
       }
     </ul>
+    }
   </div>
   }
 </div>

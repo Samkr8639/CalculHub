@@ -28,6 +28,13 @@ export class SidePanelComponent implements OnInit, OnDestroy {
 
   activeLink = signal<string | null>(null);
 
+  collapsedCategories = signal<{[key: string]: boolean}>({
+    'Financial': true,
+    'Mathematical': true,
+    'Health & Fitness': true,
+    'Lifestyle & Home': true,
+  });
+
   calculatorCards = signal<CalculatorCard[]>([
     { icon: '', title: 'Mortgage Calculator', description: 'Calculate your monthly mortgage payments and amortization schedule.', link: '/financial/mortgage', category: 'Financial' },
     { icon: '', title: 'Home Loan EMI Calculator', description: 'Calculate your monthly home loan payments (EMI) and see a breakdown of principal and interest.', link: '/financial/home-loan-emi-calculator', category: 'Financial' },
@@ -48,10 +55,10 @@ export class SidePanelComponent implements OnInit, OnDestroy {
     { icon: '', title: 'Algebra Calculator', description: 'Solve equations, factor polynomials, and graph inequalities.', link: '/mathematical/algebra-calculator', category: 'Mathematical' },
     { icon: '', title: 'Matrix Calculator', description: 'Perform matrix operations, such as addition, subtraction, and multiplication.', link: '/mathematical/matrix-calculator', category: 'Mathematical' },
     { icon: '', title: 'Statistics Calculator', description: 'Calculate various statistics, such as mean, median, and mode.', link: '/mathematical/statistics-calculator', category: 'Mathematical' },
-    { icon: '', title: 'Calorie Calculator', description: 'Find your daily calorie needs for weight loss, gain, or maintenance.', link: '/health/calorie', category: 'Health & Fitness' },
+    { icon: '', title: 'Calorie Calculator', description: 'Find your daily calorie needs for weight loss, gain, or maintenance.', link: '/health/calorie-calculator', category: 'Health & Fitness' },
     { icon: '', title: 'Pregnancy Calculator', description: 'Estimate your due date and track your pregnancy progress.', link: '/health/pregnancy', category: 'Health & Fitness' },
-    { icon: '', title: 'Buy vs. Rent', description: 'Compare the costs of buying and renting a home to make an informed decision.', link: '/other/buy-vs-rent', category: 'Lifestyle & Home' },
-    { icon: '', title: 'Millionaire Calculator', description: 'Discover how long it will take to reach your millionaire goal.', link: '/other/millionaire', category: 'Lifestyle & Home' },
+    { icon: '🏠', title: 'Buy vs. Rent', description: 'Compare the costs of buying and renting a home to make an informed decision.', link: '/other/buy-vs-rent', category: 'Lifestyle & Home' },
+    { icon: '🤑', title: 'Millionaire Calculator', description: 'Discover how long it will take to reach your millionaire goal.', link: '/other/millionaire', category: 'Lifestyle & Home' },
   ]);
 
   categorizedCalculators = computed(() => {
@@ -81,6 +88,7 @@ export class SidePanelComponent implements OnInit, OnDestroy {
           const card = this.calculatorCards().find(c => c.title === title);
           if (card) {
             this.activeLink.set(card.link);
+            this.expandCategory(card.category);
           }
         }
       })
@@ -92,18 +100,38 @@ export class SidePanelComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  toggleCategory(category: string): void {
+    this.collapsedCategories.update(current => ({
+      ...current,
+      [category]: !current[category]
+    }));
+  }
+
+  private expandCategory(categoryToExpand: string): void {
+    const newCollapsedState = this.categoryKeys().reduce((acc, key) => {
+      acc[key] = key !== categoryToExpand;
+      return acc;
+    }, {} as { [key: string]: boolean });
+    this.collapsedCategories.set(newCollapsedState);
+  }
+
   private updateActiveLinkFromRoute(): void {
     const currentUrl = this.router.url;
     let mostSpecificMatch: string | null = null;
+    let activeCategory: string | null = null;
 
     this.calculatorCards().forEach(card => {
       if (currentUrl.startsWith(card.link)) {
         if (!mostSpecificMatch || card.link.length > mostSpecificMatch.length) {
           mostSpecificMatch = card.link;
+          activeCategory = card.category;
         }
       }
     });
     this.activeLink.set(mostSpecificMatch);
+    if (activeCategory) {
+      this.expandCategory(activeCategory);
+    }
   }
 
   isActive(link: string): boolean {
@@ -115,6 +143,7 @@ export class SidePanelComponent implements OnInit, OnDestroy {
     const card = this.calculatorCards().find(c => c.title === cardTitle);
     if (card) {
       this.activeLink.set(card.link);
+      this.expandCategory(card.category);
     }
   }
 }

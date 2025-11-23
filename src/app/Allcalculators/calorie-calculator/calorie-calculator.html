@@ -1,0 +1,135 @@
+<div class="financial-calculator-content">
+  <div class="financial-calculator">
+    <h1>Calorie Calculator</h1>
+
+    @if (!result()) {
+      <form (ngSubmit)="calculate()">
+        <div class="input-group">
+          <label for="gender">Gender</label>
+          <select id="gender" name="gender" [ngModel]="gender()" (ngModelChange)="gender.set($event)">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="age">Age</label>
+          <input id="age" name="age" type="number" [ngModel]="age()" (ngModelChange)="age.set($event)" />
+        </div>
+
+        <div class="input-group">
+          <label for="weight">Weight</label>
+          <div class="loan-term-input-group">
+            <input id="weight" name="weight" type="number" [ngModel]="weight()" (ngModelChange)="weight.set($event)" />
+            <div class="loan-term-toggle">
+              <button type="button" (click)="toggleWeightUnit()" [class.active]="weightUnit() === 'kg'">kg</button>
+              <button type="button" (click)="toggleWeightUnit()" [class.active]="weightUnit() === 'lb'">lb</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="height">Height</label>
+          <div class="loan-term-input-group">
+            <input id="height" name="height" type="number" [ngModel]="height()" (ngModelChange)="height.set($event)" />
+            <div class="loan-term-toggle">
+              <button type="button" (click)="toggleHeightUnit()" [class.active]="heightUnit() === 'cm'">cm</button>
+              <button type="button" (click)="toggleHeightUnit()" [class.active]="heightUnit() === 'ft'">ft</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="activity-level">Activity Level</label>
+          <select id="activity-level" name="activityLevel" [ngModel]="activityLevel()" (ngModelChange)="activityLevel.set($event)">
+            <option value="1.2">Sedentary</option>
+            <option value="1.375">Lightly active</option>
+            <option value="1.55">Moderately active</option>
+            <option value="1.725">Very active</option>
+            <option value="1.9">Extra active</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="formula">Formula</label>
+          <select id="formula" name="formula" [ngModel]="formula()" (ngModelChange)="formula.set($event)">
+            <option value="mifflin">Mifflin-St Jeor</option>
+            <option value="harris">Harris-Benedict</option>
+            <option value="katch">Katch-McArdle</option>
+          </select>
+        </div>
+
+        @if (formula() === 'katch') {
+          <div class="input-group">
+            <label for="body-fat">Body Fat Percentage</label>
+            <input id="body-fat" name="bodyFat" type="number" [ngModel]="bodyFat()" (ngModelChange)="bodyFat.set($event)" />
+          </div>
+        }
+
+        <div class="button-group">
+          <button type="submit" class="calculate">Calculate</button>
+        </div>
+      </form>
+    } @else {
+      @if (result(); as res) {
+        <div class="results-section">
+          <h2>Your Results</h2>
+
+          <div class="summary-box">
+            <div class="summary-item">
+              <p>Your BMR is</p>
+              <strong>{{ res.bmr | number:'1.0-0' }}</strong>
+            </div>
+            <div class="summary-item">
+              <p>Your TDEE is</p>
+              <strong>{{ res.tdee | number:'1.0-0' }}</strong>
+            </div>
+          </div>
+
+          <div class="macros-card card">
+            <h2 class="macros-title">Macronutrient Goals</h2>
+            <div class="macros-list">
+              <div class="macro-item">
+                <div class="macro-info">
+                  <div class="macro-icon-wrapper">
+                    <span class="material-symbols-outlined">egg_alt</span>
+                  </div>
+                  <div>
+                    <p class="macro-name">Protein</p>
+                    <p class="macro-details">{{ res.macros.protein.grams | number:'1.0-0' }}g</p>
+                  </div>
+                </div>
+              </div>
+              <div class="macro-item">
+                <div class="macro-info">
+                  <div class="macro-icon-wrapper">
+                    <span class="material-symbols-outlined">rice_bowl</span>
+                  </div>
+                  <div>
+                    <p class="macro-name">Carbohydrates</p>
+                    <p class="macro-details">{{ res.macros.carbs.grams | number:'1.0-0' }}g</p>
+                  </div>
+                </div>
+              </div>
+              <div class="macro-item">
+                <div class="macro-info">
+                  <div class="macro-icon-wrapper">
+                    <span class="material-symbols-outlined">water_drop</span>
+                  </div>
+                  <div>
+                    <p class="macro-name">Fats</p>
+                    <p class="macro-details">{{ res.macros.fats.grams | number:'1.0-0' }}g</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button (click)="recalculate()" class="clear">Recalculate</button>
+          </div>
+        </div>
+      }
+    }
+  </div>
+</div>

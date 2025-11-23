@@ -179,6 +179,25 @@ export const routes: Routes = [
     path: 'health',
     loadComponent: () =>
       import('./health/health.component').then((m) => m.HealthComponent),
+    children: [
+      {
+        path: 'calorie-calculator',
+        loadComponent: () =>
+          import('./Allcalculators/calorie-calculator/calorie-calculator').then(
+            (m) => m.CalorieCalculatorComponent
+          ),
+        data: { title: 'Calorie Calculator' },
+      },
+      // {
+      //   path: 'pregnancy',
+      //   loadComponent: () =>
+      //     import('./health/pregnancy-calculator/pregnancy-calculator').then(
+      //       (m) => m.PregnancyCalculatorComponent
+      //     ),
+      //   data: { title: 'Pregnancy Calculator' },
+      // },
+      { path: '', redirectTo: 'calorie-calculator', pathMatch: 'full' },
+    ],
   },
   {
     path: 'other',

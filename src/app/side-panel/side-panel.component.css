@@ -12,56 +12,83 @@
 }
 
 .category-section {
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 
 .category-section h3 {
   color: var(--light-grey-text);
   font-size: 1em;
   font-weight: 600;
-  padding: 10px 20px;
-  margin-top: 0;
-  margin-bottom: 10px;
+  padding: 12px 20px;
+  margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.category-section h3:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--pure-white-text);
+}
+
+.toggle-icon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+h3.collapsed .toggle-icon {
+  transform: rotate(-90deg);
 }
 
 .category-section ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .category-section li {
-  margin-bottom: 5px;
+  margin-bottom: 0;
 }
 
 .category-section a {
   display: flex;
   align-items: center;
   padding: 12px 20px;
+  padding-left: 30px;
   color: var(--pure-white-text);
   text-decoration: none;
-  font-size: 1.05em;
+  font-size: 1em;
   transition: background-color 0.3s ease, color 0.3s ease;
-  border-radius: 0 8px 8px 0; /* Rounded on the right side */
+  border-left: 3px solid transparent;
 }
 
 .category-section a:hover {
   background-color: rgba(var(--primary-red-rgb), 0.1);
   color: var(--primary-red);
+  border-left-color: var(--primary-red);
 }
 
-.category-section a.active-link, .category-section a.router-link-active {
+.category-section a.active-link,
+.category-section a.router-link-active {
   background-color: var(--primary-red);
   color: var(--pure-white-text);
   font-weight: 600;
   box-shadow: 0 4px 10px rgba(225, 25, 49, 0.3);
+  border-left-color: var(--primary-red);
 }
 
 .category-section a .icon {
   margin-right: 15px;
-  font-size: 1.3em;
+  font-size: 1.2em;
   line-height: 1;
 }
 
@@ -76,7 +103,7 @@
   .side-panel {
     width: 100%;
     height: auto;
-    max-height: 60vh; /* Allow it to scroll on small screens if too tall */
+    max-height: 60vh;
     position: relative;
     border-right: none;
     border-bottom: 1px solid var(--border-grey);
