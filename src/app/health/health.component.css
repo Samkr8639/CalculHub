@@ -1,24 +1,27 @@
 .financial-container {
   display: flex;
-  flex: 1;
-  background-color: var(--background-black);
+  height: 100%;
 }
 
 .side-panel {
   width: 280px;
-  background-color: var(--card-black);
-  border-right: 1px solid var(--border-grey);
+  /* Adjust width as needed */
+  background-color: #f4f4f4;
+  /* Example background color */
+  border-right: 1px solid #ccc;
+  /* Example border */
 }
 
 .main-content {
-  flex: 1;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  min-height: 0;
+  overflow: hidden;
+  /* Prevent scrolling issues */
 }
 
 .main-header {
-  padding: 2rem 3rem;
+  padding: 1.5rem 2rem;
   background-color: var(--background-black);
   border-bottom: 1px solid var(--border-grey);
 }
@@ -26,38 +29,14 @@
 h1 {
   color: var(--primary-red);
   margin: 0;
-  font-size: 2.2rem;
-  font-weight: 800;
-  letter-spacing: -0.5px;
+  font-size: 1.8rem;
 }
 
 .calculator-outlet {
-  flex: 1;
-  padding: 3rem;
+  flex-grow: 1;
+  overflow-y: auto;
+  /* Allow scrolling for calculator content */
+  padding: 2rem;
   background-color: var(--background-black);
-  background-image: 
-    radial-gradient(circle at 2px 2px, rgba(239, 68, 68, 0.05) 1px, transparent 0);
-  background-size: 40px 40px;
-}
-
-@media (max-width: 992px) {
-  .side-panel {
-    width: 240px;
-  }
-}
-
-@media (max-width: 768px) {
-  .financial-container {
-    flex-direction: column;
-  }
-  .side-panel {
-    width: 100%;
-    height: auto;
-  }
-  .main-header {
-    padding: 1.5rem;
-  }
-  .calculator-outlet {
-    padding: 1.5rem;
-  }
+  height: 100%;
 }
