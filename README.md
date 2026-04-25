@@ -1,59 +1,43 @@
-# Myapp
+# 🧮 CalculHub
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.5.
+CalculHub is a premium, all-in-one suite of advanced calculators and mathematical tools designed for accuracy, speed, and a sleek user experience. Built with the latest **Angular v20+** paradigms, it leverages reactive **Signals**, **Standalone Components**, and high-performance **Change Detection** to provide a seamless interactive dashboard.
 
-## Development server
+## ✨ Features
 
-To start a local development server, run:
+- **📊 Dynamic Visualizations**: Real-time charts and progress tracking using `Chart.js`.
+- **🏥 Health & Fitness Suite**: includes BMI, Body Fat, Ideal Weight, and BMR/TDEE calculators with logic-based recommendations.
+- **💰 Financial Tools**: Advanced calculators for interest, loans, and investment planning.
+- **📐 Mathematical Precision**: Powered by `math.js`, `nerdamer`, and `algebra.js` for complex symbolic and numerical computations.
+- **🎨 Premium UI/UX**: A state-of-the-art dark-mode aesthetic with smooth animations driven by **GSAP** and interactive elements powered by **Swiper**.
+- **📱 Fully Responsive**: Optimized for every screen size, from mobile phones to high-resolution desktops.
 
+## 🚀 Tech Stack
+
+- **Framework**: Angular v20+ (Standalone Components, Signals, Native Control Flow)
+- **Styling**: Modern CSS with CSS Variables & Glassmorphism effects
+- **Icons**: Lucide Angular
+- **Animations**: GSAP (GreenSock Animation Platform)
+- **Charts**: Chart.js
+- **Mathematical Engines**: Mathjs, Nerdamer, Algebra.js
+- **Slider/Layout**: Swiper.js
+
+## 🛠️ Development
+
+### Prerequisites
+- Node.js (Latest LTS)
+- Angular CLI
+
+### Installation
 ```bash
-ng serve
+git clone https://github.com/Samkr8639/CalculHub.git
+cd CalculHub
+npm install
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+### Running Locally
 ```bash
-ng generate component component-name
+npm start
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 📄 License
+MIT License - Developed with ❤️ by [Sameer Kumar](https://github.com/Samkr8639)
