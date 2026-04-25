@@ -15,8 +15,6 @@ import { gsap } from 'gsap';
 export class AppComponent implements OnInit {
   private themeService = inject(ThemeService);
 
-  // Removed @HostBinding for light-theme as ThemeService will manage body class directly
-
   ngOnInit() {
     gsap.from('body', { opacity: 0, duration: 1, ease: 'power2.out' });
   }

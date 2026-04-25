@@ -15,6 +15,9 @@
 
 body {
   margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   font-family: var(--font-family-sans-serif);
   background-color: var(--background-black);
   color: var(--pure-white-text);
@@ -56,7 +59,7 @@ button {
 }
 
 button:hover {
-  background-color: darken(var(--primary-red), 10%); /* This won't work in plain CSS, but illustrates intent */
+  background-color: color-mix(in srgb, var(--primary-red), black 10%);
 }
 
 /* Card Styling for Depth */

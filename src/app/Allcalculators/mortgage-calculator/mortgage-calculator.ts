@@ -1,5 +1,5 @@
 import { CommonModule, CurrencyPipe } from '@angular/common';
-import { AfterViewInit, Component, computed, effect, ElementRef, OnDestroy, signal, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, effect, ElementRef, OnDestroy, signal, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Chart } from 'chart.js/auto';
 
@@ -17,6 +17,7 @@ interface AmortizationEntry {
   imports: [CommonModule, FormsModule, CurrencyPipe,],
   templateUrl: './mortgage-calculator.html',
   styleUrl: './mortgage-calculator.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MortgageCalculator implements AfterViewInit, OnDestroy{
   @ViewChild('amortizationChart') chartCanvas!: ElementRef<HTMLCanvasElement>;

@@ -1,32 +1,27 @@
 .financial-page-container {
-  width: 100%;
   display: flex;
-  flex-direction: row;
-  height: calc(100vh - 68px); /* Adjust based on header height */
-  flex-grow: 1; /* Allow it to grow within its parent (app-main > router-outlet) */
-  overflow: hidden; /* Keep this to prevent scrollbars on the container itself */
-  min-height: 95%;
+  flex: 1;
+  background-color: var(--background-black);
 }
 
 .side-panel {
   width: 280px;
   background-color: var(--card-black);
-  padding: 20px 0;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
   border-right: 1px solid var(--border-grey);
-  overflow-y: auto; /* Make side panel content scrollable */
-  height: 100%; /* Take full height of its container */
-  position: sticky; /* Sticky positioning to keep it in place */
-  top: 0;
-  left: 0;
 }
 
-/* Ensure the router-outlet within financial component handles its content's height */
-.financial-page-container > router-outlet {
-  height: 95%;
-  display: flex; /* Make it a flex container */
-  flex-direction: column; /* Stack content vertically */
-  flex-grow: 1; /* Allow it to take available space */
-  overflow-y: auto; /* Make content inside this router-outlet scrollable */
-  min-height: 0; /* Crucial: Allows flex item to shrink if content is too large */
+/* For financial we need to ensure the router-outlet children fill the space */
+:host ::ng-deep .financial-page-container > router-outlet + * {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .financial-page-container {
+    flex-direction: column;
+  }
+  .side-panel {
+    width: 100%;
+  }
 }

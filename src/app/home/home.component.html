@@ -1,4 +1,3 @@
-
 <section class="hero-section">
   <div class="hero-background">
     <div class="hero-image"></div>
@@ -8,7 +7,7 @@
       <h1 class="hero-title">Your All In One Calculator Solution</h1>
       <p class="hero-subtitle">From financial planning to health metrics, our advanced calculators help you make
         informed decisions with precision and ease.</p>
-      <a (click)="scrollToCalculators()" class="button primary-button">Scroll to discover</a>
+      <button (click)="scrollToCalculators()" class="button primary-button">Scroll to discover</button>
     </div>
 
   </div>
@@ -22,44 +21,60 @@
     <h3>{{ category }}</h3>
 
     @if (category === 'Financial' && categorizedCalculators()[category].length > 0) {
-      <swiper-container class="calculator-swiper" slides-per-view="4" speed="500" loop="true" autoplay-delay="2500"
-        autoplay-disable-on-interaction="false" pagination="false">
-        @for (card of categorizedCalculators()[category]; track card.title) {
-          <swiper-slide>
-            <div class="calculator-card">
-              <div class="icon" [innerHTML]="card.icon | safeHtml"></div>
-              <h4>{{ card.title }}</h4>
-              <p>{{ card.description }}</p>
-              <button [routerLink]="card.link" class="button small-button calculator-button">Use Calculator</button>
-            </div>
-          </swiper-slide>
-        }
-      </swiper-container>
+    <swiper-container class="calculator-swiper" slides-per-view="4" speed="500" loop="true" autoplay-delay="2500"
+      autoplay-disable-on-interaction="false" pagination="false">
+      @for (card of categorizedCalculators()[category]; track card.title) {
+      <swiper-slide>
+        <div class="calculator-card">
+          <div class="icon"><lucide-icon [name]="card.icon" [size]="32" /></div>
+          <h4>{{ card.title }}</h4>
+          <p>{{ card.description }}</p>
+          <button [routerLink]="card.link" class="button small-button calculator-button">Use Calculator</button>
+        </div>
+      </swiper-slide>
+      }
+    </swiper-container>
     } @else if (category === 'Mathematical' && categorizedCalculators()[category].length > 0) {
-      <swiper-container class="calculator-swiper" slides-per-view="4" speed="500" loop="true" autoplay-delay="2500"
-        autoplay-disable-on-interaction="false" pagination="false">
-        @for (card of categorizedCalculators()[category]; track card.title) {
-          <swiper-slide>
-            <div class="calculator-card">
-              <div class="icon" [innerHTML]="card.icon | safeHtml"></div>
-              <h4>{{ card.title }}</h4>
-              <p>{{ card.description }}</p>
-              <button [routerLink]="card.link" class="button small-button calculator-button">Use Calculator</button>
-            </div>
-          </swiper-slide>
-        }
-      </swiper-container>
-    } @else {
-      <div class="calculator-grid">
-        @for (card of categorizedCalculators()[category]; track card.title) {
-          <div class="calculator-card">
-            <div class="icon" [innerHTML]="card.icon | safeHtml"></div>
-            <h4>{{ card.title }}</h4>
-            <p>{{ card.description }}</p>
-            <button [routerLink]="card.link" class="button small-button calculator-button">Use Calculator</button>
-          </div>
-        }
+    <swiper-container class="calculator-swiper" slides-per-view="4" speed="500" loop="true" autoplay-delay="2500"
+      autoplay-disable-on-interaction="false" pagination="false">
+      @for (card of categorizedCalculators()[category]; track card.title) {
+      <swiper-slide>
+        <div class="calculator-card">
+          <div class="icon"><lucide-icon [name]="card.icon" [size]="32" /></div>
+          <h4>{{ card.title }}</h4>
+          <p>{{ card.description }}</p>
+          <button [routerLink]="card.link" class="button small-button calculator-button">Use Calculator</button>
+        </div>
+      </swiper-slide>
+      }
+    </swiper-container>
+    } @else if (category === 'Health & Fitness' && categorizedCalculators()[category].length > 0) {
+    <swiper-container class="calculator-swiper" slides-per-view="4" speed="500" loop="true" autoplay-delay="2500"
+      autoplay-disable-on-interaction="false" pagination="false">
+      @for (card of categorizedCalculators()[category]; track card.title) {
+      <swiper-slide>
+        <div class="calculator-card">
+          <div class="icon"><lucide-icon [name]="card.icon" [size]="32" /></div>
+          <h4>{{ card.title }}</h4>
+          <p>{{ card.description }}</p>
+          <button [routerLink]="card.link" class="button small-button calculator-button">Use Calculator</button>
+        </div>
+      </swiper-slide>
+      }
+    </swiper-container>
+    }
+
+    @else {
+    <div class="calculator-grid">
+      @for (card of categorizedCalculators()[category]; track card.title) {
+      <div class="calculator-card">
+        <div class="icon"><lucide-icon [name]="card.icon" [size]="32" /></div>
+        <h4>{{ card.title }}</h4>
+        <p>{{ card.description }}</p>
+        <button [routerLink]="card.link" class="button small-button calculator-button">Use Calculator</button>
       </div>
+      }
+    </div>
     }
   </div>
   }

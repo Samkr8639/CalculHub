@@ -1,27 +1,11 @@
-html, body {
-  height: 100%;
-  margin: 0;
-}
-
-body {
+:host {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 main {
   display: flex;
-  flex-direction: column; /* Allow content to stack vertically */
-  align-items: stretch; /* Stretch content to full width */
-  padding: 0;
-  flex-grow: 1; /* Allow main to take up all available space */
-  min-height: 0; /* Crucial: Allows flex item to shrink beyond content's intrinsic size */
-  overflow-x: hidden; /* Prevent horizontal scroll from GSAP animations */
-}
-
-/* Ensure router-outlet fills the available space within main */
-router-outlet {
-  display: flex;
   flex-direction: column;
-  flex-grow: 1;
-  min-height: 0; /* Allow router-outlet to shrink correctly */
+  flex: 1;
 }

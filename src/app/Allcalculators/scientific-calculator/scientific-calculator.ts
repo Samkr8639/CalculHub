@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import * as math from 'mathjs';
 
 @Component({
   selector: 'app-scientific-calculator',
@@ -61,9 +62,8 @@ export class ScientificCalculatorComponent {
     if (this.isError || this.isOperator) return;
 
     try {
-      // Use a function constructor for safe evaluation
-      const result = new Function(`return ${this.display()}`)();
-      if (Number.isNaN(result) || !Number.isFinite(result)) {
+      const result = math.evaluate(this.display());
+      if (typeof result !== 'number' || Number.isNaN(result) || !Number.isFinite(result)) {
         this.display.set('Error');
       } else {
         this.display.set(String(result));

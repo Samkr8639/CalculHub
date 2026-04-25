@@ -28,10 +28,9 @@ export class MathematicalComponent {
   activeCalculatorTitle = toSignal(this.currentRoute$, { initialValue: 'Select a Calculator' });
 
   private getRouteTitle(url: string): string {
-    const routeData = this.router.config
-      .flatMap(route => route.children || [route])
-      .find(route => url.includes(route.path ?? ''));
-
-    return routeData?.data?.['title'] || 'Select a Calculator';
+    const mathRoute = this.router.config.find(r => r.path === 'mathematical');
+    if (!mathRoute || !mathRoute.children) return 'Select a Calculator';
+    const childRoute = mathRoute.children.find(r => r.path && url.includes(r.path));
+    return childRoute?.data?.['title'] || 'Select a Calculator';
   }
 }

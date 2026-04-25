@@ -1,37 +1,63 @@
 .financial-container {
-    display: flex;
-    height: 100vh;
-  }
-  
+  display: flex;
+  flex: 1;
+  background-color: var(--background-black);
+}
+
+.side-panel {
+  width: 280px;
+  background-color: var(--card-black);
+  border-right: 1px solid var(--border-grey);
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.main-header {
+  padding: 2rem 3rem;
+  background-color: var(--background-black);
+  border-bottom: 1px solid var(--border-grey);
+}
+
+h1 {
+  color: var(--primary-red);
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.calculator-outlet {
+  flex: 1;
+  padding: 3rem;
+  background-color: var(--background-black);
+  background-image: 
+    radial-gradient(circle at 2px 2px, rgba(239, 68, 68, 0.05) 1px, transparent 0);
+  background-size: 40px 40px;
+}
+
+@media (max-width: 992px) {
   .side-panel {
-    width: 280px; /* Adjust width as needed */
-    background-color: #f4f4f4; /* Example background color */
-    border-right: 1px solid #ccc; /* Example border */
+    width: 240px;
   }
-  
-  .main-content {
-    flex-grow: 1;
-    display: flex;
+}
+
+@media (max-width: 768px) {
+  .financial-container {
     flex-direction: column;
-    overflow: hidden; /* Prevent scrolling issues */
   }
-  
+  .side-panel {
+    width: 100%;
+    height: auto;
+  }
   .main-header {
-    padding: 1.5rem 2rem;
-    background-color: var(--background-black);
-    border-bottom: 1px solid var(--border-grey);
+    padding: 1.5rem;
   }
-  
-  h1 {
-    color: var(--primary-red);
-    margin: 0;
-    font-size: 1.8rem;
-  }
-  
   .calculator-outlet {
-    flex-grow: 1;
-    overflow-y: auto; /* Allow scrolling for calculator content */
-    padding: 2rem;
-    background-color: var(--background-black);
+    padding: 1.5rem;
   }
-  
+}

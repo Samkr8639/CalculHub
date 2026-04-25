@@ -1,6 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { fromEvent } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { map, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -12,25 +15,20 @@ import { RouterModule } from '@angular/router';
 export class HeaderComponent {
   isHidden = signal(false);
 
-  navLinks = signal<{
-    label: string;
-    path: string;
-  }[]>([
-    { label: 'Home', path: '/home' },
-    { label: 'About', path: '/about' },
-    { label: 'Blog', path: '/blog' },
-  ]);
-
   constructor() {
-    let lastScrollY = 0;
-    window.addEventListener('scroll', () => {
-      const currentScrollY = window.scrollY;
-      if (currentScrollY > lastScrollY && currentScrollY > 200) {
-        this.isHidden.set(true);
-      } else {
-        this.isHidden.set(false);
-      }
-      lastScrollY = currentScrollY;
-    });
+    let lastScrollY = window.scrollY;
+
+    fromEvent(window, 'scroll')
+      .pipe(
+        map(() => {
+          const currentScrollY = window.scrollY;
+          const hidden = currentScrollY > lastScrollY && currentScrollY > 200;
+          lastScrollY = currentScrollY;
+          return hidden;
+        }),
+        distinctUntilChanged(),
+        takeUntilDestroyed()
+      )
+      .subscribe((hidden) => this.isHidden.set(hidden));
   }
 }

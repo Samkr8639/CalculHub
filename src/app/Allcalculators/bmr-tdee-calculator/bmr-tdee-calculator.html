@@ -1,0 +1,88 @@
+<div class="calculator-card">
+  <h2>BMR & TDEE Calculator</h2>
+
+  <div class="calculator-content">
+    <div class="form-group row-group">
+      <label>Gender</label>
+      <div class="radio-group">
+        <label class="radio-label">
+          <input type="radio" name="gender" value="male" [ngModel]="gender()" (ngModelChange)="gender.set($event)"> Male
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="gender" value="female" [ngModel]="gender()" (ngModelChange)="gender.set($event)"> Female
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="age">Age (years)</label>
+      <input type="number" id="age" class="form-control" [ngModel]="age()" (ngModelChange)="age.set($event)" placeholder="e.g. 30">
+    </div>
+
+    <div class="form-group">
+      <label for="height">Height (cm)</label>
+      <input type="number" id="height" class="form-control" [ngModel]="height()" (ngModelChange)="height.set($event)" placeholder="e.g. 175">
+    </div>
+
+    <div class="form-group">
+      <label for="weight">Weight (kg)</label>
+      <input type="number" id="weight" class="form-control" [ngModel]="weight()" (ngModelChange)="weight.set($event)" placeholder="e.g. 70">
+    </div>
+
+    <div class="form-group">
+      <label for="activity">Activity Level</label>
+      <select id="activity" class="form-control" [ngModel]="activity()" (ngModelChange)="activity.set($event)">
+        <option [ngValue]="1.2">Sedentary (Little to no exercise)</option>
+        <option [ngValue]="1.375">Lightly Active (1-3 days/week)</option>
+        <option [ngValue]="1.55">Moderately Active (3-5 days/week)</option>
+        <option [ngValue]="1.725">Very Active (6-7 days/week)</option>
+        <option [ngValue]="1.9">Extra Active (Very hard exercise/physical job)</option>
+      </select>
+    </div>
+
+    <button (click)="calculate()" class="btn btn-calculate">Calculate BMR & TDEE</button>
+
+    @if (error()) {
+      <div class="error-message">
+        <p>{{ error() }}</p>
+      </div>
+    }
+
+    @if (bmr() !== null && tdee() !== null) {
+      <div class="result-section">
+        <h3>Estimated Metabolic Rates</h3>
+        
+        <div class="result-grid">
+          <div class="result-item">
+            <span class="label">BMR (Resting Energy)</span>
+            <span class="value">{{ bmr()?.toFixed(0) }} kcal/day</span>
+            <span class="sub-label">Calories burned at complete rest</span>
+          </div>
+          <div class="result-item highlight">
+            <span class="label">TDEE (Maintenance)</span>
+            <span class="value">{{ tdee()?.toFixed(0) }} kcal/day</span>
+            <span class="sub-label">Calories needed to maintain weight</span>
+          </div>
+        </div>
+
+        <div class="goals-container">
+          <h4>Weight Goals</h4>
+          <div class="goals-grid">
+            <div class="goal-item">
+              <span class="goal-label">Mild Weight Loss (0.25kg/week)</span>
+              <span class="goal-value">{{ (tdee()! - 250).toFixed(0) }} kcal</span>
+            </div>
+            <div class="goal-item">
+              <span class="goal-label">Weight Loss (0.5kg/week)</span>
+              <span class="goal-value">{{ (tdee()! - 500).toFixed(0) }} kcal</span>
+            </div>
+            <div class="goal-item">
+              <span class="goal-label">Weight Gain (0.5kg/week)</span>
+              <span class="goal-value">{{ (tdee()! + 500).toFixed(0) }} kcal</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

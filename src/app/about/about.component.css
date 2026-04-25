@@ -3,6 +3,9 @@
   max-width: 1200px;
   margin: 0 auto;
   color: var(--text-color);
+  height: 100%;
+  overflow-y: auto;
+
 }
 
 .about-header {
@@ -107,15 +110,15 @@ strong {
   .about-header h1 {
     font-size: 2.8rem;
   }
-  
+
   .about-header .subtitle {
     font-size: 1.3rem;
   }
-  
+
   h2 {
     font-size: 2.2rem;
   }
-  
+
   h3 {
     font-size: 1.8rem;
   }
@@ -124,20 +127,22 @@ strong {
 @media (max-width: 768px) {
   .about-container {
     padding: 3rem 1.5rem;
+    height: 100%;
+    overflow-y: auto;
   }
-  
+
   .about-header h1 {
     font-size: 2.2rem;
   }
-  
+
   .about-header .subtitle {
     font-size: 1.1rem;
   }
-  
+
   h2 {
     font-size: 1.8rem;
   }
-  
+
   h3 {
     font-size: 1.5rem;
   }

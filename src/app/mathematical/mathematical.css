@@ -1,75 +1,46 @@
 .financial-container {
-    display: flex;
-    height: 100vh;
-    background-color: var(--background-black);
-    color: var(--pure-white-text);
+  display: flex;
+  flex: 1;
+  background-color: var(--background-black);
+}
+
+.side-panel {
+  width: 280px;
+  background-color: var(--card-black);
+  border-right: 1px solid var(--border-grey);
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-header {
+  padding: 2rem 3rem;
+  background-color: var(--background-black);
+  border-bottom: 1px solid var(--border-grey);
+}
+
+.main-header h1 {
+  color: var(--primary-red);
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.calculator-outlet {
+  flex: 1;
+  padding: 3rem;
+  background-color: var(--background-black);
+}
+
+@media (max-width: 768px) {
+  .financial-container {
+    flex-direction: column;
   }
-  
   .side-panel {
-    width: 280px;
-    flex-shrink: 0;
-    background-color: var(--side-panel-black);
-    border-right: 1px solid var(--border-grey);
-    overflow-y: auto;
-    transition: width 0.3s ease;
+    width: 100%;
   }
-  
-  .main-content {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-  
-  .main-header {
-    padding: 20px 25px;
-    background-color: var(--card-black);
-    border-bottom: 1px solid var(--border-grey);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    z-index: 10;
-  }
-  
-  .main-header h1 {
-    margin: 0;
-    font-size: 1.8em;
-    font-weight: 600;
-    color: var(--primary-red);
-    letter-spacing: 0.5px;
-  }
-  
-  .calculator-outlet {
-    flex-grow: 1;
-    padding: 25px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  @media (max-width: 992px) {
-    .side-panel {
-      width: 240px;
-    }
-  
-    .main-header h1 {
-      font-size: 1.6em;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .financial-container {
-      flex-direction: column;
-    }
-  
-    .side-panel {
-      width: 100%;
-      height: auto;
-      max-height: 50vh;
-      border-right: none;
-      border-bottom: 1px solid var(--border-grey);
-    }
-  
-    .main-header {
-      padding: 15px 20px;
-    }
-  }
-  
+}

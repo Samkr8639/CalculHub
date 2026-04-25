@@ -188,14 +188,30 @@ export const routes: Routes = [
           ),
         data: { title: 'Calorie Calculator' },
       },
-      // {
-      //   path: 'pregnancy',
-      //   loadComponent: () =>
-      //     import('./health/pregnancy-calculator/pregnancy-calculator').then(
-      //       (m) => m.PregnancyCalculatorComponent
-      //     ),
-      //   data: { title: 'Pregnancy Calculator' },
-      // },
+      {
+        path: 'bmi-calculator',
+        loadComponent: () =>
+          import('./Allcalculators/bmi-calculator/bmi-calculator').then(
+            (m) => m.BmiCalculatorComponent
+          ),
+        data: { title: 'BMI Calculator' },
+      },
+      {
+        path: 'body-fat-calculator',
+        loadComponent: () =>
+          import('./Allcalculators/body-fat-calculator/body-fat-calculator').then(
+            (m) => m.BodyFatCalculatorComponent
+          ),
+        data: { title: 'Body Fat Calculator' },
+      },
+      {
+        path: 'ideal-weight-calculator',
+        loadComponent: () =>
+          import('./Allcalculators/ideal-weight-calculator/ideal-weight-calculator').then(
+            (m) => m.IdealWeightCalculatorComponent
+          ),
+        data: { title: 'Ideal Weight Calculator' },
+      },
       { path: '', redirectTo: 'calorie-calculator', pathMatch: 'full' },
     ],
   },
@@ -209,4 +225,5 @@ export const routes: Routes = [
     path: 'blog',
     loadComponent: () => import('./blog/blog.component').then((m) => m.BlogComponent),
   },
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

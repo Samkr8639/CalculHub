@@ -1,0 +1,61 @@
+<div class="calculator-card">
+  <h2>Ideal Weight Calculator</h2>
+
+  <div class="calculator-content">
+    <div class="form-group row-group">
+      <label>Gender</label>
+      <div class="radio-group">
+        <label class="radio-label">
+          <input type="radio" name="gender" value="male" [ngModel]="gender()" (ngModelChange)="gender.set($event)"> Male
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="gender" value="female" [ngModel]="gender()" (ngModelChange)="gender.set($event)"> Female
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="height">Height (cm)</label>
+      <input type="number" id="height" class="form-control" [ngModel]="height()" (ngModelChange)="height.set($event)" placeholder="e.g. 175">
+    </div>
+
+    <button (click)="calculate()" class="btn btn-calculate">Calculate Ideal Weight</button>
+
+    @if (error()) {
+      <div class="error-message">
+        <p>{{ error() }}</p>
+      </div>
+    }
+
+    @if (idealWeightRobinson() !== null) {
+      <div class="result-section">
+        <h3>Estimated Ideal Weights (kg)</h3>
+        <p class="summary-text">Based on your height of {{ height() }} cm.</p>
+        
+        <div class="result-grid">
+          <div class="result-item highlight">
+            <span class="label">Robinson Formula</span>
+            <span class="value">{{ idealWeightRobinson()?.toFixed(1) }}</span>
+          </div>
+          <div class="result-item">
+            <span class="label">Miller Formula</span>
+            <span class="value">{{ idealWeightMiller()?.toFixed(1) }}</span>
+          </div>
+          <div class="result-item">
+            <span class="label">Devine Formula</span>
+            <span class="value">{{ idealWeightDevine()?.toFixed(1) }}</span>
+          </div>
+          <div class="result-item">
+            <span class="label">Hamwi Formula</span>
+            <span class="value">{{ idealWeightHamwi()?.toFixed(1) }}</span>
+          </div>
+        </div>
+
+        <div class="bmi-range">
+          <h4>Healthy BMI Range (18.5 - 24.9)</h4>
+          <p class="value"><strong>{{ healthyRangeMin()?.toFixed(1) }} kg</strong> - <strong>{{ healthyRangeMax()?.toFixed(1) }} kg</strong></p>
+        </div>
+      </div>
+    }
+  </div>
+</div>

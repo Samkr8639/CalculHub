@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -16,7 +16,8 @@ interface CalorieResult {
   selector: 'app-calorie-calculator',
   templateUrl: './calorie-calculator.html',
   styleUrls: ['./calorie-calculator.css'],
-  imports: [FormsModule, CommonModule]
+  imports: [FormsModule, CommonModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalorieCalculatorComponent {
   gender = signal<'male' | 'female'>('male');

@@ -124,7 +124,7 @@ export class AlgebraCalculatorComponent implements AfterViewInit {
           try {
             lhsValue = lhsNode.evaluate(scope);
             rhsValue = rhsNode.evaluate(scope);
-          } catch (e) { continue; } // Skip points where evaluation fails
+          } catch (e: unknown) { continue; } // Skip points where evaluation fails
 
           let isTrue = false;
           switch (operator) {
@@ -171,13 +171,13 @@ export class AlgebraCalculatorComponent implements AfterViewInit {
             if (val * prevVal < 0) { // Sign change indicates crossing boundary
               this.ctx.rect(px, py, 1, 1);
             }
-          } catch (e) { }
+          } catch (e: unknown) { }
         }
       }
       this.ctx.stroke();
       this.ctx.setLineDash([]);
 
-    } catch (error) {
+    } catch (error: unknown) {
       console.error(`Graphing error for "${ineq.value}":`, error);
     }
   }
@@ -299,7 +299,7 @@ export class AlgebraCalculatorComponent implements AfterViewInit {
       }
 
       this.equationSteps.set(steps);
-    } catch (error) {
+    } catch (error: unknown) {
       this.equationResult.set('Could not solve. Please check the equation format.');
       console.error('Equation solving error:', error);
     }
@@ -353,7 +353,7 @@ export class AlgebraCalculatorComponent implements AfterViewInit {
       steps.push(`Construct the factored form a(x - r1)(x - r2): ${finalResult}`);
       this.polynomialSteps.set(steps);
 
-    } catch (error) {
+    } catch (error: unknown) {
       this.polynomialResult.set('Could not factor. Use format like "ax^2 + bx + c".');
       console.error('Factoring error:', error);
     }
@@ -374,9 +374,10 @@ export class AlgebraCalculatorComponent implements AfterViewInit {
         case 'add': result = math.add(c1, c2); break;
         case 'subtract': result = math.subtract(c1, c2); break;
         case 'multiply': result = math.multiply(c1, c2); break;
+        default: throw new Error('Unsupported operation');
       }
       this.complexResult.set(`Result: ${result.toString()}`);
-    } catch (error) {
+    } catch (error: unknown) {
       this.complexResult.set('Invalid complex number format. Use "a + bi".');
       console.error('Complex calc error:', error);
     }

@@ -5,10 +5,11 @@
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
   border-right: 1px solid var(--border-grey);
   overflow-y: auto;
-  height: calc(100vh - 68px); /* Adjust based on header height */
+  height: calc(100vh - 68px);
   position: sticky;
-  top: 0;
+  top: 68px; /* Offset for Header height */
   left: 0;
+  z-index: 50;
 }
 
 .category-section {
@@ -36,16 +37,12 @@
 }
 
 .toggle-icon {
-  width: 16px;
-  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
   transition: transform 0.3s ease;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-h3.collapsed .toggle-icon {
-  transform: rotate(-90deg);
 }
 
 .category-section ul {

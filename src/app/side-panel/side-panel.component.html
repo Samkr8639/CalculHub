@@ -1,16 +1,19 @@
 <div class="side-panel">
   @for (category of categoryKeys(); track category) {
   <div class="category-section">
-    <h3 (click)="toggleCategory(category)" [class.collapsed]="collapsedCategories()[category]">
+    <h3 (click)="toggleCategory(category)" [class.collapsed]="collapsedCategories()[category]"
+        role="button" tabindex="0" [attr.aria-expanded]="!collapsedCategories()[category]">
       {{ category }}
-      <span class="toggle-icon"></span>
+      <span class="toggle-icon">
+        <lucide-icon [name]="collapsedCategories()[category] ? 'chevron-right' : 'chevron-down'" [size]="20" />
+      </span>
     </h3>
     @if (!collapsedCategories()[category]) {
     <ul>
       @for (card of categorizedCalculators()[category]; track card.title) {
       <li>
         <a [routerLink]="card.link" [class.active-link]="isActive(card.link)">
-          <span class="icon" [innerHTML]="card.icon"></span>
+          <span class="icon"><lucide-icon [name]="card.icon" [size]="16" /></span>
           {{ card.title }}
         </a>
       </li>

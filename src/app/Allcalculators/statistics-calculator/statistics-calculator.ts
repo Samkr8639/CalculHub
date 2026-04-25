@@ -74,8 +74,12 @@ export class StatisticsCalculator {
       this.p75.set(q3);
       this.iqr.set(iqr);
 
-    } catch (e: any) {
-      this.error.set(e.message);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        this.error.set(e.message);
+      } else {
+        this.error.set('An unknown error occurred during calculation.');
+      }
       this.clearResults();
     }
   }
