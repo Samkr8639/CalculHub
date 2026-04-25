@@ -1,5 +1,8 @@
 # 🧮 CalculHub
 
+<img width="3418" height="1980" alt="image" src="https://github.com/user-attachments/assets/fa39bb0b-5c31-4c74-b23a-52a890f23404" />
+
+
 CalculHub is a premium, all-in-one suite of advanced calculators and mathematical tools designed for accuracy, speed, and a sleek user experience. Built with the latest **Angular v20+** paradigms, it leverages reactive **Signals**, **Standalone Components**, and high-performance **Change Detection** to provide a seamless interactive dashboard.
 
 ## ✨ Features
