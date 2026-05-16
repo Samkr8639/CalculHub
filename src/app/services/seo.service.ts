@@ -28,22 +28,26 @@ export class SeoService {
   readonly siteName = 'CalculHub';
 
   init(): void {
+    this.updateForCurrentRoute();
+
     this.router.events
       .pipe(
-        filter((event) => event instanceof NavigationEnd),
-        map(() => {
-          let route = this.router.routerState.snapshot.root;
-          while (route.firstChild) {
-            route = route.firstChild;
-          }
-          return route.data as SeoData;
-        })
+        filter((event) => event instanceof NavigationEnd)
       )
-      .subscribe((data) => {
-        if (data?.title) {
-          this.updateSeo(data);
-        }
+      .subscribe(() => {
+        this.updateForCurrentRoute();
       });
+  }
+
+  private updateForCurrentRoute(): void {
+    let route = this.router.routerState.snapshot.root;
+    while (route.firstChild) {
+      route = route.firstChild;
+    }
+    const data = route.data as SeoData;
+    if (data?.title) {
+      this.updateSeo(data);
+    }
   }
 
   updateSeo(data: SeoData): void {
@@ -68,19 +72,16 @@ export class SeoService {
     this.meta.updateTag({ property: 'og:site_name', content: this.siteName });
     this.meta.updateTag({ property: 'og:type', content: 'website' });
     this.meta.updateTag({ property: 'og:locale', content: 'en_IN' });
-    if (data.ogImage) {
-      this.meta.updateTag({ property: 'og:image', content: data.ogImage });
-      this.meta.updateTag({ property: 'og:image:width', content: '1200' });
-      this.meta.updateTag({ property: 'og:image:height', content: '630' });
-    }
+    const ogImage = data.ogImage || `${this.baseUrl}/og-image.png`;
+    this.meta.updateTag({ property: 'og:image', content: ogImage });
+    this.meta.updateTag({ property: 'og:image:width', content: '1200' });
+    this.meta.updateTag({ property: 'og:image:height', content: '630' });
 
     // Twitter Card
     this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
     this.meta.updateTag({ name: 'twitter:title', content: data.ogTitle || fullTitle });
     this.meta.updateTag({ name: 'twitter:description', content: data.ogDescription || data.description });
-    if (data.ogImage) {
-      this.meta.updateTag({ name: 'twitter:image', content: data.ogImage });
-    }
+    this.meta.updateTag({ name: 'twitter:image', content: ogImage });
 
     // JSON-LD Schemas
     this.clearSchemas();
