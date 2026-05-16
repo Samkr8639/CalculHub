@@ -8,7 +8,7 @@
   <div class="header-right">
     <nav class="navigation">
       <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-      <a routerLink="/financial" routerLinkActive="active">Calculators</a>
+      <a routerLink="/sitemap" [class.active]="isCalculatorsActive()">Calculators</a>
       <a routerLink="/about" routerLinkActive="active">About</a>
       <!-- <a routerLink="/blog" routerLinkActive="active">Blog</a> -->
     </nav>

@@ -1,5 +1,4 @@
-
-import { ChangeDetectionStrategy, Component, OnInit, signal, computed, ElementRef, ViewChild, CUSTOM_ELEMENTS_SCHEMA, inject, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, signal, computed, ElementRef, ViewChild, CUSTOM_ELEMENTS_SCHEMA, inject, PLATFORM_ID, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -26,9 +25,10 @@ interface CalculatorCard {
   changeDetection: ChangeDetectionStrategy.OnPush,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('calculatorsSection') calculatorsSection!: ElementRef;
   private platformId = inject(PLATFORM_ID);
+  private ctx!: gsap.Context;
 
   calculatorCards = signal<CalculatorCard[]>([
     { icon: 'house', title: 'Mortgage Calculator', description: 'Calculate your monthly mortgage payments and amortization schedule.', link: '/financial/mortgage', category: 'Financial' },
@@ -72,126 +72,139 @@ export class HomeComponent implements OnInit {
     import('swiper/element/bundle').then(({ register }) => {
       register();
     });
+  }
 
-    // Parallax effect for hero background
-    gsap.to('.hero-background', {
-      yPercent: 20,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '.hero-section',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true,
-      },
-    });
+  ngAfterViewInit() {
+    if (!isPlatformBrowser(this.platformId)) return;
 
-    const splitTitle = new SplitText('.hero-title', { type: 'words,chars' });
-    gsap.from(splitTitle.chars, {
-      opacity: 0,
-      scale: 0,
-      rotation: 360,
-      ease: 'back.out(2)',
-      stagger: 0.03,
-      duration: 0.8,
-      delay: 0.5,
-    });
+    this.ctx = gsap.context(() => {
+      // Parallax effect for hero background
+      gsap.to('.hero-background', {
+        yPercent: 20,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.hero-section',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
 
+      const splitTitle = new SplitText('.hero-title', { type: 'words,chars' });
+      gsap.from(splitTitle.chars, {
+        opacity: 0,
+        scale: 0,
+        rotation: 360,
+        ease: 'back.out(2)',
+        stagger: 0.03,
+        duration: 0.8,
+        delay: 0.1,
+      });
 
-    const splitSubtitle = new SplitText('.hero-subtitle', { type: 'words' });
-    gsap.from(splitSubtitle.words, {
-      opacity: 0,
-      y: 30,
-      ease: 'power2.out',
-      stagger: 0.1,
-      duration: 0.8,
-      delay: 1.5
-    });
+      const splitSubtitle = new SplitText('.hero-subtitle', { type: 'words' });
+      gsap.from(splitSubtitle.words, {
+        opacity: 0,
+        y: 30,
+        ease: 'power2.out',
+        stagger: 0.1,
+        duration: 0.8,
+        delay: 1.0
+      });
 
-    // Add continuous float
-    gsap.to(splitSubtitle.words, {
-      y: -5,
-      ease: 'sine.inOut',
-      stagger: {
-        each: 0.1,
+      // Add continuous float
+      gsap.to(splitSubtitle.words, {
+        y: -5,
+        ease: 'sine.inOut',
+        stagger: {
+          each: 0.1,
+          repeat: -1,
+          yoyo: true
+        },
+        duration: 2,
+        delay: 2.0
+      });
+
+      // Floating calculator icons
+      gsap.to('.floating-icon', {
+        y: -20,
         repeat: -1,
-        yoyo: true
-      },
-      duration: 2,
-      delay: 2.5
-    });
+        yoyo: true,
+        ease: 'sine.inOut',
+        duration: 3,
+        stagger: {
+          each: 0.5,
+          from: 'random',
+        },
+      });
 
+      // Calculator card stagger animation
+      gsap.from('.calculator-card', {
+        opacity: 0,
+        y: 50,
+        stagger: 0.1,
+        ease: 'power2.out',
+        duration: 0.8,
+        clearProps: 'all',
+        scrollTrigger: {
+          trigger: '.calculator-grid',
+          start: 'top 80%',
+        },
+      });
 
-    // Floating calculator icons
-    gsap.to('.floating-icon', {
-      y: -20,
-      repeat: -1,
-      yoyo: true,
-      ease: 'sine.inOut',
-      duration: 3,
-      stagger: {
-        each: 0.5,
-        from: 'random',
-      },
-    });
+      // Quick-access nav: slide down & fade in
+      gsap.from('.quick-access-nav', {
+        opacity: 0,
+        y: -20,
+        duration: 0.6,
+        ease: 'power2.out',
+        delay: 0.3,
+        clearProps: 'all',
+      });
 
-    // Calculator card stagger animation
-    gsap.from('.calculator-card', {
-      opacity: 0,
-      y: 50,
-      stagger: 0.1,
-      ease: 'power2.out',
-      duration: 0.8,
-      scrollTrigger: {
-        trigger: '.calculator-grid',
-        start: 'top 80%',
-      },
-    });
+      // About section: slide up on scroll
+      gsap.from('.about-text-block', {
+        opacity: 0,
+        x: -60,
+        duration: 0.9,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '#about-section',
+          start: 'top 75%',
+        },
+      });
 
-    // Quick-access nav: slide down & fade in
-    gsap.from('.quick-access-nav', {
-      opacity: 0,
-      y: -20,
-      duration: 0.6,
-      ease: 'power2.out',
-      delay: 0.3,
-    });
+      gsap.from('.about-stat-card', {
+        opacity: 0,
+        y: 40,
+        stagger: 0.12,
+        duration: 0.7,
+        ease: 'back.out(1.5)',
+        clearProps: 'all',
+        scrollTrigger: {
+          trigger: '#about-section',
+          start: 'top 70%',
+          onEnter: () => this.animateCounters(),
+        },
+      });
 
-    // About section: slide up on scroll
-    gsap.from('.about-text-block', {
-      opacity: 0,
-      x: -60,
-      duration: 0.9,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '#about-section',
-        start: 'top 75%',
-      },
+      // Accent line width animation
+      gsap.from('.about-accent-line', {
+        scaleX: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        transformOrigin: 'left center',
+        scrollTrigger: {
+          trigger: '#about-section',
+          start: 'top 80%',
+        },
+      });
     });
+  }
 
-    gsap.from('.about-stat-card', {
-      opacity: 0,
-      y: 40,
-      stagger: 0.12,
-      duration: 0.7,
-      ease: 'back.out(1.5)',
-      scrollTrigger: {
-        trigger: '#about-section',
-        start: 'top 70%',
-        onEnter: () => this.animateCounters(),
-      },
-    });
-
-    // Accent line width animation
-    gsap.from('.about-accent-line', {
-      scaleX: 0,
-      duration: 0.8,
-      ease: 'power3.out',
-      transformOrigin: 'left center',
-      scrollTrigger: {
-        trigger: '#about-section',
-        start: 'top 80%',
-      },
-    });
+  ngOnDestroy() {
+    if (this.ctx) {
+      this.ctx.revert(); // Clean up GSAP animations and ScrollTriggers to prevent memory leaks and duplication on SPA navigation
+    }
   }
 
   private animateCounters(): void {

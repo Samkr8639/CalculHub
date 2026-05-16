@@ -1,41 +1,34 @@
-import { ChangeDetectionStrategy, Component, signal, computed, ViewChild, ElementRef, AfterViewInit, OnDestroy, effect, inject, OnInit } from '@angular/core';
-
-import { FormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { SidePanelComponent } from '../side-panel/side-panel.component';
-import Chart from 'chart.js/auto';
-import { MortgageCalculator } from "../Allcalculators/mortgage-calculator/mortgage-calculator";
-import { CalculatorSelectionService } from '../calculator-selection.service';
-import { Subscription } from 'rxjs';
-import { CompoundInterestCalculatorComponent } from "../Allcalculators/compound-interest-calculator/compound-interest-calculator";
-import { RouterModule } from '@angular/router';
+import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
+import { filter, map, startWith } from 'rxjs/operators';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-financial',
-  imports: [FormsModule, SidePanelComponent, RouterModule],
+  imports: [SidePanelComponent, RouterOutlet],
   templateUrl: './financial.component.html',
   styleUrls: ['./financial.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FinancialComponent implements OnInit, OnDestroy {
-  private calculatorSelectionService = inject(CalculatorSelectionService);
-  private subscription: Subscription;
+export class FinancialComponent {
+  private router = inject(Router);
 
-  selectedCalculator = signal<string | null>(null);
+  private navigationEnd$ = this.router.events.pipe(
+    filter((event): event is NavigationEnd => event instanceof NavigationEnd)
+  );
 
-  constructor() {
-    this.subscription = this.calculatorSelectionService.selectedCalculator$.subscribe(title => {
-      this.selectedCalculator.set(title);
-    });
-  }
+  private currentRoute$ = this.navigationEnd$.pipe(
+    map(event => this.getRouteTitle(event.urlAfterRedirects)),
+    startWith(this.getRouteTitle(this.router.url))
+  );
 
-  ngOnInit(): void {
-    // Set a default calculator if none is selected, e.g., when directly navigating to /financial
-    if (this.selectedCalculator() === null) {
-      this.calculatorSelectionService.setSelectedCalculator('Mortgage Calculator');
-    }
-  }
+  activeCalculatorTitle = toSignal(this.currentRoute$, { initialValue: 'Select a Calculator' });
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  private getRouteTitle(url: string): string {
+    const financialRoutes = this.router.config.find(route => route.path === 'financial')?.children || [];
+    const routeData = financialRoutes.find(route => url.includes(route.path ?? ''));
+
+    return routeData?.data?.['title'] || 'Select a Calculator';
   }
 }
