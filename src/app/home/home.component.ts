@@ -67,6 +67,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     if (!isPlatformBrowser(this.platformId)) return;
+
+    // Dynamically register Swiper for Web Components (fixes Vercel production SSR issues)
+    import('swiper/element/bundle').then(({ register }) => {
+      register();
+    });
+
     // Parallax effect for hero background
     gsap.to('.hero-background', {
       yPercent: 20,
