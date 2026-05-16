@@ -1,46 +1,67 @@
+/* ── Page container ── */
 .financial-container {
   display: flex;
   flex: 1;
+  height: calc(100vh - 68px);
+  overflow: hidden;
   background-color: var(--background-black);
 }
 
-.side-panel {
-  width: 280px;
-  background-color: var(--card-black);
-  border-right: 1px solid var(--border-grey);
-}
-
+/* ── Main content area ── */
 .main-content {
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+  background-color: var(--background-black);
 }
 
+/* ── Sticky title bar ── */
 .main-header {
-  padding: 2rem 3rem;
-  background-color: var(--background-black);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 1rem 2rem;
+  background-color: var(--card-black);
   border-bottom: 1px solid var(--border-grey);
+  flex-shrink: 0;
 }
 
 .main-header h1 {
   color: var(--primary-red);
   margin: 0;
-  font-size: 2.2rem;
+  font-size: 1.4rem;
   font-weight: 800;
-  letter-spacing: -0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+/* ── Scrollable area ── */
 .calculator-outlet {
   flex: 1;
-  padding: 3rem;
+  overflow-y: auto;
   background-color: var(--background-black);
 }
 
+/* ── Responsive ── */
 @media (max-width: 768px) {
   .financial-container {
     flex-direction: column;
+    height: auto;
+    overflow: visible;
   }
-  .side-panel {
-    width: 100%;
+
+  .main-content {
+    overflow: visible;
+  }
+
+  .calculator-outlet {
+    overflow-y: visible;
+  }
+
+  .main-header {
+    position: static;
   }
 }

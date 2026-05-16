@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 
 type Matrix = number[][];
 type Operation = 'add' | 'subtract' | 'multiply' | 'scalar-multiply' | 'transpose' | 'determinant' | 'inverse';
 
 @Component({
   selector: 'app-matrix-calculator',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule],
   templateUrl: './matrix-calculator.html',
   styleUrls: ['./matrix-calculator.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

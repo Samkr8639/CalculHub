@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-ideal-weight-calculator',
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './ideal-weight-calculator.html',
   styleUrls: ['./ideal-weight-calculator.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

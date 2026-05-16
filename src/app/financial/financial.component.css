@@ -1,27 +1,38 @@
 .financial-page-container {
   display: flex;
   flex: 1;
+  height: calc(100vh - 68px);
+  overflow: hidden;
   background-color: var(--background-black);
 }
 
-.side-panel {
-  width: 280px;
-  background-color: var(--card-black);
-  border-right: 1px solid var(--border-grey);
-}
-
-/* For financial we need to ensure the router-outlet children fill the space */
-:host ::ng-deep .financial-page-container > router-outlet + * {
+.main-content {
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+  background-color: var(--background-black);
+}
+
+.calculator-outlet {
+  flex: 1;
+  overflow-y: auto;
+  background-color: var(--background-black);
 }
 
 @media (max-width: 768px) {
   .financial-page-container {
     flex-direction: column;
+    height: auto;
+    overflow: visible;
   }
-  .side-panel {
-    width: 100%;
+
+  .main-content {
+    overflow: visible;
+  }
+
+  .calculator-outlet {
+    overflow-y: visible;
   }
 }

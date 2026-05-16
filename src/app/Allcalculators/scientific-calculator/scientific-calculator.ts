@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import * as math from 'mathjs';
 
 @Component({
   selector: 'app-scientific-calculator',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './scientific-calculator.html',
   styleUrls: ['./scientific-calculator.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

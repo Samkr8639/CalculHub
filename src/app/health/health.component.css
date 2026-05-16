@@ -1,42 +1,67 @@
+/* ── Page container ── */
 .financial-container {
   display: flex;
-  height: 100%;
+  flex: 1;
+  height: calc(100vh - 68px); /* full remaining height below global sticky header */
+  overflow: hidden;
+  background-color: var(--background-black);
 }
 
-.side-panel {
-  width: 280px;
-  /* Adjust width as needed */
-  background-color: #f4f4f4;
-  /* Example background color */
-  border-right: 1px solid #ccc;
-  /* Example border */
-}
-
+/* ── Main content area (right of sidebar) ── */
 .main-content {
-  flex-grow: 1;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  /* Prevent scrolling issues */
-}
-
-.main-header {
-  padding: 1.5rem 2rem;
+  overflow: hidden; /* children handle their own scroll */
+  min-width: 0;
   background-color: var(--background-black);
-  border-bottom: 1px solid var(--border-grey);
 }
 
-h1 {
+/* ── Sticky title bar ── */
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 1rem 2rem;
+  background-color: var(--card-black);
+  border-bottom: 1px solid var(--border-grey);
+  flex-shrink: 0; /* never collapse */
+}
+
+.main-header h1 {
   color: var(--primary-red);
   margin: 0;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+/* ── Scrollable calculator area ── */
 .calculator-outlet {
-  flex-grow: 1;
+  flex: 1;
   overflow-y: auto;
-  /* Allow scrolling for calculator content */
-  padding: 2rem;
   background-color: var(--background-black);
-  height: 100%;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .financial-container {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+
+  .main-content {
+    overflow: visible;
+  }
+
+  .calculator-outlet {
+    overflow-y: visible;
+  }
+
+  .main-header {
+    position: static;
+  }
 }

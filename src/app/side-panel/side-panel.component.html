@@ -12,7 +12,9 @@
     <ul>
       @for (card of categorizedCalculators()[category]; track card.title) {
       <li>
-        <a [routerLink]="card.link" [class.active-link]="isActive(card.link)">
+      <a [routerLink]="card.link"
+             [class.active-link]="isActive(card.link)"
+             (click)="onCalculatorClick(card.title)">
           <span class="icon"><lucide-icon [name]="card.icon" [size]="16" /></span>
           {{ card.title }}
         </a>

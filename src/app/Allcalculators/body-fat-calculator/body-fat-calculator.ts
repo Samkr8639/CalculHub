@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-body-fat-calculator',
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './body-fat-calculator.html',
   styleUrls: ['./body-fat-calculator.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

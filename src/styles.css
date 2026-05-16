@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap');
+@import './calc-seo.css';
+
 
 :root {
   /* Color Palette */
@@ -11,6 +13,10 @@
 
   /* Typography */
   --font-family-sans-serif: 'Inter', sans-serif;
+}
+
+html {
+  height: 100%;
 }
 
 body {

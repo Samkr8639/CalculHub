@@ -1,6 +1,6 @@
 
-import { ChangeDetectionStrategy, Component, OnInit, signal, computed, ElementRef, ViewChild, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, OnInit, signal, computed, ElementRef, ViewChild, CUSTOM_ELEMENTS_SCHEMA, inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
@@ -28,13 +28,14 @@ interface CalculatorCard {
 })
 export class HomeComponent implements OnInit {
   @ViewChild('calculatorsSection') calculatorsSection!: ElementRef;
+  private platformId = inject(PLATFORM_ID);
 
   calculatorCards = signal<CalculatorCard[]>([
     { icon: 'house', title: 'Mortgage Calculator', description: 'Calculate your monthly mortgage payments and amortization schedule.', link: '/financial/mortgage', category: 'Financial' },
     { icon: 'trending-up', title: 'Compound Interest', description: 'See how your investments grow over time with compound interest.', link: '/financial/compound-interest', category: 'Financial' },
     { icon: 'receipt', title: 'GST Calculator', description: 'Quickly add or remove GST from any amount.', link: '/financial/gst-calculator', category: 'Financial' },
     { icon: 'piggy-bank', title: 'SIP Calculator', description: 'Estimate the future value of your Systematic Investment Plans.', link: '/financial/sip-calculator', category: 'Financial' },
-    { icon: 'chart-bar', title: 'Mutual Fund Returns Calculator', description: 'Helps you calculate the absolute or annualized (XIRR) returns on your existing mutual fund investments.', link: '/financial/mutual-fund-calculator', category: 'Financial' },
+    { icon: 'bar-chart-3', title: 'Mutual Fund Returns Calculator', description: 'Helps you calculate the absolute or annualized (XIRR) returns on your existing mutual fund investments.', link: '/financial/mutual-fund-calculator', category: 'Financial' },
     { icon: 'landmark', title: 'Fixed Deposit Calculator', description: 'Calculates the maturity amount and interest you earn on a fixed deposit.', link: '/financial/fd-calculator', category: 'Financial' },
     { icon: 'vault', title: 'PPF (Public Provident Fund) Calculator', description: 'Estimates the maturity value of your PPF account, which has a 15-year lock-in period.', link: '/financial/ppf-calculator', category: 'Financial' },
     { icon: 'file-text', title: 'Income Tax Calculator', description: 'Determine your annual tax liability and effective tax rate.', link: '/financial/tax-calculator', category: 'Financial' },
@@ -65,6 +66,7 @@ export class HomeComponent implements OnInit {
   categoryKeys = computed(() => Object.keys(this.categorizedCalculators()));
 
   ngOnInit() {
+    if (!isPlatformBrowser(this.platformId)) return;
     // Parallax effect for hero background
     gsap.to('.hero-background', {
       yPercent: 20,
@@ -136,8 +138,68 @@ export class HomeComponent implements OnInit {
       scrollTrigger: {
         trigger: '.calculator-grid',
         start: 'top 80%',
-        // scrub: true,
       },
+    });
+
+    // Quick-access nav: slide down & fade in
+    gsap.from('.quick-access-nav', {
+      opacity: 0,
+      y: -20,
+      duration: 0.6,
+      ease: 'power2.out',
+      delay: 0.3,
+    });
+
+    // About section: slide up on scroll
+    gsap.from('.about-text-block', {
+      opacity: 0,
+      x: -60,
+      duration: 0.9,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '#about-section',
+        start: 'top 75%',
+      },
+    });
+
+    gsap.from('.about-stat-card', {
+      opacity: 0,
+      y: 40,
+      stagger: 0.12,
+      duration: 0.7,
+      ease: 'back.out(1.5)',
+      scrollTrigger: {
+        trigger: '#about-section',
+        start: 'top 70%',
+        onEnter: () => this.animateCounters(),
+      },
+    });
+
+    // Accent line width animation
+    gsap.from('.about-accent-line', {
+      scaleX: 0,
+      duration: 0.8,
+      ease: 'power3.out',
+      transformOrigin: 'left center',
+      scrollTrigger: {
+        trigger: '#about-section',
+        start: 'top 80%',
+      },
+    });
+  }
+
+  private animateCounters(): void {
+    document.querySelectorAll<HTMLElement>('.stat-number').forEach(el => {
+      const target = parseInt(el.getAttribute('data-target') || '0', 10);
+      const obj = { val: 0 };
+      gsap.to(obj, {
+        val: target,
+        duration: 1.5,
+        ease: 'power2.out',
+        onUpdate: () => {
+          el.textContent = Math.round(obj.val).toString();
+        },
+      });
     });
   }
 

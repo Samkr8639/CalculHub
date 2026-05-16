@@ -1,0 +1,129 @@
+import { Injectable, inject } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
+import { DOCUMENT } from '@angular/common';
+
+export interface SeoData {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  schema?: object[];
+  breadcrumbs?: Array<{ name: string; url: string }>;
+}
+
+@Injectable({
+  providedIn: 'root',
+})
+export class SeoService {
+  private meta = inject(Meta);
+  private titleService = inject(Title);
+  private router = inject(Router);
+  private document = inject(DOCUMENT);
+
+  readonly baseUrl = 'https://calcul-hub.vercel.app';
+  readonly siteName = 'CalculHub';
+
+  init(): void {
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        map(() => {
+          let route = this.router.routerState.snapshot.root;
+          while (route.firstChild) {
+            route = route.firstChild;
+          }
+          return route.data as SeoData;
+        })
+      )
+      .subscribe((data) => {
+        if (data?.title) {
+          this.updateSeo(data);
+        }
+      });
+  }
+
+  updateSeo(data: SeoData): void {
+    const fullTitle = data.title.includes(this.siteName)
+      ? data.title
+      : `${data.title} | ${this.siteName}`;
+    const canonical = data.canonical || this.baseUrl + this.router.url;
+
+    // Title
+    this.titleService.setTitle(fullTitle);
+
+    // Meta description
+    this.meta.updateTag({ name: 'description', content: data.description });
+
+    // Canonical
+    this.setCanonical(canonical);
+
+    // Open Graph
+    this.meta.updateTag({ property: 'og:title', content: data.ogTitle || fullTitle });
+    this.meta.updateTag({ property: 'og:description', content: data.ogDescription || data.description });
+    this.meta.updateTag({ property: 'og:url', content: canonical });
+    this.meta.updateTag({ property: 'og:site_name', content: this.siteName });
+    this.meta.updateTag({ property: 'og:type', content: 'website' });
+    this.meta.updateTag({ property: 'og:locale', content: 'en_IN' });
+    if (data.ogImage) {
+      this.meta.updateTag({ property: 'og:image', content: data.ogImage });
+      this.meta.updateTag({ property: 'og:image:width', content: '1200' });
+      this.meta.updateTag({ property: 'og:image:height', content: '630' });
+    }
+
+    // Twitter Card
+    this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+    this.meta.updateTag({ name: 'twitter:title', content: data.ogTitle || fullTitle });
+    this.meta.updateTag({ name: 'twitter:description', content: data.ogDescription || data.description });
+    if (data.ogImage) {
+      this.meta.updateTag({ name: 'twitter:image', content: data.ogImage });
+    }
+
+    // JSON-LD Schemas
+    this.clearSchemas();
+    if (data.schema) {
+      data.schema.forEach((s) => this.injectSchema(s));
+    }
+
+    // Breadcrumb Schema
+    if (data.breadcrumbs && data.breadcrumbs.length > 0) {
+      const breadcrumbSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: data.breadcrumbs.map((bc, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: bc.name,
+          item: bc.url,
+        })),
+      };
+      this.injectSchema(breadcrumbSchema);
+    }
+  }
+
+  private setCanonical(url: string): void {
+    const head = this.document.head;
+    let link: HTMLLinkElement | null = head.querySelector('link[rel="canonical"]');
+    if (!link) {
+      link = this.document.createElement('link');
+      link.setAttribute('rel', 'canonical');
+      head.appendChild(link);
+    }
+    link.setAttribute('href', url);
+  }
+
+  private clearSchemas(): void {
+    const schemas = this.document.head.querySelectorAll('script[type="application/ld+json"]');
+    schemas.forEach((s) => s.remove());
+  }
+
+  private injectSchema(schema: object): void {
+    const script = this.document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(schema);
+    this.document.head.appendChild(script);
+  }
+}

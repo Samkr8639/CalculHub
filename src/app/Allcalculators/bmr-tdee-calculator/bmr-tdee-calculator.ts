@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-bmr-tdee-calculator',
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './bmr-tdee-calculator.html',
   styleUrls: ['./bmr-tdee-calculator.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

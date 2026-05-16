@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import { filter, map, startWith } from 'rxjs';
@@ -7,7 +7,7 @@ import { SidePanelComponent } from '../side-panel/side-panel.component';
 
 @Component({
   selector: 'app-health',
-  imports: [CommonModule, SidePanelComponent, RouterOutlet],
+  imports: [SidePanelComponent, RouterOutlet],
   templateUrl: './health.component.html',
   styleUrls: ['./health.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

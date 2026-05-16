@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, computed, inject, OnInit, OnDestroy, input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { LucideAngularModule } from 'lucide-angular';
 import { RouterLink, Router, NavigationEnd } from '@angular/router';
 import { CalculatorSelectionService } from '../calculator-selection.service';
@@ -15,7 +15,7 @@ interface CalculatorCard {
 
 @Component({
   selector: 'app-side-panel',
-  imports: [CommonModule, RouterLink, LucideAngularModule],
+  imports: [RouterLink, LucideAngularModule],
   templateUrl: './side-panel.component.html',
   styleUrls: ['./side-panel.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -43,7 +43,7 @@ export class SidePanelComponent implements OnInit, OnDestroy {
     { icon: 'trending-up', title: 'Compound Interest', description: 'See how your investments grow over time with compound interest.', link: '/financial/compound-interest', category: 'Financial' },
     { icon: 'receipt', title: 'GST Calculator', description: 'Quickly add or remove GST from any amount.', link: '/financial/gst-calculator', category: 'Financial' },
     { icon: 'piggy-bank', title: 'SIP Calculator', description: 'Estimate the future value of your Systematic Investment Plans.', link: '/financial/sip-calculator', category: 'Financial' },
-    { icon: 'chart-bar', title: 'Mutual Fund Calculator', description: 'Helps you calculate the absolute or annualized (XIRR) returns on your existing mutual fund investments.', link: '/financial/mutual-fund-calculator', category: 'Financial' },
+    { icon: 'bar-chart-3', title: 'Mutual Fund Calculator', description: 'Helps you calculate the absolute or annualized (XIRR) returns on your existing mutual fund investments.', link: '/financial/mutual-fund-calculator', category: 'Financial' },
     { icon: 'landmark', title: 'FD Calculator', description: 'Calculate FD returns with simple or compound interest.', link: '/financial/fd-calculator', category: 'Financial' },
     { icon: 'vault', title: 'PPF Calculator', description: 'Estimates the maturity value of your PPF account, which has a 15-year lock-in period.', link: '/financial/ppf-calculator', category: 'Financial' },
     { icon: 'file-text', title: 'Income Tax Calculator', description: 'Determine your annual tax liability and effective tax rate.', link: '/financial/tax-calculator', category: 'Financial' },

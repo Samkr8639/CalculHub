@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, computed, ViewChild, ElementRef, AfterViewInit, OnDestroy, effect, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { SidePanelComponent } from '../side-panel/side-panel.component';
 import Chart from 'chart.js/auto';
@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-financial',
-  imports: [CommonModule, FormsModule, SidePanelComponent, RouterModule],
+  imports: [FormsModule, SidePanelComponent, RouterModule],
   templateUrl: './financial.component.html',
   styleUrls: ['./financial.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -2,228 +2,347 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 
+const BASE_URL = 'https://calcul-hub.vercel.app';
+
+const calcSchema = (name: string, url: string, desc: string, category = 'FinanceApplication') => ({
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name, url, description: desc,
+  applicationCategory: category,
+  operatingSystem: 'Web',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'INR' },
+});
+
 export const routes: Routes = [
-  { path: '', component: HomeComponent, pathMatch: 'full' },
+  {
+    path: '', component: HomeComponent, pathMatch: 'full',
+    data: {
+      title: 'CalculHub — Free Online Calculators for Finance, Health & Math',
+      description: 'CalculHub offers 20+ free online calculators — BMI, EMI, GST, SIP, percentage and more. Fast, accurate, mobile-friendly. No login needed.',
+      canonical: BASE_URL,
+      breadcrumbs: [{ name: 'Home', url: BASE_URL }],
+    }
+  },
   { path: 'home', component: HomeComponent },
   {
     path: 'financial',
-    loadComponent: () =>
-      import('./financial/financial.component').then(
-        (m) => m.FinancialComponent
-      ),
+    loadComponent: () => import('./financial/financial.component').then(m => m.FinancialComponent),
     children: [
       {
         path: 'mortgage',
-        loadComponent: () =>
-          import('./Allcalculators/mortgage-calculator/mortgage-calculator').then(
-            (m) => m.MortgageCalculator
-          ),
-        data: { title: 'Mortgage Calculator' },
+        loadComponent: () => import('./Allcalculators/mortgage-calculator/mortgage-calculator').then(m => m.MortgageCalculator),
+        data: {
+          title: 'Mortgage Calculator — Calculate Monthly Home Loan Payments | CalculHub',
+          description: 'Calculate your monthly mortgage EMI, total interest, and amortization schedule. Enter loan amount, tenure, and interest rate for instant results.',
+          canonical: `${BASE_URL}/financial/mortgage`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Financial', url: `${BASE_URL}/financial` }, { name: 'Mortgage Calculator', url: `${BASE_URL}/financial/mortgage` }],
+          schema: [calcSchema('Mortgage Calculator', `${BASE_URL}/financial/mortgage`, 'Free online mortgage calculator. Calculate EMI, total interest, and amortization schedule.')]
+        }
       },
       {
         path: 'compound-interest',
-        loadComponent: () =>
-          import(
-            './Allcalculators/compound-interest-calculator/compound-interest-calculator'
-          ).then((m) => m.CompoundInterestCalculatorComponent),
-        data: { title: 'Compound Interest Calculator' },
+        loadComponent: () => import('./Allcalculators/compound-interest-calculator/compound-interest-calculator').then(m => m.CompoundInterestCalculatorComponent),
+        data: {
+          title: 'Compound Interest Calculator — Calculate Investment Growth | CalculHub',
+          description: 'See how your investments grow with compound interest. Enter principal, rate, and tenure to calculate maturity amount and total interest earned.',
+          canonical: `${BASE_URL}/financial/compound-interest`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Financial', url: `${BASE_URL}/financial` }, { name: 'Compound Interest Calculator', url: `${BASE_URL}/financial/compound-interest` }],
+          schema: [calcSchema('Compound Interest Calculator', `${BASE_URL}/financial/compound-interest`, 'Calculate compound interest and investment growth over time.')]
+        }
       },
       {
         path: 'gst-calculator',
-        loadComponent: () =>
-          import('./Allcalculators/gst-calculator/gst-calculator.component').then(
-            (m) => m.GstCalculatorComponent
-          ),
-        data: { title: 'GST Calculator' },
+        loadComponent: () => import('./Allcalculators/gst-calculator/gst-calculator.component').then(m => m.GstCalculatorComponent),
+        data: {
+          title: 'GST Calculator — Add or Remove GST from Any Amount | CalculHub',
+          description: 'Calculate GST amount and net price instantly. Add or remove 5%, 12%, 18%, or 28% GST from any amount. Free online GST calculator for India.',
+          canonical: `${BASE_URL}/financial/gst-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Financial', url: `${BASE_URL}/financial` }, { name: 'GST Calculator', url: `${BASE_URL}/financial/gst-calculator` }],
+          schema: [calcSchema('GST Calculator', `${BASE_URL}/financial/gst-calculator`, 'Add or remove GST from any amount instantly. Supports all GST slabs.')]
+        }
       },
       {
         path: 'sip-calculator',
-        loadComponent: () =>
-          import('./Allcalculators/sip-calculator/sip-calculator.component').then(
-            (m) => m.SipCalculatorComponent
-          ),
-        data: { title: 'SIP Calculator' },
+        loadComponent: () => import('./Allcalculators/sip-calculator/sip-calculator.component').then(m => m.SipCalculatorComponent),
+        data: {
+          title: 'SIP Calculator — Calculate SIP Returns & Maturity Amount | CalculHub',
+          description: 'Estimate the future value of your Systematic Investment Plan (SIP). Enter monthly investment, expected return rate, and tenure for instant results.',
+          canonical: `${BASE_URL}/financial/sip-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Financial', url: `${BASE_URL}/financial` }, { name: 'SIP Calculator', url: `${BASE_URL}/financial/sip-calculator` }],
+          schema: [calcSchema('SIP Calculator', `${BASE_URL}/financial/sip-calculator`, 'Calculate SIP returns and maturity amount for your mutual fund investments.')]
+        }
       },
       {
         path: 'fd-calculator',
-        loadComponent: () =>
-          import('./Allcalculators/fd-calculator/fd-calculator').then(
-            (m) => m.FdCalculatorComponent
-          ),
-        data: { title: 'FD Calculator' },
+        loadComponent: () => import('./Allcalculators/fd-calculator/fd-calculator').then(m => m.FdCalculatorComponent),
+        data: {
+          title: 'FD Calculator — Calculate Fixed Deposit Maturity Amount | CalculHub',
+          description: 'Calculate Fixed Deposit maturity amount and interest earned. Enter principal, interest rate, and tenure to see your FD returns instantly.',
+          canonical: `${BASE_URL}/financial/fd-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Financial', url: `${BASE_URL}/financial` }, { name: 'FD Calculator', url: `${BASE_URL}/financial/fd-calculator` }],
+          schema: [calcSchema('Fixed Deposit Calculator', `${BASE_URL}/financial/fd-calculator`, 'Calculate FD maturity amount and total interest earned.')]
+        }
       },
       {
         path: 'tax-calculator',
-        loadComponent: () =>
-          import('./Allcalculators/tax-calculator/tax-calculator').then(
-            (m) => m.TaxCalculatorComponent
-          ),
-        data: { title: 'Tax Calculator' },
+        loadComponent: () => import('./Allcalculators/tax-calculator/tax-calculator').then(m => m.TaxCalculatorComponent),
+        data: {
+          title: 'Income Tax Calculator — Calculate Tax Liability for FY 2024-25 | CalculHub',
+          description: 'Calculate your annual income tax liability under old and new tax regimes for FY 2024-25. Enter your income and deductions for instant tax calculation.',
+          canonical: `${BASE_URL}/financial/tax-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Financial', url: `${BASE_URL}/financial` }, { name: 'Income Tax Calculator', url: `${BASE_URL}/financial/tax-calculator` }],
+          schema: [calcSchema('Income Tax Calculator', `${BASE_URL}/financial/tax-calculator`, 'Calculate income tax liability for FY 2024-25 under old and new regimes.')]
+        }
       },
       {
         path: 'mutual-fund-calculator',
-        loadComponent: () =>
-          import(
-            './Allcalculators/mutual-fund-calculator/mutual-fund-calculator'
-          ).then((m) => m.MutualFundCalculatorComponent),
-        data: { title: 'Mutual Fund Calculator' },
+        loadComponent: () => import('./Allcalculators/mutual-fund-calculator/mutual-fund-calculator').then(m => m.MutualFundCalculatorComponent),
+        data: {
+          title: 'Mutual Fund Returns Calculator — Calculate XIRR & Absolute Returns | CalculHub',
+          description: 'Calculate absolute and annualized (XIRR) returns on your mutual fund investments. Enter investment amount, current value, and period for instant results.',
+          canonical: `${BASE_URL}/financial/mutual-fund-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Financial', url: `${BASE_URL}/financial` }, { name: 'Mutual Fund Calculator', url: `${BASE_URL}/financial/mutual-fund-calculator` }],
+          schema: [calcSchema('Mutual Fund Returns Calculator', `${BASE_URL}/financial/mutual-fund-calculator`, 'Calculate absolute and XIRR returns on mutual fund investments.')]
+        }
       },
       {
         path: 'ppf-calculator',
-        loadComponent: () =>
-          import('./Allcalculators/ppf-calculator/ppf-calculator').then(
-            (m) => m.PpfCalculatorComponent
-          ),
-        data: { title: 'PPF Calculator' },
+        loadComponent: () => import('./Allcalculators/ppf-calculator/ppf-calculator').then(m => m.PpfCalculatorComponent),
+        data: {
+          title: 'PPF Calculator — Calculate Public Provident Fund Maturity | CalculHub',
+          description: 'Calculate PPF maturity amount, yearly interest, and total corpus after 15 years. Free PPF calculator for India with current 7.1% interest rate.',
+          canonical: `${BASE_URL}/financial/ppf-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Financial', url: `${BASE_URL}/financial` }, { name: 'PPF Calculator', url: `${BASE_URL}/financial/ppf-calculator` }],
+          schema: [calcSchema('PPF Calculator', `${BASE_URL}/financial/ppf-calculator`, 'Calculate PPF maturity amount and total corpus for 15-year lock-in period.')]
+        }
       },
       {
         path: 'loan-eligibility-calculator',
-        loadComponent: () =>
-          import(
-            './Allcalculators/loan-eligibility-calculator/loan-eligibility-calculator'
-          ).then((m) => m.LoanEligibilityCalculatorComponent),
-        data: { title: 'Loan Eligibility Calculator' },
+        loadComponent: () => import('./Allcalculators/loan-eligibility-calculator/loan-eligibility-calculator').then(m => m.LoanEligibilityCalculatorComponent),
+        data: {
+          title: 'Loan Eligibility Calculator — Check Maximum Loan Amount | CalculHub',
+          description: 'Check how much loan you are eligible for based on your income and existing EMIs. Free loan eligibility calculator for home, car, and personal loans.',
+          canonical: `${BASE_URL}/financial/loan-eligibility-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Financial', url: `${BASE_URL}/financial` }, { name: 'Loan Eligibility Calculator', url: `${BASE_URL}/financial/loan-eligibility-calculator` }],
+          schema: [calcSchema('Loan Eligibility Calculator', `${BASE_URL}/financial/loan-eligibility-calculator`, 'Calculate maximum loan eligibility based on income and existing obligations.')]
+        }
       },
       {
         path: 'home-loan-emi-calculator',
-        loadComponent: () =>
-          import(
-            './Allcalculators/home-loan-emi-calculator/home-loan-emi-calculator'
-          ).then((m) => m.HomeLoanEmiCalculatorComponent),
-        data: { title: 'Home Loan EMI Calculator' },
+        loadComponent: () => import('./Allcalculators/home-loan-emi-calculator/home-loan-emi-calculator').then(m => m.HomeLoanEmiCalculatorComponent),
+        data: {
+          title: 'Home Loan EMI Calculator — Calculate Monthly Housing Loan EMI | CalculHub',
+          description: 'Calculate your home loan EMI instantly. Enter loan amount, interest rate, and tenure to see monthly EMI, total interest, and repayment schedule.',
+          canonical: `${BASE_URL}/financial/home-loan-emi-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Financial', url: `${BASE_URL}/financial` }, { name: 'Home Loan EMI Calculator', url: `${BASE_URL}/financial/home-loan-emi-calculator` }],
+          schema: [calcSchema('Home Loan EMI Calculator', `${BASE_URL}/financial/home-loan-emi-calculator`, 'Calculate monthly home loan EMI, total interest, and repayment schedule.')]
+        }
       },
       {
         path: 'retirement-calculator',
-        loadComponent: () =>
-          import(
-            './Allcalculators/retirement-calculator/retirement-calculator'
-          ).then((m) => m.RetirementCalculatorComponent),
-        data: { title: 'Retirement Calculator' },
+        loadComponent: () => import('./Allcalculators/retirement-calculator/retirement-calculator').then(m => m.RetirementCalculatorComponent),
+        data: {
+          title: 'Retirement Calculator — Plan Your Retirement Corpus | CalculHub',
+          description: 'Plan your retirement by calculating the required corpus based on monthly expenses, inflation, and expected returns. Free retirement planning calculator.',
+          canonical: `${BASE_URL}/financial/retirement-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Financial', url: `${BASE_URL}/financial` }, { name: 'Retirement Calculator', url: `${BASE_URL}/financial/retirement-calculator` }],
+          schema: [calcSchema('Retirement Calculator', `${BASE_URL}/financial/retirement-calculator`, 'Calculate required retirement corpus based on expenses, inflation, and returns.')]
+        }
       },
       {
         path: 'investment-calculator',
-        loadComponent: () =>
-          import(
-            './Allcalculators/investment-calculator/investment-calculator'
-          ).then((m) => m.InvestmentCalculatorComponent),
-        data: { title: 'Investment Calculator' },
+        loadComponent: () => import('./Allcalculators/investment-calculator/investment-calculator').then(m => m.InvestmentCalculatorComponent),
+        data: {
+          title: 'Investment Calculator — Calculate Future Value of Investments | CalculHub',
+          description: 'Calculate the future value of your investments with lump sum and monthly contributions. See growth projections with different return rates.',
+          canonical: `${BASE_URL}/financial/investment-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Financial', url: `${BASE_URL}/financial` }, { name: 'Investment Calculator', url: `${BASE_URL}/financial/investment-calculator` }],
+          schema: [calcSchema('Investment Calculator', `${BASE_URL}/financial/investment-calculator`, 'Calculate future value of investments with lump sum and monthly contributions.')]
+        }
       },
       {
         path: 'bike-loan-emi-calculator',
-        loadComponent: () =>
-          import(
-            './Allcalculators/bike-loan-emi-calculator/bike-loan-emi-calculator'
-          ).then((m) => m.BikeLoanEmiCalculatorComponent),
-        data: { title: 'Bike Loan EMI Calculator' },
+        loadComponent: () => import('./Allcalculators/bike-loan-emi-calculator/bike-loan-emi-calculator').then(m => m.BikeLoanEmiCalculatorComponent),
+        data: {
+          title: 'Bike Loan EMI Calculator — Calculate Two-Wheeler Loan EMI | CalculHub',
+          description: 'Calculate your bike or two-wheeler loan EMI. Enter loan amount, interest rate, and tenure to see monthly payments and total interest.',
+          canonical: `${BASE_URL}/financial/bike-loan-emi-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Financial', url: `${BASE_URL}/financial` }, { name: 'Bike Loan EMI Calculator', url: `${BASE_URL}/financial/bike-loan-emi-calculator` }],
+          schema: [calcSchema('Bike Loan EMI Calculator', `${BASE_URL}/financial/bike-loan-emi-calculator`, 'Calculate two-wheeler loan EMI, total interest, and repayment schedule.')]
+        }
       },
       {
         path: 'education-loan-emi-calculator',
-        loadComponent: () =>
-          import(
-            './Allcalculators/education-loan-emi-calculator/education-loan-emi-calculator'
-          ).then((m) => m.EducationLoanEmiCalculatorComponent),
-        data: { title: 'Education Loan EMI Calculator' },
+        loadComponent: () => import('./Allcalculators/education-loan-emi-calculator/education-loan-emi-calculator').then(m => m.EducationLoanEmiCalculatorComponent),
+        data: {
+          title: 'Education Loan EMI Calculator — Calculate Student Loan Payments | CalculHub',
+          description: 'Calculate education loan EMI including the moratorium period. Plan your student loan repayment with this free education loan calculator.',
+          canonical: `${BASE_URL}/financial/education-loan-emi-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Financial', url: `${BASE_URL}/financial` }, { name: 'Education Loan EMI Calculator', url: `${BASE_URL}/financial/education-loan-emi-calculator` }],
+          schema: [calcSchema('Education Loan EMI Calculator', `${BASE_URL}/financial/education-loan-emi-calculator`, 'Calculate education loan EMI including moratorium period for student loan planning.')]
+        }
       },
       { path: '', redirectTo: 'mortgage', pathMatch: 'full' },
     ],
   },
   {
     path: 'mathematical',
-    loadComponent: () =>
-      import('./mathematical/mathematical').then((m) => m.MathematicalComponent),
+    loadComponent: () => import('./mathematical/mathematical').then(m => m.MathematicalComponent),
     children: [
       {
         path: 'percentage-calculator',
-        loadComponent: () =>
-          import(
-            './Allcalculators/percentage-calculator/percentage-calculator'
-          ).then((m) => m.PercentageCalculatorComponent),
-        data: { title: 'Percentage Calculator' },
+        loadComponent: () => import('./Allcalculators/percentage-calculator/percentage-calculator').then(m => m.PercentageCalculatorComponent),
+        data: {
+          title: 'Percentage Calculator — Find Percentage of Any Number | CalculHub',
+          description: 'Solve any percentage problem instantly — find what percent of a number is, percentage increase/decrease, and reverse percentage calculations.',
+          canonical: `${BASE_URL}/mathematical/percentage-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Mathematical', url: `${BASE_URL}/mathematical` }, { name: 'Percentage Calculator', url: `${BASE_URL}/mathematical/percentage-calculator` }],
+          schema: [calcSchema('Percentage Calculator', `${BASE_URL}/mathematical/percentage-calculator`, 'Solve percentage problems, find percentage of numbers, and calculate percentage changes.', 'EducationalApplication')]
+        }
       },
       {
         path: 'scientific-calculator',
-        loadComponent: () =>
-          import(
-            './Allcalculators/scientific-calculator/scientific-calculator'
-          ).then((m) => m.ScientificCalculatorComponent),
-        data: { title: 'Scientific Calculator' },
+        loadComponent: () => import('./Allcalculators/scientific-calculator/scientific-calculator').then(m => m.ScientificCalculatorComponent),
+        data: {
+          title: 'Scientific Calculator Online — Trigonometry, Logarithms & More | CalculHub',
+          description: 'Free online scientific calculator with trigonometric functions, logarithms, powers, roots, and more. Perfect for students and professionals.',
+          canonical: `${BASE_URL}/mathematical/scientific-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Mathematical', url: `${BASE_URL}/mathematical` }, { name: 'Scientific Calculator', url: `${BASE_URL}/mathematical/scientific-calculator` }],
+          schema: [calcSchema('Scientific Calculator', `${BASE_URL}/mathematical/scientific-calculator`, 'Online scientific calculator with trigonometry, logarithms, and advanced math functions.', 'EducationalApplication')]
+        }
       },
       {
         path: 'algebra-calculator',
-        loadComponent: () =>
-          import(
-            './Allcalculators/algebra-calculator/algebra-calculator.component'
-          ).then((m) => m.AlgebraCalculatorComponent),
-        data: { title: 'Algebra Calculator' },
+        loadComponent: () => import('./Allcalculators/algebra-calculator/algebra-calculator.component').then(m => m.AlgebraCalculatorComponent),
+        data: {
+          title: 'Algebra Calculator — Solve Equations & Factor Polynomials | CalculHub',
+          description: 'Solve algebraic equations, factor polynomials, and simplify expressions step by step. Free online algebra calculator for students.',
+          canonical: `${BASE_URL}/mathematical/algebra-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Mathematical', url: `${BASE_URL}/mathematical` }, { name: 'Algebra Calculator', url: `${BASE_URL}/mathematical/algebra-calculator` }],
+          schema: [calcSchema('Algebra Calculator', `${BASE_URL}/mathematical/algebra-calculator`, 'Solve algebraic equations, factor polynomials, and simplify math expressions.', 'EducationalApplication')]
+        }
       },
       {
         path: 'matrix-calculator',
-        loadComponent: () =>
-          import(
-            './Allcalculators/matrix-calculator/matrix-calculator'
-          ).then((m) => m.MatrixCalculatorComponent),
-        data: { title: 'Matrix Calculator' },
+        loadComponent: () => import('./Allcalculators/matrix-calculator/matrix-calculator').then(m => m.MatrixCalculatorComponent),
+        data: {
+          title: 'Matrix Calculator — Add, Subtract, Multiply Matrices Online | CalculHub',
+          description: 'Perform matrix operations online — addition, subtraction, multiplication, determinant, inverse, and transpose. Free matrix calculator for linear algebra.',
+          canonical: `${BASE_URL}/mathematical/matrix-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Mathematical', url: `${BASE_URL}/mathematical` }, { name: 'Matrix Calculator', url: `${BASE_URL}/mathematical/matrix-calculator` }],
+          schema: [calcSchema('Matrix Calculator', `${BASE_URL}/mathematical/matrix-calculator`, 'Perform matrix operations including addition, multiplication, determinant and inverse.', 'EducationalApplication')]
+        }
       },
       {
         path: 'statistics-calculator',
-        loadComponent: () =>
-          import(
-            './Allcalculators/statistics-calculator/statistics-calculator'
-          ).then((m) => m.StatisticsCalculator),
-        data: { title: 'Statistics Calculator' },
+        loadComponent: () => import('./Allcalculators/statistics-calculator/statistics-calculator').then(m => m.StatisticsCalculator),
+        data: {
+          title: 'Statistics Calculator — Mean, Median, Mode, Standard Deviation | CalculHub',
+          description: 'Calculate mean, median, mode, standard deviation, variance, and more. Free online statistics calculator for data analysis.',
+          canonical: `${BASE_URL}/mathematical/statistics-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Mathematical', url: `${BASE_URL}/mathematical` }, { name: 'Statistics Calculator', url: `${BASE_URL}/mathematical/statistics-calculator` }],
+          schema: [calcSchema('Statistics Calculator', `${BASE_URL}/mathematical/statistics-calculator`, 'Calculate mean, median, mode, standard deviation, and variance for any dataset.', 'EducationalApplication')]
+        }
       },
       { path: '', redirectTo: 'percentage-calculator', pathMatch: 'full' },
     ],
   },
   {
     path: 'health',
-    loadComponent: () =>
-      import('./health/health.component').then((m) => m.HealthComponent),
+    loadComponent: () => import('./health/health.component').then(m => m.HealthComponent),
     children: [
       {
         path: 'calorie-calculator',
-        loadComponent: () =>
-          import('./Allcalculators/calorie-calculator/calorie-calculator').then(
-            (m) => m.CalorieCalculatorComponent
-          ),
-        data: { title: 'Calorie Calculator' },
+        loadComponent: () => import('./Allcalculators/calorie-calculator/calorie-calculator').then(m => m.CalorieCalculatorComponent),
+        data: {
+          title: 'Calorie Calculator — Find Your Daily Calorie Needs (TDEE) | CalculHub',
+          description: 'Calculate your Total Daily Energy Expenditure (TDEE) and daily calorie needs for weight loss, maintenance, or muscle gain based on age, weight, height, and activity level.',
+          canonical: `${BASE_URL}/health/calorie-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Health', url: `${BASE_URL}/health` }, { name: 'Calorie Calculator', url: `${BASE_URL}/health/calorie-calculator` }],
+          schema: [calcSchema('Calorie Calculator', `${BASE_URL}/health/calorie-calculator`, 'Calculate daily calorie needs (TDEE) for weight loss, maintenance, or muscle gain.', 'HealthApplication')]
+        }
       },
       {
         path: 'bmi-calculator',
-        loadComponent: () =>
-          import('./Allcalculators/bmi-calculator/bmi-calculator').then(
-            (m) => m.BmiCalculatorComponent
-          ),
-        data: { title: 'BMI Calculator' },
+        loadComponent: () => import('./Allcalculators/bmi-calculator/bmi-calculator').then(m => m.BmiCalculatorComponent),
+        data: {
+          title: 'BMI Calculator — Check Your Body Mass Index Free | CalculHub',
+          description: 'Calculate your Body Mass Index (BMI) instantly. Enter height and weight to get your BMI score, category (underweight/normal/overweight/obese), and health insights.',
+          canonical: `${BASE_URL}/health/bmi-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Health', url: `${BASE_URL}/health` }, { name: 'BMI Calculator', url: `${BASE_URL}/health/bmi-calculator` }],
+          schema: [
+            calcSchema('BMI Calculator', `${BASE_URL}/health/bmi-calculator`, 'Free online BMI calculator. Enter height and weight to instantly find your Body Mass Index and health category.', 'HealthApplication'),
+            {
+              '@context': 'https://schema.org', '@type': 'FAQPage',
+              mainEntity: [
+                { '@type': 'Question', name: 'What is a healthy BMI range?', acceptedAnswer: { '@type': 'Answer', text: 'A BMI between 18.5 and 24.9 is considered healthy for adults.' } },
+                { '@type': 'Question', name: 'How is BMI calculated?', acceptedAnswer: { '@type': 'Answer', text: 'BMI = weight(kg) / height(m)². Divide your weight in kilograms by your height in metres squared.' } },
+              ]
+            }
+          ]
+        }
       },
       {
         path: 'body-fat-calculator',
-        loadComponent: () =>
-          import('./Allcalculators/body-fat-calculator/body-fat-calculator').then(
-            (m) => m.BodyFatCalculatorComponent
-          ),
-        data: { title: 'Body Fat Calculator' },
+        loadComponent: () => import('./Allcalculators/body-fat-calculator/body-fat-calculator').then(m => m.BodyFatCalculatorComponent),
+        data: {
+          title: 'Body Fat Calculator — Estimate Body Fat Percentage | CalculHub',
+          description: 'Estimate your body fat percentage using body measurements. Calculate lean body mass and fat mass using the US Navy formula. Free body fat calculator.',
+          canonical: `${BASE_URL}/health/body-fat-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Health', url: `${BASE_URL}/health` }, { name: 'Body Fat Calculator', url: `${BASE_URL}/health/body-fat-calculator` }],
+          schema: [calcSchema('Body Fat Calculator', `${BASE_URL}/health/body-fat-calculator`, 'Estimate body fat percentage, lean body mass, and fat mass using body measurements.', 'HealthApplication')]
+        }
       },
       {
         path: 'ideal-weight-calculator',
-        loadComponent: () =>
-          import('./Allcalculators/ideal-weight-calculator/ideal-weight-calculator').then(
-            (m) => m.IdealWeightCalculatorComponent
-          ),
-        data: { title: 'Ideal Weight Calculator' },
+        loadComponent: () => import('./Allcalculators/ideal-weight-calculator/ideal-weight-calculator').then(m => m.IdealWeightCalculatorComponent),
+        data: {
+          title: 'Ideal Weight Calculator — Find Your Healthy Weight Range | CalculHub',
+          description: 'Calculate your ideal body weight range based on height, age, and gender. Uses multiple formulas (Hamwi, Devine, Robinson) for accurate results.',
+          canonical: `${BASE_URL}/health/ideal-weight-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Health', url: `${BASE_URL}/health` }, { name: 'Ideal Weight Calculator', url: `${BASE_URL}/health/ideal-weight-calculator` }],
+          schema: [calcSchema('Ideal Weight Calculator', `${BASE_URL}/health/ideal-weight-calculator`, 'Determine ideal body weight range using Hamwi, Devine, and Robinson formulas.', 'HealthApplication')]
+        }
       },
       { path: '', redirectTo: 'calorie-calculator', pathMatch: 'full' },
     ],
   },
   {
     path: 'other',
-    loadComponent: () =>
-      import('./other/other.component').then((m) => m.OtherComponent),
+    loadComponent: () => import('./other/other.component').then(m => m.OtherComponent),
+    data: {
+      title: 'Other Calculators — Lifestyle & Everyday Tools | CalculHub',
+      description: 'Discover unique lifestyle calculators on CalculHub — buy vs rent analysis, millionaire calculator, and more everyday tools.',
+      canonical: `${BASE_URL}/other`,
+    }
   },
-  { path: 'about', component: AboutComponent },
+  {
+    path: 'about',
+    component: AboutComponent,
+    data: {
+      title: 'About CalculHub — Free Online Calculators for Everyone',
+      description: 'Learn about CalculHub — a free, ad-light calculator platform offering 20+ tools for finance, health, and mathematics. Built for accuracy, speed, and privacy.',
+      canonical: `${BASE_URL}/about`,
+      breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'About', url: `${BASE_URL}/about` }],
+    }
+  },
   {
     path: 'blog',
-    loadComponent: () => import('./blog/blog.component').then((m) => m.BlogComponent),
+    loadComponent: () => import('./blog/blog.component').then(m => m.BlogComponent),
+    data: {
+      title: 'Blog — Financial Tips, Health Guides & Math Tricks | CalculHub',
+      description: 'Read expert articles on personal finance, health metrics, and mathematical concepts. CalculHub blog helps you understand and use calculators better.',
+      canonical: `${BASE_URL}/blog`,
+    }
+  },
+  {
+    path: 'sitemap',
+    loadComponent: () => import('./sitemap/sitemap.component').then(m => m.SitemapComponent),
+    data: {
+      title: 'All Calculators — Site Directory | CalculHub',
+      description: 'Complete directory of all free calculators on CalculHub — financial, mathematical, and health calculators organized by category.',
+      canonical: `${BASE_URL}/sitemap`,
+    }
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

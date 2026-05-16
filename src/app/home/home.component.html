@@ -4,14 +4,44 @@
   </div>
   <div class="hero-content">
     <div class="hero-text">
-      <h1 class="hero-title">Your All In One Calculator Solution</h1>
-      <p class="hero-subtitle">From financial planning to health metrics, our advanced calculators help you make
-        informed decisions with precision and ease.</p>
-      <button (click)="scrollToCalculators()" class="button primary-button">Scroll to discover</button>
+      <h1 class="hero-title">Free Online Calculators — Finance, Health & Math</h1>
+      <p class="hero-subtitle">From financial planning to health metrics, CalculHub's 20+ accurate calculators help
+        you make informed decisions with precision and ease. No login required.</p>
+      <button (click)="scrollToCalculators()" class="button primary-button">Explore Calculators</button>
     </div>
-
   </div>
 </section>
+
+<!-- Quick Access Ticker Nav -->
+<nav class="quick-access-nav" aria-label="Calculator quick access">
+  <div class="quick-access-track">
+    <a href="/financial/mortgage" class="quick-pill">🏠 Mortgage</a>
+    <a href="/financial/gst-calculator" class="quick-pill">🧾 GST</a>
+    <a href="/financial/sip-calculator" class="quick-pill">📈 SIP</a>
+    <a href="/financial/fd-calculator" class="quick-pill">🏦 Fixed Deposit</a>
+    <a href="/health/bmi-calculator" class="quick-pill">⚖️ BMI</a>
+    <a href="/health/calorie-calculator" class="quick-pill">🔥 Calorie / TDEE</a>
+    <a href="/mathematical/percentage-calculator" class="quick-pill">% Percentage</a>
+    <a href="/mathematical/scientific-calculator" class="quick-pill">🔬 Scientific</a>
+    <a href="/financial/tax-calculator" class="quick-pill">📋 Income Tax</a>
+    <a href="/financial/ppf-calculator" class="quick-pill">💰 PPF</a>
+    <a href="/financial/mutual-fund-calculator" class="quick-pill">📊 Mutual Fund</a>
+    <a href="/health/ideal-weight-calculator" class="quick-pill">🎯 Ideal Weight</a>
+    <!-- duplicate for seamless loop -->
+    <a href="/financial/mortgage" class="quick-pill" aria-hidden="true">🏠 Mortgage</a>
+    <a href="/financial/gst-calculator" class="quick-pill" aria-hidden="true">🧾 GST</a>
+    <a href="/financial/sip-calculator" class="quick-pill" aria-hidden="true">📈 SIP</a>
+    <a href="/financial/fd-calculator" class="quick-pill" aria-hidden="true">🏦 Fixed Deposit</a>
+    <a href="/health/bmi-calculator" class="quick-pill" aria-hidden="true">⚖️ BMI</a>
+    <a href="/health/calorie-calculator" class="quick-pill" aria-hidden="true">🔥 Calorie / TDEE</a>
+    <a href="/mathematical/percentage-calculator" class="quick-pill" aria-hidden="true">% Percentage</a>
+    <a href="/mathematical/scientific-calculator" class="quick-pill" aria-hidden="true">🔬 Scientific</a>
+    <a href="/financial/tax-calculator" class="quick-pill" aria-hidden="true">📋 Income Tax</a>
+    <a href="/financial/ppf-calculator" class="quick-pill" aria-hidden="true">💰 PPF</a>
+    <a href="/financial/mutual-fund-calculator" class="quick-pill" aria-hidden="true">📊 Mutual Fund</a>
+    <a href="/health/ideal-weight-calculator" class="quick-pill" aria-hidden="true">🎯 Ideal Weight</a>
+  </div>
+</nav>
 
 <section #calculatorsSection class="calculators-section">
   <h2>Our Calculators</h2>
@@ -29,7 +59,7 @@
           <div class="icon"><lucide-icon [name]="card.icon" [size]="32" /></div>
           <h4>{{ card.title }}</h4>
           <p>{{ card.description }}</p>
-          <button [routerLink]="card.link" class="button small-button calculator-button">Use Calculator</button>
+          <a [routerLink]="card.link" class="button small-button calculator-button">Use Calculator</a>
         </div>
       </swiper-slide>
       }
@@ -43,7 +73,7 @@
           <div class="icon"><lucide-icon [name]="card.icon" [size]="32" /></div>
           <h4>{{ card.title }}</h4>
           <p>{{ card.description }}</p>
-          <button [routerLink]="card.link" class="button small-button calculator-button">Use Calculator</button>
+          <a [routerLink]="card.link" class="button small-button calculator-button">Use Calculator</a>
         </div>
       </swiper-slide>
       }
@@ -57,7 +87,7 @@
           <div class="icon"><lucide-icon [name]="card.icon" [size]="32" /></div>
           <h4>{{ card.title }}</h4>
           <p>{{ card.description }}</p>
-          <button [routerLink]="card.link" class="button small-button calculator-button">Use Calculator</button>
+          <a [routerLink]="card.link" class="button small-button calculator-button">Use Calculator</a>
         </div>
       </swiper-slide>
       }
@@ -71,11 +101,59 @@
         <div class="icon"><lucide-icon [name]="card.icon" [size]="32" /></div>
         <h4>{{ card.title }}</h4>
         <p>{{ card.description }}</p>
-        <button [routerLink]="card.link" class="button small-button calculator-button">Use Calculator</button>
+        <a [routerLink]="card.link" class="button small-button calculator-button">Use Calculator</a>
       </div>
       }
     </div>
     }
   </div>
   }
+</section>
+
+<!-- Premium About Section -->
+<section class="home-about-section" id="about-section">
+  <!-- Red accent top line -->
+  <div class="about-accent-line"></div>
+
+  <div class="about-container">
+
+    <!-- Left: Text block -->
+    <div class="about-text-block">
+      <span class="about-label">ABOUT CALCULHUB</span>
+      <h2 class="about-heading">Built for accuracy.<br>Designed for speed.</h2>
+      <p class="about-desc">
+        CalculHub is a free, privacy-first calculator platform — no login, no tracking, no ads cluttering your workflow.
+        Every formula is verified against official standards. All calculations run entirely in your browser.
+      </p>
+      <p class="about-desc">
+        From EMI planning to BMI checks, GST filing to SIP projections — we cover the calculations that matter
+        most to students, professionals, and everyday decision-makers across India and beyond.
+      </p>
+      <div class="about-cta-row">
+        <a routerLink="/about" class="about-btn-primary">Learn More</a>
+        <a routerLink="/sitemap" class="about-btn-ghost">All Calculators →</a>
+      </div>
+    </div>
+
+    <!-- Right: Stats grid -->
+    <div class="about-stats-grid">
+      <div class="about-stat-card" id="stat-0">
+        <span class="stat-number" data-target="20">0</span><span class="stat-plus">+</span>
+        <span class="stat-label">Free Calculators</span>
+      </div>
+      <div class="about-stat-card" id="stat-1">
+        <span class="stat-number" data-target="100">0</span><span class="stat-plus">%</span>
+        <span class="stat-label">Browser-Only</span>
+      </div>
+      <div class="about-stat-card" id="stat-2">
+        <span class="stat-number" data-target="0">0</span>
+        <span class="stat-label">Ads / Trackers</span>
+      </div>
+      <div class="about-stat-card" id="stat-3">
+        <span class="stat-number" data-target="3">0</span><span class="stat-plus">+</span>
+        <span class="stat-label">Categories</span>
+      </div>
+    </div>
+
+  </div>
 </section>

@@ -1,0 +1,182 @@
+/* ═══════════════════════════════════════════════════
+   CALCULATOR SEO CONTENT SECTIONS
+   Shared styles for all calculator pages
+   (imported in styles.css)
+═══════════════════════════════════════════════════ */
+
+.calc-seo-content {
+  max-width: 900px;
+  margin: 3rem auto 0;
+  padding: 0 1rem 4rem;
+  background: var(--background-black, #000);
+}
+
+/* ── Section block ── */
+.seo-section {
+  margin-bottom: 2.8rem;
+  border-left: 3px solid #E11931;
+  padding-left: 1.4rem;
+}
+
+.seo-section h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.seo-section p {
+  color: #8F8F8F;
+  font-size: 0.92rem;
+  line-height: 1.75;
+  margin-bottom: 0.5rem;
+}
+
+/* ── How-to steps ── */
+.seo-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: step-counter;
+}
+
+.seo-steps li {
+  counter-increment: step-counter;
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  margin-bottom: 0.7rem;
+  color: #8F8F8F;
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.seo-steps li::before {
+  content: counter(step-counter);
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  background: #E11931;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+/* ── Formula box ── */
+.formula-box {
+  background: #0d0d0d;
+  border: 1px solid #2A2A2A;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin: 0.75rem 0;
+  font-family: 'Courier New', monospace;
+  font-size: 0.95rem;
+  color: #E11931;
+  letter-spacing: 0.02em;
+}
+
+.formula-vars {
+  margin-top: 0.5rem;
+  padding-left: 0;
+  list-style: none;
+}
+
+.formula-vars li {
+  color: #8F8F8F;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  font-family: inherit;
+}
+
+.formula-vars li strong {
+  color: #ccc;
+}
+
+/* ── FAQ ── */
+.seo-faq {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.faq-item {
+  background: #0d0d0d;
+  border: 1px solid #2A2A2A;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  transition: border-color 0.25s;
+}
+
+.faq-item:hover {
+  border-color: rgba(225, 25, 49, 0.35);
+}
+
+.faq-item h3 {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.4rem;
+}
+
+.faq-item p {
+  font-size: 0.88rem;
+  color: #8F8F8F;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ── Related calculators ── */
+.related-calc-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.related-calc-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  background: #151515;
+  border: 1px solid #2A2A2A;
+  border-radius: 6px;
+  color: #ccc;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none !important;
+  transition: all 0.22s ease;
+}
+
+.related-calc-link:hover {
+  border-color: #E11931;
+  color: #E11931;
+  background: rgba(225, 25, 49, 0.06);
+  text-decoration: none !important;
+}
+
+.related-calc-link::before {
+  content: '→';
+  font-size: 0.8rem;
+  color: #E11931;
+}
+
+/* ── Divider ── */
+.seo-divider {
+  border: none;
+  border-top: 1px solid #1e1e1e;
+  margin: 0 0 2.5rem;
+}
+
+@media (max-width: 600px) {
+  .calc-seo-content { padding: 0 0.75rem 3rem; }
+  .seo-section h2 { font-size: 1.1rem; }
+  .seo-section { padding-left: 1rem; }
+  .related-calc-grid { flex-direction: column; }
+}

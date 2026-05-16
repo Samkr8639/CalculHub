@@ -74,8 +74,7 @@
   border-left-color: var(--primary-red);
 }
 
-.category-section a.active-link,
-.category-section a.router-link-active {
+.category-section a.active-link {
   background-color: var(--primary-red);
   color: var(--pure-white-text);
   font-weight: 600;

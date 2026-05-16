@@ -19,8 +19,15 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .tab-navigation {
@@ -92,7 +99,8 @@
   box-shadow: 0 0 0 3px rgba(225, 25, 49, 0.3);
 }
 
-.calculate-button, .add-button {
+.calculate-button,
+.add-button {
   margin-top: 20px;
   padding: 12px 25px;
   border: none;
@@ -105,17 +113,21 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.calculate-button:hover, .add-button:hover {
-  background-color: #ff3d57; /* Lighter red for hover */
+.calculate-button:hover,
+.add-button:hover {
+  background-color: #ff3d57;
+  /* Lighter red for hover */
   transform: translateY(-2px);
 }
 
 .add-button {
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50;
+  /* Green */
 }
 
 .add-button:hover {
-  background-color: #66BB6A; /* Lighter green */
+  background-color: #66BB6A;
+  /* Lighter green */
 }
 
 .result,
@@ -129,8 +141,15 @@
 }
 
 @keyframes slideInResult {
-  from { opacity: 0; transform: translateX(-10px); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .result p,
@@ -186,14 +205,14 @@
 }
 
 .inequality-item input[type="text"] {
-    flex-grow: 1;
-    padding: 12px 15px;
-    border: 1px solid var(--border-grey);
-    border-radius: 8px;
-    background-color: #2c2c2c;
-    color: var(--pure-white-text);
-    font-size: 1.1em;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  flex-grow: 1;
+  padding: 12px 15px;
+  border: 1px solid var(--border-grey);
+  border-radius: 8px;
+  background-color: #2c2c2c;
+  color: var(--pure-white-text);
+  font-size: 1.1em;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .inequality-item input[type="text"]:focus {
@@ -239,6 +258,7 @@ canvas {
   .algebra-calculator-page-layout {
     flex-direction: column;
   }
+
   .side-navigation {
     width: 100%;
     display: flex;
@@ -246,6 +266,7 @@ canvas {
     overflow-x: auto;
     padding: 15px;
   }
+
   .side-navigation button {
     flex: 0 0 auto;
   }
@@ -255,19 +276,36 @@ canvas {
   .algebra-calculator-container {
     padding: 20px;
   }
+
   .input-row.single-input-row {
     flex-direction: column;
     align-items: stretch;
   }
+
   .inequality-item {
     flex-direction: column;
     align-items: stretch;
   }
+
   .chart-container {
     padding: 10px;
   }
+
   canvas {
     width: 100%;
     height: auto;
   }
+}
+
+/* Override any fixed height/scroll on the container to allow SEO content to flow below */
+:host>div:first-child,
+.calculator-container,
+.gst-calculator-container,
+.health-calculator-container,
+.financial-calculator-container,
+.container {
+  height: auto !important;
+  min-height: auto !important;
+  overflow: visible !important;
+  overflow-y: visible !important;
 }

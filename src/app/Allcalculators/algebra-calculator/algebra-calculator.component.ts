@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, ViewChild, ElementRef, AfterViewInit, WritableSignal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import * as math from 'mathjs';
 
@@ -13,7 +13,7 @@ interface Inequality {
 
 @Component({
   selector: 'app-algebra-calculator',
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './algebra-calculator.component.html',
   styleUrls: ['./algebra-calculator.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

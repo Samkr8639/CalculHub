@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-statistics-calculator',
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './statistics-calculator.html',
   styleUrls: ['./statistics-calculator.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

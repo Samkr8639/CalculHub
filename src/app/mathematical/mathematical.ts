@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, signal, effect } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { SidePanelComponent } from '../side-panel/side-panel.component';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { filter, map, startWith } from 'rxjs/operators';
@@ -8,7 +8,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-mathematical',
-  imports: [CommonModule, SidePanelComponent, RouterOutlet],
+  imports: [SidePanelComponent, RouterOutlet],
   templateUrl: './mathematical.html',
   styleUrls: ['./mathematical.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
