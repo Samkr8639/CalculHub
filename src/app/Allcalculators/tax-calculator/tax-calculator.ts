@@ -57,12 +57,13 @@ export class TaxCalculatorComponent {
       const taxable = Math.max(0, income - deduct);
       this.taxableIncome.set(taxable);
 
-      // Simplified tax brackets for demonstration
       const taxBrackets = [
-        { limit: 10000, rate: 0.10 },
-        { limit: 40000, rate: 0.12 },
-        { limit: 85000, rate: 0.22 },
-        { limit: Infinity, rate: 0.24 },
+        { limit: 300000, rate: 0.00 },
+        { limit: 700000, rate: 0.05 },
+        { limit: 1000000, rate: 0.10 },
+        { limit: 1200000, rate: 0.15 },
+        { limit: 1500000, rate: 0.20 },
+        { limit: Infinity, rate: 0.30 },
       ];
 
       let tax = 0;
@@ -71,13 +72,19 @@ export class TaxCalculatorComponent {
 
       for (const bracket of taxBrackets) {
         if (remainingIncome > 0) {
-          const taxableInBracket = Math.min(remainingIncome, bracket.limit - previousLimit);
+          const limitRange = bracket.limit - previousLimit;
+          const taxableInBracket = Math.min(remainingIncome, limitRange);
           tax += taxableInBracket * bracket.rate;
           remainingIncome -= taxableInBracket;
           previousLimit = bracket.limit;
         } else {
           break;
         }
+      }
+
+      // Section 87A rebate for new regime (no tax if income <= 7,00,000)
+      if (taxable <= 700000) {
+        tax = 0;
       }
 
       this.totalTax.set(tax);
