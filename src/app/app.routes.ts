@@ -15,15 +15,37 @@ const calcSchema = (name: string, url: string, desc: string, category = 'Finance
 
 export const routes: Routes = [
   {
-    path: 'home', component: HomeComponent,
+    path: '', component: HomeComponent, pathMatch: 'full',
     data: {
       title: 'CalculHub — Free Online Calculators for Finance, Health & Math',
       description: 'CalculHub offers 20+ free online calculators — BMI, EMI, GST, SIP, percentage and more. Fast, accurate, mobile-friendly. No login needed.',
-      canonical: BASE_URL + '/home',
-      breadcrumbs: [{ name: 'Home', url: BASE_URL + '/home' }],
+      canonical: BASE_URL,
+      breadcrumbs: [{ name: 'Home', url: BASE_URL }],
+      schema: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'WebSite',
+          name: 'CalculHub',
+          url: BASE_URL,
+          description: 'CalculHub offers 20+ free online calculators for finance, health, and math.'
+        },
+        {
+          '@context': 'https://schema.org',
+          '@type': 'WebApplication',
+          name: 'CalculHub',
+          url: BASE_URL,
+          applicationCategory: 'UtilityApplication',
+          operatingSystem: 'All',
+          offers: {
+            '@type': 'Offer',
+            price: '0',
+            priceCurrency: 'INR'
+          }
+        }
+      ]
     }
   },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', redirectTo: '', pathMatch: 'full' },
   {
     path: 'financial',
     loadComponent: () => import('./financial/financial.component').then(m => m.FinancialComponent),

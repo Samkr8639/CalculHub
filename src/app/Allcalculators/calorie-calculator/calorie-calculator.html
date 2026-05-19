@@ -141,39 +141,51 @@
 </div>
 
 
+
 <!-- SEO Content Section -->
 <div class="calc-seo-content">
-  <hr class="seo-divider">
-
   <div class="seo-section">
-    <h2>What is a Calorie Calculator?</h2>
-    <p>This calculator estimates the number of calories you need to consume each day to maintain, lose, or gain weight. It takes into account your basal metabolic rate (BMR) and your activity level to provide tailored caloric goals.</p>
+    <h2>Understanding the Calorie Calculator (TDEE)</h2>
+    <p>A Calorie Calculator is an essential nutritional tool used to estimate your Total Daily Energy Expenditure (TDEE). Your TDEE represents the total number of calories your body burns in a 24-hour period, accounting for both your resting metabolism (keeping your organs functioning) and your physical activity level. Understanding this metric is the absolute foundation of any diet plan, whether your goal is to lose weight, build muscle, or maintain your current physique.</p>
+    <p>By inputting your age, gender, height, weight, and activity level, the calculator provides a personalized caloric baseline. To lose weight, you must consume fewer calories than your TDEE (a caloric deficit). To gain weight or build muscle, you must consume more calories than your TDEE (a caloric surplus).</p>
   </div>
 
   <div class="seo-section">
-    <h2>How to Use This Calculator</h2>
-    <ol class="seo-steps">
-      <li>Input your age, gender, height, and current weight.</li>
-      <li>Select your typical daily activity level.</li>
-      <li>Click <strong>Calculate Calories</strong> to view your daily maintenance calories, and target calories for mild, moderate, and extreme weight loss/gain.</li>
-    </ol>
+    <h2>The Formula Explained</h2>
+    <p>Most modern calorie calculators use the Mifflin-St Jeor equation to find your Basal Metabolic Rate (BMR), as it is currently considered the most accurate standard formula by health professionals. The BMR is then multiplied by an Activity Multiplier to find the TDEE.</p>
+    <p><strong>Mifflin-St Jeor Equation (BMR):</strong></p>
+    <div class="formula-box">
+      Men: BMR = (10 × weight in kg) + (6.25 × height in cm) - (5 × age in years) + 5<br>
+      Women: BMR = (10 × weight in kg) + (6.25 × height in cm) - (5 × age in years) - 161
+    </div>
+    <ul class="formula-vars">
+      <li><strong>Sedentary (little/no exercise):</strong> BMR × 1.2</li>
+      <li><strong>Lightly active (1-3 days/week):</strong> BMR × 1.375</li>
+      <li><strong>Moderately active (3-5 days/week):</strong> BMR × 1.55</li>
+      <li><strong>Very active (6-7 days/week):</strong> BMR × 1.725</li>
+    </ul>
+    <p>For example, if a man has a BMR of 1,800 calories and exercises moderately, his TDEE is 1,800 × 1.55 = 2,790 calories per day.</p>
   </div>
 
   <div class="seo-section">
-    <h2>Formula</h2>
-    <div class="formula-box">Calorie Needs = BMR × Activity Factor<br>Weight Loss = Maintenance - 500 kcal/day (for ~0.5kg/week loss)</div>
+    <h2>When to Use This Calculator</h2>
+    <ul class="seo-steps">
+      <li><strong>Weight Loss Planning:</strong> Subtract 500 calories from your calculated TDEE to create a sustainable deficit, which generally leads to about 0.5 kg (1 lb) of fat loss per week.</li>
+      <li><strong>Muscle Building (Bulking):</strong> Add 300 to 500 calories to your TDEE to provide your body with the excess energy required to synthesize new muscle tissue.</li>
+      <li><strong>Diet Auditing:</strong> Compare your current daily food intake against your TDEE to understand why your weight is fluctuating or stalling.</li>
+    </ul>
   </div>
 
   <div class="seo-section">
     <h2>Frequently Asked Questions</h2>
     <div class="seo-faq">
       <div class="faq-item">
-        <h3>How many calories should I eat to lose weight?</h3>
-        <p>A general rule is to eat 500 calories less than your maintenance level to lose about 0.5 kg (1 lb) per week safely.</p>
+        <h3>Is it safe to eat below my BMR to lose weight faster?</h3>
+        <p>No, it is highly discouraged. Your BMR is the minimum energy required to keep your vital organs functioning at rest. Consistently eating below your BMR can lead to metabolic adaptation (slowing metabolism), muscle loss, nutrient deficiencies, and severe fatigue. Always base your caloric deficit on your TDEE, not your BMR.</p>
       </div>
       <div class="faq-item">
-        <h3>Should I eat back calories burned through exercise?</h3>
-        <p>If you accurately included your exercise in the 'activity level' dropdown, do not eat them back, as they are already accounted for.</p>
+        <h3>Why do men generally have a higher BMR than women?</h3>
+        <p>BMR is heavily influenced by lean muscle mass. On average, men naturally have a higher percentage of lean muscle and a lower percentage of body fat than women of the same weight. Because muscle tissue burns more calories at rest than fat tissue, men typically require more daily calories.</p>
       </div>
     </div>
   </div>
@@ -181,7 +193,8 @@
   <div class="seo-section">
     <h2>Related Calculators</h2>
     <div class="related-calc-grid">
-      <a href="/health/bmr-tdee-calculator" class="related-calc-link">BMR & TDEE Calculator</a>
+      <a href="/health/bmi-calculator" class="related-calc-link">BMI Calculator</a>
+      <a href="/health/body-fat-calculator" class="related-calc-link">Body Fat Calculator</a>
       <a href="/health/ideal-weight-calculator" class="related-calc-link">Ideal Weight Calculator</a>
     </div>
   </div>
