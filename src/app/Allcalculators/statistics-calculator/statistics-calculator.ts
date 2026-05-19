@@ -22,19 +22,6 @@ export class StatisticsCalculator {
   public iqr = signal<number | null>(null);
   public error = signal<string | null>(null);
 
-  // Computed signal to parse the input string into an array of numbers
-  private parsedData = computed(() => {
-    const rawData = this.data();
-    if (!rawData.trim()) {
-      return [];
-    }
-    const numbers = rawData.split(',').map(s => parseFloat(s.trim())).filter(n => !isNaN(n));
-    if (numbers.length === 0 && rawData.trim().length > 0) {
-        throw new Error('Invalid input. Please ensure you enter comma-separated numbers.');
-    }
-    return numbers;
-  });
-
   public onDataChange(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     this.data.set(inputElement.value);
@@ -44,15 +31,33 @@ export class StatisticsCalculator {
     this.clearResults();
     this.error.set(null);
 
+    const rawData = this.data().trim();
+    if (!rawData) {
+      this.error.set('Validation Error: Input data field cannot be empty. Please enter comma-separated numbers.');
+      return;
+    }
+
+    // Check for invalid characters (only numbers, commas, periods, signs, spaces are allowed)
+    if (/[^\d,\.\-\s]/.test(rawData)) {
+      this.error.set('Validation Error: Input contains invalid characters. Only numbers, commas, decimals, and signs are allowed.');
+      return;
+    }
+
     try {
-      const data = this.parsedData();
-      if (data.length === 0) {
-        if(this.data().trim().length > 0) {
-           this.error.set('Invalid input. Please enter valid, comma-separated numbers.');
-        } else {
-           this.error.set('No data to calculate. Please enter some numbers.');
-        }
+      const parts = rawData.split(',').map(s => s.trim()).filter(s => s !== '');
+      if (parts.length === 0) {
+        this.error.set('Validation Error: No valid numbers found. Please enter comma-separated numbers.');
         return;
+      }
+
+      const data: number[] = [];
+      for (const part of parts) {
+        const num = parseFloat(part);
+        if (isNaN(num)) {
+          this.error.set(`Validation Error: "${part}" is not a valid number.`);
+          return;
+        }
+        data.push(num);
       }
 
       // --- Calculations based on your provided algorithms ---
@@ -76,9 +81,9 @@ export class StatisticsCalculator {
 
     } catch (e: unknown) {
       if (e instanceof Error) {
-        this.error.set(e.message);
+        this.error.set(`Validation Error: ${e.message}`);
       } else {
-        this.error.set('An unknown error occurred during calculation.');
+        this.error.set('Validation Error: An unknown error occurred during calculation.');
       }
       this.clearResults();
     }

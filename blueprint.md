@@ -50,13 +50,56 @@ This section provides a definitive list of all calculators currently implemented
     *   **Functionality:** Includes a "Clear" button to reset all fields and robust error handling for invalid input.
 *   **Statistics Calculator:** A tool for calculating fundamental and advanced statistical measures, including mean, median, mode, standard deviation, variance, 25th percentile (Q1), 75th percentile (Q3), and the interquartile range (IQR).
 
+### Health & Fitness Calculators (`/health`)
+
+*   **BMI Calculator:** Calculates Body Mass Index (BMI) with strict boundary validation (height 1-300cm, weight 1-600kg).
+*   **BMR & TDEE Calculator:** Computes Basal Metabolic Rate and Total Daily Energy Expenditure using the Mifflin-St Jeor formula with gender, age, weight, and height bounds.
+*   **Body Fat Calculator:** Calculates body fat percentage using the U.S. Navy Method, with strict safety checks on tape-measurement parameters.
+*   **Calorie Calculator:** Estimates daily caloric maintenance and macro targets (protein, carbs, fats) across multiple formulas (Mifflin, Harris-Benedict, Katch-McArdle) with detailed inputs validation.
+*   **Ideal Weight Calculator:** Computes ideal weight ranges using Robinson, Miller, Devine, and Hamwi formulas for heights above 152.4 cm.
+
 ### Other Sections
 
-*   **Health:** A placeholder section for future health-related calculators.
 *   **Other:** A placeholder for uncategorized calculators.
 *   **About:** Provides information about the application.
 *   **Blog:** A section for articles and updates.
 
 ## 4. Current Development Plan
 
-There are no active development plans at this time. The Statistics Calculator has been enhanced with advanced statistical measures, and the application is in a stable, clean state.
+We have successfully standardized and enhanced the user experience across all **Mathematical** and **Health & Fitness** calculators by adding robust form validation triggered on click of the calculate buttons:
+
+1. **Percentage Calculator (Completed):**
+   - Introduced explicit "Calculate" buttons for each of the three percentage sections.
+   - Refactored state from automatic computed signals to explicit calculation functions triggered by the calculate button.
+   - Added input validation to ensure fields are populated with valid numbers, and displayed helpful error messages if validation fails.
+
+2. **Algebra Calculator (Completed):**
+   - Enhanced **Equation Solver** validation to check for empty inputs and ensure an `=` sign is present.
+   - Enhanced **Polynomial Factorer** validation to check for empty inputs and ensure it contains a quadratic term (`x^2`).
+   - Enhanced **Complex Numbers** validation with helpful format instructions (e.g. `a + bi`) when parse errors occur.
+   - Enhanced **Inequality Grapher** validation to verify that inequality expressions are entered correctly with valid operators (`<`, `>`, `<=`, `>=`).
+
+3. **Matrix Calculator (Completed):**
+   - Added explicit input validation before parsing (e.g., Matrix A cannot be empty, Matrix B cannot be empty for two-matrix operations, and scalar must be a valid number).
+   - Displayed nice red-bordered error boxes below inputs.
+
+4. **Statistics Calculator (Completed):**
+   - Improved list input validation to display clear errors if user inputs non-numeric characters or an empty dataset when clicking Calculate.
+
+5. **Scientific Calculator (Completed):**
+   - Validated calculations on the click of `=` (e.g. check for division by zero and show "Cannot divide by zero" instead of generic "Error" or "Infinity").
+
+6. **Health & Fitness Suite (Completed):**
+   - **BMI Calculator:** Strict height (1-300cm) and weight (1-600kg) bounds checking, applying `[class.error-border]` and displaying informative red-bordered warnings.
+   - **BMR & TDEE Calculator:** Rigorous validation for age, height, and weight inputs using computed signal indicators.
+   - **Body Fat Calculator:** Navy method validation to ensure Waist > Neck (males/other) and Waist + Hip > Neck (females/other), avoiding mathematically invalid inputs to log functions. Supports the `"Other"` gender option with balanced multi-formula averaging.
+   - **Calorie Calculator:** Validation across Mifflin, Harris, and Katch equations, checking body fat percentages in Katch formula and displaying clear macro distribution states.
+   - **Ideal Weight Calculator:** Height bounds checking to confirm the minimum required height of 152.4 cm (5 feet) for standard formulas to remain accurate. Supports the `"Other"` gender option with robust mathematical averaging across all scientific models.
+
+7. **Build & Verify (Completed):**
+   - Ran `ng build` to ensure all changes compile successfully without any TypeScript or Angular framework errors.
+
+8. **Currency Standardization (Completed):**
+   - Converted all currency displays in the financial suite from Dollars (`$`) to Rupees (`₹`).
+   - Updated the `CurrencyPipe` arguments in templates (e.g. `Mortgage Calculator` and `Compound Interest Calculator`) from `'USD':'symbol'` to `'INR':'symbol-narrow':'1.0-0'` to format Indian Rupees elegantly.
+   - Standardized Chart.js axis labels to show `Amount (₹)` in both TS components.

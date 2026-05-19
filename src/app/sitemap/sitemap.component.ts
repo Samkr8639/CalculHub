@@ -45,10 +45,10 @@ interface CalcEntry { name: string; link: string; desc: string; }
     h1 { font-size: 2rem; margin-bottom: 0.5rem; }
     .sitemap-intro { color: var(--text-secondary, #888); margin-bottom: 2rem; }
     .sitemap-category { margin-bottom: 2rem; }
-    .sitemap-category h2 { font-size: 1.3rem; border-bottom: 2px solid var(--accent, #7c3aed); padding-bottom: 0.4rem; margin-bottom: 1rem; }
+    .sitemap-category h2 { font-size: 1.3rem; border-bottom: 2px solid var(--accent, #e11931); padding-bottom: 0.4rem; margin-bottom: 1rem; }
     ul { list-style: none; padding: 0; }
     li { padding: 0.4rem 0; }
-    a { color: var(--accent, #7c3aed); text-decoration: none; }
+    a { color: var(--accent, #e11931); text-decoration: none; }
     a:hover { text-decoration: underline; }
   `]
 })

@@ -68,7 +68,8 @@ export class MatrixCalculatorComponent {
 
   public onScalarChange(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
-    this.scalar.set(parseFloat(inputElement.value) || 0);
+    const parsed = parseFloat(inputElement.value);
+    this.scalar.set(!isNaN(parsed) ? parsed : 0);
   }
 
   private parseMatrix(matrixStr: string): Matrix {
@@ -88,12 +89,41 @@ export class MatrixCalculatorComponent {
     this.result.set(null);
     this.error.set(null);
 
-    try {
-      const matrixA = this.parseMatrix(this.matrixA());
-      const matrixB = this.operationRequiresTwoMatrices() ? this.parseMatrix(this.matrixB()) : null;
+    const valA = this.matrixA().trim();
+    if (!valA) {
+      this.error.set('Validation Error: Matrix A input field cannot be empty.');
+      return;
+    }
 
-      if (!this.isValidMatrix(matrixA)) throw new Error('Matrix A has inconsistent columns.');
-      if (matrixB && !this.isValidMatrix(matrixB)) throw new Error('Matrix B has inconsistent columns.');
+    if (this.operationRequiresTwoMatrices()) {
+      const valB = this.matrixB().trim();
+      if (!valB) {
+        this.error.set('Validation Error: Matrix B input field cannot be empty for this operation.');
+        return;
+      }
+    }
+
+    if (this.isScalarMultiplication()) {
+      const s = this.scalar();
+      if (s === null || isNaN(s)) {
+        this.error.set('Validation Error: Please enter a valid scalar multiplier.');
+        return;
+      }
+    }
+
+    try {
+      const matrixA = this.parseMatrix(valA);
+      if (matrixA.length === 0 || matrixA[0].length === 0) {
+        throw new Error('Matrix A has no valid rows or columns.');
+      }
+
+      const matrixB = this.operationRequiresTwoMatrices() ? this.parseMatrix(this.matrixB()) : null;
+      if (matrixB && (matrixB.length === 0 || matrixB[0].length === 0)) {
+        throw new Error('Matrix B has no valid rows or columns.');
+      }
+
+      if (!this.isValidMatrix(matrixA)) throw new Error('Matrix A has inconsistent column lengths.');
+      if (matrixB && !this.isValidMatrix(matrixB)) throw new Error('Matrix B has inconsistent column lengths.');
 
       switch (this.operation()) {
         case 'add':
@@ -119,7 +149,7 @@ export class MatrixCalculatorComponent {
           break;
       }
     } catch (e: any) {
-      this.error.set(e.message);
+      this.error.set(e.message.startsWith('Validation Error:') ? e.message : `Validation Error: ${e.message}`);
     }
   }
 

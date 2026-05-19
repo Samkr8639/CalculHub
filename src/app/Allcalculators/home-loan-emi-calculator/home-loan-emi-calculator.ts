@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild, PLATFORM_ID, inject } from '@angular/core';
+import { CommonModule, DecimalPipe, isPlatformBrowser } from '@angular/common';
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
 
-Chart.register(...registerables);
+
 
 @Component({
   selector: 'app-home-loan-emi-calculator',
@@ -12,6 +12,8 @@ Chart.register(...registerables);
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeLoanEmiCalculatorComponent {
+  private platformId = inject(PLATFORM_ID);
+
   loanAmount = signal<number | null>(5000000);
   interestRate = signal<number | null>(8);
   loanTenure = signal<number | null>(20);
@@ -89,6 +91,9 @@ export class HomeLoanEmiCalculatorComponent {
   }
 
   private createChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
+    Chart.register(...registerables);
+
     const canvas = this.chartCanvas()?.nativeElement;
     if (!canvas) return;
 
@@ -129,6 +134,8 @@ export class HomeLoanEmiCalculatorComponent {
   }
 
   private updateChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     const chart = this.chartInstance();
     if (chart) {
       chart.data.datasets[0].data = this.generateChartData().data;

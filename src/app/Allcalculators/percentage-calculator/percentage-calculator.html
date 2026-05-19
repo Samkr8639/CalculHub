@@ -3,11 +3,20 @@
       <h2>Basic Percentage</h2>
       <div class="input-row">
         <label>What is</label>
-        <input type="number" [value]="percentage1() || ''" (input)="onInput($event, percentage1.set)" placeholder="e.g., 15">
+        <input type="number" [value]="percentage1() === null ? '' : percentage1()" (input)="onInput($event, percentage1.set)" placeholder="e.g., 15">
         <label>% of</label>
-        <input type="number" [value]="value1() || ''" (input)="onInput($event, value1.set)" placeholder="e.g., 750">
+        <input type="number" [value]="value1() === null ? '' : value1()" (input)="onInput($event, value1.set)" placeholder="e.g., 750">
         <label>?</label>
       </div>
+      
+      <button class="calculate-button" (click)="calculateSection1()">Calculate</button>
+
+      @if (error1()) {
+        <div class="error-message">
+          <p>{{ error1() }}</p>
+        </div>
+      }
+
       @if (result1() !== null) {
         <div class="result">
           <p>Result: <strong>{{ result1() | number:'1.2-5' }}</strong></p>
@@ -18,11 +27,20 @@
     <div class="calculator-section">
       <h2>Percentage of a Value</h2>
       <div class="input-row">
-        <input type="number" [value]="value2X() || ''" (input)="onInput($event, value2X.set)" placeholder="e.g., 112.5">
+        <input type="number" [value]="value2X() === null ? '' : value2X()" (input)="onInput($event, value2X.set)" placeholder="e.g., 112.5">
         <label>is what % of</label>
-        <input type="number" [value]="value2Y() || ''" (input)="onInput($event, value2Y.set)" placeholder="e.g., 750">
+        <input type="number" [value]="value2Y() === null ? '' : value2Y()" (input)="onInput($event, value2Y.set)" placeholder="e.g., 750">
         <label>?</label>
       </div>
+
+      <button class="calculate-button" (click)="calculateSection2()">Calculate</button>
+
+      @if (error2()) {
+        <div class="error-message">
+          <p>{{ error2() }}</p>
+        </div>
+      }
+
       @if (result2() !== null) {
         <div class="result">
           <p>Result: <strong>{{ result2() | number:'1.2-2' }}%</strong></p>
@@ -34,11 +52,20 @@
       <h2>Percentage Change</h2>
       <div class="input-row">
         <label>% change from</label>
-        <input type="number" [value]="value3X() || ''" (input)="onInput($event, value3X.set)" placeholder="e.g., 600">
+        <input type="number" [value]="value3X() === null ? '' : value3X()" (input)="onInput($event, value3X.set)" placeholder="e.g., 600">
         <label>to</label>
-        <input type="number" [value]="value3Y() || ''" (input)="onInput($event, value3Y.set)" placeholder="e.g., 750">
+        <input type="number" [value]="value3Y() === null ? '' : value3Y()" (input)="onInput($event, value3Y.set)" placeholder="e.g., 750">
         <label>?</label>
       </div>
+
+      <button class="calculate-button" (click)="calculateSection3()">Calculate</button>
+
+      @if (error3()) {
+        <div class="error-message">
+          <p>{{ error3() }}</p>
+        </div>
+      }
+
       @if (result3() !== null) {
         <div class="result">
           <p>Result:

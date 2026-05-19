@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild, computed } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild, computed, PLATFORM_ID, inject } from '@angular/core';
+import { CommonModule, DecimalPipe, isPlatformBrowser } from '@angular/common';
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
 
-Chart.register(...registerables);
+
 
 @Component({
   selector: 'app-loan-eligibility-calculator',
@@ -12,6 +12,8 @@ Chart.register(...registerables);
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoanEligibilityCalculatorComponent {
+  private platformId = inject(PLATFORM_ID);
+
   monthlyIncome = signal<number | null>(50000);
   monthlyDebt = signal<number | null>(10000);
   interestRate = signal<number | null>(8.5);
@@ -103,6 +105,9 @@ export class LoanEligibilityCalculatorComponent {
   }
 
   private createChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
+    Chart.register(...registerables);
+
     const canvas = this.chartCanvas()?.nativeElement;
     if (!canvas) return;
 
@@ -143,6 +148,8 @@ export class LoanEligibilityCalculatorComponent {
   }
 
   private updateChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     const chart = this.chartInstance();
     if (chart) {
       chart.data.datasets[0].data = this.generateChartData().data;

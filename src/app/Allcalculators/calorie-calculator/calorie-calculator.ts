@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -31,23 +31,97 @@ export class CalorieCalculatorComponent {
   bodyFat = signal<number | null>(null);
 
   result = signal<CalorieResult | null>(null);
+  error = signal<string | null>(null);
+
+  ageError = computed(() => {
+    const a = this.age();
+    if (this.error()) {
+      return a === null || isNaN(a) || a <= 0 || a > 120;
+    }
+    return false;
+  });
+
+  weightError = computed(() => {
+    const w = this.weight();
+    if (this.error()) {
+      return w === null || isNaN(w) || w <= 0 || w > 600;
+    }
+    return false;
+  });
+
+  heightError = computed(() => {
+    const h = this.height();
+    if (this.error()) {
+      return h === null || isNaN(h) || h <= 0 || h > 300;
+    }
+    return false;
+  });
+
+  bodyFatError = computed(() => {
+    const bf = this.bodyFat();
+    const f = this.formula();
+    if (this.error() && f === 'katch') {
+      return bf === null || isNaN(bf) || bf <= 0 || bf > 100;
+    }
+    return false;
+  });
 
   calculate(): void {
+    this.error.set(null);
     const gender = this.gender();
     const age = this.age();
-    let weightInKg = this.weight();
-    let heightInCm = this.height();
+    const weight = this.weight();
+    const height = this.height();
+    const bf = this.bodyFat();
 
-    if (this.weightUnit() === 'lb') {
-      weightInKg = (this.weight() ?? 0) * 0.453592;
-    }
-
-    if (this.heightUnit() === 'ft') {
-      heightInCm = (this.height() ?? 0) * 30.48;
-    }
-
-    if (!age || !weightInKg || !heightInCm) {
+    if (age === null || isNaN(age)) {
+      this.error.set('Validation Error: Please enter a valid number for age.');
       return;
+    }
+
+    if (weight === null || isNaN(weight)) {
+      this.error.set('Validation Error: Please enter a valid number for weight.');
+      return;
+    }
+
+    if (height === null || isNaN(height)) {
+      this.error.set('Validation Error: Please enter a valid number for height.');
+      return;
+    }
+
+    if (this.formula() === 'katch' && (bf === null || isNaN(bf))) {
+      this.error.set('Validation Error: Please enter a valid number for body fat percentage.');
+      return;
+    }
+
+    if (age <= 0 || age > 120) {
+      this.error.set('Validation Error: Age must be a positive number between 1 and 120.');
+      return;
+    }
+
+    if (weight <= 0 || weight > 600) {
+      this.error.set('Validation Error: Weight must be a positive number between 1 and 600.');
+      return;
+    }
+
+    if (height <= 0 || height > 300) {
+      this.error.set('Validation Error: Height must be a positive number between 1 and 300.');
+      return;
+    }
+
+    if (this.formula() === 'katch' && (bf! <= 0 || bf! > 100)) {
+      this.error.set('Validation Error: Body fat percentage must be between 1% and 100%.');
+      return;
+    }
+
+    let weightInKg = weight;
+    if (this.weightUnit() === 'lb') {
+      weightInKg = weight * 0.453592;
+    }
+
+    let heightInCm = height;
+    if (this.heightUnit() === 'ft') {
+      heightInCm = height * 30.48;
     }
 
     let bmr = 0;
@@ -86,6 +160,7 @@ export class CalorieCalculatorComponent {
 
   recalculate(): void {
     this.result.set(null);
+    this.error.set(null);
     this.age.set(null);
     this.weight.set(null);
     this.height.set(null);

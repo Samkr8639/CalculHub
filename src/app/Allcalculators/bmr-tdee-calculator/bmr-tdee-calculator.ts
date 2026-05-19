@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 
@@ -21,6 +21,30 @@ export class BmrTdeeCalculatorComponent {
   
   error = signal<string | null>(null);
 
+  ageError = computed(() => {
+    const a = this.age();
+    if (this.error()) {
+      return a === null || isNaN(a) || a <= 0 || a > 120;
+    }
+    return false;
+  });
+
+  heightError = computed(() => {
+    const h = this.height();
+    if (this.error()) {
+      return h === null || isNaN(h) || h <= 0 || h > 300;
+    }
+    return false;
+  });
+
+  weightError = computed(() => {
+    const w = this.weight();
+    if (this.error()) {
+      return w === null || isNaN(w) || w <= 0 || w > 600;
+    }
+    return false;
+  });
+
   calculate() {
     this.error.set(null);
     const a = this.age();
@@ -29,14 +53,38 @@ export class BmrTdeeCalculatorComponent {
     const g = this.gender();
     const act = this.activity();
 
-    if (!a || !h || !w) {
-      this.error.set('Please fill out all required fields.');
+    if (a === null || isNaN(a)) {
+      this.error.set('Validation Error: Please enter a valid number for age.');
       this.clearResults();
       return;
     }
 
-    if (a <= 0 || h <= 0 || w <= 0) {
-      this.error.set('Values must be greater than zero.');
+    if (h === null || isNaN(h)) {
+      this.error.set('Validation Error: Please enter a valid number for height.');
+      this.clearResults();
+      return;
+    }
+
+    if (w === null || isNaN(w)) {
+      this.error.set('Validation Error: Please enter a valid number for weight.');
+      this.clearResults();
+      return;
+    }
+
+    if (a <= 0 || a > 120) {
+      this.error.set('Validation Error: Age must be a positive number between 1 and 120.');
+      this.clearResults();
+      return;
+    }
+
+    if (h <= 0 || h > 300) {
+      this.error.set('Validation Error: Height must be a positive number between 1 and 300 cm.');
+      this.clearResults();
+      return;
+    }
+
+    if (w <= 0 || w > 600) {
+      this.error.set('Validation Error: Weight must be a positive number between 1 and 600 kg.');
       this.clearResults();
       return;
     }

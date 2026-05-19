@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, signal, computed, effect, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, signal, computed, effect, AfterViewInit, OnDestroy, ViewChild, ElementRef, PLATFORM_ID, inject } from '@angular/core';
+import { CommonModule, CurrencyPipe, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Chart, registerables } from 'chart.js';
 
-Chart.register(...registerables);
+
 
 @Component({
   selector: 'app-compound-interest-calculator',
@@ -13,6 +13,8 @@ Chart.register(...registerables);
   imports: [CommonModule, FormsModule, CurrencyPipe]
 })
 export class CompoundInterestCalculatorComponent implements AfterViewInit, OnDestroy {
+  private platformId = inject(PLATFORM_ID);
+
   @ViewChild('compoundInterestChart') chartCanvas!: ElementRef<HTMLCanvasElement>;
   chart: Chart | undefined;
 
@@ -114,6 +116,9 @@ export class CompoundInterestCalculatorComponent implements AfterViewInit, OnDes
    * Renders the bar chart visualizing the compound interest growth over time.
    */
   renderChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
+    Chart.register(...registerables);
+
     // Only render if inputs are valid and canvas is available
     if (!this.chartCanvas || !this.areInputsValid()) return;
 
@@ -207,7 +212,7 @@ export class CompoundInterestCalculatorComponent implements AfterViewInit, OnDes
           y: {
             title: {
               display: true,
-              text: 'Amount ($)',
+              text: 'Amount (₹)',
               color: '#333'
             },
             ticks: {

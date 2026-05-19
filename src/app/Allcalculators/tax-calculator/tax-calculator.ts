@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild, PLATFORM_ID, inject } from '@angular/core';
+import { CommonModule, DecimalPipe, isPlatformBrowser } from '@angular/common';
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
 
-Chart.register(...registerables);
+
 
 @Component({
   selector: 'app-tax-calculator',
@@ -12,6 +12,8 @@ Chart.register(...registerables);
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaxCalculatorComponent {
+  private platformId = inject(PLATFORM_ID);
+
   grossIncome = signal<number | null>(60000);
   deductions = signal<number | null>(2000);
 
@@ -106,6 +108,9 @@ export class TaxCalculatorComponent {
   }
 
   private createChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
+    Chart.register(...registerables);
+
     const canvas = this.chartCanvas()?.nativeElement;
     if (!canvas) return;
 
@@ -164,6 +169,8 @@ export class TaxCalculatorComponent {
   }
 
   private updateChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     const chart = this.chartInstance();
     if (chart) {
       const { data } = this.generateChartData();

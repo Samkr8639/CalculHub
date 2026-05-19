@@ -15,6 +15,27 @@
   background-color: var(--background-black);
 }
 
+/* ── Sticky title bar ── */
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 1rem 2rem;
+  background-color: var(--card-black);
+  border-bottom: 1px solid var(--border-grey);
+  flex-shrink: 0;
+}
+
+.main-header h1 {
+  color: var(--primary-red);
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .calculator-outlet {
   flex: 1;
   overflow-y: auto;
@@ -34,5 +55,9 @@
 
   .calculator-outlet {
     overflow-y: visible;
+  }
+
+  .main-header {
+    position: static;
   }
 }

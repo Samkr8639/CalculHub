@@ -31,7 +31,7 @@ label {
 }
 
 .form-control {
-  width: 100%;
+  width: 95%;
   padding: 14px;
   border-radius: 10px;
   background: rgba(42, 42, 42, 0.5);
@@ -85,6 +85,16 @@ label {
   font-weight: 500;
 }
 
+.error-message p {
+  margin: 0;
+}
+
+.error-border {
+  border-color: var(--primary-red) !important;
+  box-shadow: 0 0 0 2px rgba(225, 25, 49, 0.2) !important;
+  background-color: rgba(225, 25, 49, 0.05) !important;
+}
+
 .result-section {
   background: rgba(255, 255, 255, 0.03);
   padding: 1.5rem;
@@ -136,10 +146,21 @@ label {
   font-weight: 700;
 }
 
-.text-underweight { color: #3b82f6; }
-.text-normal { color: #10b981; }
-.text-overweight { color: #f59e0b; }
-.text-obese { color: #ef4444; }
+.text-underweight {
+  color: #3b82f6;
+}
+
+.text-normal {
+  color: #10b981;
+}
+
+.text-overweight {
+  color: #f59e0b;
+}
+
+.text-obese {
+  color: #ef4444;
+}
 
 .bmi-scale {
   display: flex;
@@ -166,14 +187,25 @@ label {
 .scale-segment.active {
   opacity: 1;
   font-weight: 800;
-  box-shadow: inset 0 0 15px rgba(0,0,0,0.3);
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3);
   transform: scaleY(1.1);
 }
 
-.underweight { background-color: #3b82f6; }
-.normal { background-color: #10b981; }
-.overweight { background-color: #f59e0b; }
-.obese { background-color: #ef4444; }
+.underweight {
+  background-color: #3b82f6;
+}
+
+.normal {
+  background-color: #10b981;
+}
+
+.overweight {
+  background-color: #f59e0b;
+}
+
+.obese {
+  background-color: #ef4444;
+}
 
 @media (max-width: 600px) {
   .result-grid {
@@ -183,7 +215,7 @@ label {
 
 
 /* Override any fixed height/scroll on the container to allow SEO content to flow below */
-:host > div:first-child,
+:host>div:first-child,
 .calculator-container,
 .gst-calculator-container,
 .health-calculator-container,

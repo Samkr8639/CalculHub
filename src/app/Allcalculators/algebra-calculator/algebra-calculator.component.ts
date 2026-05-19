@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal, ViewChild, ElementRef, AfterViewInit, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, ViewChild, ElementRef, AfterViewInit, WritableSignal, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 import { FormsModule } from '@angular/forms';
 import * as math from 'mathjs';
@@ -19,6 +20,7 @@ interface Inequality {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlgebraCalculatorComponent implements AfterViewInit {
+  private platformId = inject(PLATFORM_ID);
   activeTab = signal<CalculatorTab>('inequality');
 
   // Equation Solver
@@ -42,6 +44,7 @@ export class AlgebraCalculatorComponent implements AfterViewInit {
     { id: 1, value: 'x^2 + y^2 < 16', color: 'rgba(225, 25, 49, 0.5)' },
     { id: 2, value: 'y > x', color: 'rgba(25, 118, 210, 0.5)' }
   ]);
+  inequalityError = signal<string | null>(null);
   private nextId = 3;
   private readonly colors = ['rgba(225, 25, 49, 0.5)', 'rgba(25, 118, 210, 0.5)', 'rgba(76, 175, 80, 0.5)', 'rgba(255, 193, 7, 0.5)', 'rgba(156, 39, 176, 0.5)'];
 
@@ -62,6 +65,7 @@ export class AlgebraCalculatorComponent implements AfterViewInit {
   }
 
   initCanvasAndGraph() {
+    if (!isPlatformBrowser(this.platformId)) return;
     setTimeout(() => {
       if (!this.canvas) return;
       const context = this.canvas.nativeElement.getContext('2d');
@@ -82,6 +86,7 @@ export class AlgebraCalculatorComponent implements AfterViewInit {
   }
 
   graphAllInequalities() {
+    this.inequalityError.set(null);
     if (!this.ctx) {
         this.initCanvasAndGraph();
         return;
@@ -89,6 +94,31 @@ export class AlgebraCalculatorComponent implements AfterViewInit {
     this.drawGrid();
 
     const allIneqs = this.inequalities();
+    if (allIneqs.length === 0) {
+      this.inequalityError.set('Validation Error: Please add at least one inequality to graph.');
+      return;
+    }
+
+    let hasError = false;
+    for (const ineq of allIneqs) {
+      const val = ineq.value.trim();
+      if (!val) {
+        this.inequalityError.set('Validation Error: Inequality expression cannot be empty.');
+        hasError = true;
+        break;
+      }
+      const parts = val.match(/(.+)(>=|<=|>|<)(.+)/);
+      if (!parts || parts.length !== 4) {
+        this.inequalityError.set(`Validation Error: "${val}" is not a valid inequality. Must contain <, >, <=, or >= (e.g., y > x^2).`);
+        hasError = true;
+        break;
+      }
+    }
+
+    if (hasError) {
+      return;
+    }
+
     for (const ineq of allIneqs) {
       this.graphSingleInequality(ineq);
     }
@@ -246,14 +276,22 @@ export class AlgebraCalculatorComponent implements AfterViewInit {
     const eq = this.equation().trim();
 
     if (!eq) {
-      this.equationResult.set('Please enter a linear equation.');
+      this.equationResult.set('Validation Error: Equation field cannot be empty.');
+      return;
+    }
+
+    if (!eq.includes('=')) {
+      this.equationResult.set("Validation Error: Equation must contain an '=' sign (e.g., 2x + 4 = 10).");
       return;
     }
 
     try {
       const steps: string[] = [];
       const sides = eq.split('=');
-      if (sides.length !== 2) throw new Error('Invalid equation format.');
+      if (sides.length !== 2 || !sides[0].trim() || !sides[1].trim()) {
+        this.equationResult.set("Validation Error: Please enter a valid equation with expressions on both sides of the '=' sign.");
+        return;
+      }
 
       const left = sides[0].trim();
       const right = sides[1].trim();
@@ -300,7 +338,7 @@ export class AlgebraCalculatorComponent implements AfterViewInit {
 
       this.equationSteps.set(steps);
     } catch (error: unknown) {
-      this.equationResult.set('Could not solve. Please check the equation format.');
+      this.equationResult.set('Validation Error: Could not solve. Please verify the linear equation format (e.g., 2x + 4 = 10).');
       console.error('Equation solving error:', error);
     }
   }
@@ -310,7 +348,12 @@ export class AlgebraCalculatorComponent implements AfterViewInit {
     this.polynomialSteps.set([]);
     const poly = this.polynomial().trim();
     if (!poly) {
-      this.polynomialResult.set('Please enter a quadratic polynomial.');
+      this.polynomialResult.set('Validation Error: Polynomial field cannot be empty.');
+      return;
+    }
+
+    if (!poly.toLowerCase().includes('x^2') && !poly.toLowerCase().includes('x²')) {
+      this.polynomialResult.set('Validation Error: Please enter a quadratic polynomial containing "x^2" (e.g., x^2 - 5x + 6).');
       return;
     }
 
@@ -325,6 +368,11 @@ export class AlgebraCalculatorComponent implements AfterViewInit {
       const c = p0;
       const a = (p1 + p_minus_1 - 2 * c) / 2;
       const b = (p1 - p_minus_1) / 2;
+
+      if (a === 0) {
+        this.polynomialResult.set('Validation Error: This is not a quadratic polynomial (coefficient of x^2 is zero).');
+        return;
+      }
       
       steps.push(`Starting with the polynomial: ${poly}`);
       steps.push(`Identified coefficients: a = ${a}, b = ${b}, c = ${c}`);
@@ -354,16 +402,20 @@ export class AlgebraCalculatorComponent implements AfterViewInit {
       this.polynomialSteps.set(steps);
 
     } catch (error: unknown) {
-      this.polynomialResult.set('Could not factor. Use format like "ax^2 + bx + c".');
+      this.polynomialResult.set('Validation Error: Could not parse or factor the expression. Use format like "x^2 - 5x + 6".');
       console.error('Factoring error:', error);
     }
   }
 
   calculateComplex() {
-    const num1 = this.complexNum1();
-    const num2 = this.complexNum2();
-    if (!num1 || !num2) {
-      this.complexResult.set('Please enter both complex numbers.');
+    const num1 = this.complexNum1().trim();
+    const num2 = this.complexNum2().trim();
+    if (!num1) {
+      this.complexResult.set('Validation Error: Complex Number 1 cannot be empty.');
+      return;
+    }
+    if (!num2) {
+      this.complexResult.set('Validation Error: Complex Number 2 cannot be empty.');
       return;
     }
     try {
@@ -378,7 +430,7 @@ export class AlgebraCalculatorComponent implements AfterViewInit {
       }
       this.complexResult.set(`Result: ${result.toString()}`);
     } catch (error: unknown) {
-      this.complexResult.set('Invalid complex number format. Use "a + bi".');
+      this.complexResult.set('Validation Error: Invalid complex number format. Use standard format like "3 + 2i" or "5 - i".');
       console.error('Complex calc error:', error);
     }
   }

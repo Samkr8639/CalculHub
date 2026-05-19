@@ -53,7 +53,7 @@ label {
 }
 
 .form-control {
-  width: 100%;
+  width: 95%;
   padding: 14px;
   border-radius: 10px;
   background: rgba(42, 42, 42, 0.5);
@@ -99,6 +99,17 @@ label {
   color: var(--primary-red);
   border-radius: 8px;
   margin-bottom: 1.5rem;
+}
+
+.error-message p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.error-border {
+  border-color: var(--primary-red) !important;
+  box-shadow: 0 0 0 2px rgba(225, 25, 49, 0.2) !important;
+  background-color: rgba(225, 25, 49, 0.05) !important;
 }
 
 .result-section {
@@ -205,7 +216,7 @@ label {
 
 
 /* Override any fixed height/scroll on the container to allow SEO content to flow below */
-:host > div:first-child,
+:host>div:first-child,
 .calculator-container,
 .gst-calculator-container,
 .health-calculator-container,

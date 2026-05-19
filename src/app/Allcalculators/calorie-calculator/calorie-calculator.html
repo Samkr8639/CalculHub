@@ -14,13 +14,13 @@
 
         <div class="input-group">
           <label for="age">Age</label>
-          <input id="age" name="age" type="number" [ngModel]="age()" (ngModelChange)="age.set($event)" />
+          <input id="age" name="age" type="number" [class.error-border]="ageError()" [ngModel]="age()" (ngModelChange)="age.set($event)" />
         </div>
 
         <div class="input-group">
           <label for="weight">Weight</label>
           <div class="loan-term-input-group">
-            <input id="weight" name="weight" type="number" [ngModel]="weight()" (ngModelChange)="weight.set($event)" />
+            <input id="weight" name="weight" type="number" [class.error-border]="weightError()" [ngModel]="weight()" (ngModelChange)="weight.set($event)" />
             <div class="loan-term-toggle">
               <button type="button" (click)="toggleWeightUnit()" [class.active]="weightUnit() === 'kg'">kg</button>
               <button type="button" (click)="toggleWeightUnit()" [class.active]="weightUnit() === 'lb'">lb</button>
@@ -31,7 +31,7 @@
         <div class="input-group">
           <label for="height">Height</label>
           <div class="loan-term-input-group">
-            <input id="height" name="height" type="number" [ngModel]="height()" (ngModelChange)="height.set($event)" />
+            <input id="height" name="height" type="number" [class.error-border]="heightError()" [ngModel]="height()" (ngModelChange)="height.set($event)" />
             <div class="loan-term-toggle">
               <button type="button" (click)="toggleHeightUnit()" [class.active]="heightUnit() === 'cm'">cm</button>
               <button type="button" (click)="toggleHeightUnit()" [class.active]="heightUnit() === 'ft'">ft</button>
@@ -62,7 +62,13 @@
         @if (formula() === 'katch') {
           <div class="input-group">
             <label for="body-fat">Body Fat Percentage</label>
-            <input id="body-fat" name="bodyFat" type="number" [ngModel]="bodyFat()" (ngModelChange)="bodyFat.set($event)" />
+            <input id="body-fat" name="bodyFat" type="number" [class.error-border]="bodyFatError()" [ngModel]="bodyFat()" (ngModelChange)="bodyFat.set($event)" />
+          </div>
+        }
+
+        @if (error()) {
+          <div class="error-message">
+            <p>{{ error() }}</p>
           </div>
         }
 
@@ -92,7 +98,7 @@
               <div class="macro-item">
                 <div class="macro-info">
                   <div class="macro-icon-wrapper">
-                    <span class="material-symbols-outlined">egg_alt</span>
+                    <span class="material-symbols-outlined">egg</span>
                   </div>
                   <div>
                     <p class="macro-name">Protein</p>
@@ -114,7 +120,7 @@
               <div class="macro-item">
                 <div class="macro-info">
                   <div class="macro-icon-wrapper">
-                    <span class="material-symbols-outlined">water_drop</span>
+                    <span class="material-symbols-outlined">water</span>
                   </div>
                   <div>
                     <p class="macro-name">Fats</p>

@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild, PLATFORM_ID, inject } from '@angular/core';
+import { CommonModule, DecimalPipe, isPlatformBrowser } from '@angular/common';
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
 
-Chart.register(...registerables);
+
 
 @Component({
   selector: 'app-sip-calculator',
@@ -12,6 +12,8 @@ Chart.register(...registerables);
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SipCalculatorComponent {
+  private platformId = inject(PLATFORM_ID);
+
   monthlyInvestment = signal<number | null>(10000);
   annualReturnRate = signal<number | null>(12);
   investmentTenureYears = signal<number | null>(10);
@@ -104,6 +106,9 @@ export class SipCalculatorComponent {
   }
 
   private createChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
+    Chart.register(...registerables);
+
     const canvas = this.chartCanvas()?.nativeElement;
     if (!canvas) return;
 
@@ -165,6 +170,8 @@ export class SipCalculatorComponent {
   }
 
   private updateChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     const chart = this.chartInstance();
     if (chart) {
       const { labels, investedData, maturityData } = this.generateChartData();

@@ -16,8 +16,8 @@
         <button class="calculate-button" (click)="solveEquation()">Solve</button>
 
         @if (equationResult()) {
-          <div class="result">
-            <p class="final-answer">{{ equationResult() }}</p>
+          <div class="result" [class.error-border]="equationResult().startsWith('Validation Error:')">
+            <p class="final-answer" [class.error-text]="equationResult().startsWith('Validation Error:')">{{ equationResult() }}</p>
           </div>
         }
 
@@ -43,8 +43,8 @@
         <button class="calculate-button" (click)="factorPolynomial()">Factor</button>
 
         @if (polynomialResult()) {
-          <div class="result">
-            <p class="final-answer">{{ polynomialResult() }}</p>
+          <div class="result" [class.error-border]="polynomialResult().startsWith('Validation Error:')">
+            <p class="final-answer" [class.error-text]="polynomialResult().startsWith('Validation Error:')">{{ polynomialResult() }}</p>
           </div>
         }
 
@@ -75,8 +75,8 @@
         </div>
         <button class="calculate-button" (click)="calculateComplex()">Calculate</button>
         @if (complexResult()) {
-          <div class="result">
-            <p>{{ complexResult() }}</p>
+          <div class="result" [class.error-border]="complexResult().startsWith('Validation Error:')">
+            <p [class.error-text]="complexResult().startsWith('Validation Error:')">{{ complexResult() }}</p>
           </div>
         }
       </div>
@@ -98,6 +98,11 @@
           <button class="add-button" (click)="addInequality()">+ Add Inequality</button>
           <button class="calculate-button" (click)="graphAllInequalities()">Graph All</button>
         </div>
+        @if (inequalityError()) {
+          <div class="error-message">
+            <p>{{ inequalityError() }}</p>
+          </div>
+        }
         <div class="chart-container">
           <canvas #inequalityCanvas width="600" height="600"></canvas>
         </div>

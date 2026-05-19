@@ -17,6 +17,22 @@ export class BmiCalculatorComponent {
   category = signal<string | null>(null);
   error = signal<string | null>(null);
 
+  heightError = computed(() => {
+    const h = this.height();
+    if (this.error()) {
+      return h === null || isNaN(h) || h <= 0 || h > 300;
+    }
+    return false;
+  });
+
+  weightError = computed(() => {
+    const w = this.weight();
+    if (this.error()) {
+      return w === null || isNaN(w) || w <= 0 || w > 600;
+    }
+    return false;
+  });
+
   categoryClass = computed(() => {
     const cat = this.category();
     if (cat === 'Underweight') return 'text-underweight';
@@ -31,8 +47,29 @@ export class BmiCalculatorComponent {
     const h = this.height();
     const w = this.weight();
 
-    if (!h || !w || h <= 0 || w <= 0) {
-      this.error.set('Please enter valid positive numbers for height and weight.');
+    if (h === null || isNaN(h)) {
+      this.error.set('Validation Error: Please enter a valid number for height.');
+      this.bmi.set(null);
+      this.category.set(null);
+      return;
+    }
+
+    if (w === null || isNaN(w)) {
+      this.error.set('Validation Error: Please enter a valid number for weight.');
+      this.bmi.set(null);
+      this.category.set(null);
+      return;
+    }
+
+    if (h <= 0 || h > 300) {
+      this.error.set('Validation Error: Height must be a positive number between 1 and 300 cm.');
+      this.bmi.set(null);
+      this.category.set(null);
+      return;
+    }
+
+    if (w <= 0 || w > 600) {
+      this.error.set('Validation Error: Weight must be a positive number between 1 and 600 kg.');
       this.bmi.set(null);
       this.category.set(null);
       return;

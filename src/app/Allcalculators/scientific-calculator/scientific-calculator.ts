@@ -16,7 +16,7 @@ export class ScientificCalculatorComponent {
   memory = signal(0);
 
   get isError(): boolean {
-    return this.display() === 'Error';
+    return this.display() === 'Error' || this.display() === 'Cannot divide by zero';
   }
 
   private get lastChar(): string {
@@ -60,6 +60,11 @@ export class ScientificCalculatorComponent {
 
   calculate(): void {
     if (this.isError || this.isOperator) return;
+
+    if (this.display().includes('/0')) {
+      this.display.set('Cannot divide by zero');
+      return;
+    }
 
     try {
       const result = math.evaluate(this.display());
@@ -133,7 +138,13 @@ export class ScientificCalculatorComponent {
       case 'ln': result = this.isSecondFunction() ? Math.exp(value) : Math.log(value); break;
       case 'sqrt': result = Math.sqrt(value); break;
       case 'sqr': result = Math.pow(value, 2); break;
-      case 'inv': result = 1 / value; break;
+      case 'inv':
+        if (value === 0) {
+          this.display.set('Cannot divide by zero');
+          return;
+        }
+        result = 1 / value;
+        break;
       case 'abs': result = Math.abs(value); break;
       case 'pi': this.display.set(String(Math.PI)); return;
       case 'e': this.display.set(String(Math.E)); return;

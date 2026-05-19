@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild, PLATFORM_ID, inject } from '@angular/core';
+import { CommonModule, DecimalPipe, isPlatformBrowser } from '@angular/common';
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
 
-Chart.register(...registerables);
+
 
 @Component({
   selector: 'app-fd-calculator',
@@ -12,6 +12,8 @@ Chart.register(...registerables);
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FdCalculatorComponent {
+  private platformId = inject(PLATFORM_ID);
+
   principalAmount = signal<number | null>(100000);
   interestRate = signal<number | null>(6.5);
   tenureYears = signal<number | null>(5);
@@ -110,6 +112,9 @@ export class FdCalculatorComponent {
   }
 
   private createChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
+    Chart.register(...registerables);
+
     const canvas = this.chartCanvas()?.nativeElement;
     if (!canvas) return;
 
@@ -172,6 +177,8 @@ export class FdCalculatorComponent {
   }
 
   private updateChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     const chart = this.chartInstance();
     if (chart) {
       const { labels, principalData, interestData } = this.generateChartData();

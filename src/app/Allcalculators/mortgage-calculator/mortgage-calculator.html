@@ -3,7 +3,7 @@
       <h1>Mortgage Calculator</h1>
 
       <div class="input-group">
-        <label for="loanAmount">Loan Amount ($)</label>
+        <label for="loanAmount">Loan Amount (₹)</label>
         <input 
           id="loanAmount"
           type="number"
@@ -80,15 +80,15 @@
         <div class="summary-box">
           <div class="summary-item">
             <p>Monthly Payment</p>
-            <strong>{{ monthlyPayment() | currency:'USD':'symbol':'1.2-2' }}</strong>
+            <strong>{{ monthlyPayment() | currency:'INR':'symbol-narrow':'1.0-0' }}</strong>
           </div>
           <div class="summary-item">
             <p>Total Principal Paid</p>
-            <strong>{{ loanAmount() | currency:'USD':'symbol':'1.2-2' }}</strong>
+            <strong>{{ loanAmount() | currency:'INR':'symbol-narrow':'1.0-0' }}</strong>
           </div>
           <div class="summary-item">
             <p>Total Interest Paid</p>
-            <strong>{{ (amortizationSchedule() ? amortizationSchedule()![amortizationSchedule()!.length - 1].cumulativeInterest : 0) | currency:'USD':'symbol':'1.2-2' }}</strong>
+            <strong>{{ (amortizationSchedule() ? amortizationSchedule()![amortizationSchedule()!.length - 1].cumulativeInterest : 0) | currency:'INR':'symbol-narrow':'1.0-0' }}</strong>
           </div>
         </div>
 
@@ -110,11 +110,11 @@
               @for (entry of schedule; track entry.month) {
               <tr>
                 <td>{{ entry.month }}</td>
-                <td>{{ monthlyPayment() | currency:'USD':'symbol':'1.2-2' }}</td>
-                <td>{{ entry.principalPayment | currency:'USD':'symbol':'1.2-2' }}</td>
-                <td>{{ entry.interestPayment | currency:'USD':'symbol':'1.2-2' }}</td>
-                <td>{{ entry.remainingBalance | currency:'USD':'symbol':'1.2-2' }}</td>
-                <td>{{ entry.cumulativeInterest | currency:'USD':'symbol':'1.2-2' }}</td>
+                <td>{{ monthlyPayment() | currency:'INR':'symbol-narrow':'1.0-0' }}</td>
+                <td>{{ entry.principalPayment | currency:'INR':'symbol-narrow':'1.0-0' }}</td>
+                <td>{{ entry.interestPayment | currency:'INR':'symbol-narrow':'1.0-0' }}</td>
+                <td>{{ entry.remainingBalance | currency:'INR':'symbol-narrow':'1.0-0' }}</td>
+                <td>{{ entry.cumulativeInterest | currency:'INR':'symbol-narrow':'1.0-0' }}</td>
               </tr>
               }
             </tbody>

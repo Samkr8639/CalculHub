@@ -251,6 +251,27 @@
   margin: 5px 0 0 0;
 }
 
+.error-message {
+  padding: 1rem;
+  background: rgba(225, 25, 49, 0.1);
+  border-left: 4px solid var(--primary-red);
+  color: var(--primary-red);
+  border-radius: 8px;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.error-message p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.error-border {
+  border-color: var(--primary-red) !important;
+  box-shadow: 0 0 0 2px rgba(225, 25, 49, 0.2) !important;
+  background-color: rgba(225, 25, 49, 0.05) !important;
+}
+
 @media (max-width: 768px) {
   .financial-calculator {
     padding: 20px;

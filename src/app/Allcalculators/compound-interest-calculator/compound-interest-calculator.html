@@ -3,7 +3,7 @@
     <h1>Compound Interest Calculator</h1>
 
     <div class="input-group">
-      <label for="principal">Principal Amount ($)</label>
+      <label for="principal">Principal Amount (₹)</label>
       <input
         id="principal"
         type="number"
@@ -110,11 +110,11 @@
         <div class="summary-box">
           <div class="summary-item">
             <p>Total Amount</p>
-            <strong>{{ totalAmount() | currency:'USD':'symbol':'1.2-2' }}</strong>
+            <strong>{{ totalAmount() | currency:'INR':'symbol-narrow':'1.0-0' }}</strong>
           </div>
           <div class="summary-item">
             <p>Compound Interest Earned</p>
-            <strong>{{ compoundInterest() | currency:'USD':'symbol':'1.2-2' }}</strong>
+            <strong>{{ compoundInterest() | currency:'INR':'symbol-narrow':'1.0-0' }}</strong>
           </div>
         </div>
 

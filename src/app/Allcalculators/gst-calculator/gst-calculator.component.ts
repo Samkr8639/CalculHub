@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal, ViewChild, ElementRef, AfterViewInit, AfterViewChecked } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, signal, ViewChild, ElementRef, AfterViewInit, AfterViewChecked, PLATFORM_ID, inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Chart, registerables } from 'chart.js';
 
@@ -11,6 +11,8 @@ import { Chart, registerables } from 'chart.js';
   imports: [CommonModule, FormsModule]
 })
 export class GstCalculatorComponent implements AfterViewInit, AfterViewChecked {
+  private platformId = inject(PLATFORM_ID);
+
   @ViewChild('gstPieChart') private chartRef!: ElementRef<HTMLCanvasElement>;
   public chartInstance = signal<Chart | null>(null);
 
@@ -25,7 +27,6 @@ export class GstCalculatorComponent implements AfterViewInit, AfterViewChecked {
   private chartShouldBeCreated = false;
 
   constructor() {
-    Chart.register(...registerables);
   }
 
   ngAfterViewInit(): void {
@@ -107,6 +108,8 @@ export class GstCalculatorComponent implements AfterViewInit, AfterViewChecked {
   }
 
   private createChart(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    Chart.register(...registerables);
     if (!this.chartRef || !this.chartRef.nativeElement) return;
     
     const baseValue = this.calculationMode() === 'exclude' ? this.amount() : this.calculatedBasePrice();
@@ -153,6 +156,7 @@ export class GstCalculatorComponent implements AfterViewInit, AfterViewChecked {
   }
 
   private updateChart(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
     if (this.chartInstance() && this.calculatedGstAmount() !== null && this.calculatedBasePrice() !== null) {
       const baseValue = this.calculationMode() === 'exclude' ? this.amount() : this.calculatedBasePrice();
       const gstAmount = this.calculatedGstAmount();

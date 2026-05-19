@@ -1,7 +1,7 @@
-import { CommonModule, CurrencyPipe } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, computed, effect, ElementRef, OnDestroy, signal, ViewChild } from '@angular/core';
+import { CommonModule, CurrencyPipe, isPlatformBrowser } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, effect, ElementRef, OnDestroy, signal, ViewChild, PLATFORM_ID, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Chart } from 'chart.js/auto';
+import { Chart, registerables } from 'chart.js';
 
 interface AmortizationEntry {
   month: number;
@@ -20,6 +20,8 @@ interface AmortizationEntry {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MortgageCalculator implements AfterViewInit, OnDestroy{
+  private platformId = inject(PLATFORM_ID);
+
   @ViewChild('amortizationChart') chartCanvas!: ElementRef<HTMLCanvasElement>;
   chart: Chart | undefined;
 
@@ -123,6 +125,8 @@ export class MortgageCalculator implements AfterViewInit, OnDestroy{
   }
 
   renderChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
+    Chart.register(...registerables);
     if (!this.chartCanvas) return;
 
     const ctx = this.chartCanvas.nativeElement.getContext('2d');
@@ -200,7 +204,7 @@ export class MortgageCalculator implements AfterViewInit, OnDestroy{
             y: {
               title: {
                 display: true,
-                text: 'Amount ($)',
+                text: 'Amount (₹)',
                 color: '#FFFFFF'
               },
               ticks: {
