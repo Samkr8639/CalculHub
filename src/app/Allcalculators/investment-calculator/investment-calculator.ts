@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, DecimalPipe, isPlatformBrowser } from '@angular/common';
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
 
 Chart.register(...registerables);
@@ -24,16 +24,18 @@ export class InvestmentCalculatorComponent {
   private chartInstance = signal<Chart | null>(null);
   private chartCanvas = viewChild<ElementRef<HTMLCanvasElement>>('investmentChart');
 
-  constructor() {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     effect(() => {
-      if (this.chartCanvas() && this.futureValue() !== null) {
-        if (this.chartInstance()) {
-          this.updateChart();
-        } else {
-          this.createChart();
+      if (isPlatformBrowser(this.platformId)) {
+        if (this.chartCanvas() && this.futureValue() !== null) {
+          if (this.chartInstance()) {
+            this.updateChart();
+          } else {
+            this.createChart();
+          }
+        } else if (this.chartInstance()) {
+          this.clearChart();
         }
-      } else if (this.chartInstance()) {
-        this.clearChart();
       }
     });
     this.calculateInvestment();
@@ -81,6 +83,7 @@ export class InvestmentCalculatorComponent {
   }
 
   private createChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
     const canvas = this.chartCanvas()?.nativeElement;
     if (!canvas) return;
 
@@ -121,6 +124,7 @@ export class InvestmentCalculatorComponent {
   }
 
   private updateChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
     const chart = this.chartInstance();
     if (chart) {
       chart.data.datasets[0].data = this.generateChartData().data;
@@ -135,6 +139,7 @@ export class InvestmentCalculatorComponent {
   }
 
   private clearChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
     const chart = this.chartInstance();
     if (chart) {
       chart.destroy();

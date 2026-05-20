@@ -7,23 +7,21 @@
       <input
         id="principal"
         type="number"
-        [(ngModel)]="principal"
-        (input)="validateInputs()"
-        [class.is-invalid]="!isPrincipalValid()"
+        [ngModel]="principalAmount()"
+        (ngModelChange)="principalAmount.set($event)"
+        (input)="calculateInterest()"
         placeholder="e.g., 1000"
         min="0"
       />
       <input
         type="range"
-        [(ngModel)]="principal"
+        [ngModel]="principalAmount()"
+        (ngModelChange)="principalAmount.set($event)"
         min="0"
         max="1000000"
         step="1000"
-        (input)="validateInputs()"
+        (input)="calculateInterest()"
       />
-      @if (!isPrincipalValid()) {
-        <div class="error-message">Principal must be greater than 0.</div>
-      }
     </div>
 
     <div class="input-group">
@@ -31,24 +29,22 @@
       <input
         id="interestRate"
         type="number"
-        [(ngModel)]="interestRate"
-        (input)="validateInputs()"
-        [class.is-invalid]="!isInterestRateValid()"
+        [ngModel]="annualInterestRate()"
+        (ngModelChange)="annualInterestRate.set($event)"
+        (input)="calculateInterest()"
         placeholder="e.g., 5"
         min="0"
         step="0.01"
       />
       <input
         type="range"
-        [(ngModel)]="interestRate"
+        [ngModel]="annualInterestRate()"
+        (ngModelChange)="annualInterestRate.set($event)"
         min="0"
         max="20"
         step="0.01"
-        (input)="validateInputs()"
+        (input)="calculateInterest()"
       />
-      @if (!isInterestRateValid()) {
-        <div class="error-message">Interest rate cannot be negative.</div>
-      }
     </div>
 
     <div class="input-group">
@@ -56,23 +52,21 @@
       <input
         id="compoundingFrequency"
         type="number"
-        [(ngModel)]="compoundingFrequency"
-        (input)="validateInputs()"
-        [class.is-invalid]="!isCompoundingFrequencyValid()"
+        [ngModel]="compoundingFrequency()"
+        (ngModelChange)="compoundingFrequency.set($event)"
+        (input)="calculateInterest()"
         placeholder="e.g., 12 (monthly)"
         min="1"
       />
       <input
         type="range"
-        [(ngModel)]="compoundingFrequency"
+        [ngModel]="compoundingFrequency()"
+        (ngModelChange)="compoundingFrequency.set($event)"
         min="1"
         max="365"
         step="1"
-        (input)="validateInputs()"
+        (input)="calculateInterest()"
       />
-      @if (!isCompoundingFrequencyValid()) {
-        <div class="error-message">Compounding frequency must be greater than 0.</div>
-      }
     </div>
 
     <div class="input-group">
@@ -80,46 +74,44 @@
       <input
         id="timePeriod"
         type="number"
-        [(ngModel)]="timePeriod"
-        (input)="validateInputs()"
-        [class.is-invalid]="!isTimePeriodValid()"
+        [ngModel]="timeInYears()"
+        (ngModelChange)="timeInYears.set($event)"
+        (input)="calculateInterest()"
         placeholder="e.g., 10"
         min="1"
       />
       <input
         type="range"
-        [(ngModel)]="timePeriod"
+        [ngModel]="timeInYears()"
+        (ngModelChange)="timeInYears.set($event)"
         min="1"
         max="50"
         step="1"
-        (input)="validateInputs()"
+        (input)="calculateInterest()"
       />
-      @if (!isTimePeriodValid()) {
-        <div class="error-message">Time period must be greater than 0.</div>
-      }
     </div>
 
     <div class="button-group">
       <button class="clear" (click)="clearInputs()">Clear</button>
     </div>
 
-    @if (areInputsValid()) {
+    @if (futureValue() !== null) {
       <div class="results-section">
         <h2>Calculation Results</h2>
 
         <div class="summary-box">
           <div class="summary-item">
             <p>Total Amount</p>
-            <strong>{{ totalAmount() | currency:'USD':'symbol':'1.2-2' }}</strong>
+            <strong>{{ futureValue() | currency:'USD':'symbol':'1.2-2' }}</strong>
           </div>
           <div class="summary-item">
             <p>Compound Interest Earned</p>
-            <strong>{{ compoundInterest() | currency:'USD':'symbol':'1.2-2' }}</strong>
+            <strong>{{ totalInterest() | currency:'USD':'symbol':'1.2-2' }}</strong>
           </div>
         </div>
 
         <div class="chart-container">
-          <canvas #compoundInterestChart></canvas>
+          <canvas #interestChart></canvas>
         </div>
       </div>
     } @else {

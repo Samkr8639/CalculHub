@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
-import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
+import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild, inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, DecimalPipe, isPlatformBrowser } from '@angular/common';
 
-Chart.register(...registerables);
+// Use a type alias for the Chart class to be loaded dynamically
+type Chart = import('chart.js').Chart;
+type ChartData = import('chart.js').ChartData;
+type ChartOptions = import('chart.js').ChartOptions;
 
 @Component({
   selector: 'app-sip-calculator',
@@ -22,18 +24,21 @@ export class SipCalculatorComponent {
 
   private chartInstance = signal<Chart | null>(null);
   private chartCanvas = viewChild<ElementRef<HTMLCanvasElement>>('sipChart');
+  private platformId = inject(PLATFORM_ID);
 
   constructor() {
     effect(() => {
-      const canvas = this.chartCanvas();
-      if (canvas && this.maturityAmount() !== null) {
-        if (this.chartInstance()) {
-          this.updateChart();
-        } else {
-          this.createChart();
+      if (isPlatformBrowser(this.platformId)) {
+        const canvas = this.chartCanvas();
+        if (canvas && this.maturityAmount() !== null) {
+          if (this.chartInstance()) {
+            this.updateChart();
+          } else {
+            this.createChart();
+          }
+        } else if (this.chartInstance()) {
+          this.clearChart();
         }
-      } else if (this.chartInstance()) {
-        this.clearChart();
       }
     });
 
@@ -103,9 +108,13 @@ export class SipCalculatorComponent {
     return { labels, investedData, maturityData };
   }
 
-  private createChart() {
+  private async createChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
     const canvas = this.chartCanvas()?.nativeElement;
     if (!canvas) return;
+
+    const { Chart, registerables } = await import('chart.js');
+    Chart.register(...registerables);
 
     const { labels, investedData, maturityData } = this.generateChartData();
 
@@ -141,7 +150,7 @@ export class SipCalculatorComponent {
         y: {
           beginAtZero: true,
           grid: { color: 'rgba(255, 255, 255, 0.1)' },
-          ticks: { 
+          ticks: {
             color: '#ccc',
             callback: (value) => `₹${Number(value) / 1000}k`
           },
@@ -165,6 +174,7 @@ export class SipCalculatorComponent {
   }
 
   private updateChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
     const chart = this.chartInstance();
     if (chart) {
       const { labels, investedData, maturityData } = this.generateChartData();
@@ -180,8 +190,9 @@ export class SipCalculatorComponent {
     this.totalInvested.set(null);
     this.estimatedGains.set(null);
   }
-  
+
   private clearChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
     const chart = this.chartInstance();
     if (chart) {
         chart.destroy();

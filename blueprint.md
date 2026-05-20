@@ -59,4 +59,9 @@ This section provides a definitive list of all calculators currently implemented
 
 ## 4. Current Development Plan
 
-There are no active development plans at this time. The Statistics Calculator has been enhanced with advanced statistical measures, and the application is in a stable, clean state.
+### Build Stabilization
+
+*   **Bug Fix:** Resolved a series of build errors related to the `chart.js` library and server-side rendering (SSR). The errors were caused by the library being initialized on the server, which resulted in a `NotYetImplemented` error.
+*   **Solution:** The fix involved implementing a consistent pattern of dynamically importing `chart.js/auto` within an `async` `createChart` method in all components that use charts. This ensures that the library is only imported and initialized in the browser environment.
+*   **Template Synchronization:** Corrected the template of the `compound-interest-calculator` to align with the signal-based properties and methods in the component class. This also required importing the `FormsModule`.
+*   **Status:** The application is now building successfully, and all calculators are functioning as expected.

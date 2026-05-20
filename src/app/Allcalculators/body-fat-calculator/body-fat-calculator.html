@@ -84,43 +84,75 @@
   <hr class="seo-divider">
 
   <div class="seo-section">
-    <h2>What is Body Fat Percentage?</h2>
-    <p>Body fat percentage is the total mass of fat divided by total body mass. It is a more accurate indicator of health and fitness than body weight alone because it distinguishes between fat and lean muscle mass.</p>
+    <h2>Why Body Fat Percentage Matters More Than Weight</h2>
+    <p>While your scale shows your total body weight, it doesn't tell the whole story. <strong>Body Fat Percentage</strong> is a far more insightful metric, revealing how much of your weight is composed of fat versus lean mass (muscle, bone, water, organs). A healthy body fat percentage is a better indicator of fitness and health than BMI, especially for individuals with more muscle mass.</p>
+    <p>This calculator uses the U.S. Navy Method, a well-established and reliable way to estimate body fat using simple body measurements. It provides a convenient and cost-effective alternative to clinical methods like DEXA scans.</p>
   </div>
 
   <div class="seo-section">
-    <h2>How to Use This Calculator</h2>
+    <h2>How to Take Accurate Measurements</h2>
+    <p>Getting accurate results starts with accurate measurements. Here’s how:</p>
     <ol class="seo-steps">
-      <li>Select your gender and enter your age, weight, and height.</li>
-      <li>Enter your neck and waist measurements. Women also need to enter hip measurements.</li>
-      <li>Click <strong>Calculate Body Fat</strong> to see your body fat percentage and category.</li>
+      <li><strong>Select Your Gender:</strong> The formula is different for men and women.</li>
+      <li><strong>Height & Weight:</strong> Enter your current height and weight.</li>
+      <li><strong>Neck Circumference:</strong> Place the measuring tape just below your larynx (Adam's apple) and look straight ahead. Keep the tape level.</li>
+      <li><strong>Waist Circumference:</strong> For men, measure horizontally at the level of your navel. For women, measure at the narrowest point of your abdomen, usually just above the navel.</li>
+      <li><strong>Hip Circumference (Women Only):</strong> Measure at the widest point of your hips.</li>
     </ol>
+    <p>For best results, use a flexible, non-stretchable measuring tape, and take each measurement two or three times to ensure accuracy. Click <strong>Calculate Body Fat</strong> to see your results.</p>
   </div>
 
   <div class="seo-section">
-    <h2>Formula</h2>
-    <div class="formula-box">U.S. Navy Method:<br>Men: 495 / (1.0324 - 0.19077×log10(waist-neck) + 0.15456×log10(height)) - 450<br>Women: 495 / (1.29579 - 0.35004×log10(waist+hip-neck) + 0.22100×log10(height)) - 450</div>
+    <h2>The U.S. Navy Formula</h2>
+    <p>The formulas used are derived from research by the U.S. Navy to assess the body composition of its personnel:</p>
+    <div class="formula-box">
+      <p><strong>Men:</strong> %Fat = 495 / (1.0324 - 0.19077 * log10(Waist - Neck) + 0.15456 * log10(Height)) - 450</p>
+      <p><strong>Women:</strong> %Fat = 495 / (1.29579 - 0.35004 * log10(Waist + Hip - Neck) + 0.22100 * log10(Height)) - 450</p>
+    </div>
+    <p>The results also break down your weight into <strong>Fat Mass</strong> (the weight of fat on your body) and <strong>Lean Body Mass</strong> (everything else).</p>
   </div>
 
   <div class="seo-section">
-    <h2>Frequently Asked Questions</h2>
+    <h2>Body Fat Percentage Categories (by ACE)</h2>
+    <table>
+      <thead>
+        <tr><th>Description</th><th>Women</th><th>Men</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Essential Fat</td><td>10-13%</td><td>2-5%</td></tr>
+        <tr><td>Athletes</td><td>14-20%</td><td>6-13%</td></tr>
+        <tr><td>Fitness</td><td>21-24%</td><td>14-17%</td></tr>
+        <tr><td>Acceptable</td><td>25-31%</td><td>18-24%</td></tr>
+        <tr><td>Obese</td><td>32%+</td><td>25%+</td></tr>
+      </tbody>
+    </table>
+    <small>Source: American Council on Exercise (ACE)</small>
+  </div>
+
+  <div class="seo-section">
+    <h2>Frequently Asked Questions (FAQs)</h2>
     <div class="seo-faq">
       <div class="faq-item">
-        <h3>What is a healthy body fat percentage?</h3>
-        <p>A healthy range for men is generally 10-20%, and for women 20-30%, depending on age.</p>
+        <h3>How accurate is the U.S. Navy method?</h3>
+        <p>It's considered a reliable estimator, generally within 3-4% of results from more advanced methods like dual-energy X-ray absorptiometry (DEXA). However, its accuracy can be lower for individuals who are extremely lean or obese.</p>
       </div>
       <div class="faq-item">
-        <h3>Is the U.S. Navy method accurate?</h3>
-        <p>It provides a good estimate (within 3-4% of DEXA scans) but may overestimate fat in highly muscular individuals.</p>
+        <h3>What's the difference between BMI and body fat percentage?</h3>
+        <p>BMI is a ratio of your weight to your height, while body fat percentage measures how much of your weight is fat. Body fat percentage is a better measure of health, as it can distinguish between a muscular person and an overweight person, even if they have the same BMI.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How can I reduce my body fat percentage?</h3>
+        <p>A combination of a calorie-controlled diet (eating in a slight deficit) and regular exercise, particularly strength training to build muscle, is the most effective way to reduce body fat while preserving lean mass.</p>
       </div>
     </div>
   </div>
 
   <div class="seo-section">
-    <h2>Related Calculators</h2>
+    <h2>Related Health Calculators</h2>
     <div class="related-calc-grid">
-      <a href="/health/bmi-calculator" class="related-calc-link">BMI Calculator</a>
-      <a href="/health/ideal-weight-calculator" class="related-calc-link">Ideal Weight Calculator</a>
+      <a routerLink="/health/bmi-calculator" class="related-calc-link">BMI Calculator</a>
+      <a routerLink="/health/ideal-weight-calculator" class="related-calc-link">Ideal Weight Calculator</a>
+      <a routerLink="/health/bmr-tdee-calculator" class="related-calc-link">BMR & TDEE Calculator</a>
     </div>
   </div>
 </div>

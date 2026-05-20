@@ -33,7 +33,11 @@
             "server": "src/main.server.ts",
             "outputMode": "server",
             "security": {
-              "allowedHosts": []
+              "allowedHosts": [
+                "127.0.0.1:4200",
+                "localhost:4200",
+                "127.0.0.1:9002"
+              ]
             },
             "ssr": {
               "entry": "src/server.ts"
@@ -65,6 +69,14 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "allowedHosts": [
+              "127.0.0.1:4200",
+              "localhost:4200",
+              "4200-firebase-calculhubgit-1779089496809.cluster-xpmcxs2fjnhg6xvn446ubtgpio.cloudworkstations.dev",
+              "127.0.0.1:9002"
+            ]
+          },
           "configurations": {
             "production": {
               "buildTarget": "myapp:build:production"

@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild, computed } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild, computed, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, DecimalPipe, isPlatformBrowser } from '@angular/common';
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
 
 Chart.register(...registerables);
@@ -25,17 +25,19 @@ export class LoanEligibilityCalculatorComponent {
   private chartInstance = signal<Chart | null>(null);
   private chartCanvas = viewChild<ElementRef<HTMLCanvasElement>>('affordabilityChart');
 
-  constructor() {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     effect(() => {
-      const canvas = this.chartCanvas();
-      if (canvas && this.maxLoanAmount() !== null) {
-        if (this.chartInstance()) {
-          this.updateChart();
-        } else {
-          this.createChart();
+      if (isPlatformBrowser(this.platformId)) {
+        const canvas = this.chartCanvas();
+        if (canvas && this.maxLoanAmount() !== null) {
+          if (this.chartInstance()) {
+            this.updateChart();
+          } else {
+            this.createChart();
+          }
+        } else if (this.chartInstance()) {
+          this.clearChart();
         }
-      } else if (this.chartInstance()) {
-        this.clearChart();
       }
     });
     this.calculateLoanEligibility();
@@ -103,6 +105,7 @@ export class LoanEligibilityCalculatorComponent {
   }
 
   private createChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
     const canvas = this.chartCanvas()?.nativeElement;
     if (!canvas) return;
 
@@ -143,6 +146,7 @@ export class LoanEligibilityCalculatorComponent {
   }
 
   private updateChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
     const chart = this.chartInstance();
     if (chart) {
       chart.data.datasets[0].data = this.generateChartData().data;
@@ -157,6 +161,7 @@ export class LoanEligibilityCalculatorComponent {
   }
 
   private clearChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
     const chart = this.chartInstance();
     if (chart) {
       chart.destroy();

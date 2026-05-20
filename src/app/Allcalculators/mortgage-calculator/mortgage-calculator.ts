@@ -1,7 +1,8 @@
-import { CommonModule, CurrencyPipe } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, computed, effect, ElementRef, OnDestroy, signal, ViewChild } from '@angular/core';
+import { CommonModule, CurrencyPipe, isPlatformBrowser } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, effect, ElementRef, OnDestroy, signal, ViewChild, inject, PLATFORM_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Chart } from 'chart.js/auto';
+
+type Chart = import('chart.js').Chart;
 
 interface AmortizationEntry {
   month: number;
@@ -28,26 +29,34 @@ export class MortgageCalculator implements AfterViewInit, OnDestroy{
   loanTermYears = signal<number | null>(null);
   loanTermUnit = signal<'years' | 'months'>('years');
 
+  private platformId = inject(PLATFORM_ID);
+
   constructor() {
     // Effect to re-render chart when relevant signals change
     effect(() => {
-      // Trigger chart update if any of these signals change
-      this.loanAmount();
-      this.interestRate();
-      this.loanTermYears();
-      this.loanTermUnit();
-      // Debounce the chart update to avoid excessive re-renders
-      setTimeout(() => this.updateChart(), 0);
+      if (isPlatformBrowser(this.platformId)) {
+        // Trigger chart update if any of these signals change
+        this.loanAmount();
+        this.interestRate();
+        this.loanTermYears();
+        this.loanTermUnit();
+        // Debounce the chart update to avoid excessive re-renders
+        setTimeout(() => this.updateChart(), 0);
+      }
     });
   }
 
   ngAfterViewInit() {
-    this.renderChart();
+    if (isPlatformBrowser(this.platformId)) {
+      this.renderChart();
+    }
   }
 
   ngOnDestroy() {
-    if (this.chart) {
-      this.chart.destroy();
+    if (isPlatformBrowser(this.platformId)) {
+      if (this.chart) {
+        this.chart.destroy();
+      }
     }
   }
 
@@ -122,7 +131,8 @@ export class MortgageCalculator implements AfterViewInit, OnDestroy{
     this.loanTermUnit.set('years');
   }
 
-  renderChart() {
+  async renderChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
     if (!this.chartCanvas) return;
 
     const ctx = this.chartCanvas.nativeElement.getContext('2d');
@@ -133,6 +143,9 @@ export class MortgageCalculator implements AfterViewInit, OnDestroy{
     }
 
     const schedule = this.amortizationSchedule();
+
+    const { Chart, registerables } = await import('chart.js/auto');
+    Chart.register(...registerables);
 
     if (schedule && schedule.length > 0) {
       this.chart = new Chart(ctx, {
@@ -220,6 +233,7 @@ export class MortgageCalculator implements AfterViewInit, OnDestroy{
   }
 
   updateChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
     if (this.chart) {
       this.chart.destroy();
       this.chart = undefined;

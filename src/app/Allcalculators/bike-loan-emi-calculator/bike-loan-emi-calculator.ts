@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
-import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
+import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser, CommonModule, DecimalPipe } from '@angular/common';
 
-Chart.register(...registerables);
+type Chart = import('chart.js').Chart;
+type ChartData = import('chart.js').ChartData;
+type ChartOptions = import('chart.js').ChartOptions;
 
 @Component({
   selector: 'app-bike-loan-emi-calculator',
@@ -22,17 +23,20 @@ export class BikeLoanEmiCalculatorComponent {
 
   private chartInstance = signal<Chart | null>(null);
   private chartCanvas = viewChild<ElementRef<HTMLCanvasElement>>('emiChart');
+  private platformId = inject(PLATFORM_ID);
 
   constructor() {
     effect(() => {
-      if (this.chartCanvas() && this.monthlyEMI() !== null) {
-        if (this.chartInstance()) {
-          this.updateChart();
-        } else {
-          this.createChart();
+      if (isPlatformBrowser(this.platformId)) {
+        if (this.chartCanvas() && this.monthlyEMI() !== null) {
+          if (this.chartInstance()) {
+            this.updateChart();
+          } else {
+            this.createChart();
+          }
+        } else if (this.chartInstance()) {
+          this.clearChart();
         }
-      } else if (this.chartInstance()) {
-        this.clearChart();
       }
     });
     this.calculateEMI();
@@ -75,9 +79,13 @@ export class BikeLoanEmiCalculatorComponent {
     };
   }
 
-  private createChart() {
+  private async createChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
     const canvas = this.chartCanvas()?.nativeElement;
     if (!canvas) return;
+
+    const { Chart, registerables } = await import('chart.js');
+    Chart.register(...registerables);
 
     const { labels, data } = this.generateChartData();
 
@@ -116,6 +124,7 @@ export class BikeLoanEmiCalculatorComponent {
   }
 
   private updateChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
     const chart = this.chartInstance();
     if (chart) {
       chart.data.datasets[0].data = this.generateChartData().data;
@@ -130,6 +139,7 @@ export class BikeLoanEmiCalculatorComponent {
   }
 
   private clearChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
     const chart = this.chartInstance();
     if (chart) {
       chart.destroy();

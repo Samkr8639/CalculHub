@@ -1,24 +1,31 @@
 <div class="gst-calculator-container">
   <div class="financial-calculator">
     <h1>Bike Loan EMI Calculator</h1>
+    <p class="intro-text">Planning to buy your dream bike? Use our free and instant Bike Loan EMI Calculator to figure out your monthly payments. Know exactly how much you'll pay before you even visit the showroom.</p>
 
     <div class="calculator-inputs">
       <div class="input-group">
         <label for="loanAmount">Loan Amount (₹)</label>
-        <input id="loanAmount" type="number" [value]="loanAmount() || ''" (input)="onInputChange($event, loanAmount.set)" placeholder="e.g., 200000" />
-        <input type="range" [value]="loanAmount() || 0" (input)="onInputChange($event, loanAmount.set)" min="10000" max="5000000" step="10000" />
+        <div class="input-with-range">
+          <input id="loanAmount" type="number" [value]="loanAmount() || ''" (input)="onInputChange($event, loanAmount.set)" placeholder="e.g., 200000" />
+          <input type="range" [value]="loanAmount() || 0" (input)="onInputChange($event, loanAmount.set)" min="10000" max="5000000" step="10000" />
+        </div>
       </div>
 
       <div class="input-group">
         <label for="interestRate">Annual Interest Rate (%)</label>
-        <input id="interestRate" type="number" [value]="interestRate() || ''" (input)="onInputChange($event, interestRate.set)" placeholder="e.g., 10" />
-        <input type="range" [value]="interestRate() || 10" (input)="onInputChange($event, interestRate.set)" min="1" max="20" step="0.1" />
+        <div class="input-with-range">
+          <input id="interestRate" type="number" [value]="interestRate() || ''" (input)="onInputChange($event, interestRate.set)" placeholder="e.g., 10" />
+          <input type="range" [value]="interestRate() || 10" (input)="onInputChange($event, interestRate.set)" min="1" max="20" step="0.1" />
+        </div>
       </div>
 
       <div class="input-group">
         <label for="loanTenure">Loan Tenure (Years)</label>
-        <input id="loanTenure" type="number" [value]="loanTenure() || ''" (input)="onInputChange($event, loanTenure.set)" placeholder="e.g., 5" />
-        <input type="range" [value]="loanTenure() || 5" (input)="onInputChange($event, loanTenure.set)" min="1" max="7" />
+        <div class="input-with-range">
+          <input id="loanTenure" type="number" [value]="loanTenure() || ''" (input)="onInputChange($event, loanTenure.set)" placeholder="e.g., 5" />
+          <input type="range" [value]="loanTenure() || 5" (input)="onInputChange($event, loanTenure.set)" min="1" max="7" />
+        </div>
       </div>
     </div>
 
@@ -59,36 +66,57 @@
   <hr class="seo-divider">
 
   <div class="seo-section">
-    <h2>What is a Bike Loan EMI Calculator?</h2>
-    <p>A Bike Loan EMI (Equated Monthly Installment) calculator helps you determine the monthly amount you need to pay to repay your two-wheeler loan. It calculates the interest and principal components of your loan over your chosen tenure.</p>
+    <h2>Understanding Your Bike Loan EMI</h2>
+    <p>A Bike Loan EMI (Equated Monthly Installment) is the fixed amount you pay to a lender every month to repay your two-wheeler loan. This payment covers both the principal amount borrowed and the interest accrued. Our calculator breaks down this complex calculation into a simple, easy-to-understand format, helping you plan your budget effectively.</p>
   </div>
 
   <div class="seo-section">
-    <h2>How to Use This Calculator</h2>
+    <h2>How to Use Our Bike Loan EMI Calculator</h2>
+    <p>Follow these three simple steps to get instant and accurate results:</p>
     <ol class="seo-steps">
-      <li>Enter the total loan amount you plan to borrow for your bike.</li>
-      <li>Input the annual interest rate offered by your bank or lender.</li>
-      <li>Enter the loan tenure (in months or years).</li>
-      <li>Click <strong>Calculate EMI</strong> to view your monthly payment, total interest, and total payable amount.</li>
+      <li><strong>Enter Loan Amount:</strong> Input the on-road price of the bike minus your down payment. This is the amount you need to borrow.</li>
+      <li><strong>Enter Interest Rate:</strong> Input the annual interest rate quoted by your bank or financial institution. Bike loan rates typically range from 8% to 15%.</li>
+      <li><strong>Enter Loan Tenure:</strong> Select the repayment period in years. A shorter tenure means higher EMIs but lower total interest, while a longer tenure reduces your monthly payment.</li>
     </ol>
+    <p>Once you input these values, the calculator automatically displays your monthly EMI, the total interest you'll pay, and the total cost of the bike loan.</p>
   </div>
 
   <div class="seo-section">
-    <h2>EMI Formula</h2>
+    <h2>The Formula Behind the Calculation</h2>
+    <p>Our calculator uses the standard EMI formula to ensure accuracy:</p>
     <div class="formula-box">EMI = [P × R × (1+R)^N] / [(1+R)^N - 1]</div>
+    <p>Where:</p>
     <ul class="formula-vars">
-      <li><strong>P</strong> = Principal loan amount</li>
-      <li><strong>R</strong> = Monthly interest rate (Annual Rate / 12 / 100)</li>
-      <li><strong>N</strong> = Loan tenure in months</li>
+      <li><strong>P</strong> = Principal Loan Amount</li>
+      <li><strong>R</strong> = Monthly Interest Rate (Annual Rate divided by 12, then divided by 100)</li>
+      <li><strong>N</strong> = Loan Tenure in Months (Number of years multiplied by 12)</li>
+    </ul>
+    <p>The visual chart helps you see the split between the principal amount and the interest paid over the loan's lifetime.</p>
+  </div>
+
+  <div class="seo-section">
+    <h2>Factors Affecting Your Bike Loan EMI</h2>
+    <ul>
+        <li><strong>Loan Amount:</strong> A higher loan amount directly increases the EMI. A larger down payment can reduce this.</li>
+        <li><strong>Interest Rate:</strong> Your credit score, income, and relationship with the bank can influence the interest rate you're offered. A lower rate significantly reduces your EMI.</li>
+        <li><strong>Loan Tenure:</strong> While a longer tenure reduces the monthly EMI, it increases the total interest you pay. It's a trade-off between monthly affordability and total cost.</li>
     </ul>
   </div>
 
   <div class="seo-section">
-    <h2>Frequently Asked Questions</h2>
+    <h2>Frequently Asked Questions (FAQs)</h2>
     <div class="seo-faq">
       <div class="faq-item">
+        <h3>What is a good credit score to get a bike loan?</h3>
+        <p>A credit score of 750 or above is generally considered excellent and will help you secure a lower interest rate and faster loan approval.</p>
+      </div>
+      <div class="faq-item">
         <h3>Are processing fees included in the EMI?</h3>
-        <p>No, processing fees are usually deducted upfront from the disbursed loan amount and are not part of the standard EMI calculation.</p>
+        <p>No, processing fees are typically a one-time charge deducted from the loan amount before it's disbursed. They are not included in the monthly EMI calculation.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I prepay my bike loan?</h3>
+        <p>Yes, most banks allow you to make partial or full prepayments on your loan. This can help you reduce your tenure or lower your future EMIs. However, check with your lender about any prepayment penalties.</p>
       </div>
     </div>
   </div>
@@ -96,8 +124,9 @@
   <div class="seo-section">
     <h2>Related Calculators</h2>
     <div class="related-calc-grid">
-      <a href="/financial/home-loan-emi-calculator" class="related-calc-link">Home Loan EMI Calculator</a>
-      <a href="/financial/education-loan-emi-calculator" class="related-calc-link">Education Loan EMI</a>
+      <a routerLink="/financial/home-loan-emi-calculator" class="related-calc-link">Home Loan EMI Calculator</a>
+      <a routerLink="/financial/education-loan-emi-calculator" class="related-calc-link">Education Loan EMI</a>
+      <a routerLink="/financial/loan-eligibility-calculator" class="related-calc-link">Loan Eligibility Calculator</a>
     </div>
   </div>
 </div>

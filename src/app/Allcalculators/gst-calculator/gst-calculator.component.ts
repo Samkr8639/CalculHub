@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal, ViewChild, ElementRef, AfterViewInit, AfterViewChecked } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, signal, ViewChild, ElementRef, AfterViewInit, AfterViewChecked, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Chart, registerables } from 'chart.js';
 
@@ -24,8 +24,10 @@ export class GstCalculatorComponent implements AfterViewInit, AfterViewChecked {
 
   private chartShouldBeCreated = false;
 
-  constructor() {
-    Chart.register(...registerables);
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    if (isPlatformBrowser(this.platformId)) {
+      Chart.register(...registerables);
+    }
   }
 
   ngAfterViewInit(): void {
@@ -33,11 +35,13 @@ export class GstCalculatorComponent implements AfterViewInit, AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    // This hook runs after the view has been updated.
-    // We check if a chart needs to be created and if the canvas is now available.
-    if (this.chartShouldBeCreated && this.chartRef?.nativeElement) {
-      this.createChart();
-      this.chartShouldBeCreated = false; // Reset the flag
+    if (isPlatformBrowser(this.platformId)) {
+      // This hook runs after the view has been updated.
+      // We check if a chart needs to be created and if the canvas is now available.
+      if (this.chartShouldBeCreated && this.chartRef?.nativeElement) {
+        this.createChart();
+        this.chartShouldBeCreated = false; // Reset the flag
+      }
     }
   }
 
@@ -76,13 +80,15 @@ export class GstCalculatorComponent implements AfterViewInit, AfterViewChecked {
       this.calculatedNetPrice.set(netPrice);
       this.calculatedBasePrice.set(basePrice);
 
-      // If a chart instance already exists, just update it.
-      if (this.chartInstance()) {
-        this.updateChart();
-      } else {
-        // If not, set a flag indicating that a chart should be created.
-        // ngAfterViewChecked will pick this up once the canvas is rendered.
-        this.chartShouldBeCreated = true;
+      if (isPlatformBrowser(this.platformId)) {
+        // If a chart instance already exists, just update it.
+        if (this.chartInstance()) {
+          this.updateChart();
+        } else {
+          // If not, set a flag indicating that a chart should be created.
+          // ngAfterViewChecked will pick this up once the canvas is rendered.
+          this.chartShouldBeCreated = true;
+        }
       }
     } else {
       this.clearCalculations();
@@ -93,9 +99,11 @@ export class GstCalculatorComponent implements AfterViewInit, AfterViewChecked {
     this.calculatedGstAmount.set(null);
     this.calculatedNetPrice.set(null);
     this.calculatedBasePrice.set(null);
-    if (this.chartInstance()) {
-      this.chartInstance()?.destroy();
-      this.chartInstance.set(null);
+    if (isPlatformBrowser(this.platformId)) {
+      if (this.chartInstance()) {
+        this.chartInstance()?.destroy();
+        this.chartInstance.set(null);
+      }
     }
     this.chartShouldBeCreated = false;
   }
@@ -107,6 +115,7 @@ export class GstCalculatorComponent implements AfterViewInit, AfterViewChecked {
   }
 
   private createChart(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
     if (!this.chartRef || !this.chartRef.nativeElement) return;
     
     const baseValue = this.calculationMode() === 'exclude' ? this.amount() : this.calculatedBasePrice();
@@ -153,6 +162,7 @@ export class GstCalculatorComponent implements AfterViewInit, AfterViewChecked {
   }
 
   private updateChart(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
     if (this.chartInstance() && this.calculatedGstAmount() !== null && this.calculatedBasePrice() !== null) {
       const baseValue = this.calculationMode() === 'exclude' ? this.amount() : this.calculatedBasePrice();
       const gstAmount = this.calculatedGstAmount();

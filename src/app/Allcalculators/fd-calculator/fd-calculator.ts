@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
-import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
+import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild, inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, DecimalPipe, isPlatformBrowser } from '@angular/common';
 
-Chart.register(...registerables);
+type Chart = import('chart.js').Chart;
+type ChartData = import('chart.js').ChartData;
+type ChartOptions = import('chart.js').ChartOptions;
 
 @Component({
   selector: 'app-fd-calculator',
@@ -22,18 +23,21 @@ export class FdCalculatorComponent {
 
   private chartInstance = signal<Chart | null>(null);
   private chartCanvas = viewChild<ElementRef<HTMLCanvasElement>>('fdChart');
+  private platformId = inject(PLATFORM_ID);
 
   constructor() {
     effect(() => {
-      const canvas = this.chartCanvas();
-      if (canvas && this.maturityAmount() !== null) {
-        if (this.chartInstance()) {
-          this.updateChart();
-        } else {
-          this.createChart();
+      if (isPlatformBrowser(this.platformId)) {
+        const canvas = this.chartCanvas();
+        if (canvas && this.maturityAmount() !== null) {
+          if (this.chartInstance()) {
+            this.updateChart();
+          } else {
+            this.createChart();
+          }
+        } else if (this.chartInstance()) {
+          this.clearChart();
         }
-      } else if (this.chartInstance()) {
-        this.clearChart();
       }
     });
     this.calculateFd();
@@ -109,9 +113,13 @@ export class FdCalculatorComponent {
     return { labels, principalData, interestData };
   }
 
-  private createChart() {
+  private async createChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
     const canvas = this.chartCanvas()?.nativeElement;
     if (!canvas) return;
+
+    const { Chart, registerables } = await import('chart.js');
+    Chart.register(...registerables);
 
     const { labels, principalData, interestData } = this.generateChartData();
 
@@ -172,6 +180,7 @@ export class FdCalculatorComponent {
   }
 
   private updateChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
     const chart = this.chartInstance();
     if (chart) {
       const { labels, principalData, interestData } = this.generateChartData();
@@ -188,6 +197,7 @@ export class FdCalculatorComponent {
   }
 
   private clearChart() {
+    if (!isPlatformBrowser(this.platformId)) return;
     const chart = this.chartInstance();
     if (chart) {
       chart.destroy();

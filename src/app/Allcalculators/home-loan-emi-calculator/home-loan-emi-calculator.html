@@ -1,81 +1,88 @@
 <div class="gst-calculator-container">
   <div class="financial-calculator">
     <h1>Home Loan EMI Calculator</h1>
+    <p class="intro-text">Plan your finances better with our accurate Home Loan EMI Calculator. Get instant results for your monthly payments, total interest, and the overall cost of your home loan.</p>
 
     <div class="calculator-inputs">
       <div class="input-group">
         <label for="loanAmount">Loan Amount (₹)</label>
-        <input
-          id="loanAmount"
-          type="number"
-          [value]="loanAmount() || ''"
-          (input)="onLoanAmountChange($event)"
-          placeholder="e.g., 5000000"
-        />
-        <input
-          type="range"
-          [value]="loanAmount() || 0"
-          (input)="onLoanAmountChange($event)"
-          min="100000"
-          max="20000000"
-          step="100000"
-        />
+        <div class="input-with-range">
+          <input
+            id="loanAmount"
+            type="number"
+            [value]="loanAmount() || ''"
+            (input)="onLoanAmountChange($event)"
+            placeholder="e.g., 5000000"
+          />
+          <input
+            type="range"
+            [value]="loanAmount() || 0"
+            (input)="onLoanAmountChange($event)"
+            min="100000"
+            max="20000000"
+            step="100000"
+          />
+        </div>
       </div>
 
       <div class="input-group">
         <label for="interestRate">Interest Rate (%)</label>
-        <input
-          id="interestRate"
-          type="number"
-          [value]="interestRate() || ''"
-          (input)="onInterestRateChange($event)"
-          placeholder="e.g., 8"
-        />
-        <input
-          type="range"
-          [value]="interestRate() || 8"
-          (input)="onInterestRateChange($event)"
-          min="1"
-          max="20"
-          step="0.1"
-        />
+        <div class="input-with-range">
+          <input
+            id="interestRate"
+            type="number"
+            [value]="interestRate() || ''"
+            (input)="onInterestRateChange($event)"
+            placeholder="e.g., 8.5"
+          />
+          <input
+            type="range"
+            [value]="interestRate() || 8"
+            (input)="onInterestRateChange($event)"
+            min="1"
+            max="20"
+            step="0.1"
+          />
+        </div>
       </div>
 
       <div class="input-group">
         <label for="loanTenure">Loan Tenure (Years)</label>
-        <input
-          id="loanTenure"
-          type="number"
-          [value]="loanTenure() || ''"
-          (input)="onLoanTenureChange($event)"
-          placeholder="e.g., 20"
-        />
-        <input
-          type="range"
-          [value]="loanTenure() || 20"
-          (input)="onLoanTenureChange($event)"
-          min="1"
-          max="30"
-          step="1"
-        />
+        <div class="input-with-range">
+          <input
+            id="loanTenure"
+            type="number"
+            [value]="loanTenure() || ''"
+            (input)="onLoanTenureChange($event)"
+            placeholder="e.g., 20"
+          />
+          <input
+            type="range"
+            [value]="loanTenure() || 20"
+            (input)="onLoanTenureChange($event)"
+            min="1"
+            max="30"
+            step="1"
+          />
+        </div>
       </div>
     </div>
 
     @if (monthlyEmi() !== null && monthlyEmi()! > 0) {
       <section class="results-section">
-        <h2>EMI Details</h2>
+        <h2>Your Monthly Repayment</h2>
         <div class="summary-box">
           <div class="summary-item">
             <p>Monthly EMI</p>
-            <strong>{{ monthlyEmi() | number: '1.2-2' }}</strong>
+            <strong class="highlight">₹{{ monthlyEmi() | number: '1.0-0' }}</strong>
           </div>
           <div class="summary-item">
             <p>Total Interest Payable</p>
-            <strong>{{ totalInterest() | number: '1.2-2' }}</strong>
+            <strong>₹{{ totalInterest() | number: '1.0-0' }}</strong>
           </div>
           <div class="summary-item">
             <p>Total Payable Amount</p>
-            <strong>{{ totalPayable() | number: '1.2-2' }}</strong>
+            <strong>₹{{ totalPayable() | number: '1.0-0' }}</strong>
           </div>
         </div>
 
@@ -98,36 +105,62 @@
   <hr class="seo-divider">
 
   <div class="seo-section">
-    <h2>What is a Home Loan EMI Calculator?</h2>
-    <p>A Home Loan EMI Calculator is an essential financial tool used to calculate your monthly housing loan repayment amount. Because home loans are long-term (up to 30 years), knowing your exact EMI helps you plan your long-term monthly budget effectively.</p>
+    <h2>Understanding Home Loan EMI</h2>
+    <p>A <strong>Home Loan Equated Monthly Installment (EMI)</strong> is a fixed payment amount made by a borrower to a lender at a specified date each calendar month. Equated monthly installments are used to pay off both interest and principal each month so that over a specified number of years, the loan is paid off in full.</p>
+    <p>Knowing your EMI in advance is crucial for financial planning. It helps you determine if you can afford the monthly payments and how it will impact your overall savings and expenses.</p>
   </div>
 
   <div class="seo-section">
-    <h2>How to Use This Calculator</h2>
+    <h2>How is Home Loan EMI Calculated?</h2>
+    <p>Our calculator uses the standard mathematical formula for EMI calculation:</p>
+    <div class="formula-box">EMI = [P x r x (1 + r)^n] / [(1 + r)^n – 1]</div>
+    <ul class="formula-legend">
+      <li><strong>P:</strong> Principal loan amount (the amount you borrow).</li>
+      <li><strong>r:</strong> Monthly interest rate (Annual rate / 12 / 100).</li>
+      <li><strong>n:</strong> Number of monthly installments (Loan tenure in years x 12).</li>
+    </ul>
+    <p>This formula ensures that the interest component is higher in the initial years and gradually decreases as the principal is paid off.</p>
+  </div>
+
+  <div class="seo-section">
+    <h2>3 Simple Steps to Use the Home Loan EMI Calculator</h2>
     <ol class="seo-steps">
-      <li>Input your principal home loan amount.</li>
-      <li>Enter the current home loan interest rate.</li>
-      <li>Select your desired loan tenure (in years).</li>
-      <li>Review the calculated EMI, total interest burden, and the total payment amount over the life of the loan.</li>
+      <li><strong>Principal Amount:</strong> Enter the total amount you wish to borrow from the bank.</li>
+      <li><strong>Rate of Interest:</strong> Enter the annual interest rate offered by your lender.</li>
+      <li><strong>Tenure:</strong> Enter the number of years for which you want to take the loan.</li>
     </ol>
+    <p>The calculator will instantly show your monthly EMI, the total interest you will pay over the entire tenure, and the total amount (Principal + Interest) payable to the bank.</p>
   </div>
 
   <div class="seo-section">
-    <h2>EMI Formula</h2>
-    <div class="formula-box">EMI = P × r × (1 + r)ⁿ / ((1 + r)ⁿ - 1)</div>
-    <p>Where P is Principal, r is monthly rate, and n is total number of months.</p>
+    <h2>How to Reduce Your Home Loan EMI?</h2>
+    <p>Reducing your EMI can significantly lower your financial burden. Here are a few tips:</p>
+    <ul>
+      <li><strong>Opt for a Longer Tenure:</strong> Increasing the loan duration will decrease your monthly EMI, though it will increase the total interest paid.</li>
+      <li><strong>Make Part-Prepayments:</strong> Any extra amount paid towards the principal reduces the outstanding balance, lowering future EMIs or reducing the tenure.</li>
+      <li><strong>Compare Interest Rates:</strong> Even a 0.1% difference in interest rates can save you lakhs of rupees over 20 years.</li>
+      <li><strong>Increase Your Down Payment:</strong> A higher down payment reduces the loan amount (Principal), which directly lowers the EMI.</li>
+    </ul>
   </div>
 
   <div class="seo-section">
-    <h2>Frequently Asked Questions</h2>
+    <h2>Frequently Asked Questions (FAQs)</h2>
     <div class="seo-faq">
       <div class="faq-item">
-        <h3>Can home loan EMI change over time?</h3>
-        <p>Yes, if you choose a floating interest rate, your EMI or tenure will change whenever the central bank adjusts benchmark repo rates.</p>
+        <h3>What is the maximum tenure for a home loan?</h3>
+        <p>Most banks and financial institutions offer home loans with a maximum tenure of up to 30 years, subject to the borrower's age at the time of maturity.</p>
       </div>
       <div class="faq-item">
-        <h3>Does early repayment reduce the EMI?</h3>
-        <p>Making partial prepayments usually reduces your outstanding principal, which allows you to either lower your future EMIs or reduce your loan tenure.</p>
+        <h3>What factors affect Home Loan Interest Rates?</h3>
+        <p>Interest rates depend on various factors, including the RBI's repo rate, the borrower's credit (CIBIL) score, the loan amount, and the type of employment (salaried vs. self-employed).</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I change my EMI amount later?</h3>
+        <p>Yes, you can request your bank to restructure your loan. Making a part-prepayment usually gives you the option to either reduce the EMI or reduce the tenure.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What is the difference between fixed and floating interest rates?</h3>
+        <p>Fixed rates remain constant throughout the tenure, while floating rates change based on market fluctuations and benchmark rates set by the RBI.</p>
       </div>
     </div>
   </div>
@@ -135,8 +168,9 @@
   <div class="seo-section">
     <h2>Related Calculators</h2>
     <div class="related-calc-grid">
-      <a href="/financial/mortgage" class="related-calc-link">Mortgage Calculator</a>
-      <a href="/financial/loan-eligibility-calculator" class="related-calc-link">Loan Eligibility</a>
+      <a routerLink="/financial/mortgage" class="related-calc-link">Mortgage Calculator</a>
+      <a routerLink="/financial/loan-eligibility-calculator" class="related-calc-link">Check Loan Eligibility</a>
+      <a routerLink="/financial/sip-calculator" class="related-calc-link">SIP Calculator</a>
     </div>
   </div>
 </div>
