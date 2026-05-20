@@ -1,0 +1,179 @@
+{
+  "scanned": 48,
+  "lowWordCount": [
+    {
+      "file": "src\\app\\Allcalculators\\algebra-calculator\\algebra-calculator.component.html",
+      "wordCount": 455
+    },
+    {
+      "file": "src\\app\\Allcalculators\\gst-calculator\\gst-calculator.component.html",
+      "wordCount": 647
+    },
+    {
+      "file": "src\\app\\Allcalculators\\sip-calculator\\sip-calculator.component.html",
+      "wordCount": 604
+    },
+    {
+      "file": "src\\app\\app.component.html",
+      "wordCount": 0
+    },
+    {
+      "file": "src\\app\\blog\\blog.component.html",
+      "wordCount": 2
+    },
+    {
+      "file": "src\\app\\financial\\financial.component.html",
+      "wordCount": 3
+    },
+    {
+      "file": "src\\app\\footer\\footer.component.html",
+      "wordCount": 16
+    },
+    {
+      "file": "src\\app\\header\\header.component.html",
+      "wordCount": 6
+    },
+    {
+      "file": "src\\app\\health\\health.component.html",
+      "wordCount": 3
+    },
+    {
+      "file": "src\\app\\home\\home.component.html",
+      "wordCount": 701
+    },
+    {
+      "file": "src\\app\\navigation\\navigation.component.html",
+      "wordCount": 9
+    },
+    {
+      "file": "src\\app\\side-panel\\side-panel.component.html",
+      "wordCount": 26
+    },
+    {
+      "file": "src\\app\\Allcalculators\\algebra-calculator\\algebra-calculator.component.html",
+      "wordCount": 455
+    },
+    {
+      "file": "src\\app\\Allcalculators\\bike-loan-emi-calculator\\bike-loan-emi-calculator.html",
+      "wordCount": 520
+    },
+    {
+      "file": "src\\app\\Allcalculators\\bmr-tdee-calculator\\bmr-tdee-calculator.html",
+      "wordCount": 317
+    },
+    {
+      "file": "src\\app\\Allcalculators\\body-fat-calculator\\body-fat-calculator.html",
+      "wordCount": 507
+    },
+    {
+      "file": "src\\app\\Allcalculators\\calorie-calculator\\calorie-calculator.html",
+      "wordCount": 583
+    },
+    {
+      "file": "src\\app\\Allcalculators\\compound-interest-calculator\\compound-interest-calculator.html",
+      "wordCount": 633
+    },
+    {
+      "file": "src\\app\\Allcalculators\\education-loan-emi-calculator\\education-loan-emi-calculator.html",
+      "wordCount": 519
+    },
+    {
+      "file": "src\\app\\Allcalculators\\fd-calculator\\fd-calculator.html",
+      "wordCount": 612
+    },
+    {
+      "file": "src\\app\\Allcalculators\\gst-calculator\\gst-calculator.component.html",
+      "wordCount": 647
+    },
+    {
+      "file": "src\\app\\Allcalculators\\home-loan-emi-calculator\\home-loan-emi-calculator.html",
+      "wordCount": 620
+    },
+    {
+      "file": "src\\app\\Allcalculators\\ideal-weight-calculator\\ideal-weight-calculator.html",
+      "wordCount": 498
+    },
+    {
+      "file": "src\\app\\Allcalculators\\investment-calculator\\investment-calculator.html",
+      "wordCount": 475
+    },
+    {
+      "file": "src\\app\\Allcalculators\\loan-eligibility-calculator\\loan-eligibility-calculator.html",
+      "wordCount": 635
+    },
+    {
+      "file": "src\\app\\Allcalculators\\matrix-calculator\\matrix-calculator.html",
+      "wordCount": 429
+    },
+    {
+      "file": "src\\app\\Allcalculators\\mutual-fund-calculator\\mutual-fund-calculator.html",
+      "wordCount": 578
+    },
+    {
+      "file": "src\\app\\Allcalculators\\percentage-calculator\\percentage-calculator.html",
+      "wordCount": 493
+    },
+    {
+      "file": "src\\app\\Allcalculators\\ppf-calculator\\ppf-calculator.html",
+      "wordCount": 591
+    },
+    {
+      "file": "src\\app\\Allcalculators\\retirement-calculator\\retirement-calculator.html",
+      "wordCount": 509
+    },
+    {
+      "file": "src\\app\\Allcalculators\\scientific-calculator\\scientific-calculator.html",
+      "wordCount": 451
+    },
+    {
+      "file": "src\\app\\Allcalculators\\sip-calculator\\sip-calculator.component.html",
+      "wordCount": 604
+    },
+    {
+      "file": "src\\app\\Allcalculators\\statistics-calculator\\statistics-calculator.html",
+      "wordCount": 428
+    },
+    {
+      "file": "src\\app\\app.component.html",
+      "wordCount": 0
+    },
+    {
+      "file": "src\\app\\blog\\blog.component.html",
+      "wordCount": 2
+    },
+    {
+      "file": "src\\app\\financial\\financial.component.html",
+      "wordCount": 3
+    },
+    {
+      "file": "src\\app\\footer\\footer.component.html",
+      "wordCount": 16
+    },
+    {
+      "file": "src\\app\\header\\header.component.html",
+      "wordCount": 6
+    },
+    {
+      "file": "src\\app\\health\\health.component.html",
+      "wordCount": 3
+    },
+    {
+      "file": "src\\app\\home\\home.component.html",
+      "wordCount": 701
+    },
+    {
+      "file": "src\\app\\mathematical\\mathematical.html",
+      "wordCount": 3
+    },
+    {
+      "file": "src\\app\\navigation\\navigation.component.html",
+      "wordCount": 9
+    },
+    {
+      "file": "src\\app\\side-panel\\side-panel.component.html",
+      "wordCount": 26
+    }
+  ],
+  "duplicateAnchors": [],
+  "h1Suggestions": []
+}

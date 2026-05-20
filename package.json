@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "fix-seo:dry": "node tools/seo-fixer.js --dry-run",
+    "fix-seo": "node tools/seo-fixer.js --apply",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:myapp": "node dist/myapp/server/server.mjs"

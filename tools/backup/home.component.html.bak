@@ -26,19 +26,19 @@
     <a routerLink="/financial/ppf-calculator" class="quick-pill">💰 PPF</a>
     <a routerLink="/financial/mutual-fund-calculator" class="quick-pill">📊 Mutual Fund</a>
     <a routerLink="/health/ideal-weight-calculator" class="quick-pill">🎯 Ideal Weight</a>
-    <!-- duplicate for seamless loop (marked noindex-like for SEO) -->
-    <a routerLink="/financial/mortgage" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">🏠 Mortgage</a>
-    <a routerLink="/financial/gst-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">🧾 GST</a>
-    <a routerLink="/financial/sip-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">📈 SIP</a>
-    <a routerLink="/financial/fd-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">🏦 Fixed Deposit</a>
-    <a routerLink="/health/bmi-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">⚖️ BMI</a>
-    <a routerLink="/health/calorie-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">🔥 Calorie / TDEE</a>
-    <a routerLink="/mathematical/percentage-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">% Percentage</a>
-    <a routerLink="/mathematical/scientific-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">🔬 Scientific</a>
-    <a routerLink="/financial/tax-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">📋 Income Tax</a>
-    <a routerLink="/financial/ppf-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">💰 PPF</a>
-    <a routerLink="/financial/mutual-fund-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">📊 Mutual Fund</a>
-    <a routerLink="/health/ideal-weight-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">🎯 Ideal Weight</a>
+    <!-- duplicate for seamless loop -->
+    <a routerLink="/financial/mortgage" class="quick-pill" aria-hidden="true">🏠 Mortgage</a>
+    <a routerLink="/financial/gst-calculator" class="quick-pill" aria-hidden="true">🧾 GST</a>
+    <a routerLink="/financial/sip-calculator" class="quick-pill" aria-hidden="true">📈 SIP</a>
+    <a routerLink="/financial/fd-calculator" class="quick-pill" aria-hidden="true">🏦 Fixed Deposit</a>
+    <a routerLink="/health/bmi-calculator" class="quick-pill" aria-hidden="true">⚖️ BMI</a>
+    <a routerLink="/health/calorie-calculator" class="quick-pill" aria-hidden="true">🔥 Calorie / TDEE</a>
+    <a routerLink="/mathematical/percentage-calculator" class="quick-pill" aria-hidden="true">% Percentage</a>
+    <a routerLink="/mathematical/scientific-calculator" class="quick-pill" aria-hidden="true">🔬 Scientific</a>
+    <a routerLink="/financial/tax-calculator" class="quick-pill" aria-hidden="true">📋 Income Tax</a>
+    <a routerLink="/financial/ppf-calculator" class="quick-pill" aria-hidden="true">💰 PPF</a>
+    <a routerLink="/financial/mutual-fund-calculator" class="quick-pill" aria-hidden="true">📊 Mutual Fund</a>
+    <a routerLink="/health/ideal-weight-calculator" class="quick-pill" aria-hidden="true">🎯 Ideal Weight</a>
   </div>
 </nav>
 

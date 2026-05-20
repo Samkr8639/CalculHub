@@ -23,6 +23,7 @@ export class SeoService {
   private titleService = inject(Title);
   private router = inject(Router);
   private document = inject(DOCUMENT);
+  private readonly MAX_TITLE_CHARS = 70;
 
   readonly baseUrl = 'https://calcul-hub.vercel.app';
   readonly siteName = 'CalculHub';
@@ -56,8 +57,23 @@ export class SeoService {
       : `${data.title} | ${this.siteName}`;
     const canonical = data.canonical || this.baseUrl + this.router.url;
 
+    // Title: ensure it doesn't exceed the visual/pixel budget by clamping length
+    const separator = ` | ${this.siteName}`;
+    let displayTitle = fullTitle;
+    if (fullTitle.endsWith(separator)) {
+      const base = fullTitle.slice(0, -separator.length);
+      const maxBaseLen = this.MAX_TITLE_CHARS - separator.length;
+      if (maxBaseLen < 20) {
+        displayTitle = this.siteName;
+      } else if (base.length > maxBaseLen) {
+        displayTitle = base.slice(0, Math.max(0, maxBaseLen - 3)).trim() + '...' + separator;
+      }
+    } else if (displayTitle.length > this.MAX_TITLE_CHARS) {
+      displayTitle = displayTitle.slice(0, Math.max(0, this.MAX_TITLE_CHARS - 3)).trim() + '...';
+    }
+
     // Title
-    this.titleService.setTitle(fullTitle);
+    this.titleService.setTitle(displayTitle);
 
     // Meta description
     this.meta.updateTag({ name: 'description', content: data.description });
