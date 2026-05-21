@@ -1,0 +1,208 @@
+<div class="crypto-calculator-container">
+  <div class="financial-calculator">
+    <h1>Crypto Calculator</h1>
+
+    <!-- Mode Selector Tabs -->
+    <div class="mode-tabs">
+      <button [class.active-tab]="calcMode() === 'buy'" (click)="onModeChange('buy')">
+        Buy (Fiat to Crypto)
+      </button>
+      <button [class.active-tab]="calcMode() === 'sell'" (click)="onModeChange('sell')">
+        Sell (Crypto to Fiat)
+      </button>
+    </div>
+
+    <div class="calculator-inputs">
+      <!-- Input Amount -->
+      <div class="input-group">
+        <label for="amount">
+          @if (calcMode() === 'buy') {
+            Fiat Investment Amount ({{ fiatSymbol() }}):
+          } @else {
+            Crypto Selling Amount ({{ selectedCoin() }}):
+          }
+        </label>
+        <input
+          id="amount"
+          type="number"
+          [value]="amount() === null ? '' : amount()"
+          (input)="onAmountChange($event)"
+          placeholder="Enter amount"
+          [class.error-border]="validationError()"
+        />
+        @if (validationError()) {
+          <div class="error-message">{{ validationError() }}</div>
+        }
+      </div>
+
+      <!-- Coin & Fiat Dropdowns -->
+      <div class="asset-selectors">
+        <div class="select-group">
+          <label for="selectedCoin">Crypto Asset:</label>
+          <select id="selectedCoin" [ngModel]="selectedCoin()" (ngModelChange)="onCoinChange($event)">
+            @for (coin of supportedCoins; track coin.symbol) {
+              <option [value]="coin.symbol">{{ coin.name }} ({{ coin.symbol }})</option>
+            }
+          </select>
+        </div>
+
+        <div class="select-group">
+          <label for="selectedFiat">Fiat Currency:</label>
+          <select id="selectedFiat" [ngModel]="selectedFiat()" (ngModelChange)="onFiatChange($event)">
+            @for (fiat of supportedFiats; track fiat.symbol) {
+              <option [value]="fiat.symbol">{{ fiat.name }} ({{ fiat.symbol }})</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <!-- Fee Slider -->
+      <div class="input-group">
+        <div class="slider-header">
+          <label for="feePercent">Est. Exchange Fee (%):</label>
+          <span class="slider-value">{{ feePercent() | number:'1.1-2' }}%</span>
+        </div>
+        <input
+          id="feePercent"
+          type="range"
+          [value]="feePercent()"
+          (input)="onFeeChange($event)"
+          min="0"
+          max="5"
+          step="0.1"
+        />
+      </div>
+    </div>
+
+    <!-- API States -->
+    @if (isLoading()) {
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Fetching real-time cryptocurrency exchange rates...</p>
+      </div>
+    }
+
+    @if (hasError()) {
+      <div class="error-alert">
+        <p>{{ errorMessage() }}</p>
+        <button class="retry-btn" (click)="retryFetch()">Retry</button>
+      </div>
+    }
+
+    <!-- Calculation Results -->
+    @if (!isLoading() && !hasError() && amount() !== null && amount()! > 0 && calculations() !== null) {
+      <section class="results-section">
+        <!-- Live rate card -->
+        <div class="rate-card">
+          <span class="rate-label">Live Exchange Rate:</span>
+          <span class="rate-value">1 {{ selectedCoin() }} = {{ fiatSymbol() }}{{ coinPriceInFiat() | number:'1.2-2' }} {{ selectedFiat() }}</span>
+        </div>
+
+        <div class="result-display-grid">
+          <!-- Breakdown receipt card -->
+          <div class="receipt-card">
+            <h3>Transaction Breakdown</h3>
+            <div class="receipt-row">
+              <span>Gross Value</span>
+              <span>{{ fiatSymbol() }}{{ calculations()!.gross | number:'1.2-2' }}</span>
+            </div>
+            <div class="receipt-row fee-row">
+              <span>Est. Exchange Fee ({{ feePercent() }}%)</span>
+              <span>- {{ fiatSymbol() }}{{ calculations()!.fee | number:'1.2-2' }}</span>
+            </div>
+            <div class="receipt-row total-row">
+              <span>Net Value</span>
+              <span>{{ fiatSymbol() }}{{ calculations()!.net | number:'1.2-2' }}</span>
+            </div>
+
+            <!-- Big Final Result Box -->
+            <div class="final-result-card">
+              <span class="final-label">{{ calculations()!.resultLabel }}</span>
+              <strong class="final-value">
+                @if (calcMode() === 'buy') {
+                  {{ calculations()!.result | number:'1.1-6' }} {{ calculations()!.resultUnit }}
+                } @else {
+                  {{ fiatSymbol() }}{{ calculations()!.result | number:'1.2-2' }} {{ calculations()!.resultUnit }}
+                }
+              </strong>
+            </div>
+          </div>
+
+          <!-- Chart Card -->
+          <div class="chart-card-box">
+            <h3>Fee vs. Value Distribution</h3>
+            <div class="chart-wrapper">
+              <canvas #feeChart></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+    } @else if (!isLoading() && !hasError() && (amount() === null || amount()! <= 0)) {
+      <div class="placeholder-message">
+        <p>Please enter a valid investment or sale amount above to view calculations.</p>
+      </div>
+    }
+  </div>
+</div>
+
+<!-- SEO Content Section -->
+<div class="calc-seo-content">
+  <div class="seo-section">
+    <h2>How Cryptocurrency Exchange and Calculators Work</h2>
+    <p>Cryptocurrency is a digital or virtual form of currency secured by cryptography, making it nearly impossible to counterfeit or double-spend. Most cryptocurrencies run on decentralized networks based on blockchain technology—a distributed ledger enforced by a disparate network of computers. Unlike traditional fiat currencies like the US Dollar or Indian Rupee, cryptocurrencies are not issued by central banks, and their value is driven purely by market sentiment, adoption rates, utility, and supply-demand mechanics.</p>
+    <p>A Crypto Calculator is a critical tool for traders and investors. It allows you to quickly estimate the amount of crypto you will receive when buying with fiat, or the payout you will receive when selling your digital assets. Because crypto prices are highly volatile and exchanges charge varying fees, calculating these parameters beforehand helps manage investment portfolios and calculate potential gains or losses accurately.</p>
+  </div>
+
+  <div class="seo-section">
+    <h2>The Math Behind Buying & Selling Crypto</h2>
+    <p>When buying or selling crypto assets, transaction fees can significantly impact the net amount received. Most trading platforms charge a percentage-based fee on each execution.</p>
+    <p><strong>To Buy Crypto (Fiat to Crypto):</strong></p>
+    <div class="formula-box">
+      Fee Amount (Fiat) = Investment (Fiat) × (Fee% / 100)<br>
+      Net Investment (Fiat) = Investment (Fiat) - Fee Amount (Fiat)<br>
+      Crypto Received = Net Investment (Fiat) / Spot Price of Crypto
+    </div>
+    <p><strong>To Sell Crypto (Crypto to Fiat):</strong></p>
+    <div class="formula-box">
+      Gross Payout (Fiat) = Selling Amount (Crypto) × Spot Price of Crypto<br>
+      Fee Amount (Fiat) = Gross Payout (Fiat) × (Fee% / 100)<br>
+      Net Payout (Fiat) = Gross Payout (Fiat) - Fee Amount (Fiat)
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>Major Cryptocurrencies Supported</h2>
+    <ul class="seo-steps">
+      <li><strong>Bitcoin (BTC):</strong> The first decentralized cryptocurrency, created in 2009 by the anonymous developer Satoshi Nakamoto. Often referred to as "digital gold" due to its limited supply of 21 million coins.</li>
+      <li><strong>Ethereum (ETH):</strong> A decentralized global software platform powered by blockchain. It is famous for introducing smart contracts, enabling developers to build decentralized applications (dApps) and NFTs.</li>
+      <li><strong>Solana (SOL):</strong> A high-performance blockchain platform designed for fast, secure, and scalable decentralized apps. It utilizes a unique Proof-of-History consensus mechanism for extremely low transaction costs.</li>
+      <li><strong>Binance Coin (BNB):</strong> The native token of the Binance ecosystem, used to pay for trading fees on the exchange and operate applications on the BNB Chain network.</li>
+    </ul>
+  </div>
+
+  <div class="seo-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="seo-faq">
+      <div class="faq-item">
+        <h3>What are maker and taker fees on crypto exchanges?</h3>
+        <p>Maker fees are charged when you add liquidity to the order book (by placing a limit order that isn't matched instantly). Taker fees are charged when you remove liquidity by placing a market order that fills immediately. Taker fees are usually slightly higher than maker fees.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Why is the price of crypto different on different exchanges?</h3>
+        <p>Because there is no centralized pricing source for cryptocurrency. Each exchange has its own order book with different buying and selling volumes. Arbitrage bots quickly buy crypto where it is cheap and sell it where it is expensive, keeping prices very close across major platforms.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What is network or gas fee?</h3>
+        <p>In addition to exchange trading fees, moving crypto between wallets requires a network transaction fee (called "gas" on Ethereum). This fee goes directly to blockchain miners or validators to process your transaction on-chain, and is not kept by the exchange.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>Related Calculators</h2>
+    <div class="related-calc-grid">
+      <a href="/market/currency-converter" class="related-calc-link">Currency Converter</a>
+      <a href="/market/gold-silver-calculator" class="related-calc-link">Gold & Silver Calculator</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,363 @@
+.currency-converter-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  flex-grow: 1;
+  overflow-y: auto;
+  height: 95%;
+}
+
+.financial-calculator {
+  width: 100%;
+  margin: 0;
+  padding: 30px;
+  border-radius: 12px;
+  background-color: var(--card-black);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-grey);
+  animation: fadeIn 0.8s ease-out;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  box-sizing: border-box;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.financial-calculator h1 {
+  text-align: center;
+  color: var(--pure-white-text);
+  margin-bottom: 15px;
+  font-size: 2.2em;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.calculator-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-group label, .select-group label {
+  color: var(--light-grey-text);
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.input-group input[type="number"] {
+  width: 100%;
+  padding: 14px 15px;
+  border: 1px solid var(--border-grey);
+  border-radius: 8px;
+  background-color: #212121;
+  color: var(--pure-white-text);
+  font-size: 1.1em;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group input[type="number"]:focus {
+  border-color: var(--primary-red);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(225, 25, 49, 0.3);
+}
+
+.input-group input[type="number"].error-border {
+  border-color: #ff3333;
+  box-shadow: 0 0 0 3px rgba(255, 51, 51, 0.2);
+}
+
+.error-message {
+  color: #ff3333;
+  font-size: 0.9em;
+  margin-top: 4px;
+}
+
+/* Select groups and layouts */
+.currency-selectors {
+  display: flex;
+  align-items: flex-end;
+  gap: 15px;
+  width: 100%;
+}
+
+.select-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.select-group select {
+  width: 100%;
+  padding: 14px 15px;
+  border: 1px solid var(--border-grey);
+  border-radius: 8px;
+  background-color: #212121;
+  color: var(--pure-white-text);
+  font-size: 1.1em;
+  box-sizing: border-box;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238F8F8F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 18px;
+  transition: border-color 0.3s ease;
+}
+
+.flag-select {
+  background-repeat: no-repeat;
+  background-position: left 10px center;
+  background-size: 24px 18px;
+  padding-left: 40px;
+}
+
+.select-group select:focus {
+  border-color: var(--primary-red);
+  outline: none;
+}
+
+.swap-btn {
+  background-color: #2a2a2a;
+  border: 1px solid var(--border-grey);
+  color: var(--pure-white-text);
+  padding: 14px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: 600;
+  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swap-btn:hover {
+  background-color: #3a3a3a;
+  border-color: var(--primary-red);
+  transform: translateY(-2px);
+}
+
+/* Loading state and spinner */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  gap: 15px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(225, 25, 49, 0.1);
+  border-left-color: var(--primary-red);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error-alert {
+  background-color: rgba(255, 51, 51, 0.1);
+  border: 1px solid #ff3333;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.error-alert p {
+  color: #ffcccc;
+  margin: 0;
+}
+
+.retry-btn {
+  background-color: #ff3333;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.retry-btn:hover {
+  background-color: #cc0000;
+}
+
+/* Results section styling */
+.results-section {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 20px;
+  padding-top: 25px;
+  border-top: 1px solid var(--border-grey);
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.conversion-result-box {
+  background: linear-gradient(135deg, #1f1f1f 0%, #151515 100%);
+  border-radius: 10px;
+  padding: 25px;
+  border: 1px solid var(--border-grey);
+  text-align: center;
+}
+
+.conversion-result-box .from-amount {
+  font-size: 1.4em;
+  color: var(--light-grey-text);
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.conversion-result-box .to-amount {
+  font-size: 2.5em;
+  color: var(--pure-white-text);
+  font-weight: 800;
+  margin-bottom: 15px;
+  word-break: break-all;
+}
+
+.conversion-result-box .rate-details {
+  border-top: 1px solid #2a2a2a;
+  padding-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.conversion-result-box .rate-details p {
+  margin: 0;
+  font-size: 0.95em;
+  color: var(--light-grey-text);
+}
+
+.results-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.rates-table-container, .chart-container-box {
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid var(--border-grey);
+}
+
+.rates-table-container h3, .chart-container-box h3 {
+  font-size: 1.25em;
+  margin-bottom: 15px;
+  color: var(--primary-red);
+  font-weight: 700;
+}
+
+.rates-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.rates-table th {
+  padding: 10px 12px;
+  color: var(--light-grey-text);
+  font-weight: 600;
+  border-bottom: 2px solid var(--border-grey);
+}
+
+.rates-table td {
+  padding: 12px;
+  color: var(--pure-white-text);
+  border-bottom: 1px solid #2a2a2a;
+  font-size: 0.95em;
+}
+
+.rates-table tr:last-child td {
+  border-bottom: none;
+}
+
+.chart-wrapper {
+  position: relative;
+  height: 300px;
+  width: 100%;
+}
+
+.placeholder-message {
+  text-align: center;
+  color: var(--light-grey-text);
+  padding: 40px 20px;
+  background-color: #212121;
+  border-radius: 10px;
+  border: 1px dashed var(--border-grey);
+}
+
+@media (max-width: 768px) {
+  .financial-calculator {
+    padding: 20px;
+  }
+
+  .currency-selectors {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .swap-btn {
+    height: auto;
+    padding: 12px;
+  }
+
+  .results-split {
+    grid-template-columns: 1fr;
+  }
+
+  .conversion-result-box .to-amount {
+    font-size: 2em;
+  }
+
+  .conversion-result-box .rate-details {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+:host {
+  width: 100%;
+  display: block;
+}
+
+:host > div:first-child,
+.currency-converter-container {
+  height: auto !important;
+  min-height: auto !important;
+  overflow: visible !important;
+  overflow-y: visible !important;
+}

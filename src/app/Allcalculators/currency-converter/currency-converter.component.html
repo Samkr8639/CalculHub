@@ -1,0 +1,187 @@
+<div class="currency-converter-container">
+  <div class="financial-calculator">
+    <h1>Currency Converter</h1>
+
+    <div class="calculator-inputs">
+      <!-- Amount -->
+      <div class="input-group">
+        <label for="amount">Amount:</label>
+        <input id="amount" type="number" [value]="amount() === null ? '' : amount()" (input)="onAmountChange($event)"
+          placeholder="Enter amount" [class.error-border]="validationError()" />
+        @if (validationError()) {
+        <div class="error-message">{{ validationError() }}</div>
+        }
+      </div>
+
+      <!-- Currency Selectors -->
+      <div class="currency-selectors">
+        <div class="select-group">
+          <label for="baseCurrency">From:</label>
+          <input type="text" placeholder="Search..." (input)="onBaseSearch($event)" class="search-input" />
+          <select id="baseCurrency" [ngModel]="baseCurrency()" (ngModelChange)="onBaseChange($event)"
+            [style.backgroundImage]="'url(' + flagUrl(baseCurrency()) + ')'" class="flag-select">
+            @for (code of filteredBaseCurrencies(); track code) {
+            <option [value]="code">{{ code }}</option>
+            }
+          </select>
+        </div>
+
+
+        <button class="swap-btn" (click)="swapCurrencies()" title="Swap Currencies">
+          Swap ⇄
+        </button>
+
+        <div class="select-group">
+          <label for="targetCurrency">To:</label>
+          <input type="text" placeholder="Search..." (input)="onTargetSearch($event)" class="search-input" />
+          <select id="targetCurrency" [ngModel]="targetCurrency()" (ngModelChange)="onTargetChange($event)"
+            [style.backgroundImage]="'url(' + flagUrl(targetCurrency()) + ')'" class="flag-select">
+            @for (code of filteredTargetCurrencies(); track code) {
+            <option [value]="code">{{ code }}</option>
+            }
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- API Loading & Error Handling -->
+    @if (isLoading()) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Fetching latest exchange rates...</p>
+    </div>
+    }
+
+    @if (hasError()) {
+    <div class="error-alert">
+      <p>{{ errorMessage() }}</p>
+      <button class="retry-btn" (click)="retryFetch()">Retry</button>
+    </div>
+    }
+
+    <!-- Calculation Results -->
+    @if (!isLoading() && !hasError() && amount() !== null && amount() > 0 && convertedAmount() !== null) {
+    <section class="results-section">
+      <div class="conversion-result-box">
+        <div class="from-amount">{{ amount() | number:'1.2-2' }} {{ baseCurrency() }} =</div>
+        <div class="to-amount">{{ convertedAmount() | number:'1.2-4' }} {{ targetCurrency() }}</div>
+        <div class="rate-details">
+          <p>1 {{ baseCurrency() }} = {{ rates()[targetCurrency()] | number:'1.2-6' }} {{ targetCurrency() }}</p>
+          <p>1 {{ targetCurrency() }} = {{ inverseRate() | number:'1.2-6' }} {{ baseCurrency() }}</p>
+        </div>
+      </div>
+
+      <div class="results-split">
+        <!-- Popular Exchange Rates Table -->
+        <div class="rates-table-container">
+          <h3>Quick Conversions</h3>
+          <table class="rates-table">
+            <thead>
+              <tr>
+                <th>Convert</th>
+                <th>Value</th>
+                <th>Inverse</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (curr of popularCurrencies; track curr) {
+              @if (curr !== baseCurrency() && rates()[curr]) {
+              <tr>
+                <td>100 {{ baseCurrency() }} to {{ curr }}</td>
+                <td>{{ 100 * rates()[curr] | number:'1.2-2' }} {{ curr }}</td>
+                <td>{{ 100 / rates()[curr] | number:'1.2-2' }} {{ baseCurrency() }}</td>
+              </tr>
+              }
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Chart Container -->
+        <div class="chart-container-box">
+          <h3>Popular Pair Comparison</h3>
+          <div class="chart-wrapper">
+            <canvas #comparisonChart></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+    } @else if (!isLoading() && !hasError() && (amount() === null || amount() <= 0)) { <div class="placeholder-message">
+      <p>Please enter a valid positive amount above to see conversions.</p>
+  </div>
+  }
+</div>
+</div>
+
+<!-- SEO Content Section -->
+<div class="calc-seo-content">
+  <div class="seo-section">
+    <h2>Understanding Currency Conversion & Exchange Rates</h2>
+    <p>A currency converter is an essential tool for business travelers, tourists, e-commerce shoppers, and financial
+      professionals. It allows you to calculate the relative value of one country's currency against another based on
+      live, interbank exchange rates. These rates represent the price at which one currency can be exchanged for another
+      on the foreign exchange (Forex) market, which operates 24 hours a day globally.</p>
+    <p>Exchange rates fluctuate constantly due to a variety of economic and political factors. These include inflation
+      rates, interest rates set by central banks (such as the Reserve Bank of India or the US Federal Reserve),
+      geopolitical stability, trade balances, and overall economic performance. By using our converter, you get access
+      to edge-cached rates updated every 5 minutes from central bank Feeds, avoiding commercial markups.</p>
+  </div>
+
+  <div class="seo-section">
+    <h2>How Currency Exchange Rates Are Calculated</h2>
+    <p>Currency rates are expressed as pairs, where the first currency is the "base" and the second is the "quote" or
+      "target" currency. The calculation itself is straightforward multiplication:</p>
+    <div class="formula-box">
+      Converted Amount = Input Amount × Exchange Rate of Target<br>
+      Inverse Rate = 1 / Exchange Rate of Target
+    </div>
+    <p>For example, if the USD/INR exchange rate is 83.50, it means 1 US Dollar is worth 83.50 Indian Rupees. Converting
+      $500 USD yields: 500 × 83.50 = ₹41,750 INR. Conversely, if you want to convert Rupees to Dollars, you divide by
+      the rate, or multiply by the inverse rate (1 / 83.50 ≈ 0.01198).</p>
+  </div>
+
+  <div class="seo-section">
+    <h2>Key Factors Affecting Exchange Rates</h2>
+    <ul class="seo-steps">
+      <li><strong>Interest Rates:</strong> Higher interest rates offered by a country's central bank attract foreign
+        capital, increasing demand for its currency and driving up its value.</li>
+      <li><strong>Inflation:</strong> Countries with lower inflation rates typically see their currencies appreciate, as
+        their purchasing power remains strong relative to other nations.</li>
+      <li><strong>Government Debt:</strong> Large public deficits and debt can lead to inflation and currency
+        depreciation, as investors fear default or debt monetization.</li>
+      <li><strong>Speculation & Market Sentiment:</strong> Forex markets are highly speculative. If investors believe a
+        currency will strengthen in the future, they buy it now, causing it to rise immediately.</li>
+    </ul>
+  </div>
+
+  <div class="seo-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="seo-faq">
+      <div class="faq-item">
+        <h3>What is the difference between buy, sell, and mid-market rates?</h3>
+        <p>The mid-market rate (or interbank rate) is the real midpoint between the buy and sell rates on the global
+          financial markets. Banks and exchange booths add a spread or fee on top of this rate when you buy or sell
+          physical cash, making transactions more expensive for retail consumers than the rate shown here.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Why do exchange rates change every day?</h3>
+        <p>Because currencies are traded floatingly. Supply and demand forces in the global Forex market react instantly
+          to trade flows, central bank announcements, employment statistics, and political events, causing rate
+          movements throughout the day.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Is it better to exchange currency before traveling or at the destination?</h3>
+        <p>Usually, using local ATMs at your destination with a low-fee debit card yields much closer rates to the
+          mid-market rate than exchange bureaus in airports, which charge high markups and commission fees.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>Related Calculators</h2>
+    <div class="related-calc-grid">
+      <a href="/financial/tax-calculator" class="related-calc-link">Income Tax Calculator</a>
+      <a href="/market/crypto-calculator" class="related-calc-link">Crypto Calculator</a>
+    </div>
+  </div>
+</div>

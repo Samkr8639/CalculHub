@@ -30,6 +30,7 @@ export class SidePanelComponent implements OnInit, OnDestroy {
     'Financial': true,
     'Mathematical': true,
     'Health & Fitness': true,
+    'Markets & Rates': true,
     'Lifestyle & Home': true,
   });
 
@@ -57,6 +58,9 @@ export class SidePanelComponent implements OnInit, OnDestroy {
     { icon: 'scale', title: 'BMI Calculator', description: 'Measure weight relative to height to categorize body mass index.', link: '/health/bmi-calculator', category: 'Health & Fitness' },
     { icon: 'user', title: 'Body Fat Calculator', description: 'Estimate fat percentage, lean body mass, and fat mass using body measurements.', link: '/health/body-fat-calculator', category: 'Health & Fitness' },
     { icon: 'target', title: 'Ideal Weight Calculator', description: 'Determine a target healthy weight range based on height, age, and gender.', link: '/health/ideal-weight-calculator', category: 'Health & Fitness' },
+    { icon: 'coins', title: 'Currency Converter', description: 'Convert between 150+ fiat currencies with live, real-time exchange rates.', link: '/market/currency-converter', category: 'Markets & Rates' },
+    { icon: 'bitcoin', title: 'Crypto Calculator', description: 'Estimate cryptocurrency swaps and transaction fee costs.', link: '/market/crypto-calculator', category: 'Markets & Rates' },
+    { icon: 'gem', title: 'Gold & Silver Rate Calculator', description: 'Calculate live gold and silver prices with purity, weight, and GST taxes.', link: '/market/gold-silver-calculator', category: 'Markets & Rates' },
     { icon: 'house', title: 'Buy vs. Rent', description: 'Compare the costs of buying and renting a home to make an informed decision.', link: '/other/buy-vs-rent', category: 'Lifestyle & Home' },
     { icon: 'trending-up', title: 'Millionaire Calculator', description: 'Discover how long it will take to reach your millionaire goal.', link: '/other/millionaire', category: 'Lifestyle & Home' },
   ]);

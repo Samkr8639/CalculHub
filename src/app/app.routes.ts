@@ -466,6 +466,64 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'market',
+    loadComponent: () => import('./market/market').then(m => m.MarketComponent),
+    children: [
+      {
+        path: 'currency-converter',
+        loadComponent: () => import('./Allcalculators/currency-converter/currency-converter.component').then(m => m.CurrencyConverterComponent),
+        data: {
+          title: 'Currency Converter — Real-Time Exchange Rates | CalculHub',
+          description: 'Convert between 150+ currencies instantly with real-time exchange rates. View live rates, comparison charts, and convert major fiat currencies.',
+          canonical: `${BASE_URL}/market/currency-converter`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Markets & Rates', url: `${BASE_URL}/market` }, { name: 'Currency Converter', url: `${BASE_URL}/market/currency-converter` }],
+          schema: [calcSchema('Currency Converter', `${BASE_URL}/market/currency-converter`, 'Convert 150+ fiat currencies with real-time exchange rates and historical comparison charts.', 'FinanceApplication'),
+            {
+              '@context': 'https://schema.org', '@type': 'FAQPage',
+              mainEntity: [
+                { '@type': 'Question', name: 'How are exchange rates determined?', acceptedAnswer: { '@type': 'Answer', text: 'Exchange rates are determined by global foreign exchange markets where currencies are traded 24/7. These rates fluctuate based on supply, demand, inflation, and economic stability.' } }
+              ]
+            }]
+        }
+      },
+      {
+        path: 'crypto-calculator',
+        loadComponent: () => import('./Allcalculators/crypto-calculator/crypto-calculator.component').then(m => m.CryptoCalculatorComponent),
+        data: {
+          title: 'Cryptocurrency Calculator & Exchange Rate Converter | CalculHub',
+          description: 'Calculate cryptocurrency conversions for Bitcoin, Ethereum, Solana, and more. Estimate trade fees, buy/sell values, and payout amounts instantly.',
+          canonical: `${BASE_URL}/market/crypto-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Markets & Rates', url: `${BASE_URL}/market` }, { name: 'Crypto Calculator', url: `${BASE_URL}/market/crypto-calculator` }],
+          schema: [calcSchema('Crypto Calculator', `${BASE_URL}/market/crypto-calculator`, 'Convert between top cryptocurrencies and fiat currencies, with transaction fee estimation.', 'FinanceApplication'),
+            {
+              '@context': 'https://schema.org', '@type': 'FAQPage',
+              mainEntity: [
+                { '@type': 'Question', name: 'How are cryptocurrency transaction fees calculated?', acceptedAnswer: { '@type': 'Answer', text: 'Crypto transaction fees depend on the network congestion and the exchange provider being used. This calculator allows you to input a custom percentage fee to estimate your net payout or total cost.' } }
+              ]
+            }]
+        }
+      },
+      {
+        path: 'gold-silver-calculator',
+        loadComponent: () => import('./Allcalculators/gold-silver-calculator/gold-silver-calculator.component').then(m => m.GoldSilverCalculatorComponent),
+        data: {
+          title: 'Gold & Silver Rate Calculator — Live Spot Rates | CalculHub',
+          description: 'Calculate gold and silver prices based on live spot rates, karat purity, custom weights, making charges, and local GST billing.',
+          canonical: `${BASE_URL}/market/gold-silver-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Markets & Rates', url: `${BASE_URL}/market` }, { name: 'Gold & Silver Calculator', url: `${BASE_URL}/market/gold-silver-calculator` }],
+          schema: [calcSchema('Gold & Silver Rate Calculator', `${BASE_URL}/market/gold-silver-calculator`, 'Determine current gold and silver rates with karat adjustments, making charges, and invoice tax breakdowns.', 'FinanceApplication'),
+            {
+              '@context': 'https://schema.org', '@type': 'FAQPage',
+              mainEntity: [
+                { '@type': 'Question', name: 'What is Karat in gold?', acceptedAnswer: { '@type': 'Answer', text: 'Karat measures the purity of gold. 24K gold is 99.9% pure, 22K is 91.6% pure (standard for jewelry), 18K is 75% pure, and 14K is 58.3% pure.' } }
+              ]
+            }]
+        }
+      },
+      { path: '', redirectTo: 'currency-converter', pathMatch: 'full' },
+    ],
+  },
+  {
     path: 'other',
     loadComponent: () => import('./other/other.component').then(m => m.OtherComponent),
     data: {

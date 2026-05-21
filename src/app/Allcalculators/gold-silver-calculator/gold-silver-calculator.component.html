@@ -1,0 +1,220 @@
+<div class="precious-metals-container">
+  <div class="financial-calculator">
+    <h1>Gold & Silver Rate Calculator</h1>
+
+    <!-- Metal Selector tabs -->
+    <div class="metal-tabs">
+      <button [class.active-tab]="selectedMetal() === 'XAU'" (click)="onMetalChange('XAU')">
+        Gold (XAU)
+      </button>
+      <button [class.active-tab]="selectedMetal() === 'XAG'" (click)="onMetalChange('XAG')">
+        Silver (XAG)
+      </button>
+    </div>
+
+    <div class="calculator-inputs">
+      <!-- Weight and Unit -->
+      <div class="weight-group">
+        <div class="input-group">
+          <label for="weight">Weight:</label>
+          <input
+            id="weight"
+            type="number"
+            [value]="weight() === null ? '' : weight()"
+            (input)="onWeightChange($event)"
+            placeholder="Enter weight"
+            [class.error-border]="validationError()"
+          />
+        </div>
+        <div class="select-group">
+          <label for="selectedUnit">Unit:</label>
+          <select id="selectedUnit" [ngModel]="selectedUnit()" (ngModelChange)="onUnitChange($event)">
+            <option value="grams">Grams (g)</option>
+            <option value="tolas">Tolas (11.66g)</option>
+            <option value="ounces">Troy Ounces (oz)</option>
+            <option value="kilograms">Kilograms (kg)</option>
+          </select>
+        </div>
+      </div>
+      @if (validationError()) {
+        <div class="error-message">{{ validationError() }}</div>
+      }
+
+      <div class="inputs-row">
+        <!-- Purity Selector -->
+        <div class="select-group">
+          <label for="selectedPurity">Purity:</label>
+          <select id="selectedPurity" [ngModel]="selectedPurity()" (ngModelChange)="onPurityChange($event)">
+            @for (p of activePurities(); track p.value) {
+              <option [value]="p.value">{{ p.label }}</option>
+            }
+          </select>
+        </div>
+
+        <!-- Currency Selector -->
+        <div class="select-group">
+          <label for="selectedCurrency">Currency:</label>
+          <select id="selectedCurrency" [ngModel]="selectedCurrency()" (ngModelChange)="onCurrencyChange($event)">
+            <option value="INR">Indian Rupee (₹)</option>
+            <option value="USD">US Dollar ($)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Making Charge Slider -->
+      <div class="input-group">
+        <div class="slider-header">
+          <label for="makingChargePercent">Making Charges (% of Metal Value):</label>
+          <span class="slider-value">{{ makingChargePercent() }}%</span>
+        </div>
+        <input
+          id="makingChargePercent"
+          type="range"
+          [value]="makingChargePercent()"
+          (input)="onMakingChargeChange($event)"
+          min="0"
+          max="25"
+          step="1"
+        />
+      </div>
+
+      <!-- Tax Input -->
+      <div class="input-group">
+        <label for="gstPercent">Local Sales Tax / GST (%):</label>
+        <input
+          id="gstPercent"
+          type="number"
+          [value]="gstPercent()"
+          (input)="onTaxChange($event)"
+          placeholder="Tax percentage"
+        />
+      </div>
+    </div>
+
+    <!-- API States -->
+    @if (isLoading()) {
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Fetching real-time spot rates from precious metal servers...</p>
+      </div>
+    }
+
+    @if (hasError()) {
+      <div class="error-alert">
+        <p>{{ errorMessage() }}</p>
+        <button class="retry-btn" (click)="retryFetch()">Retry</button>
+      </div>
+    }
+
+    <!-- Calculation Results -->
+    @if (!isLoading() && !hasError() && weight() !== null && weight()! > 0 && invoice() !== null) {
+      <section class="results-section">
+        <!-- Spot price card -->
+        <div class="spot-rate-card">
+          <span class="spot-rate-label">
+            Live Spot Price (Purity-adjusted):
+          </span>
+          <span class="spot-rate-value">
+            {{ currencySymbol() }}{{ invoice()!.ratePerUnit | number:'1.2-2' }} / {{ selectedUnit() === 'ounces' ? 'oz' : selectedUnit() === 'tolas' ? 'tola' : selectedUnit() === 'kilograms' ? 'kg' : 'gram' }}
+          </span>
+        </div>
+
+        <div class="invoice-details-grid">
+          <!-- Detailed Invoice Breakdown receipt -->
+          <div class="invoice-receipt">
+            <h3>Estimated Invoice Bill</h3>
+            <div class="receipt-row">
+              <span>Metal Purity Weight Value</span>
+              <span>{{ currencySymbol() }}{{ invoice()!.metalValue | number:'1.2-2' }}</span>
+            </div>
+            <div class="receipt-row making-row">
+              <span>Making Charges ({{ makingChargePercent() }}%)</span>
+              <span>+ {{ currencySymbol() }}{{ invoice()!.makingCharges | number:'1.2-2' }}</span>
+            </div>
+            <div class="receipt-row taxable-row">
+              <span>Taxable Value</span>
+              <span>{{ currencySymbol() }}{{ invoice()!.taxableValue | number:'1.2-2' }}</span>
+            </div>
+            <div class="receipt-row gst-row">
+              <span>GST / Sales Tax ({{ gstPercent() }}%)</span>
+              <span>+ {{ currencySymbol() }}{{ invoice()!.gstValue | number:'1.2-2' }}</span>
+            </div>
+            <div class="receipt-total-row">
+              <span>Total Estimated Bill</span>
+              <span>{{ currencySymbol() }}{{ invoice()!.totalBill | number:'1.2-2' }}</span>
+            </div>
+          </div>
+
+          <!-- Chart Box -->
+          <div class="chart-card-box">
+            <h3>Cost Elements Breakdown</h3>
+            <div class="chart-wrapper">
+              <canvas #invoiceChart></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+    } @else if (!isLoading() && !hasError() && (weight() === null || weight()! <= 0)) {
+      <div class="placeholder-message">
+        <p>Please enter a valid weight above to see the invoice breakdown and live rates.</p>
+      </div>
+    }
+  </div>
+</div>
+
+<!-- SEO Content Section -->
+<div class="calc-seo-content">
+  <div class="seo-section">
+    <h2>Understanding Gold & Silver Spot Prices & Valuations</h2>
+    <p>Gold and silver have served as stores of value and mediums of exchange for thousands of years. Today, precious metals are primarily utilized as inflation hedges, safe-haven assets during geopolitical uncertainty, and commodities for industrial manufacturing and fine jewellery. The "spot price" represents the current market clearing price at which gold or silver is traded for immediate delivery on international commodity exchanges, such as COMEX in New York and the London Bullion Market Association (LBMA).</p>
+    <p>International spot rates are quoted in US Dollars per Troy Ounce (oz). A troy ounce is a traditional unit of weight equal to exactly 31.1034768 grams, which is slightly heavier than a standard cooking ounce (28.35 grams). When buying physical bullion, coins, or jewellery, you pay the spot metal price plus additional surcharges for refining, fabrication (making charges), and local value-added taxes (VAT or GST).</p>
+  </div>
+
+  <div class="seo-section">
+    <h2>How Precious Metal Billing is Calculated</h2>
+    <p>Determining the final purchase price of jewelry or bullion requires scaling the spot price to your desired weight, correcting for the alloy's purity, adding fabrication markups, and applying government taxes.</p>
+    <div class="formula-box">
+      Base Price per Gram = (Spot Price per Troy Ounce / 31.1035)<br>
+      Purity-Adjusted Rate = Base Price per Gram × Purity Percentage<br>
+      Metal Value = Purity-Adjusted Rate × Weight<br>
+      Making Charges = Metal Value × (Making Charge% / 100)<br>
+      Total Bill = (Metal Value + Making Charges) × [ 1 + (Tax% / 100) ]
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>Understanding Gold Karat (Purity)</h2>
+    <ul class="seo-steps">
+      <li><strong>24 Karat (99.9% Purity):</strong> Pure gold. Extremely soft and malleable, making it unsuitable for durable jewelry but standard for investment bars and coins.</li>
+      <li><strong>22 Karat (91.6% Purity):</strong> Alloyed with 8.3% copper, silver, or zinc. The traditional gold standard for Indian and Middle Eastern bridal jewelry, combining high purity with reasonable durability. Also known as "916 Gold".</li>
+      <li><strong>18 Karat (75.0% Purity):</strong> Contains 25% alloy metals. Ideal for fine stone-studded jewelry and engagement rings, as it holds diamonds securely.</li>
+      <li><strong>14 Karat (58.3% Purity):</strong> Extremely durable and affordable, containing 41.7% alloy metals. Highly popular in Western markets for everyday jewelry items.</li>
+    </ul>
+  </div>
+
+  <div class="seo-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="seo-faq">
+      <div class="faq-item">
+        <h3>What is making charge in jewellery purchases?</h3>
+        <p>Making charge represents the cost of craftsmanship, design labor, and machine operation required to convert raw gold bullion into a finished piece of jewelry. It is usually charged as a percentage of the gold rate or a fixed rupee amount per gram, ranging from 5% to 25% depending on design complexity.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What are hallmarking standards?</h3>
+        <p>Hallmarking is an official certification process that guarantees the purity and fineness of precious metal items. In India, BIS hallmarking includes the BIS logo, purity grade (e.g. 22K916 or 18K750), and a unique 6-digit alphanumeric HUID (Hallmark Unique Identification) code laser-etched onto the item.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Why is silver price much lower than gold?</h3>
+        <p>Silver is significantly more abundant in the Earth's crust than gold and has a much higher annual mining output. Furthermore, silver is heavily utilized as an industrial metal in electronics, solar panels, and chemical processing, exposing its price to global economic manufacturing cycles.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>Related Calculators</h2>
+    <div class="related-calc-grid">
+      <a href="/market/currency-converter" class="related-calc-link">Currency Converter</a>
+      <a href="/market/crypto-calculator" class="related-calc-link">Crypto Calculator</a>
+    </div>
+  </div>
+</div>

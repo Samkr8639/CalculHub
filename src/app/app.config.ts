@@ -12,6 +12,7 @@ import {
   Grid2x2, Sigma, Activity, Bike, GraduationCap, Calendar,
   Facebook, Twitter, Linkedin, Instagram, Github,
   ChevronDown, ChevronRight, Heart, Scale, Target, User, Info, Map,
+  Coins, Bitcoin, Gem,
 } from 'lucide-angular';
 
 export const appConfig: ApplicationConfig = {
@@ -29,6 +30,7 @@ export const appConfig: ApplicationConfig = {
       Grid2x2, Sigma, Activity, Bike, GraduationCap, Calendar,
       Facebook, Twitter, Linkedin, Instagram, Github,
       ChevronDown, ChevronRight, Heart, Scale, Target, User, Info, Map,
+      Coins, Bitcoin, Gem,
     })),
   ]
 };
