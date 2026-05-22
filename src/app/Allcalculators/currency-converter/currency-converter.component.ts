@@ -1,8 +1,14 @@
-import { ChangeDetectionStrategy, Component, OnInit, signal, computed, inject, ViewChild, ElementRef, AfterViewChecked, PLATFORM_ID } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, AfterViewChecked, inject, PLATFORM_ID, ViewChild, ElementRef, signal, computed } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Chart, registerables } from 'chart.js';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatOptionModule } from '@angular/material/core';
+import { ChangeDetectorRef } from '@angular/core';
+
 
 interface FxResponse {
   base: string;
@@ -12,14 +18,23 @@ interface FxResponse {
 
 @Component({
   selector: 'app-currency-converter',
+  standalone: true,
   templateUrl: './currency-converter.component.html',
   styleUrl: './currency-converter.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, FormsModule]
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatOptionModule,
+  ]
 })
 export class CurrencyConverterComponent implements OnInit, AfterViewChecked {
   private http = inject(HttpClient);
   private platformId = inject(PLATFORM_ID);
+  private cdr = inject(ChangeDetectorRef);
 
   @ViewChild('comparisonChart') private chartRef!: ElementRef<HTMLCanvasElement>;
   amount = signal<number | null>(null);
@@ -37,6 +52,7 @@ export class CurrencyConverterComponent implements OnInit, AfterViewChecked {
   // Search terms for dropdowns
   searchBase = signal<string>('');
   searchTarget = signal<string>('');
+
 
   // Filtered currency lists based on search term
   filteredBaseCurrencies = computed(() => {
@@ -67,15 +83,33 @@ export class CurrencyConverterComponent implements OnInit, AfterViewChecked {
     this.searchTarget.set((event.target as HTMLInputElement).value);
   }
 
-  // Ensure chart recreation after swap
+  // Fix swapCurrencies
   swapCurrencies() {
     const temp = this.baseCurrency();
     this.baseCurrency.set(this.targetCurrency());
     this.targetCurrency.set(temp);
     this.searchBase.set('');
     this.searchTarget.set('');
+    this.cdr.markForCheck(); // ← ADD THIS
     this.fetchRates(this.baseCurrency());
     this.chartShouldBeCreated = true;
+  }
+
+  // Add new method for autocomplete selection
+  onBaseSelected(event: any) {
+    const value = event.option.value;
+    this.baseCurrency.set(value);
+    this.searchBase.set('');
+    this.fetchRates(value);
+    this.cdr.markForCheck();
+  }
+
+  onTargetSelected(event: any) {
+    const value = event.option.value;
+    this.targetCurrency.set(value);
+    this.searchTarget.set('');
+    this.updateChart();
+    this.cdr.markForCheck();
   }
 
   // Popular currencies for the quick summary list and chart
@@ -105,6 +139,7 @@ export class CurrencyConverterComponent implements OnInit, AfterViewChecked {
   });
 
   ngOnInit() {
+    console.log('CurrencyConverterComponent ngOnInit, baseCurrency=', this.baseCurrency());
     this.fetchRates(this.baseCurrency());
   }
 
@@ -120,33 +155,40 @@ export class CurrencyConverterComponent implements OnInit, AfterViewChecked {
     this.hasError.set(false);
     this.errorMessage.set('');
 
-    const url = `https://fxapi.app/api/${base.toLowerCase()}.json`;
+    const baseLower = base.toLowerCase();
+    const url = `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${baseLower}.json`;
 
-    this.http.get<FxResponse>(url).subscribe({
+    this.http.get<any>(url).subscribe({
       next: (data) => {
-        if (data && data.rates) {
-          this.rates.set(data.rates);
-          // Set list of available currencies if not set
-          if (this.availableCurrencies().length === 0) {
-            const sortedCurrencies = Object.keys(data.rates).sort();
-            this.availableCurrencies.set(sortedCurrencies);
-          }
+        console.log('API response:', data);
+
+        // Response: { date: "2026-05-22", usd: { inr: 84.5, eur: 0.92, ... } }
+        const ratesRaw = data[baseLower];
+
+        if (ratesRaw && typeof ratesRaw === 'object') {
+          // Convert keys to uppercase to match your component's expectations
+          const ratesMap: { [key: string]: number } = {};
+          Object.keys(ratesRaw).forEach(key => {
+            ratesMap[key.toUpperCase()] = ratesRaw[key];
+          });
+
+          this.rates.set(ratesMap);
+          this.availableCurrencies.set(Object.keys(ratesMap).sort());
           this.isLoading.set(false);
           this.validationError.set('');
-
-          // Trigger chart update or recreation
+          this.cdr.markForCheck();
           if (this.chartInstance()) {
             this.updateChart();
           } else {
             this.chartShouldBeCreated = true;
           }
         } else {
-          this.handleLoadError('Invalid response format received from currency API.');
+          this.handleLoadError('Invalid response from API.');
         }
       },
       error: (err) => {
-        console.error('Error fetching currency rates:', err);
-        this.handleLoadError('Failed to fetch real-time exchange rates. Please check your internet connection and try again.');
+        console.error('API error:', err);
+        this.handleLoadError(`Failed to fetch rates. Status: ${err.status}`);
       }
     });
   }
@@ -168,6 +210,11 @@ export class CurrencyConverterComponent implements OnInit, AfterViewChecked {
     }
     this.amount.set(val);
     this.updateChart();
+  }
+
+  // Display function for mat-autocomplete
+  displayFn(option: string): string {
+    return option;
   }
 
   onBaseChange(newBase: string) {
@@ -198,20 +245,20 @@ export class CurrencyConverterComponent implements OnInit, AfterViewChecked {
     const ctx = this.chartRef.nativeElement.getContext('2d');
     if (!ctx) return;
 
-    // Data points: conversions of 100 base currency to popular currencies
-    const chartLabels = this.popularCurrencies.filter(c => c !== this.baseCurrency());
-    const chartData = chartLabels.map(c => {
+    const baseAmount = this.amount() ?? 100;
+    const labels = this.popularCurrencies.filter(c => c !== this.baseCurrency());
+    const data = labels.map(c => {
       const rate = this.rates()[c];
-      return rate ? 100 * rate : 0;
+      return rate ? baseAmount * rate : 0;
     });
 
-    this.chartInstance.set(new Chart(ctx, {
+    const chart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: chartLabels,
+        labels,
         datasets: [{
-          label: `Value of 100 ${this.baseCurrency()}`,
-          data: chartData,
+          label: `Value of ${baseAmount} ${this.baseCurrency()}`,
+          data,
           backgroundColor: '#e11931',
           borderColor: '#e11931',
           borderWidth: 1,
@@ -224,29 +271,22 @@ export class CurrencyConverterComponent implements OnInit, AfterViewChecked {
         plugins: {
           legend: {
             display: true,
-            labels: {
-              color: 'var(--pure-white-text)',
-              font: { size: 12, family: 'Inter' }
-            }
+            labels: { color: '#ffffff', font: { size: 12, family: 'Inter' } }
           },
           tooltip: {
             callbacks: {
-              label: (item) => `${item.dataset.label}: ${Number(item.raw).toFixed(2)} ${item.label}`
+              label: (context) => `${context.dataset.label}: ${Number(context.raw).toFixed(2)} ${context.label}`
             }
           }
         },
         scales: {
-          x: {
-            ticks: { color: 'var(--pure-white-text)' },
-            grid: { color: '#2A2A2A' }
-          },
-          y: {
-            ticks: { color: 'var(--pure-white-text)' },
-            grid: { color: '#2A2A2A' }
-          }
+          x: { ticks: { color: '#ffffff' }, grid: { color: '#2A2A2A' } },
+          y: { ticks: { color: '#ffffff' }, grid: { color: '#2A2A2A' } }
         }
       }
-    }));
+    });
+
+    this.chartInstance.set(chart);
   }
 
   private updateChart() {
@@ -254,15 +294,16 @@ export class CurrencyConverterComponent implements OnInit, AfterViewChecked {
     const chart = this.chartInstance();
     if (!chart) return;
 
-    const chartLabels = this.popularCurrencies.filter(c => c !== this.baseCurrency());
-    const chartData = chartLabels.map(c => {
+    const baseAmount = this.amount() ?? 100;
+    const labels = this.popularCurrencies.filter(c => c !== this.baseCurrency());
+    const data = labels.map(c => {
       const rate = this.rates()[c];
-      return rate ? 100 * rate : 0;
+      return rate ? baseAmount * rate : 0;
     });
 
-    chart.data.labels = chartLabels;
-    chart.data.datasets[0].label = `Value of 100 ${this.baseCurrency()}`;
-    chart.data.datasets[0].data = chartData;
+    chart.data.labels = labels;
+    chart.data.datasets[0].label = `Value of ${baseAmount} ${this.baseCurrency()}`;
+    chart.data.datasets[0].data = data;
     chart.update();
   }
 }
