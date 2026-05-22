@@ -23,6 +23,7 @@ export class CurrencyConverterComponent implements OnInit, AfterViewChecked {
 
   @ViewChild('comparisonChart') private chartRef!: ElementRef<HTMLCanvasElement>;
   amount = signal<number | null>(null);
+  safeAmount = computed(() => this.amount() ?? 0);
   baseCurrency = signal<string>('USD');
   targetCurrency = signal<string>('INR');
   rates = signal<{ [key: string]: number }>({});
@@ -85,7 +86,7 @@ export class CurrencyConverterComponent implements OnInit, AfterViewChecked {
 
   // Calculations
   convertedAmount = computed(() => {
-    const amt = this.amount();
+    const amt = this.safeAmount();
     const target = this.targetCurrency();
     const rateList = this.rates();
 

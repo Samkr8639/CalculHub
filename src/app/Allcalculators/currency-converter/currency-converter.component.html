@@ -60,7 +60,7 @@
     }
 
     <!-- Calculation Results -->
-    @if (!isLoading() && !hasError() && amount() !== null && amount() > 0 && convertedAmount() !== null) {
+    @if (!isLoading() && !hasError() && safeAmount() > 0 && convertedAmount() !== null) {
     <section class="results-section">
       <div class="conversion-result-box">
         <div class="from-amount">{{ amount() | number:'1.2-2' }} {{ baseCurrency() }} =</div>
@@ -106,7 +106,7 @@
         </div>
       </div>
     </section>
-    } @else if (!isLoading() && !hasError() && (amount() === null || amount() <= 0)) { <div class="placeholder-message">
+    } @else if (!isLoading() && !hasError() && (safeAmount() <= 0)) { <div class="placeholder-message">
       <p>Please enter a valid positive amount above to see conversions.</p>
   </div>
   }

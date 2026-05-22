@@ -4,7 +4,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { RouterLink } from '@angular/router';
-import { SwiperContainer } from 'swiper/element';
+
 import { LucideAngularModule } from 'lucide-angular';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);

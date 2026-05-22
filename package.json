@@ -42,7 +42,9 @@
         "gsap": "^3.13.0",
         "lucide-angular": "^0.567.0",
         "mathjs": "^15.1.0",
-        "nerdamer": "^1.1.13"
+        "nerdamer": "^1.1.13",
+        "swiper": "^12.1.4",
+        "zone.js": "^0.16.2"
     },
     "devDependencies": {
         "@angular/build": "^21.2.11",
