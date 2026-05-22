@@ -233,6 +233,7 @@
 
 /* Invoice result layout */
 .invoice-details-grid {
+  margin-top: 2%;
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   gap: 25px;
@@ -398,4 +399,173 @@
   min-height: auto !important;
   overflow: visible !important;
   overflow-y: visible !important;
+}
+
+/* =========================================================
+   Material Autocomplete – Dark Theme Override
+   ========================================================= */
+
+/* ---------- Form-field wrapper (fill appearance) ---------- */
+.currency-autocomplete {
+  width: 100%;
+}
+
+.currency-autocomplete .mdc-text-field--filled {
+  background-color: #212121 !important;
+  border-radius: 8px 8px 0 0;
+  transition: background-color 0.3s ease;
+}
+
+.currency-autocomplete .mdc-text-field--filled:hover {
+  background-color: #2a2a2a !important;
+}
+
+/* Input text */
+.currency-autocomplete .mdc-text-field__input,
+.currency-autocomplete .mat-mdc-input-element {
+  color: var(--pure-white-text) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 1.1em !important;
+  caret-color: var(--primary-red) !important;
+}
+
+/* Floating label — resting */
+.currency-autocomplete .mdc-floating-label,
+.currency-autocomplete .mat-mdc-floating-label {
+  color: var(--light-grey-text) !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* Floating label — focused */
+.currency-autocomplete .mdc-floating-label--float-above,
+.currency-autocomplete.mat-focused .mdc-floating-label {
+  color: var(--primary-red) !important;
+}
+
+/* Underline / ripple line — default */
+.currency-autocomplete .mdc-line-ripple::before {
+  border-bottom-color: var(--border-grey) !important;
+}
+
+/* Underline / ripple line — focused */
+.currency-autocomplete .mdc-line-ripple::after {
+  border-bottom-color: var(--primary-red) !important;
+}
+
+/* Remove Material's default background indicator on focus */
+.currency-autocomplete .mat-mdc-form-field-focus-overlay {
+  background-color: transparent !important;
+}
+
+/* Subscript (hint / error) wrapper – collapse when empty */
+.currency-autocomplete .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+/* ---------- Autocomplete dropdown panel ---------- */
+/* The panel is rendered in the CDK overlay, so we use ::ng-deep */
+::ng-deep .mat-mdc-autocomplete-panel {
+  background-color: #1a1a1a !important;
+  border: 1px solid var(--border-grey) !important;
+  border-radius: 0 0 10px 10px !important;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.55),
+    0 2px 8px rgba(225, 25, 49, 0.08) !important;
+  padding: 4px 0 !important;
+  max-height: 280px !important;
+
+  /* Sleek scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: #3a3a3a #1a1a1a;
+}
+
+::ng-deep .mat-mdc-autocomplete-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+::ng-deep .mat-mdc-autocomplete-panel::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 3px;
+}
+
+::ng-deep .mat-mdc-autocomplete-panel::-webkit-scrollbar-thumb {
+  background: #3a3a3a;
+  border-radius: 3px;
+  transition: background 0.2s;
+}
+
+::ng-deep .mat-mdc-autocomplete-panel::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* ---------- Individual option items ---------- */
+::ng-deep .mat-mdc-autocomplete-panel .mat-mdc-option {
+  color: var(--pure-white-text) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.95em !important;
+  padding: 10px 16px !important;
+  min-height: 44px !important;
+  letter-spacing: 0.04em;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+/* Hover */
+::ng-deep .mat-mdc-autocomplete-panel .mat-mdc-option:hover,
+::ng-deep .mat-mdc-autocomplete-panel .mat-mdc-option.mat-mdc-option-active {
+  background-color: rgba(225, 25, 49, 0.1) !important;
+  border-left-color: var(--primary-red);
+}
+
+/* Keyboard-focused (active) */
+::ng-deep .mat-mdc-autocomplete-panel .mat-mdc-option.mdc-list-item--selected,
+::ng-deep .mat-mdc-autocomplete-panel .mat-mdc-option[aria-selected="true"] {
+  background-color: rgba(225, 25, 49, 0.18) !important;
+  color: #fff !important;
+  font-weight: 600;
+  border-left-color: var(--primary-red);
+}
+
+/* Focus state highlight */
+::ng-deep .mat-mdc-autocomplete-panel .mat-mdc-option:focus {
+  background-color: rgba(225, 25, 49, 0.12) !important;
+}
+
+/* Remove default Material ripple / state overlay to keep dark look clean */
+::ng-deep .mat-mdc-autocomplete-panel .mat-mdc-option .mdc-list-item__ripple {
+  display: none !important;
+}
+
+::ng-deep .mat-mdc-autocomplete-panel .mat-mdc-option .mat-pseudo-checkbox {
+  display: none !important;
+}
+
+/* Option text layer (override the default MDC dark overlay) */
+::ng-deep .mat-mdc-option .mdc-list-item__primary-text {
+  color: inherit !important;
+}
+
+::ng-deep .mdc-text-field--filled {
+  background-color: #212121 !important;
+}
+
+::ng-deep.mat-mdc-form-field:not(.mat-form-field-disabled) .mat-mdc-floating-label.mdc-floating-label--float-above {
+  color: #fff !important;
+}
+
+/* ---------- CDK overlay – subtle entrance animation ---------- */
+::ng-deep .cdk-overlay-pane {
+  animation: dropdownFadeIn 0.2s ease-out;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

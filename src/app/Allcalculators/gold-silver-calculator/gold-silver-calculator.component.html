@@ -28,7 +28,7 @@
         </div>
         <div class="select-group">
           <label for="selectedUnit">Unit:</label>
-          <select id="selectedUnit" [ngModel]="selectedUnit()" (ngModelChange)="onUnitChange($event)">
+          <select id="selectedUnit" [ngModel]="selectedUnit()" (ngModelChange)="onUnitChange($event)" style="margin-top: 5px;">
             <option value="grams">Grams (g)</option>
             <option value="tolas">Tolas (11.66g)</option>
             <option value="ounces">Troy Ounces (oz)</option>
@@ -52,11 +52,12 @@
         </div>
 
         <!-- Currency Selector -->
-        <div class="select-group">
+        <div class="select-group" >
           <label for="selectedCurrency">Currency:</label>
           <select id="selectedCurrency" [ngModel]="selectedCurrency()" (ngModelChange)="onCurrencyChange($event)">
-            <option value="INR">Indian Rupee (₹)</option>
-            <option value="USD">US Dollar ($)</option>
+            @for (c of currencies; track c.code) {
+              <option [value]="c.code">{{ c.name }} ({{ c.code }}) </option>
+            }
           </select>
         </div>
       </div>
@@ -164,57 +165,415 @@
 
 <!-- SEO Content Section -->
 <div class="calc-seo-content">
+
   <div class="seo-section">
-    <h2>Understanding Gold & Silver Spot Prices & Valuations</h2>
-    <p>Gold and silver have served as stores of value and mediums of exchange for thousands of years. Today, precious metals are primarily utilized as inflation hedges, safe-haven assets during geopolitical uncertainty, and commodities for industrial manufacturing and fine jewellery. The "spot price" represents the current market clearing price at which gold or silver is traded for immediate delivery on international commodity exchanges, such as COMEX in New York and the London Bullion Market Association (LBMA).</p>
-    <p>International spot rates are quoted in US Dollars per Troy Ounce (oz). A troy ounce is a traditional unit of weight equal to exactly 31.1034768 grams, which is slightly heavier than a standard cooking ounce (28.35 grams). When buying physical bullion, coins, or jewellery, you pay the spot metal price plus additional surcharges for refining, fabrication (making charges), and local value-added taxes (VAT or GST).</p>
+
+    <h2>
+      Understanding Gold & Silver Spot Prices, Precious Metal Valuation & Live Market Rates
+    </h2>
+
+    <p>
+      Gold and silver have been considered symbols of wealth, stability, and financial security for thousands of years. Long before the existence of paper currencies, stock markets, or digital banking systems, civilizations across the world used precious metals as mediums of exchange, stores of value, and indicators of economic power. Even in the modern financial system dominated by digital assets and fiat currencies, gold and silver continue to hold immense importance in investment portfolios, central bank reserves, jewelry industries, manufacturing sectors, and international commodity markets.
+    </p>
+
+    <p>
+      Today, gold and silver are primarily used as safe-haven assets during economic uncertainty, inflation hedges during periods of rising prices, and valuable industrial commodities in sectors such as electronics, solar energy, aerospace engineering, healthcare, and semiconductor manufacturing. Investors often purchase precious metals during periods of stock market volatility, geopolitical instability, currency devaluation, recession fears, or high inflation because gold historically preserves purchasing power over long periods of time.
+    </p>
+
+    <p>
+      The value of gold and silver changes continuously based on international market demand and supply. These prices are commonly referred to as “spot prices.” The spot price of a precious metal represents the current market rate at which the metal can be bought or sold for immediate delivery on global commodity exchanges such as COMEX (Commodity Exchange Inc.), the London Bullion Market Association (LBMA), the Shanghai Gold Exchange, and other international trading platforms.
+    </p>
+
+    <p>
+      Precious metal prices are generally quoted in US Dollars per Troy Ounce. A troy ounce is a special unit of weight traditionally used for precious metals and equals exactly 31.1034768 grams. This differs from the standard ounce commonly used in food and household measurements, which equals approximately 28.35 grams. Because international gold and silver markets operate using troy ounces, most APIs and financial data providers publish spot prices using this standard measurement.
+    </p>
+
+    <p>
+      This Gold & Silver Rate Calculator converts international spot prices into practical local pricing formats such as grams, tolas, kilograms, and ounces while also adjusting for metal purity, making charges, local taxes, and currency exchange rates. The calculator dynamically fetches live market data from APIs, ensuring users receive accurate and updated valuation estimates rather than outdated static prices.
+    </p>
+
+    <p>
+      Whether you are purchasing jewelry, investing in bullion, comparing metal prices across countries, calculating invoice estimates, or analyzing precious metal investments, this calculator helps simplify complex pricing calculations into easy-to-understand breakdowns.
+    </p>
+
   </div>
 
   <div class="seo-section">
-    <h2>How Precious Metal Billing is Calculated</h2>
-    <p>Determining the final purchase price of jewelry or bullion requires scaling the spot price to your desired weight, correcting for the alloy's purity, adding fabrication markups, and applying government taxes.</p>
-    <div class="formula-box">
-      Base Price per Gram = (Spot Price per Troy Ounce / 31.1035)<br>
-      Purity-Adjusted Rate = Base Price per Gram × Purity Percentage<br>
-      Metal Value = Purity-Adjusted Rate × Weight<br>
-      Making Charges = Metal Value × (Making Charge% / 100)<br>
-      Total Bill = (Metal Value + Making Charges) × [ 1 + (Tax% / 100) ]
-    </div>
-  </div>
 
-  <div class="seo-section">
-    <h2>Understanding Gold Karat (Purity)</h2>
+    <h2>
+      How Live Gold & Silver Price Calculation Works
+    </h2>
+
+    <p>
+      The calculator uses live market spot prices obtained from international commodity pricing APIs. Gold is represented internationally using the symbol XAU, while silver is represented using the symbol XAG. The application retrieves real-time spot rates in US Dollars and then converts them into the selected local currency using foreign exchange market rates.
+    </p>
+
+    <p>
+      Because gold and silver are traded globally in USD, local metal prices in countries such as India, the UAE, the UK, Canada, Australia, Singapore, and Europe depend heavily on currency exchange rates. Even if the international spot price remains stable, local gold prices may rise or fall due to forex fluctuations.
+    </p>
+
+    <p>
+      For example:
+    </p>
+
     <ul class="seo-steps">
-      <li><strong>24 Karat (99.9% Purity):</strong> Pure gold. Extremely soft and malleable, making it unsuitable for durable jewelry but standard for investment bars and coins.</li>
-      <li><strong>22 Karat (91.6% Purity):</strong> Alloyed with 8.3% copper, silver, or zinc. The traditional gold standard for Indian and Middle Eastern bridal jewelry, combining high purity with reasonable durability. Also known as "916 Gold".</li>
-      <li><strong>18 Karat (75.0% Purity):</strong> Contains 25% alloy metals. Ideal for fine stone-studded jewelry and engagement rings, as it holds diamonds securely.</li>
-      <li><strong>14 Karat (58.3% Purity):</strong> Extremely durable and affordable, containing 41.7% alloy metals. Highly popular in Western markets for everyday jewelry items.</li>
+      <li>If the US Dollar strengthens against the Indian Rupee, gold prices in India may increase even if global gold prices remain unchanged.</li>
+      <li>If international silver demand rises because of solar panel manufacturing, silver spot prices may increase globally.</li>
+      <li>If geopolitical uncertainty increases, investors may move money into gold, causing gold prices to surge.</li>
     </ul>
+
+    <p>
+      This calculator dynamically adjusts all these variables using real-time API-driven pricing data. It converts ounce-based market prices into user-selected units such as grams, kilograms, tolas, or troy ounces and then calculates invoice estimates based on purity and tax settings.
+    </p>
+
   </div>
 
   <div class="seo-section">
-    <h2>Frequently Asked Questions</h2>
+
+    <h2>
+      How Gold & Silver Jewellery Billing Is Calculated
+    </h2>
+
+    <p>
+      The final price of gold or silver jewelry is not determined solely by the spot market rate. Jewelry pricing involves several additional cost components including purity adjustments, craftsmanship costs, fabrication charges, retailer margins, hallmarking costs, and government taxes.
+    </p>
+
+    <p>
+      This calculator estimates the total invoice amount by applying all major billing components step by step.
+    </p>
+
+    <div class="formula-box">
+
+      Base Price per Gram = Spot Price per Troy Ounce ÷ 31.1035<br>
+
+      Purity Adjusted Rate = Base Price × Purity Percentage<br>
+
+      Metal Value = Purity Rate × Weight<br>
+
+      Making Charges = Metal Value × Making Charge Percentage<br>
+
+      Taxable Value = Metal Value + Making Charges<br>
+
+      GST / Tax = Taxable Value × Tax Percentage<br>
+
+      Total Bill = Taxable Value + GST
+
+    </div>
+
+    <p>
+      For example, suppose international gold price is ₹7,000 per gram and you are purchasing 20 grams of 22K gold jewelry with 10% making charges and 3% GST. The calculation would include:
+    </p>
+
+    <ul class="seo-steps">
+      <li>Purity adjustment for 22K gold (91.6%)</li>
+      <li>Total metal value for 20 grams</li>
+      <li>Additional making charges</li>
+      <li>GST calculation on total taxable amount</li>
+      <li>Final invoice estimation</li>
+    </ul>
+
+    <p>
+      This structured invoice calculation helps buyers understand exactly where their money is being spent and prevents confusion during jewelry purchases.
+    </p>
+
+  </div>
+
+  <div class="seo-section">
+
+    <h2>
+      Understanding Gold Purity, Karat & Hallmarking Standards
+    </h2>
+
+    <p>
+      Gold purity refers to the percentage of pure gold contained within a metal alloy. Because pure gold is extremely soft and malleable, it is often mixed with other metals such as copper, zinc, nickel, palladium, or silver to improve strength, durability, and appearance.
+    </p>
+
+    <p>
+      Gold purity is measured in karats (K). Pure gold is considered 24 Karat, while lower karat values indicate the presence of alloy metals.
+    </p>
+
+    <ul class="seo-steps">
+
+      <li>
+        <strong>24 Karat Gold (99.9% Pure):</strong>
+        The purest form of gold available commercially. It is bright yellow, soft, and mainly used for bullion bars, coins, and investment-grade products.
+      </li>
+
+      <li>
+        <strong>22 Karat Gold (91.6% Pure):</strong>
+        Commonly known as 916 gold. Widely used in Indian and Middle Eastern jewelry because it balances purity with durability.
+      </li>
+
+      <li>
+        <strong>18 Karat Gold (75% Pure):</strong>
+        Popular for premium jewelry and diamond ornaments because it is stronger and better suited for stone settings.
+      </li>
+
+      <li>
+        <strong>14 Karat Gold (58.3% Pure):</strong>
+        Frequently used in Western markets due to its affordability and high durability.
+      </li>
+
+      <li>
+        <strong>10 Karat Gold (41.7% Pure):</strong>
+        Contains a larger proportion of alloy metals and is highly resistant to wear and scratches.
+      </li>
+
+    </ul>
+
+    <p>
+      In India, hallmarking is regulated by the Bureau of Indian Standards (BIS). BIS hallmark certification verifies the purity and authenticity of gold jewelry. Modern hallmarking includes:
+    </p>
+
+    <ul class="seo-steps">
+      <li>BIS logo</li>
+      <li>Purity mark such as 22K916 or 18K750</li>
+      <li>Jeweller identification mark</li>
+      <li>HUID (Hallmark Unique Identification) code</li>
+    </ul>
+
+    <p>
+      Hallmarking protects consumers from fraud and ensures accurate metal purity during jewelry purchases.
+    </p>
+
+  </div>
+
+  <div class="seo-section">
+
+    <h2>
+      Understanding Silver Purity & Industrial Demand
+    </h2>
+
+    <p>
+      Silver is another highly valuable precious metal with both investment and industrial applications. Unlike gold, silver has extensive industrial demand due to its excellent electrical conductivity, thermal conductivity, and antibacterial properties.
+    </p>
+
+    <p>
+      Silver is widely used in:
+    </p>
+
+    <ul class="seo-steps">
+      <li>Solar panels</li>
+      <li>Electric vehicles</li>
+      <li>Semiconductors</li>
+      <li>Medical equipment</li>
+      <li>Electronics manufacturing</li>
+      <li>Water purification systems</li>
+      <li>Photography and imaging</li>
+    </ul>
+
+    <p>
+      Common silver purity standards include:
+    </p>
+
+    <ul class="seo-steps">
+
+      <li>
+        <strong>Fine Silver (99.9% Pure):</strong>
+        Primarily used for investment bars and bullion products.
+      </li>
+
+      <li>
+        <strong>Sterling Silver (92.5% Pure):</strong>
+        The most common jewelry silver standard worldwide.
+      </li>
+
+      <li>
+        <strong>Coin Silver (90% Pure):</strong>
+        Traditionally used in silver coins and antique silverware.
+      </li>
+
+    </ul>
+
+    <p>
+      Because silver is far more abundant than gold and has higher annual mining output, its market price is significantly lower than gold. However, silver prices can experience substantial volatility because industrial demand strongly influences the market.
+    </p>
+
+  </div>
+
+  <div class="seo-section">
+
+    <h2>
+      Factors That Affect Gold & Silver Prices
+    </h2>
+
+    <p>
+      Precious metal prices are influenced by a wide range of economic, political, and industrial factors. Gold and silver markets react continuously to global events, investor sentiment, and macroeconomic conditions.
+    </p>
+
+    <p>
+      Major factors affecting gold and silver prices include:
+    </p>
+
+    <ul class="seo-steps">
+
+      <li>
+        <strong>Inflation:</strong>
+        Gold is commonly used as a hedge against inflation because fiat currency purchasing power declines during periods of rising prices.
+      </li>
+
+      <li>
+        <strong>Interest Rates:</strong>
+        Lower interest rates often increase gold demand because investors seek alternative stores of value.
+      </li>
+
+      <li>
+        <strong>US Dollar Strength:</strong>
+        Gold prices usually move inversely to the US Dollar Index.
+      </li>
+
+      <li>
+        <strong>Geopolitical Tension:</strong>
+        Wars, sanctions, political instability, and economic crises often drive investors toward safe-haven assets like gold.
+      </li>
+
+      <li>
+        <strong>Central Bank Purchases:</strong>
+        Central banks around the world hold gold reserves and may increase purchases during uncertain periods.
+      </li>
+
+      <li>
+        <strong>Industrial Demand:</strong>
+        Silver prices are heavily impacted by manufacturing activity and technological demand.
+      </li>
+
+      <li>
+        <strong>Jewelry Demand:</strong>
+        Festivals, weddings, and cultural buying patterns significantly influence gold demand in countries like India and China.
+      </li>
+
+    </ul>
+
+  </div>
+
+  <div class="seo-section">
+
+    <h2>
+      Benefits of Using This Gold & Silver Rate Calculator
+    </h2>
+
+    <p>
+      This calculator is designed to provide accurate, real-time, and transparent precious metal valuation calculations for investors, jewelry buyers, bullion traders, and financial analysts.
+    </p>
+
+    <p>
+      Key benefits include:
+    </p>
+
+    <ul class="seo-steps">
+
+      <li>Live gold and silver spot prices</li>
+
+      <li>Automatic currency conversion</li>
+
+      <li>Support for grams, tolas, ounces, and kilograms</li>
+
+      <li>Purity-adjusted valuation</li>
+
+      <li>Making charge calculation</li>
+
+      <li>GST and tax estimation</li>
+
+      <li>Interactive invoice breakdown charts</li>
+
+      <li>Real-time API-based data</li>
+
+      <li>Easy invoice estimation for jewelry purchases</li>
+
+      <li>Responsive modern user interface</li>
+
+    </ul>
+
+    <p>
+      Whether you are calculating wedding jewelry costs, comparing bullion investments, estimating silver coin prices, or tracking live precious metal market trends, this calculator provides accurate and transparent calculations instantly.
+    </p>
+
+  </div>
+
+  <div class="seo-section">
+
+    <h2>
+      Frequently Asked Questions About Gold & Silver Pricing
+    </h2>
+
     <div class="seo-faq">
+
       <div class="faq-item">
-        <h3>What is making charge in jewellery purchases?</h3>
-        <p>Making charge represents the cost of craftsmanship, design labor, and machine operation required to convert raw gold bullion into a finished piece of jewelry. It is usually charged as a percentage of the gold rate or a fixed rupee amount per gram, ranging from 5% to 25% depending on design complexity.</p>
+
+        <h3>
+          Why does jewelry price differ from live gold rate?
+        </h3>
+
+        <p>
+          Jewelry prices include additional charges such as making charges, gemstone costs, wastage charges, retailer margins, hallmarking fees, and taxes. Therefore, the final jewelry invoice is always higher than the raw spot gold value.
+        </p>
+
       </div>
+
       <div class="faq-item">
-        <h3>What are hallmarking standards?</h3>
-        <p>Hallmarking is an official certification process that guarantees the purity and fineness of precious metal items. In India, BIS hallmarking includes the BIS logo, purity grade (e.g. 22K916 or 18K750), and a unique 6-digit alphanumeric HUID (Hallmark Unique Identification) code laser-etched onto the item.</p>
+
+        <h3>
+          Why is gold measured in troy ounces internationally?
+        </h3>
+
+        <p>
+          Precious metals have historically been traded using the troy weight system, which originated in medieval European trade markets. International commodity exchanges continue using troy ounces for standardization.
+        </p>
+
       </div>
+
       <div class="faq-item">
-        <h3>Why is silver price much lower than gold?</h3>
-        <p>Silver is significantly more abundant in the Earth's crust than gold and has a much higher annual mining output. Furthermore, silver is heavily utilized as an industrial metal in electronics, solar panels, and chemical processing, exposing its price to global economic manufacturing cycles.</p>
+
+        <h3>
+          Why do local gold prices change daily?
+        </h3>
+
+        <p>
+          Local gold prices depend on international spot prices, currency exchange rates, import duties, taxes, and local market demand. Changes in any of these factors can affect daily pricing.
+        </p>
+
       </div>
+
+      <div class="faq-item">
+
+        <h3>
+          Is silver a good investment?
+        </h3>
+
+        <p>
+          Silver is often considered both an industrial commodity and an investment asset. It may offer higher growth potential during industrial expansion cycles, though it is generally more volatile than gold.
+        </p>
+
+      </div>
+
     </div>
+
   </div>
 
   <div class="seo-section">
-    <h2>Related Calculators</h2>
+
+    <h2>
+      Related Financial & Market Tools
+    </h2>
+
     <div class="related-calc-grid">
-      <a href="/market/currency-converter" class="related-calc-link">Currency Converter</a>
-      <a href="/market/crypto-calculator" class="related-calc-link">Crypto Calculator</a>
+
+      <a href="/market/currency-converter"
+         class="related-calc-link">
+
+        Currency Converter
+
+      </a>
+
+      <a href="/market/crypto-calculator"
+         class="related-calc-link">
+
+        Crypto Calculator
+
+      </a>
+
     </div>
+
   </div>
+
 </div>
