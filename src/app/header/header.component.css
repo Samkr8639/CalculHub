@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 40px;
+  padding: 20px 40px;
   background-color: var(--card-black);
   border-bottom: 1px solid var(--border-grey);
   position: sticky;
@@ -39,7 +39,7 @@
   font-weight: 500;
   transition: color 0.3s ease;
   text-align: end;
-  
+
 }
 
 .navigation a:hover,
@@ -55,11 +55,12 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .header {
-    padding: 10px 20px;
+    padding: 20px 20px;
   }
 
   .navigation {
-    display: none; /* Hide navigation on small screens, could add a hamburger menu later */
+    display: none;
+    /* Hide navigation on small screens, could add a hamburger menu later */
   }
 
   .app-name {
