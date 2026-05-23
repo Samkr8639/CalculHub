@@ -5,7 +5,8 @@
   <div class="hero-content">
     <div class="hero-text">
       <h1 class="hero-title">Free Online Calculators — Finance, Health & Math</h1>
-      <p class="hero-subtitle">Explore CalculHub's free online calculators for finance, health, and math. Our accurate tools help you make informed decisions with precision and ease. No login required.</p>
+      <p class="hero-subtitle">Explore CalculHub's free online calculators for finance, health, and math. Our accurate
+        tools help you make informed decisions with precision and ease. No login required.</p>
       <button (click)="scrollToCalculators()" class="button primary-button">Explore Calculators</button>
     </div>
   </div>
@@ -28,21 +29,35 @@
     <a routerLink="/health/ideal-weight-calculator" class="quick-pill">🎯 Ideal Weight</a>
     <a routerLink="/market/currency-converter" class="quick-pill">💱 Currency</a>
     <a routerLink="/market/gold-silver-calculator" class="quick-pill">🪙 Gold & Silver</a>
-    <!-- duplicate for seamless loop (marked noindex-like for SEO) -->
-    <a routerLink="/financial/mortgage" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">🏠 Mortgage</a>
-    <a routerLink="/financial/gst-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">🧾 GST</a>
-    <a routerLink="/financial/sip-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">📈 SIP</a>
-    <a routerLink="/financial/fd-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">🏦 Fixed Deposit</a>
-    <a routerLink="/health/bmi-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">⚖️ BMI</a>
-    <a routerLink="/health/calorie-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">🔥 Calorie / TDEE</a>
-    <a routerLink="/mathematical/percentage-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">% Percentage</a>
-    <a routerLink="/mathematical/scientific-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">🔬 Scientific</a>
-    <a routerLink="/financial/tax-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">📋 Income Tax</a>
-    <a routerLink="/financial/ppf-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">💰 PPF</a>
-    <a routerLink="/financial/mutual-fund-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">📊 Mutual Fund</a>
-    <a routerLink="/health/ideal-weight-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">🎯 Ideal Weight</a>
-    <a routerLink="/market/currency-converter" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">💱 Currency</a>
-    <a routerLink="/market/gold-silver-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">🪙 Gold & Silver</a>
+    <!-- duplicate for seamless loop -->
+    <a routerLink="/financial/mortgage" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">🏠
+      Mortgage</a>
+    <a routerLink="/financial/gst-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">🧾
+      GST</a>
+    <a routerLink="/financial/sip-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">📈
+      SIP</a>
+    <a routerLink="/financial/fd-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">🏦
+      Fixed Deposit</a>
+    <a routerLink="/health/bmi-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">⚖️
+      BMI</a>
+    <a routerLink="/health/calorie-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">🔥
+      Calorie / TDEE</a>
+    <a routerLink="/mathematical/percentage-calculator" class="quick-pill" aria-hidden="true" rel="nofollow"
+      data-clone="true">% Percentage</a>
+    <a routerLink="/mathematical/scientific-calculator" class="quick-pill" aria-hidden="true" rel="nofollow"
+      data-clone="true">🔬 Scientific</a>
+    <a routerLink="/financial/tax-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">📋
+      Income Tax</a>
+    <a routerLink="/financial/ppf-calculator" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">💰
+      PPF</a>
+    <a routerLink="/financial/mutual-fund-calculator" class="quick-pill" aria-hidden="true" rel="nofollow"
+      data-clone="true">📊 Mutual Fund</a>
+    <a routerLink="/health/ideal-weight-calculator" class="quick-pill" aria-hidden="true" rel="nofollow"
+      data-clone="true">🎯 Ideal Weight</a>
+    <a routerLink="/market/currency-converter" class="quick-pill" aria-hidden="true" rel="nofollow" data-clone="true">💱
+      Currency</a>
+    <a routerLink="/market/gold-silver-calculator" class="quick-pill" aria-hidden="true" rel="nofollow"
+      data-clone="true">🪙 Gold & Silver</a>
   </div>
 </nav>
 
@@ -54,8 +69,8 @@
     <h3>{{ category }}</h3>
 
     @if (category === 'Financial' && categorizedCalculators()[category].length > 0) {
-    <swiper-container class="calculator-swiper" slides-per-view="4" speed="500" loop="true" autoplay-delay="2500"
-      autoplay-disable-on-interaction="false" pagination="false">
+    <swiper-container class="calculator-swiper" [breakpoints]="swiperBreakpoints" speed="500" loop="true"
+      autoplay-delay="2500" autoplay-disable-on-interaction="false" pagination="false">
       @for (card of categorizedCalculators()[category]; track card.title) {
       <swiper-slide>
         <div class="calculator-card">
@@ -68,8 +83,8 @@
       }
     </swiper-container>
     } @else if (category === 'Mathematical' && categorizedCalculators()[category].length > 0) {
-    <swiper-container class="calculator-swiper" slides-per-view="4" speed="500" loop="true" autoplay-delay="2500"
-      autoplay-disable-on-interaction="false" pagination="false">
+    <swiper-container class="calculator-swiper" [breakpoints]="swiperBreakpoints" speed="500" loop="true"
+      autoplay-delay="2500" autoplay-disable-on-interaction="false" pagination="false">
       @for (card of categorizedCalculators()[category]; track card.title) {
       <swiper-slide>
         <div class="calculator-card">
@@ -82,8 +97,8 @@
       }
     </swiper-container>
     } @else if (category === 'Health & Fitness' && categorizedCalculators()[category].length > 0) {
-    <swiper-container class="calculator-swiper" slides-per-view="4" speed="500" loop="true" autoplay-delay="2500"
-      autoplay-disable-on-interaction="false" pagination="false">
+    <swiper-container class="calculator-swiper" [breakpoints]="swiperBreakpoints" speed="500" loop="true"
+      autoplay-delay="2500" autoplay-disable-on-interaction="false" pagination="false">
       @for (card of categorizedCalculators()[category]; track card.title) {
       <swiper-slide>
         <div class="calculator-card">
@@ -113,27 +128,552 @@
   }
 </section>
 
-<!-- SEO Content Section -->
-<section class="seo-content-section" style="padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; color: var(--text-color);">
-  <h2>Comprehensive Free Online Calculators for Every Need</h2>
-  <p>
-    Welcome to CalculHub, your ultimate destination for free online calculators designed to simplify complex computations in finance, health, and math. In today's fast-paced world, having quick access to reliable and accurate tools is essential. Whether you are managing your personal finances, tracking your health and fitness goals, or solving intricate mathematical problems, our platform offers a wide range of intuitive calculators tailored to meet your specific requirements. We believe that everyone should have access to high-quality computational tools without the hassle of signing up or paying premium fees. That is why all our free online calculators are instantly accessible right from your web browser.
-  </p>
-  
-  <h3>Empower Your Financial Future</h3>
-  <p>
-    Navigating the world of finance can be daunting, but our finance calculators make it straightforward and manageable. From planning your dream home with our mortgage and home loan EMI calculators to optimizing your investments through our SIP, FD, and mutual fund calculators, CalculHub provides the insights you need to make informed financial decisions. Understanding your tax obligations is also crucial, and our GST and income tax calculators are here to help you accurately estimate your liabilities. By utilizing these free online calculators, you can take control of your financial destiny, plan for retirement, and ensure that your hard-earned money is working effectively for you.
-  </p>
+<!-- ═══════════════════════════════════════════
+     SEO CONTENT SECTION
+═══════════════════════════════════════════ -->
+<section class="seo-content-section" aria-label="About CalculHub calculators">
 
-  <h3>Achieve Your Health and Fitness Goals</h3>
-  <p>
-    Your health is your most valuable asset, and monitoring it should be simple and accurate. Our health calculators are meticulously developed to assist you in tracking essential wellness metrics. Whether you want to determine your Body Mass Index (BMI), calculate your Total Daily Energy Expenditure (TDEE), or find your ideal weight, our tools provide precise results based on scientifically backed formulas. By integrating these free online calculators into your daily routine, you can set realistic fitness milestones, tailor your diet and exercise plans, and maintain a balanced and healthy lifestyle with confidence.
-  </p>
+  <!-- Hero intro card -->
+  <div class="seo-hero-card">
+    <span class="seo-badge">FREE ONLINE CALCULATORS</span>
+    <h2 class="seo-main-title">Comprehensive Free Online Calculators — Finance, Health &amp; Math</h2>
+    <p class="seo-main-desc">
+      CalculHub is India's trusted destination for accurate, instant, and completely free online calculators.
+      No sign-up. No ads. No tracking. Every tool runs entirely in your browser — from EMI planning and SIP
+      projections to BMI checks and scientific equations — built for students, professionals, and everyday
+      decision-makers across India and beyond.
+    </p>
+    <div class="seo-stats-row">
+      <div class="seo-stat-box">
+        <span class="seo-stat-num">
+          <lucide name="list" class="seo-stat-icon"></lucide>25+
+        </span>
+        <span class="seo-stat-lbl">Free Calculators</span>
+      </div>
+      <div class="seo-stat-box">
+        <span class="seo-stat-num">
+          <lucide name="globe" class="seo-stat-icon"></lucide>100%
+        </span>
+        <span class="seo-stat-lbl">Free &amp; Browser-Only</span>
+      </div>
+      <div class="seo-stat-box">
+        <span class="seo-stat-num">
+          <lucide name="shield-off" class="seo-stat-icon"></lucide>0
+        </span>
+        <span class="seo-stat-lbl">Ads / Trackers</span>
+      </div>
+      <div class="seo-stat-box">
+        <span class="seo-stat-num">
+          <lucide name="layers" class="seo-stat-icon"></lucide>4+
+        </span>
+        <span class="seo-stat-lbl">Categories</span>
+      </div>
+    </div>
+  </div>
 
-  <h3>Simplify Complex Mathematical Problems</h3>
-  <p>
-    Mathematics is the foundation of many daily tasks and professional projects. CalculHub offers a robust suite of math calculators to help students, educators, and professionals solve mathematical equations quickly and efficiently. Whether you need to calculate percentages for a discount, compute compound interest, or perform advanced scientific calculations, our platform delivers accurate results in seconds. Our free online calculators for math are designed with user-friendliness in mind, ensuring that even the most complex formulas are easy to compute and understand.
-  </p>
+  <!-- Tab navigation -->
+  <div class="seo-tabs-wrapper">
+    <div class="seo-tabs" role="tablist" aria-label="Calculator categories">
+      <button class="seo-tab" [class.active]="seoActiveTab === 'finance'" role="tab"
+        [attr.aria-selected]="seoActiveTab === 'finance'" (click)="seoActiveTab = 'finance'">
+        <lucide-icon name="chart-no-axes-column-increasing" [size]="16">
+        </lucide-icon> <span class="seo-tab-text"> Finance</span>
+      </button>
+      <button class="seo-tab" [class.active]="seoActiveTab === 'health'" role="tab"
+        [attr.aria-selected]="seoActiveTab === 'health'" (click)="seoActiveTab = 'health'">
+        <lucide-icon name="HeartPulse" [size]="16"></lucide-icon> <span class="seo-tab-text"> Health</span>
+      </button>
+      <button class="seo-tab" [class.active]="seoActiveTab === 'math'" role="tab"
+        [attr.aria-selected]="seoActiveTab === 'math'" (click)="seoActiveTab = 'math'">
+        <lucide-icon name="sigma" [size]="16"></lucide-icon> <span class="seo-tab-text"> Math</span>
+      </button>
+      <button class="seo-tab" [class.active]="seoActiveTab === 'market'" role="tab"
+        [attr.aria-selected]="seoActiveTab === 'market'" (click)="seoActiveTab = 'market'">
+        <lucide-icon name="bitcoin" [size]="16"></lucide-icon> <span class="seo-tab-text"> Markets</span>
+      </button>
+      <button class="seo-tab" [class.active]="seoActiveTab === 'faq'" role="tab"
+        [attr.aria-selected]="seoActiveTab === 'faq'" (click)="seoActiveTab = 'faq'">
+        <lucide-icon name="info" [size]="16"></lucide-icon> <span class="seo-tab-text"> FAQ</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ── FINANCE PANEL ── -->
+  <div class="seo-panel" [class.seo-panel--visible]="seoActiveTab === 'finance'" role="tabpanel">
+    <div class="seo-card">
+      <h3 class="seo-card-title">
+        <span class="seo-card-icon"><lucide-icon name="chart-no-axes-column-increasing"
+            [size]="16"></lucide-icon></span>
+        Empower your financial future with free finance calculators
+      </h3>
+      <p>
+        Managing personal finances in India can feel overwhelming — rising property prices, changing tax slabs,
+        complex investment products, and fluctuating interest rates all demand constant recalculation. CalculHub's
+        suite of free online finance calculators puts every critical number at your fingertips, instantly, without
+        downloading an app or creating an account.
+      </p>
+      <p>
+        Whether you are a first-time home buyer estimating your monthly EMI, a salaried professional computing
+        your income tax liability, or a long-term investor projecting SIP returns, our tools deliver accurate
+        results powered by standard financial formulas used by banks and financial institutions across India.
+      </p>
+
+      <h4 class="seo-subheading">Mortgage &amp; home loan EMI calculator</h4>
+      <p>
+        Our <a routerLink="/financial/mortgage" class="seo-link">mortgage calculator</a> and
+        <a routerLink="/financial/home-loan-emi-calculator" class="seo-link">home loan EMI calculator</a>
+        are among the most used tools on CalculHub. Enter your loan principal, interest rate, and tenure to
+        instantly see your monthly instalment (EMI), total interest payable, and a full amortization schedule.
+        Planning to buy a flat in Mumbai, Bangalore, or Hyderabad? Use the affordability calculator alongside
+        to check how much loan you qualify for based on your monthly income and existing obligations. The
+        amortization schedule breaks down every single payment over the loan tenure, showing exactly how much
+        goes toward principal reduction versus interest — invaluable knowledge for planning prepayments and
+        reducing total interest outgo.
+      </p>
+
+      <div class="seo-pill-row">
+        <span class="seo-pill seo-pill--hot">home loan EMI calculator</span>
+        <span class="seo-pill seo-pill--hot">mortgage calculator India</span>
+        <span class="seo-pill">loan amortization schedule</span>
+        <span class="seo-pill">EMI calculator online free</span>
+        <span class="seo-pill">housing loan calculator</span>
+      </div>
+
+      <h4 class="seo-subheading">SIP calculator — systematic investment planning made simple</h4>
+      <p>
+        A Systematic Investment Plan (SIP) is the most popular way Indians invest in mutual funds today.
+        Our free <a routerLink="/financial/sip-calculator" class="seo-link">SIP calculator</a> helps you
+        estimate the future value of your monthly investments by factoring in compounding returns over time.
+        Input your monthly SIP amount, expected annual return rate, and investment duration — and instantly
+        see how your wealth grows. Whether you are saving for your child's education, a dream wedding, or
+        early retirement, the SIP calculator makes goal-based investing tangible and motivating. You can
+        also compare different monthly amounts side by side to understand the impact of even a small increase
+        in your SIP contribution on the final corpus.
+      </p>
+
+      <h4 class="seo-subheading">Fixed deposit &amp; PPF calculator</h4>
+      <p>
+        Fixed deposits remain the backbone of conservative Indian savings. Our
+        <a routerLink="/financial/fd-calculator" class="seo-link">FD calculator</a> computes the maturity
+        amount and total interest earned for any deposit — whether compounded monthly, quarterly, or annually.
+        Pair it with our <a routerLink="/financial/ppf-calculator" class="seo-link">PPF calculator</a> for
+        a complete picture of your risk-free savings. The Public Provident Fund (PPF) has a mandatory
+        15-year lock-in, and our calculator shows you the year-by-year accumulation based on the current
+        PPF interest rate, helping you visualise the power of long-term tax-free compounding. Both tools
+        are especially useful for comparing post-tax returns across savings instruments.
+      </p>
+
+      <h4 class="seo-subheading">GST calculator &amp; income tax calculator</h4>
+      <p>
+        Tax compliance is non-negotiable for businesses and salaried individuals alike. Our
+        <a routerLink="/financial/gst-calculator" class="seo-link">GST calculator</a> instantly adds or
+        removes Goods and Services Tax (5%, 12%, 18%, or 28%) from any base amount — perfect for freelancers
+        raising invoices, shop owners billing customers, or consumers verifying receipts. The
+        <a routerLink="/financial/tax-calculator" class="seo-link">income tax calculator</a> covers both
+        the old and new tax regimes for FY 2024-25, letting you compare your liability under each slab and
+        choose the option that maximises your savings. It accounts for standard deduction, HRA, 80C
+        investments, 80D health insurance premiums, and other common exemptions so your estimate is as
+        close to your actual liability as possible.
+      </p>
+
+      <div class="seo-mini-grid">
+        <div class="seo-mini-card">
+          <span class="seo-mini-icon"><lucide-icon name="chart-line" [size]="16"></lucide-icon></span>
+          <strong>Mutual fund returns</strong>
+          <p>Calculate absolute and XIRR returns on existing investments. See whether your portfolio is truly
+            outperforming inflation and benchmark indices.</p>
+        </div>
+        <div class="seo-mini-card">
+          <span class="seo-mini-icon"><lucide-icon name="ChartNoAxesCombined" [size]="16"></lucide-icon></span>
+          <strong>Compound interest</strong>
+          <p>Visualise how money multiplies with compound interest versus simple interest across different compounding
+            frequencies — monthly, quarterly, or annually.</p>
+        </div>
+        <div class="seo-mini-card">
+          <span class="seo-mini-icon"><lucide-icon name="banknote" [size]="16"></lucide-icon></span>
+          <strong>Loan eligibility</strong>
+          <p>Estimate the maximum loan amount banks will sanction based on your salary, Fixed Obligation to Income Ratio
+            (FOIR), and existing EMI commitments.</p>
+        </div>
+        <div class="seo-mini-card">
+          <span class="seo-mini-icon"><lucide-icon name="vault" [size]="16"></lucide-icon></span>
+          <strong>PPF projections</strong>
+          <p>15-year compounding on PPF with annual breakdown — see the tax-free corpus you build over time at the
+            current interest rate declared by the government.</p>
+        </div>
+      </div>
+
+      <div class="seo-highlight-box">
+        <p>
+          ℹ️ All financial calculations on CalculHub follow RBI guidelines and standard actuarial formulas.
+          Results are indicative and intended for planning purposes — consult a certified financial advisor
+          before making investment or borrowing decisions.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── HEALTH PANEL ── -->
+  <div class="seo-panel" [class.seo-panel--visible]="seoActiveTab === 'health'" role="tabpanel">
+    <div class="seo-card">
+      <h3 class="seo-card-title">
+        <span class="seo-card-icon"><lucide-icon name="HeartPulse" [size]="16"></lucide-icon></span>
+        Achieve your health &amp; fitness goals with precision tools
+      </h3>
+      <p>
+        Health is your most valuable long-term investment, and data-driven wellness decisions begin with
+        accurate numbers. CalculHub's free online health calculators are built on WHO-approved and
+        NIH-validated formulas, giving you clinically informed metrics without the need for a fitness app
+        subscription or a gym consultation fee.
+      </p>
+
+      <h4 class="seo-subheading">BMI calculator — understanding body mass index</h4>
+      <p>
+        The Body Mass Index (BMI) is the globally accepted standard for classifying weight status. Our
+        <a routerLink="/health/bmi-calculator" class="seo-link">BMI calculator</a> uses the WHO formula
+        (weight in kg divided by height in metres squared) to instantly categorise you as underweight,
+        normal weight, overweight, or obese. Beyond the number, CalculHub explains what your BMI score
+        means for long-term health risks including Type 2 diabetes, cardiovascular disease, and
+        hypertension — giving context that raw numbers alone cannot provide. The calculator supports both
+        metric (kg/cm) and imperial (lbs/inches) inputs, making it equally useful for users across India,
+        the US, the UK, and the UAE.
+      </p>
+
+      <div class="seo-pill-row">
+        <span class="seo-pill seo-pill--hot">BMI calculator India</span>
+        <span class="seo-pill seo-pill--hot">free BMI calculator online</span>
+        <span class="seo-pill">body mass index chart</span>
+        <span class="seo-pill">BMI for adults</span>
+        <span class="seo-pill">healthy weight range calculator</span>
+      </div>
+
+      <h4 class="seo-subheading">Calorie calculator &amp; TDEE — know your daily energy needs</h4>
+      <p>
+        Whether your goal is fat loss, muscle gain, or maintenance, understanding your Total Daily Energy
+        Expenditure (TDEE) is the single most important dietary metric. Our
+        <a routerLink="/health/calorie-calculator" class="seo-link">calorie calculator</a> uses the
+        Mifflin-St Jeor equation — the gold standard recommended by registered dietitians — incorporating
+        your age, gender, height, weight, and activity level to compute your Basal Metabolic Rate (BMR)
+        and adjust it for your daily movement. The result is a precise daily calorie target for your
+        specific goal, alongside a macronutrient breakdown of proteins, carbohydrates, and fats in grams.
+        This is the same methodology used by professional nutritionists and sports scientists.
+      </p>
+
+      <h4 class="seo-subheading">Ideal weight calculator</h4>
+      <p>
+        Rather than a single target weight, our <a routerLink="/health/ideal-weight-calculator" class="seo-link">ideal
+          weight calculator</a>
+        presents a healthy weight range derived from four established medical formulas — Robinson, Miller,
+        Devine, and Hamwi — and provides the range most appropriate for your height and gender. This nuanced
+        approach recognises that ideal body weight is not one-size-fits-all and depends on bone density,
+        muscle mass, and individual body composition. Setting a realistic, evidence-based weight target is
+        the first step to a sustainable fitness journey.
+      </p>
+
+      <h4 class="seo-subheading">Body fat percentage calculator</h4>
+      <p>
+        BMI tells you about relative weight, but body fat percentage tells you about body composition — a
+        far more meaningful metric for athletes and fitness enthusiasts. Our
+        <a routerLink="/health/body-fat-calculator" class="seo-link">body fat calculator</a> uses the
+        U.S. Navy circumference method (requiring waist, neck, and hip measurements) to estimate total fat
+        mass versus lean body mass. High body fat — even in individuals with a "normal" BMI, a condition
+        called normal-weight obesity — is associated with elevated metabolic risk. Track your body fat
+        percentage monthly to gauge the real effectiveness of your fitness programme beyond just the
+        weighing scale.
+      </p>
+
+      <div class="seo-checklist">
+        <div class="seo-check-item">✅ WHO-validated BMI formula (metric &amp; imperial)</div>
+        <div class="seo-check-item">✅ Mifflin-St Jeor equation for TDEE &amp; BMR</div>
+        <div class="seo-check-item">✅ US Navy body fat circumference method</div>
+        <div class="seo-check-item">✅ 4 ideal weight formulas compared side by side</div>
+        <div class="seo-check-item">✅ Macro breakdown (protein / carbs / fat) in grams</div>
+        <div class="seo-check-item">✅ Zero health data stored, shared, or transmitted</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MATH PANEL ── -->
+  <div class="seo-panel" [class.seo-panel--visible]="seoActiveTab === 'math'" role="tabpanel">
+    <div class="seo-card">
+      <h3 class="seo-card-title">
+        <span class="seo-card-icon"><lucide-icon name="Sigma" [size]="16"></lucide-icon></span>
+        Simplify complex mathematical problems instantly
+      </h3>
+      <p>
+        Mathematics underpins everything — from a student solving quadratic equations for board exams,
+        to a business analyst computing statistical significance, to an engineer evaluating matrix
+        transformations. CalculHub's free math calculators bring professional-grade computation to any
+        browser with no installation, no subscription, and no complexity.
+      </p>
+
+      <h4 class="seo-subheading">Scientific calculator — advanced operations in your browser</h4>
+      <p>
+        Our browser-based <a routerLink="/mathematical/scientific-calculator" class="seo-link">scientific calculator</a>
+        supports trigonometric functions (sin, cos, tan and their inverses), logarithms (log₁₀ and ln),
+        exponents, square roots, factorials, and mathematical constants like π and e. It follows standard
+        operator precedence (BODMAS/PEMDAS) and supports both degree and radian modes — covering the full
+        scope of Class 11-12 and undergraduate mathematics curricula. No download needed; it works
+        flawlessly on mobile, tablet, and desktop alike, making it the ideal companion during exams,
+        homework sessions, and quick professional calculations.
+      </p>
+
+      <div class="seo-pill-row">
+        <span class="seo-pill seo-pill--hot">scientific calculator online free</span>
+        <span class="seo-pill seo-pill--hot">percentage calculator online</span>
+        <span class="seo-pill">algebra calculator step by step</span>
+        <span class="seo-pill">matrix calculator</span>
+        <span class="seo-pill">mean median mode calculator</span>
+      </div>
+
+      <h4 class="seo-subheading">Percentage calculator — solve any percentage problem instantly</h4>
+      <p>
+        Percentages appear in virtually every domain — discounts at retail stores, GST tax rates, bank
+        interest rates, exam scores, stock returns, and more. Our
+        <a routerLink="/mathematical/percentage-calculator" class="seo-link">percentage calculator</a>
+        handles six common problem types: find the percentage of a number, find what percentage X is of Y,
+        find the original value before a percentage increase or decrease, calculate the percentage change
+        between two values, and more. Each result updates in real time as you type, making it ideal for
+        quick mental-math verification in shopping, finance, and academics.
+      </p>
+
+      <h4 class="seo-subheading">Algebra calculator</h4>
+      <p>
+        Solve linear and quadratic equations, simplify algebraic expressions, and factor polynomials step
+        by step with our <a routerLink="/mathematical/algebra-calculator" class="seo-link">algebra calculator</a>.
+        Designed for students preparing for CBSE, ICSE, JEE Mains, JEE Advanced, and other competitive
+        examinations, as well as working professionals who need quick symbolic manipulation without opening
+        a full-fledged CAS software package. The step-by-step solution display helps reinforce conceptual
+        understanding, not just deliver an answer.
+      </p>
+
+      <h4 class="seo-subheading">Matrix calculator</h4>
+      <p>
+        Perform matrix addition, subtraction, multiplication, transposition, and determinant calculation
+        for matrices up to 4×4 using our
+        <a routerLink="/mathematical/matrix-calculator" class="seo-link">matrix calculator</a>.
+        Ideal for students in linear algebra and engineering mathematics courses, and for data scientists
+        working with transformation matrices, covariance matrices, or neural network weight tensors. Results
+        are displayed in a clean grid format, making it easy to verify hand-computed answers and spot errors.
+      </p>
+
+      <h4 class="seo-subheading">Statistics calculator</h4>
+      <p>
+        Enter any dataset and instantly compute the mean, median, mode, range, variance, and standard
+        deviation with our <a routerLink="/mathematical/statistics-calculator" class="seo-link">statistics
+          calculator</a>.
+        Indispensable for Class 10-12 students, psychology and social science researchers, quality control
+        engineers, and anyone who needs descriptive statistics quickly without launching Excel or SPSS.
+        Paste in a comma-separated list of values and get the complete statistical summary in one click.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── MARKETS PANEL ── -->
+  <div class="seo-panel" [class.seo-panel--visible]="seoActiveTab === 'market'" role="tabpanel">
+    <div class="seo-card">
+      <h3 class="seo-card-title">
+        <span class="seo-card-icon"><lucide-icon name="bitcoin" [size]="16"></lucide-icon></span>
+        Live market tools — currency, crypto &amp; precious metals
+      </h3>
+      <p>
+        Financial markets never sleep, and neither should your ability to convert, compare, and price
+        assets accurately. CalculHub's market calculators fetch live rates and apply them in real time so
+        you always have the most current data for informed decisions — whether you are an importer
+        checking the USD/INR rate, a jewellery buyer verifying the 22K gold price per gram, or a crypto
+        enthusiast estimating transaction costs.
+      </p>
+
+      <h4 class="seo-subheading">Currency converter — live exchange rates for 150+ currencies</h4>
+      <p>
+        Our free <a routerLink="/market/currency-converter" class="seo-link">currency converter</a> uses
+        real-time exchange rate data to convert between over 150 global currencies including INR, USD, EUR,
+        GBP, AED, SGD, JPY, CAD, AUD, and more. Whether you are comparing international tuition fees,
+        planning a foreign trip, calculating import/export costs, or sending remittances abroad, the
+        currency converter gives you an accurate mid-market rate instantly. Unlike bank websites that only
+        show their own buy/sell spread, CalculHub shows you the true interbank rate so you can benchmark
+        any conversion quote you receive.
+      </p>
+
+      <div class="seo-pill-row">
+        <span class="seo-pill seo-pill--hot">currency converter INR to USD</span>
+        <span class="seo-pill seo-pill--hot">live exchange rate calculator India</span>
+        <span class="seo-pill">INR to AED today</span>
+        <span class="seo-pill">dollar to rupee converter</span>
+        <span class="seo-pill">forex calculator online</span>
+      </div>
+
+      <h4 class="seo-subheading">Gold &amp; silver rate calculator</h4>
+      <p>
+        Gold and silver prices fluctuate daily based on global spot prices, London Bullion Market
+        Association (LBMA) benchmarks, import duties, and applicable GST. Our
+        <a routerLink="/market/gold-silver-calculator" class="seo-link">gold and silver calculator</a>
+        fetches the latest rates and lets you compute the total value of any weight — grams, tola, or
+        troy ounce — at any purity level: 24K, 22K, 18K, or 14K for gold; 999, 925, or 800 for silver.
+        GST at 3% is applied automatically. Useful for jewellery buyers comparing prices across retailers,
+        sellers valuing old gold, pawnbrokers assessing collateral, and investors tracking their physical
+        precious metal portfolio value in real time.
+      </p>
+
+      <h4 class="seo-subheading">Crypto calculator</h4>
+      <p>
+        The cryptocurrency market moves at unprecedented speed. Our
+        <a routerLink="/market/crypto-calculator" class="seo-link">crypto calculator</a> helps you
+        estimate the effective value of cryptocurrency swaps and transaction fee costs, giving you a clear
+        picture of the net conversion rate after network fees (gas fees for Ethereum, network fees for
+        Bitcoin, etc.) are applied. Essential for anyone actively trading or investing in digital assets
+        who wants a clear cost breakdown before confirming a transaction.
+      </p>
+
+      <div class="seo-highlight-box">
+        <p>
+          ⚠️ Market rates shown are real-time mid-market rates for reference purposes only. Actual buy/sell
+          rates at banks, money exchange counters, and remittance providers will differ due to their spread
+          and service fees. Always confirm with your bank or exchange before transacting.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FAQ PANEL ── -->
+  <div class="seo-panel" [class.seo-panel--visible]="seoActiveTab === 'faq'" role="tabpanel">
+    <div class="seo-card">
+      <h3 class="seo-card-title">
+        <span class="seo-card-icon"><lucide-icon name="info" [size]="16"></lucide-icon></span>
+        Frequently asked questions about CalculHub
+      </h3>
+
+      <div class="seo-faq-list">
+        <details class="seo-faq-item">
+          <summary class="seo-faq-q">Are all CalculHub calculators completely free to use?</summary>
+          <p class="seo-faq-a">
+            Yes — every calculator on CalculHub is 100% free with no hidden charges, no premium tiers,
+            no paywall, and no account creation required. All tools are accessible directly from your
+            browser on any device at any time.
+          </p>
+        </details>
+        <details class="seo-faq-item">
+          <summary class="seo-faq-q">Does CalculHub store or share my personal data?</summary>
+          <p class="seo-faq-a">
+            No. All calculations run entirely inside your browser using JavaScript. No inputs you enter
+            are ever sent to a server, stored in a database, or shared with any third party. CalculHub
+            is privacy-first by architecture — your financial figures, health metrics, and personal
+            inputs never leave your device.
+          </p>
+        </details>
+        <details class="seo-faq-item">
+          <summary class="seo-faq-q">How accurate are the financial calculators?</summary>
+          <p class="seo-faq-a">
+            CalculHub's financial calculators use standard formulas prescribed by RBI and SEBI guidelines
+            — the same formulas used by banks, NBFCs, and financial institutions. Results are accurate for
+            planning and estimation purposes. For binding financial, legal, or tax advice, always consult
+            a certified financial planner (CFP) or chartered accountant (CA).
+          </p>
+        </details>
+        <details class="seo-faq-item">
+          <summary class="seo-faq-q">Which BMI and TDEE formulas does CalculHub use?</summary>
+          <p class="seo-faq-a">
+            The BMI calculator uses the WHO standard formula: weight (kg) ÷ height² (m²). The calorie and
+            TDEE calculator uses the Mifflin-St Jeor equation, which is the most accurate formula recommended
+            by clinical dietitians for estimating Basal Metabolic Rate. The ideal weight calculator uses
+            four clinical formulas — Robinson (1983), Miller (1983), Devine (1974), and Hamwi — and
+            displays all results together for a comprehensive range.
+          </p>
+        </details>
+        <details class="seo-faq-item">
+          <summary class="seo-faq-q">Can I use CalculHub on my mobile phone?</summary>
+          <p class="seo-faq-a">
+            Absolutely. CalculHub is fully responsive and optimised for all screen sizes including
+            smartphones, tablets, laptops, and desktops. No app download is needed — simply visit
+            CalculHub in your mobile browser and all tools work natively, even on slower internet
+            connections.
+          </p>
+        </details>
+        <details class="seo-faq-item">
+          <summary class="seo-faq-q">How often are currency and gold/silver rates updated?</summary>
+          <p class="seo-faq-a">
+            Live rates on the currency converter and gold/silver calculator are fetched in real time
+            from market data APIs each time you open or reload the calculator. This ensures you always
+            work with current mid-market rates rather than stale cached values that could be hours or
+            days old.
+          </p>
+        </details>
+        <details class="seo-faq-item">
+          <summary class="seo-faq-q">Which tax regimes does the income tax calculator support?</summary>
+          <p class="seo-faq-a">
+            The income tax calculator supports both the Old Tax Regime (with deductions under 80C, 80D,
+            HRA, standard deduction, and others) and the New Tax Regime introduced in the Union Budget.
+            You can compare your tax liability under both regimes side by side to decide which is more
+            beneficial for your specific income profile and investment pattern.
+          </p>
+        </details>
+        <details class="seo-faq-item">
+          <summary class="seo-faq-q">Is there a difference between the SIP calculator and the mutual fund returns
+            calculator?</summary>
+          <p class="seo-faq-a">
+            Yes. The SIP calculator projects the future value of ongoing monthly investments you plan to
+            make — ideal for goal planning. The mutual fund returns calculator evaluates the performance
+            of investments you have already made, computing absolute returns or annualised XIRR based on
+            actual investment amounts and current values. Together they cover both forward planning and
+            backward performance analysis.
+          </p>
+        </details>
+      </div>
+    </div>
+
+    <!-- Why CalculHub card -->
+    <div class="seo-card seo-card--why">
+      <h3 class="seo-card-title">
+        <span class="seo-card-icon"><lucide-icon name="star" [size]="16"></lucide-icon></span>
+        Why CalculHub stands out among free calculator websites
+      </h3>
+      <p>
+        There are dozens of calculator websites on the internet, but most are cluttered with intrusive
+        advertisements, require a login for full access, or deliver results without explaining the
+        underlying methodology. CalculHub was designed differently, guided by three core principles that
+        put users first.
+      </p>
+      <div class="seo-why-grid">
+        <div class="seo-why-card">
+          <span class="seo-why-icon">🔒</span>
+          <strong>Privacy first</strong>
+          <p>Zero data leaves your device. No tracking cookies. No analytics profiling your financial inputs or health
+            metrics. What you calculate stays with you.</p>
+        </div>
+        <div class="seo-why-card">
+          <span class="seo-why-icon">🎯</span>
+          <strong>Verified accuracy</strong>
+          <p>Every formula is cross-verified against RBI, WHO, ISO, and SEBI standards before deployment. We cite the
+            formula source so you can verify it yourself.</p>
+        </div>
+        <div class="seo-why-card">
+          <span class="seo-why-icon">⚡</span>
+          <strong>Instant results</strong>
+          <p>No page reloads. Results update live as you type — fully optimised for speed on networks ranging from 2G to
+            5G so nobody is left waiting.</p>
+        </div>
+        <div class="seo-why-card">
+          <span class="seo-why-icon">📱</span>
+          <strong>Mobile ready</strong>
+          <p>Fully responsive design works flawlessly on any screen — from an entry-level Android smartphone to a 4K
+            desktop monitor. No app required.</p>
+        </div>
+        <div class="seo-why-card">
+          <span class="seo-why-icon"><lucide-icon name="heart-plus" [size]="16"></lucide-icon></span>
+          <strong>No ads, ever</strong>
+          <p>CalculHub is completely ad-free. No pop-ups, no banners, no sponsored results. A clean, distraction-free
+            environment for focused calculations.</p>
+        </div>
+        <div class="seo-why-card">
+          <span class="seo-why-icon">🇮🇳</span>
+          <strong>Built for India</strong>
+          <p>Designed with Indian financial products, tax laws, and regulations in mind — GST, PPF, SIP, EPF, and income
+            tax slabs are all natively supported.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </section>
 
 <!-- Premium About Section -->

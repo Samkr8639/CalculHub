@@ -25,6 +25,15 @@ export class SidePanelComponent implements OnInit, OnDestroy {
   private calculatorSelectionService = inject(CalculatorSelectionService);
   private subscription = new Subscription();
   activeLink = signal<string | null>(null);
+  isOpen = signal<boolean>(false);
+
+  toggleSidebar(): void {
+    this.isOpen.update(open => !open);
+  }
+
+  closeSidebar(): void {
+    this.isOpen.set(false);
+  }
 
   collapsedCategories = signal<{[key: string]: boolean}>({
     'Financial': true,

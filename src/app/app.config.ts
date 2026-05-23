@@ -6,14 +6,14 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideServiceWorker } from '@angular/service-worker';
-import { LucideAngularModule } from 'lucide-angular';
+import { Banknote, ChartLine, ChartNoAxesColumnIncreasing, ChartNoAxesCombined, HeartPulse, LucideAngularModule, Star } from 'lucide-angular';
 import {
   House, TrendingUp, Receipt, PiggyBank, BarChart3, Landmark, Vault,
   FileText, BadgeCheck, Building, Percent, Calculator, SquareFunction,
   Grid2x2, Sigma, Activity, Bike, GraduationCap, Calendar,
   Facebook, Twitter, Linkedin, Instagram, Github,
   ChevronDown, ChevronRight, Heart, Scale, Target, User, Info, Map,
-  Coins, Bitcoin, Gem,
+  Coins, Bitcoin, Gem, Menu, X,
 } from 'lucide-angular';
 
 export const appConfig: ApplicationConfig = {
@@ -32,7 +32,7 @@ export const appConfig: ApplicationConfig = {
       Grid2x2, Sigma, Activity, Bike, GraduationCap, Calendar,
       Facebook, Twitter, Linkedin, Instagram, Github,
       ChevronDown, ChevronRight, Heart, Scale, Target, User, Info, Map,
-      Coins, Bitcoin, Gem,
-    })),
+      Coins, Bitcoin, Gem, ChartNoAxesColumnIncreasing, ChartLine, Banknote, HeartPulse, Star, ChartNoAxesCombined, Menu, X
+    }))
   ]
 };

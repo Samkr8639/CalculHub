@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, signal, computed, ElementRef, ViewChild, CUSTOM_ELEMENTS_SCHEMA, inject, PLATFORM_ID, AfterViewInit, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, signal, computed, ElementRef, ViewChild, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, inject, PLATFORM_ID, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -14,7 +14,7 @@ interface CalculatorCard {
   title: string;
   description: string;
   link: string;
-  category: string; 
+  category: string;
 }
 
 @Component({
@@ -23,12 +23,31 @@ interface CalculatorCard {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('calculatorsSection') calculatorsSection!: ElementRef;
   private platformId = inject(PLATFORM_ID);
   private ctx!: gsap.Context;
+  seoActiveTab = 'finance';
+  swiperBreakpoints = {
+    320: {
+      slidesPerView: 1,
+      spaceBetween: 16
+    },
+    640: {
+      slidesPerView: 2,
+      spaceBetween: 20
+    },
+    992: {
+      slidesPerView: 3,
+      spaceBetween: 24
+    },
+    1200: {
+      slidesPerView: 4,
+      spaceBetween: 24
+    }
+  };
 
   calculatorCards = signal<CalculatorCard[]>([
     { icon: 'house', title: 'Mortgage Calculator', description: 'Calculate your monthly mortgage payments and amortization schedule.', link: '/financial/mortgage', category: 'Financial' },
