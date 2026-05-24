@@ -29,7 +29,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('calculatorsSection') calculatorsSection!: ElementRef;
   private platformId = inject(PLATFORM_ID);
   private ctx!: gsap.Context;
-  seoActiveTab = 'finance';
+
+  public seoActiveTab = 'finance';
+
   swiperBreakpoints = {
     320: {
       slidesPerView: 1,

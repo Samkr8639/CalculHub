@@ -1,120 +1,573 @@
-<div class="about-container">
-  <header class="about-header">
-    <h1>About CalculHub: Your Partner in Precision</h1>
-    <p class="subtitle">Welcome to CalculHub, the digital sanctuary where numbers transform into answers and complex
-      calculations become simple.</p>
+<article class="about-container" id="calculhub-about-root">
+  <!-- Interactive Visual Backdrop Glows -->
+  <div class="backdrop-glow glow-1"></div>
+  <div class="backdrop-glow glow-2"></div>
+
+  <!-- Hero Branding Banner -->
+  <header class="about-header animate-fade-in">
+    <div class="brand-badge">
+      <lucide-icon name="info" [size]="14"></lucide-icon>
+      <span>Inside CalculHub</span>
+    </div>
+    <h1 class="glow-text">Empowering Decisions Through Computational Precision</h1>
+    <p class="subtitle">
+      CalculHub is a next-generation utility portal providing instant, client-side, 
+      mathematically precise answers for finance, health, and academic calculations.
+    </p>
   </header>
 
-  <section class="content-section">
-    <p>In a world saturated with data, we believe everyone deserves access to a powerful, intuitive, and completely free
-      online calculator that doesn't just compute, but clarifies. Our mission is to empower students, professionals, and
-      curious minds alike by providing a comprehensive suite of tools that are not only mathematically precise but also
-      beautifully designed and incredibly easy to use.</p>
-    <p>Whether you're planning your financial future with our compound interest calculator, making crucial health
-      decisions with our calorie calculator, or tackling complex academic problems with our scientific calculator,
-      CalculHub is your trusted partner. We've meticulously designed this platform to be the only calculator you'll ever
-      need—a one-stop solution for every calculation imaginable.</p>
-  </section>
+  <!-- Navigation Tab bar for Premium Content Modules -->
+  <nav class="pill-navigation" aria-label="About Sections Tab Navigation">
+    <button 
+      class="nav-tab" 
+      [class.active]="activeTab() === 'vision'"
+      (click)="setTab('vision')"
+      id="tab-vision"
+      type="button">
+      <lucide-icon name="target" [size]="16"></lucide-icon>
+      <span>Our Vision</span>
+    </button>
+    <button 
+      class="nav-tab" 
+      [class.active]="activeTab() === 'tech'"
+      (click)="setTab('tech')"
+      id="tab-tech"
+      type="button">
+      <lucide-icon name="cpu" [size]="16"></lucide-icon>
+      <span>Technology & Speed</span>
+    </button>
+    <button 
+      class="nav-tab" 
+      [class.active]="activeTab() === 'story'"
+      (click)="setTab('story')"
+      id="tab-story"
+      type="button">
+      <lucide-icon name="activity" [size]="16"></lucide-icon>
+      <span>Milestones</span>
+    </button>
+    <button 
+      class="nav-tab" 
+      [class.active]="activeTab() === 'accuracy'"
+      (click)="setTab('accuracy')"
+      id="tab-accuracy"
+      type="button">
+      <lucide-icon name="calculator" [size]="16"></lucide-icon>
+      <span>Mathematical Rigor</span>
+    </button>
+    <button 
+      class="nav-tab" 
+      [class.active]="activeTab() === 'privacy'"
+      (click)="setTab('privacy')"
+      id="tab-privacy"
+      type="button">
+      <lucide-icon name="badge-check" [size]="16"></lucide-icon>
+      <span>Privacy & Safety</span>
+    </button>
+  </nav>
 
-  <section class="mission-section">
-    <h2>Our Mission: Simplifying Complexity for Everyone</h2>
-    <p>Our core mission is simple: to democratize access to high-quality calculation tools. We saw a gap in the digital
-      landscape—tools were either too basic, riddled with ads, or locked behind expensive paywalls. We envisioned a
-      single, unified platform where anyone could find a reliable calculator for free, without compromise.</p>
+  <!-- Interactive Dynamic Viewport Sections -->
+  <main class="viewport-content" id="viewport-main">
+    
+    <!-- SECTION 1: VISION & PILLARS -->
+    @if (activeTab() === 'vision') {
+      <section class="tab-panel animate-slide-up" id="panel-vision" aria-labelledby="tab-vision">
+        <div class="panel-header">
+          <h2>Democratizing Precision: Our Three Pillars</h2>
+          <p class="panel-intro">
+            We believe high-quality mathematical calculators, financial plan estimators, and physiological index analyzers 
+            should be freely accessible, beautifully designed, and run with absolute security.
+          </p>
+        </div>
 
-    <div class="principles-grid">
-      <div class="principle-card">
-        <h3>Accessibility</h3>
-        <p>We believe that financial literacy, health awareness, and academic success shouldn't be privileges. That's
-          why every tool on our platform, from the GST calculator to the mortgage payment calculator, is available to
-          everyone, anytime, anywhere, and on any device.</p>
+        <div class="pillars-grid">
+          <div class="pillar-card">
+            <div class="pillar-icon">
+              <lucide-icon name="scale" [size]="24"></lucide-icon>
+            </div>
+            <h3>Universal Accessibility</h3>
+            <p>
+              Knowledge should not be gated behind premium tiers, hidden subscriptions, or user-tracking paywalls. 
+              CalculHub is completely free for everyone. Whether you are a student computing matrices in a college library, 
+              a small business owner determining GST rates on invoices, or an investor tracking a SIP compounding schedule 
+              on your smartphone, our entire catalog is unlocked for you.
+            </p>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon">
+              <lucide-icon name="badge-check" [size]="24"></lucide-icon>
+            </div>
+            <h3>Rigorous Accuracy</h3>
+            <p>
+              Calculations demand absolute precision. Every formula implemented in our software—from home loan EMIs and tax schedules 
+              to body mass indexes and metabolic parameters—undergoes multi-stage verification against certified banking 
+              standards and medical studies. We implement robust input validation checks so that you never receive 
+              mathematically invalid answers.
+            </p>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon">
+              <lucide-icon name="gem" [size]="24"></lucide-icon>
+            </div>
+            <h3>Delightful User Experience</h3>
+            <p>
+              Utility tools do not have to look like spreadsheets from the 1990s. We combine modern aesthetics, dark themes, 
+              micro-interactions, and visual representations (like dynamic growth charts) with responsive layouts. 
+              Our interface adapts seamlessly, providing an intuitive, premium workspace that makes solving math equations 
+              and planning budgets a visual pleasure.
+            </p>
+          </div>
+        </div>
+
+        <div class="seo-text-block">
+          <h3>The Evolution of Computing Utilities</h3>
+          <p>
+            For decades, web utility sites have relied on outdated advertising loops, sluggish server requests, and 
+            invasive tracking cookies that jeopardize data integrity. When users query their financial data or input 
+            personal body measurements, they shouldn't have to share their private details with advertisers. 
+            We recognized this structural gap and engineered CalculHub from the ground up to solve it. Our vision is to 
+            establish a highly responsive, modern digital sanctuary that respects your privacy and provides instant results.
+          </p>
+          <p>
+            By consolidating diverse utilities into a single, clean domain, users are freed from the friction of bookmarking 
+            multiple websites. Our platform serves as your persistent utility workstation, retaining calculator inputs in your 
+            local browser sandbox so that returning to your compound interest charts or calorie goals is completely seamless.
+          </p>
+        </div>
+      </section>
+    }
+
+    <!-- SECTION 2: TECHNOLOGY & INTERACTIVE SANDBOX -->
+    @if (activeTab() === 'tech') {
+      <section class="tab-panel animate-slide-up" id="panel-tech" aria-labelledby="tab-tech">
+        <div class="grid-two-columns">
+          
+          <!-- Column A: Detailed Tech Copy -->
+          <div class="seo-text-block">
+            <h2>Under the Hood: Responsive Architecture</h2>
+            <p>
+              CalculHub is built using a highly optimized, client-side, modular framework powered by 
+              <strong>Angular v20+</strong>. By designing 100% of our pages as standalone components, 
+              we minimize overhead, enhance modular boundaries, and ensure blazing-fast initial load times.
+            </p>
+            
+            <div class="tech-feature-list">
+              <div class="tech-item">
+                <lucide-icon name="activity" [size]="18" class="bullet-icon"></lucide-icon>
+                <div>
+                  <strong>Angular Signals & Reactivity:</strong>
+                  Our calculators leverage reactive signals state management. Rather than executing heavy 
+                  dirty-checking loops across the entire DOM tree, the template dynamically renders only the 
+                  specific mathematical nodes that changed, reducing processor cycles.
+                </div>
+              </div>
+              <div class="tech-item">
+                <lucide-icon name="cpu" [size]="18" class="bullet-icon"></lucide-icon>
+                <div>
+                  <strong>0ms Computational Latency:</strong>
+                  Conventional calculators send form data to backend servers, returning answers via APIs. 
+                  CalculHub compiles all math solvers into highly optimized JavaScript executed locally in your 
+                  device's browser thread, yielding instantaneous, sub-millisecond computations.
+                </div>
+              </div>
+              <div class="tech-item">
+                <lucide-icon name="vault" [size]="18" class="bullet-icon"></lucide-icon>
+                <div>
+                  <strong>Browser Caching:</strong>
+                  We use browser-native LocalStorage memory arrays to save your configurations and recent histories. 
+                  This ensures that your customized settings are preserved locally without sending a single byte to an external database.
+                </div>
+              </div>
+            </div>
+
+            <p>
+              By bypassing the server for mathematical processes, we avoid network lag and eliminate service disruption. 
+              Whether you are offline in an airplane cabin or operating on a congested mobile connection, 
+              CalculHub's calculations execute instantly.
+            </p>
+          </div>
+
+          <!-- Column B: Interactive Live Sandbox Widget -->
+          <div class="interactive-sandbox-card glass-panel">
+            <div class="sandbox-header">
+              <div class="glow-indicator">LIVE PERFORMANCE SANDBOX</div>
+              <h3>Test Our Real-Time Signals Engine</h3>
+              <p>Interact with the sliders below to see our signals recalculate standard math models with 0ms delay.</p>
+            </div>
+
+            <!-- Sandbox Switcher -->
+            <div class="sandbox-switcher">
+              <button 
+                [class.active]="activeSandbox() === 'interest'"
+                (click)="setSandbox('interest')"
+                type="button">Compound Interest</button>
+              <button 
+                [class.active]="activeSandbox() === 'percentage'"
+                (click)="setSandbox('percentage')"
+                type="button">Precision Percentage</button>
+            </div>
+
+            <!-- Sandbox A: Compound Interest -->
+            @if (activeSandbox() === 'interest') {
+              <div class="sandbox-form animate-fade-in">
+                
+                <div class="form-group">
+                  <div class="label-row">
+                    <label for="sb-principal">Principal Amount (₹):</label>
+                    <span class="value-highlight">₹{{ sandboxPrincipal() | number:'1.0-0' }}</span>
+                  </div>
+                  <input 
+                    type="range" 
+                    id="sb-principal" 
+                    min="10000" 
+                    max="1000000" 
+                    step="10000" 
+                    [value]="sandboxPrincipal()"
+                    (input)="sandboxPrincipal.set(+$any($event.target).value)">
+                </div>
+
+                <div class="form-group">
+                  <div class="label-row">
+                    <label for="sb-rate">Annual Interest Rate (%):</label>
+                    <span class="value-highlight">{{ sandboxRate() }}%</span>
+                  </div>
+                  <input 
+                    type="range" 
+                    id="sb-rate" 
+                    min="1" 
+                    max="30" 
+                    step="0.5" 
+                    [value]="sandboxRate()"
+                    (input)="sandboxRate.set(+$any($event.target).value)">
+                </div>
+
+                <div class="form-group">
+                  <div class="label-row">
+                    <label for="sb-years">Investment Duration (Years):</label>
+                    <span class="value-highlight">{{ sandboxYears() }} Years</span>
+                  </div>
+                  <input 
+                    type="range" 
+                    id="sb-years" 
+                    min="1" 
+                    max="40" 
+                    step="1" 
+                    [value]="sandboxYears()"
+                    (input)="sandboxYears.set(+$any($event.target).value)">
+                </div>
+
+                <div class="form-group">
+                  <label for="sb-freq">Compounding Frequency:</label>
+                  <select 
+                    id="sb-freq" 
+                    [value]="sandboxCompoundFreq()" 
+                    (change)="sandboxCompoundFreq.set(+$any($event.target).value)">
+                    <option [value]="1">Annually (1x/Yr)</option>
+                    <option [value]="4">Quarterly (4x/Yr)</option>
+                    <option [value]="12">Monthly (12x/Yr)</option>
+                  </select>
+                </div>
+
+                <!-- Sandbox Output -->
+                <div class="sandbox-output-block">
+                  <div class="output-row">
+                    <span>Interest Accrued:</span>
+                    <strong class="text-glow">₹{{ sandboxInterestResult().interest | number:'1.0-0' }}</strong>
+                  </div>
+                  <div class="output-row total-row">
+                    <span>Future Wealth:</span>
+                    <strong class="accent-glow">₹{{ sandboxInterestResult().total | number:'1.0-0' }}</strong>
+                  </div>
+                </div>
+
+              </div>
+            }
+
+            <!-- Sandbox B: Precision Percentage -->
+            @if (activeSandbox() === 'percentage') {
+              <div class="sandbox-form animate-fade-in">
+                
+                <div class="form-group">
+                  <div class="label-row">
+                    <label for="sb-percent">Percentage Value (%):</label>
+                    <span class="value-highlight">{{ sandboxPercentVal() }}%</span>
+                  </div>
+                  <input 
+                    type="range" 
+                    id="sb-percent" 
+                    min="1" 
+                    max="100" 
+                    step="1" 
+                    [value]="sandboxPercentVal()"
+                    (input)="sandboxPercentVal.set(+$any($event.target).value)">
+                </div>
+
+                <div class="form-group">
+                  <div class="label-row">
+                    <label for="sb-num">Base Number:</label>
+                    <span class="value-highlight">{{ sandboxNumVal() | number:'1.0-0' }}</span>
+                  </div>
+                  <input 
+                    type="range" 
+                    id="sb-num" 
+                    min="100" 
+                    max="50000" 
+                    step="100" 
+                    [value]="sandboxNumVal()"
+                    (input)="sandboxNumVal.set(+$any($event.target).value)">
+                </div>
+
+                <!-- Sandbox Output -->
+                <div class="sandbox-output-block">
+                  <div class="output-row total-row">
+                    <span>Result:</span>
+                    <strong class="accent-glow">{{ sandboxPercentResult() | number:'1.0-2' }}</strong>
+                  </div>
+                </div>
+
+              </div>
+            }
+
+          </div>
+        </div>
+      </section>
+    }
+
+    <!-- SECTION 3: MILESTONE TIMELINE -->
+    @if (activeTab() === 'story') {
+      <section class="tab-panel animate-slide-up" id="panel-story" aria-labelledby="tab-story">
+        <div class="panel-header">
+          <h2>The Journey Behind the Calculations</h2>
+          <p class="panel-intro">
+            What started as a frustration with cluttered, ad-ridden web utility pages has grown into a comprehensive, 
+            mathematically verified calculator suite. Here is our engineering roadmap from inception to our current state.
+          </p>
+        </div>
+
+        <div class="timeline-container">
+          <div class="timeline-line"></div>
+          
+          @for (event of timelineEvents(); track event.year) {
+            <div class="timeline-card-wrapper">
+              <div class="timeline-marker">
+                <lucide-icon [name]="event.icon" [size]="16"></lucide-icon>
+              </div>
+              <div class="timeline-card glass-panel">
+                <div class="card-year">{{ event.year }}</div>
+                <h3>{{ event.title }}</h3>
+                <p>{{ event.description }}</p>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+    }
+
+    <!-- SECTION 4: MATHEMATICAL ACCURACY & FORMULAS -->
+    @if (activeTab() === 'accuracy') {
+      <section class="tab-panel animate-slide-up" id="panel-accuracy" aria-labelledby="tab-accuracy">
+        <div class="panel-header">
+          <h2>Mathematical Rigor & Verification Standards</h2>
+          <p class="panel-intro">
+            We don't believe in approximations. Every calculator on our site runs standard equations verified by global financial 
+            institutions and peer-reviewed medical journals.
+          </p>
+        </div>
+
+        <div class="formula-grid">
+          
+          <!-- Formula Box 1 -->
+          <div class="formula-card glass-panel">
+            <div class="formula-header">
+              <span class="formula-tag">FINANCIAL MATHEMATICS</span>
+              <h3>Compounding & Annuity Equations</h3>
+            </div>
+            <p>
+              For standard wealth estimation modules, including the Fixed Deposit (FD) and Compound Interest calculators, 
+              we apply the Time Value of Money (TVM) standard. The future value is determined using compound interest logic:
+            </p>
+            <div class="equation-box">
+              <code>FV = P &times; (1 + r/n)<sup>n &times; t</sup></code>
+            </div>
+            <p>Where:</p>
+            <ul class="equation-variables">
+              <li><strong>FV:</strong> The future value or compound maturity amount.</li>
+              <li><strong>P:</strong> The initial principal investment sum.</li>
+              <li><strong>r:</strong> Nominal interest rate (expressed as a decimal).</li>
+              <li><strong>n:</strong> Compounding frequency multiplier per year.</li>
+              <li><strong>t:</strong> Total investment tenure in years.</li>
+            </ul>
+          </div>
+
+          <!-- Formula Box 2 -->
+          <div class="formula-card glass-panel">
+            <div class="formula-header">
+              <span class="formula-tag">CLINICAL METABOLISM</span>
+              <h3>The Mifflin-St Jeor Equation</h3>
+            </div>
+            <p>
+              To estimate Basal Metabolic Rate (BMR) and Total Daily Energy Expenditure (TDEE), we implement the 
+              Mifflin-St Jeor formula, widely recognized in clinical physiology as the most precise model:
+            </p>
+            <div class="equation-box">
+              <code>BMR = (10 &times; W) + (6.25 &times; H) - (5 &times; A) + s</code>
+            </div>
+            <p>Where:</p>
+            <ul class="equation-variables">
+              <li><strong>W:</strong> Body weight in kilograms.</li>
+              <li><strong>H:</strong> Body height in centimeters.</li>
+              <li><strong>A:</strong> Chronological age in years.</li>
+              <li><strong>s:</strong> Constant offset value: +5 for males, -161 for females.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="seo-text-block">
+          <h3>The Floating-Point Arithmetic Challenge</h3>
+          <p>
+            A common bug in modern JavaScript applications is the floating-point arithmetic issue (e.g., standard representation of 
+            <code>0.1 + 0.2</code> yields <code>0.30000000000000004</code> due to IEEE 754 double-precision binary representation). 
+            In financial planning tools, fractional precision is vital; even minor deviations propagate into compound schedules, 
+            leading to massive final errors.
+          </p>
+          <p>
+            CalculHub resolves this by employing internal scaling and integer arithmetic. Every financial calculation is processed by 
+            scaling inputs to base integers, performing absolute multiplication, and applying proper rounding. 
+            This keeps your numbers mathematically consistent down to the paisa.
+          </p>
+        </div>
+      </section>
+    }
+
+    <!-- SECTION 5: DATA PRIVACY & COMPLIANCE -->
+    @if (activeTab() === 'privacy') {
+      <section class="tab-panel animate-slide-up" id="panel-privacy" aria-labelledby="tab-privacy">
+        <div class="panel-header">
+          <h2>Strict Browser-Native Data Confidentiality</h2>
+          <p class="panel-intro">
+            Your personal, metabolic, and financial parameters should remain secure. That's why we have engineered a zero-database calculation portal.
+          </p>
+        </div>
+
+        <div class="privacy-points-grid">
+          <div class="privacy-point-card glass-panel">
+            <h3>No Database Clusters</h3>
+            <p>
+              We do not possess database clusters to catalog your inputs. When you compute loan interest, income taxes, 
+              or daily physical caloric maintenance, the variables remain in the sandboxed local thread of your browser's execution engine. 
+              No third-party intercepts or database breaches can ever compromise your financial metrics.
+            </p>
+          </div>
+
+          <div class="privacy-point-card glass-panel">
+            <h3>Sandboxed Local Storage</h3>
+            <p>
+              To improve your convenience, CalculHub saves your calculator selections, custom interest parameters, and recent computation histories 
+              locally in your device's browser memory workspace. Since this data is sandboxed, it is never transmitted to our host servers, 
+              offering you absolute peace of mind.
+            </p>
+          </div>
+
+          <div class="privacy-point-card glass-panel">
+            <h3>GDPR & CCPA Compliant</h3>
+            <p>
+              Because we don't collect, store, transmit, or monetize personal identifiable information (PII), we are inherently compliant with 
+              global safety guidelines, including the General Data Protection Regulation (GDPR) and the California Consumer Privacy Act (CCPA). 
+              You don't even need to register or create an account to use our tools.
+            </p>
+          </div>
+        </div>
+
+        <div class="seo-text-block">
+          <h3>Why Serverless Calculations Matter</h3>
+          <p>
+            Traditional calculator sites operate on a server-request architecture: when you click "Calculate", your income or weight parameters 
+            are wrapped in HTTP requests, sent across standard network ports, and parsed on backend API systems. 
+            This represents a massive vulnerability vector—unsecured connections, server logs, or compromised databases can expose 
+            your proprietary data to hackers or ad-targeting networks.
+          </p>
+          <p>
+            By executing all calculations locally within your web browser sandboxed environment, we guarantee complete privacy. 
+            CalculHub operates as a passive, high-performance static resource, delivering absolute accuracy with complete security.
+          </p>
+        </div>
+      </section>
+    }
+
+  </main>
+
+  <!-- KNOWLEDGE BASE & EXTENSIVE FAQ ACCORDION SECTION -->
+  <section class="faq-container animate-fade-in" id="faq-knowledge-base">
+    <div class="panel-header">
+      <span class="section-label">EDUCATIONAL COMPENDIUM</span>
+      <h2>Frequently Asked Questions & Expert Guidance</h2>
+      <p class="panel-intro">
+        Browse our comprehensive knowledge base to learn more about our math engines, data privacy policies, and calculation models.
+      </p>
+    </div>
+
+    <!-- Live FAQ Search input -->
+    <div class="faq-search-wrapper">
+      <div class="search-input-box">
+        <lucide-icon name="search" [size]="18" class="search-icon"></lucide-icon>
+        <input 
+          type="text" 
+          placeholder="Search our knowledge base (e.g. Accuracy, Mifflin, GDPR, Compounding...)" 
+          [value]="faqSearchQuery()"
+          (input)="updateSearchQuery($event)"
+          id="faq-search-bar"
+          aria-label="Search FAQs">
+        @if (faqSearchQuery()) {
+          <button class="clear-search-btn" (click)="faqSearchQuery.set('')" aria-label="Clear Search" type="button">
+            <lucide-icon name="x" [size]="16"></lucide-icon>
+          </button>
+        }
       </div>
-      <div class="principle-card">
-        <h3>Accuracy</h3>
-        <p>Trust is the bedrock of our platform. Our team of developers and subject-matter experts has rigorously tested
-          every formula and algorithm powering our calculators. When you use a CalculHub tool, you can be confident that
-          the results are precise and reliable, whether you're using the SIP calculator for investment planning or the
-          pregnancy due date calculator for life's biggest moments.</p>
-      </div>
-      <div class="principle-card">
-        <h3>User Experience</h3>
-        <p>We are obsessed with creating a seamless and delightful user experience. This means no intrusive pop-ups, no
-          confusing layouts, and no steep learning curves. Our clean, modern interface, complete with a dark/light mode
-          toggle and GSAP-powered animations, is designed to make your calculations not just easy, but enjoyable.
-          Finding the right online percentage calculator or a buy vs rent calculator should be effortless, and we've
-          made sure it is.</p>
-      </div>
+    </div>
+
+    <!-- Active Accordion list using native control flow -->
+    <div class="faq-accordion-list" id="faq-accordion-root">
+      
+      @for (faq of filteredFaqs(); track $index) {
+        <article 
+          class="faq-card glass-panel" 
+          [class.expanded]="activeFaq() === $index"
+          id="faq-item-{{ $index }}">
+          
+          <header 
+            class="faq-header" 
+            (click)="toggleFaq($index)"
+            (keydown.enter)="toggleFaq($index)"
+            (keydown.space)="toggleFaq($index)"
+            tabindex="0"
+            role="button"
+            [attr.aria-expanded]="activeFaq() === $index">
+            <div class="faq-title-row">
+              <span class="faq-badge">{{ faq.category }}</span>
+              <h4>{{ faq.question }}</h4>
+            </div>
+            <div class="faq-toggle-indicator">
+              <lucide-icon [name]="activeFaq() === $index ? 'chevron-down' : 'chevron-right'" [size]="18"></lucide-icon>
+            </div>
+          </header>
+
+          @if (activeFaq() === $index) {
+            <section class="faq-body-content animate-slide-up">
+              <p>{{ faq.answer }}</p>
+            </section>
+          }
+
+        </article>
+      } @empty {
+        <div class="empty-faq-state animate-fade-in">
+          <lucide-icon name="search" [size]="40" class="empty-icon"></lucide-icon>
+          <p>No matching educational articles found. Please try typing another keyword, like "accuracy" or "Mifflin".</p>
+        </div>
+      }
+
     </div>
   </section>
 
-  <section class="advantage-section">
-    <h2>Why Choose CalculHub? The CalculHub Advantage</h2>
-    <p>With countless online tools available, you might wonder what makes CalculHub special. The difference lies in our
-      unwavering commitment to quality, comprehensiveness, and the user. We've built more than just a website; we've
-      built a smart ecosystem for all your calculation needs.</p>
-
-    <h3>A Comprehensive Library of Free Tools</h3>
-    <div class="category-list">
-      <p><strong>Financial Calculators:</strong> Master your money with our powerful suite of financial tools. From our
-        detailed mortgage calculator with amortization schedule to our insightful paycheck calculator for net salary, we
-        provide the clarity you need to make informed financial decisions. Use our investment growth calculator to
-        project your future wealth or our simple tax calculator to estimate your liability.</p>
-      <p><strong>Mathematical & Scientific Calculators:</strong> Whether you're a student or a seasoned professional,
-        our math tools are built for performance. Our advanced scientific calculator handles everything from
-        trigonometry to logarithms, while our matrix calculator simplifies complex linear algebra. And for quick,
-        everyday tasks, our versatile percentage change calculator is always at your fingertips.</p>
-      <p><strong>Health & Lifestyle Calculators:</strong> Your health is your wealth, and our tools are here to help you
-        manage it. Use our TDEE calculator (Total Daily Energy Expenditure) to understand your energy needs, or our BMR
-        calculator to find your basal metabolic rate. Planning a family? Our due date calculator provides accurate
-        estimates to guide you on your journey.</p>
-      <p><strong>Niche & Viral Calculators:</strong> We also host a variety of unique tools that solve specific,
-        real-world problems. Our millionaire calculator is a motivational tool that shows you the path to reaching your
-        financial goals, while our buy vs. rent analysis calculator provides a detailed breakdown to help you make one
-        of life's biggest decisions.</p>
-    </div>
-
-    <h3>Unparalleled User-Centric Design</h3>
-    <div class="feature-list">
-      <p><strong>Smart Search Functionality:</strong> Can't find the tool you need? Our smart search bar uses fuzzy
-        matching to help you locate the exact calculator instantly. Just type "interest" and find everything from
-        compound interest to mortgage interest tools.</p>
-      <p><strong>Interactive Charts & Visualizations:</strong> Numbers on a screen are one thing, but seeing your data
-        come to life is another. Many of our calculators, like the SIP investment calculator and compound interest chart
-        generator, feature dynamic charts from Chart.js to help you visualize growth and understand complex data at a
-        glance.</p>
-      <p><strong>Personalization & History:</strong> Our platform remembers you. With a persistent dark/light mode
-        toggle and calculation history saved directly to your browser via LocalStorage, your preferences are always
-        saved for your next visit. You can easily access your recent mortgage payment calculations or calorie intake
-        goals without starting over.</p>
-    </div>
-
-    <h3>Commitment to Performance and Privacy</h3>
-    <div class="commitment-list">
-      <p><strong>Blazing-Fast Performance:</strong> Using modern web technologies like lazy loading and efficient
-        vanilla JavaScript, our site loads instantly. We've optimized every line of code to ensure you get your answers
-        without delay.</p>
-      <p><strong>Absolute Privacy:</strong> We respect your privacy. All calculations are performed directly within your
-        browser. We do not store your financial or personal data on our servers. The history feature utilizes your
-        browser's LocalStorage, meaning the data never leaves your device. You can use our salary tax calculator or loan
-        amortization scheduler with complete peace of mind.</p>
-    </div>
-  </section>
-
-  <section class="story-section">
-    <h2>Our Story: The Spark Behind the Numbers</h2>
-    <p>CalculHub was born out of a shared frustration. Our founder, a web developer with a passion for finance, was
-      tired of navigating a fragmented digital world to find reliable calculation tools. One day, while trying to
-      compare mortgage options, he had to open five different websites—one for the mortgage payment, another for the
-      amortization schedule, a third for a buy vs. rent analysis, and so on. Each site was cluttered with ads, had a
-      different user interface, and some even gave conflicting results.</p>
-    <p>This experience sparked an idea: What if there was one place for all these tools? A single, beautifully designed
-      website that was comprehensive, accurate, and respected the user's time and privacy.</p>
-    <p>He assembled a small, passionate team of developers, designers, and financial experts who shared this vision.
-      They spent months researching the most commonly needed calculators, from a simple GST calculator for small
-      businesses to a complex matrix inverse calculator for students. The team's guiding principle was to build each
-      tool with the same level of care and precision they would want for themselves.</p>
-    <p>The result is CalculHub—a project born from a genuine need, built with passion, and offered to the world for
-      free. It is the culmination of thousands of hours of coding, designing, and testing, all to fulfill the promise of
-      making complex calculations simple for everyone.</p>
-  </section>
-</div>
+</article>

@@ -13,7 +13,7 @@ import {
   Grid2x2, Sigma, Activity, Bike, GraduationCap, Calendar,
   Facebook, Twitter, Linkedin, Instagram, Github,
   ChevronDown, ChevronRight, Heart, Scale, Target, User, Info, Map,
-  Coins, Bitcoin, Gem, Menu, X,
+  Coins, Bitcoin, Gem, Menu, X, Cpu,
 } from 'lucide-angular';
 
 export const appConfig: ApplicationConfig = {
@@ -33,7 +33,7 @@ export const appConfig: ApplicationConfig = {
       Facebook, Twitter, Linkedin, Instagram, Github,
       ChevronDown, ChevronRight, Heart, Scale, Target, User, Info, Map,
       Coins, Bitcoin, Gem, ChartNoAxesColumnIncreasing, ChartLine, Banknote, HeartPulse, Star, ChartNoAxesCombined, Menu, X,
-      Flame, Search, ArrowRight
+      Flame, Search, ArrowRight, Cpu
     }))
   ]
 };
