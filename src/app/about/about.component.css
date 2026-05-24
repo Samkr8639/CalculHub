@@ -49,6 +49,7 @@
     transform: scale(0.9) translate(0, 0);
     opacity: 0.8;
   }
+
   100% {
     transform: scale(1.1) translate(20px, -20px);
     opacity: 1;
@@ -115,7 +116,7 @@
   border: 1px solid var(--border-grey);
   padding: 0.5rem;
   border-radius: 99px;
-  max-width: 900px;
+  max-width: 960px;
   margin: 0 auto 4rem auto;
   backdrop-filter: blur(12px);
   z-index: 2;
@@ -904,6 +905,7 @@ select:focus {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -914,6 +916,7 @@ select:focus {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
