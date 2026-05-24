@@ -462,6 +462,17 @@ export const routes: Routes = [
             }]
         }
       },
+      {
+        path: 'bmr-tdee-calculator',
+        loadComponent: () => import('./Allcalculators/bmr-tdee-calculator/bmr-tdee-calculator').then(m => m.BmrTdeeCalculatorComponent),
+        data: {
+          title: 'BMR TDEE Calculator — Calculate BMR & Daily Calorie Needs | CalculHub',
+          description: 'Calculate your Basal Metabolic Rate (BMR) and Total Daily Energy Expenditure (TDEE). Find your daily calorie needs for weight management.',
+          canonical: `${BASE_URL}/health/bmr-tdee-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Health', url: `${BASE_URL}/health` }, { name: 'BMR TDEE Calculator', url: `${BASE_URL}/health/bmr-tdee-calculator` }],
+          schema: [calcSchema('BMR TDEE Calculator', `${BASE_URL}/health/bmr-tdee-calculator`, 'Calculate your BMR and TDEE based on physical details and activity level.', 'HealthApplication')]
+        }
+      },
       { path: '', redirectTo: 'calorie-calculator', pathMatch: 'full' },
     ],
   },
