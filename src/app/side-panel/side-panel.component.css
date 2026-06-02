@@ -5,15 +5,25 @@
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
   border-right: 1px solid var(--border-grey);
   overflow-y: auto;
-  height: calc(100vh - 68px);
+  height: calc(100vh - 79px);
   position: sticky;
-  top: 68px;
+  top: 79px;
   /* Offset for Header height */
   left: 0;
   z-index: 50;
 }
 
 .category-section {
+  margin-bottom: 15px;
+}
+
+.mobile-only {
+  display: none;
+}
+
+.global-nav-section {
+  border-bottom: 1px solid var(--border-grey);
+  padding-bottom: 15px;
   margin-bottom: 15px;
 }
 
@@ -106,6 +116,9 @@
 }
 
 @media (max-width: 768px) {
+  .mobile-only {
+    display: block;
+  }
 
   /* Side Panel Collapsible Drawer Mode */
   .side-panel {

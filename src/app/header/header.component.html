@@ -1,6 +1,6 @@
 <header class="header">
   <div class="header-left">
-    <a routerLink="/home" class="logo-link">
+    <a routerLink="/home" class="logo-link" (click)="closeMobileMenu()">
       <!-- CalculHub Premium SVG Logo -->
       <svg class="logo-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="CalculHub Logo">
         <defs>
@@ -54,7 +54,19 @@
       <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
       <a routerLink="/sitemap" [class.active]="isCalculatorsActive()">Calculators</a>
       <a routerLink="/about" routerLinkActive="active">About</a>
-      <!-- <a routerLink="/blog" routerLinkActive="active">Blog</a> -->
     </nav>
+    <button class="hamburger-menu-btn" (click)="toggleMobileMenu()" [attr.aria-expanded]="isMobileMenuOpen()" aria-label="Toggle mobile menu">
+      <lucide-icon [name]="isMobileMenuOpen() ? 'x' : 'menu'" [size]="26"></lucide-icon>
+    </button>
   </div>
 </header>
+
+@if (isMobileMenuOpen() && !hasSidePanel()) {
+<div class="mobile-navigation-overlay" (click)="closeMobileMenu()">
+  <nav class="mobile-navigation" (click)="$event.stopPropagation()">
+    <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMobileMenu()">Home</a>
+    <a routerLink="/sitemap" [class.active]="isCalculatorsActive()" (click)="closeMobileMenu()">Calculators</a>
+    <a routerLink="/about" routerLinkActive="active" (click)="closeMobileMenu()">About</a>
+  </nav>
+</div>
+}

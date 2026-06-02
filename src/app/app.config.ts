@@ -6,7 +6,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideServiceWorker } from '@angular/service-worker';
-import { Banknote, ChartLine, ChartNoAxesColumnIncreasing, ChartNoAxesCombined, HeartPulse, LucideAngularModule, Star, Flame, Search, ArrowRight } from 'lucide-angular';
+import { Banknote, ChartLine, ChartNoAxesColumnIncreasing, ChartNoAxesCombined, HeartPulse, LucideAngularModule, Star, Flame, Search, ArrowRight, Home } from 'lucide-angular';
 import {
   House, TrendingUp, Receipt, PiggyBank, BarChart3, Landmark, Vault,
   FileText, BadgeCheck, Building, Percent, Calculator, SquareFunction,
@@ -33,7 +33,7 @@ export const appConfig: ApplicationConfig = {
       Facebook, Twitter, Linkedin, Instagram, Github,
       ChevronDown, ChevronRight, Heart, Scale, Target, User, Info, Map,
       Coins, Bitcoin, Gem, ChartNoAxesColumnIncreasing, ChartLine, Banknote, HeartPulse, Star, ChartNoAxesCombined, Menu, X,
-      Flame, Search, ArrowRight, Cpu
+      Flame, Search, ArrowRight, Home, Cpu
     }))
   ]
 };

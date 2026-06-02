@@ -8,4 +8,11 @@ main {
   display: flex;
   flex-direction: column;
   flex: 1;
+  padding-top: 79px; /* Desktop header height */
+}
+
+@media (max-width: 768px) {
+  main {
+    padding-top: 65px; /* Mobile header height */
+  }
 }

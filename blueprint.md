@@ -110,7 +110,7 @@ We have successfully standardized and enhanced the user experience across all **
    - Introduced dynamic `swiperBreakpoints` configurations in `HomeComponent` to ensure Swiper containers show only 1 slide on mobile screens, 2 on tablet, and 3-4 on larger monitors, binding `[breakpoints]="swiperBreakpoints"` in `home.component.html`.
    - Adjusted Angular workspace styles budgets in `angular.json` under `anyComponentStyle` from 20kB to 50kB to accommodate the rich homepage styles, ensuring clean, successful builds.
 
-10. **Side Panel Mobile Optimization (Current Task):**
+10. **Side Panel Mobile Optimization (Completed):**
     - **Goal:** Transform the sidebar navigation into a smooth, premium collapsible drawer on mobile/tablet devices.
     - **Collapsible Drawer:** On mobile (width <= 768px), the sidebar will transition to a fixed-position drawer (`left: 0`, `top: 0`, `height: 100vh`) overlaying the content.
     - **Hamburger Toggle:** A sleek, animated hamburger menu button will be floating in the top-right header space on mobile.
@@ -119,3 +119,8 @@ We have successfully standardized and enhanced the user experience across all **
     - **Navigation Triggers:** Clicking any calculator link in the drawer will automatically close the drawer, ensuring a smooth transition to the new tool.
     - **Desktop Behavior Preserved:** The responsive sidebar behavior is retained on screens larger than 768px, ensuring zero disruption to desktop layout structure.
     - **Signals State Management:** Leverage Angular Signals (`isOpen`) for clear, reactive state tracking.
+
+11. **Header Layout Stabilization on Scroll (Completed):**
+    - **Goal:** Eliminate layout shifting, viewport jitter, and cut-off headers during mobile scrolling.
+    - **Implementation:** Moved fixed positioning properties (`position: fixed`, `top: 0`, etc.) from the Angular component host element selector (`:host`) to the native inner `.header` container element inside `header.component.css`.
+    - **Layout Standardization:** Standardized the desktop height of category page containers (`financial.component.css`, `mathematical.css`, `health.component.css`, `market.css`) to `calc(100vh - 79px)` to match the desktop header's height exactly. This prevents vertical body scrollbars and layout shifts on desktop screens.

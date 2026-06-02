@@ -2,7 +2,7 @@
 .financial-container {
   display: flex;
   flex: 1;
-  height: calc(100vh - 68px); /* full remaining height below global sticky header */
+  height: calc(100vh - 79px); /* full remaining height below global sticky header */
   overflow: hidden;
   background-color: var(--background-black);
 }

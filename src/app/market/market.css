@@ -1,7 +1,7 @@
 .market-page-container {
   display: flex;
   flex: 1;
-  height: calc(100vh - 68px);
+  height: calc(100vh - 79px);
   overflow: hidden;
   background-color: var(--background-black);
 }

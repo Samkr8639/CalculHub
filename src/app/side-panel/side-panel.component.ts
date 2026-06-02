@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, signal, computed, inject, OnInit, OnDestroy, input } from '@angular/core';
 
 import { LucideAngularModule } from 'lucide-angular';
-import { RouterLink, Router, NavigationEnd } from '@angular/router';
+import { RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
 import { CalculatorSelectionService } from '../calculator-selection.service';
 import { Subscription, filter } from 'rxjs';
+import { MobileMenuService } from '../services/mobile-menu.service';
 
 interface CalculatorCard {
   icon: string;
@@ -15,7 +16,7 @@ interface CalculatorCard {
 
 @Component({
   selector: 'app-side-panel',
-  imports: [RouterLink, LucideAngularModule],
+  imports: [RouterLink, RouterLinkActive, LucideAngularModule],
   templateUrl: './side-panel.component.html',
   styleUrls: ['./side-panel.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,16 +24,17 @@ interface CalculatorCard {
 export class SidePanelComponent implements OnInit, OnDestroy {
   private router = inject(Router);
   private calculatorSelectionService = inject(CalculatorSelectionService);
+  private mobileMenuService = inject(MobileMenuService);
   private subscription = new Subscription();
   activeLink = signal<string | null>(null);
-  isOpen = signal<boolean>(false);
+  isOpen = this.mobileMenuService.isOpen;
 
   toggleSidebar(): void {
-    this.isOpen.update(open => !open);
+    this.mobileMenuService.toggle();
   }
 
   closeSidebar(): void {
-    this.isOpen.set(false);
+    this.mobileMenuService.close();
   }
 
   collapsedCategories = signal<{[key: string]: boolean}>({
