@@ -89,13 +89,13 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   categoryKeys = computed(() => Object.keys(this.categorizedCalculators()));
 
-  ngOnInit() {
-    if (!isPlatformBrowser(this.platformId)) return;
+  // Eagerly kick off Swiper registration so it's ready before view renders
+  private swiperReady = isPlatformBrowser(this.platformId)
+    ? import('swiper/element/bundle').then(({ register }) => register())
+    : Promise.resolve();
 
-    // Dynamically register Swiper for Web Components (fixes Vercel production SSR issues)
-    import('swiper/element/bundle').then(({ register }) => {
-      register();
-    });
+  ngOnInit() {
+    // Swiper registration is already in-flight from the field initializer above
   }
 
   ngAfterViewInit() {
@@ -132,7 +132,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         ease: 'power2.out',
         stagger: 0.1,
         duration: 0.8,
-        delay: 1.0
+        delay: 0.3
       });
 
       // Add continuous float
@@ -145,7 +145,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
           yoyo: true
         },
         duration: 2,
-        delay: 2.0
+        delay: 1.0
       });
 
       // Floating calculator icons
@@ -161,13 +161,15 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         },
       });
 
-      // Calculator card stagger animation
+      // Calculator card stagger animation — immediateRender: false prevents
+      // GSAP from setting opacity:0 before the trigger fires (fixes flash-of-invisible)
       gsap.from('.calculator-card', {
         opacity: 0,
         y: 50,
-        stagger: 0.1,
+        stagger: 0.08,
         ease: 'power2.out',
-        duration: 0.8,
+        duration: 0.6,
+        immediateRender: false,
         clearProps: 'all',
         scrollTrigger: {
           trigger: '.calculator-grid',
@@ -185,12 +187,15 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         clearProps: 'all',
       });
 
-      // About section: slide up on scroll
+      // About section: slide up on scroll — immediateRender: false prevents
+      // GSAP from setting opacity:0 before the section scrolls into view,
+      // which was making the about section appear blank on initial load
       gsap.from('.about-text-block', {
         opacity: 0,
         x: -60,
         duration: 0.9,
         ease: 'power3.out',
+        immediateRender: false,
         scrollTrigger: {
           trigger: '#about-section',
           start: 'top 75%',
@@ -203,6 +208,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         stagger: 0.12,
         duration: 0.7,
         ease: 'back.out(1.5)',
+        immediateRender: false,
         clearProps: 'all',
         scrollTrigger: {
           trigger: '#about-section',
@@ -216,6 +222,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         scaleX: 0,
         duration: 0.8,
         ease: 'power3.out',
+        immediateRender: false,
         transformOrigin: 'left center',
         scrollTrigger: {
           trigger: '#about-section',
