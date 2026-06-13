@@ -2,13 +2,14 @@ import { ChangeDetectionStrategy, Component, signal, ViewChild, ElementRef, Afte
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Chart, registerables } from 'chart.js';
+import { EmbedWidgetComponent } from '../../embed-widget/embed-widget.component';
 
 @Component({
   selector: 'app-gst-calculator',
   templateUrl: './gst-calculator.component.html',
   styleUrl: './gst-calculator.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, EmbedWidgetComponent]
 })
 export class GstCalculatorComponent implements AfterViewInit, AfterViewChecked {
   private platformId = inject(PLATFORM_ID);

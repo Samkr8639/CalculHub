@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
-
 import { FormsModule } from '@angular/forms';
+import { EmbedWidgetComponent } from '../../embed-widget/embed-widget.component';
 
 @Component({
   selector: 'app-bmi-calculator',
-  imports: [FormsModule],
+  imports: [FormsModule, EmbedWidgetComponent],
   templateUrl: './bmi-calculator.html',
   styleUrls: ['./bmi-calculator.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

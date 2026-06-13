@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild, PLATFORM_ID, inject } from '@angular/core';
 import { CommonModule, DecimalPipe, isPlatformBrowser } from '@angular/common';
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
-
-
+import { EmbedWidgetComponent } from '../../embed-widget/embed-widget.component';
 
 @Component({
   selector: 'app-sip-calculator',
-  imports: [CommonModule, DecimalPipe],
+  imports: [CommonModule, DecimalPipe, EmbedWidgetComponent],
   templateUrl: './sip-calculator.component.html',
   styleUrls: ['./sip-calculator.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
