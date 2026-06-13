@@ -1,0 +1,130 @@
+<div class="policy-page">
+  <div class="backdrop-glow glow-1"></div>
+  <div class="backdrop-glow glow-2"></div>
+
+  <div class="policy-container">
+
+    <!-- Hero -->
+    <header class="policy-header">
+      <div class="tag-badge">Legal</div>
+      <h1>Privacy <span class="glow-text">Policy</span></h1>
+      <p class="subtitle">We believe your data belongs to you — and only you. This policy explains exactly what we collect, what we don't, and why.</p>
+      <p class="last-updated">Last updated: {{ lastUpdated }}</p>
+    </header>
+
+    <!-- Highlights Grid -->
+    <section class="highlights-grid" aria-label="Privacy highlights">
+      <div class="highlight-card">
+        <div class="highlight-icon">🔒</div>
+        <h3>Zero Server Storage</h3>
+        <p>Your financial figures, health metrics, and calculation inputs never leave your device. All computation happens locally in your browser.</p>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">🚫</div>
+        <h3>No Personal Accounts</h3>
+        <p>CalculHub requires no registration, login, email address, or personal identification of any kind to use any tool.</p>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">🍪</div>
+        <h3>Minimal Cookies</h3>
+        <p>We use only essential, anonymous cookies required for the site to function properly. No tracking or advertising cookies.</p>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">📊</div>
+        <h3>Anonymous Analytics</h3>
+        <p>We may collect anonymous, aggregated usage data (e.g., page visits) to improve the platform. This data is never linked to you personally.</p>
+      </div>
+    </section>
+
+    <!-- Policy Sections -->
+    <article class="policy-body">
+
+      <section class="policy-section">
+        <h2>1. Information We Collect</h2>
+        <p>CalculHub is designed with privacy-first architecture. We distinguish between two types of data:</p>
+        <h3>1.1 Data We Do NOT Collect</h3>
+        <p>We do <strong>not</strong> collect, transmit, or store any of the following data on our servers:</p>
+        <ul>
+          <li>Values you enter into any calculator (loan amounts, income, weight, height, age, etc.)</li>
+          <li>Calculation results or financial projections</li>
+          <li>Your name, email address, or any personally identifiable information (PII)</li>
+          <li>IP address or precise geolocation data</li>
+        </ul>
+        <h3>1.2 Data We May Collect</h3>
+        <p>We may collect the following <strong>anonymous, non-identifiable</strong> data:</p>
+        <ul>
+          <li><strong>Anonymous page-view analytics:</strong> Aggregated counts of which pages or calculators are visited most, used to improve the platform. This data cannot be traced back to any individual user.</li>
+          <li><strong>Browser localStorage:</strong> Your browser may store your last-used preferences (e.g., selected unit or currency) locally on your own device. This data never leaves your device and is not accessible to us.</li>
+          <li><strong>Standard server logs:</strong> Our hosting provider (Vercel) may automatically record standard HTTP request data such as browser type and referring URL for infrastructure security and performance purposes. This is governed by Vercel's own privacy policy.</li>
+        </ul>
+      </section>
+
+      <section class="policy-section">
+        <h2>2. How We Use Data</h2>
+        <p>Any anonymous data we receive is used exclusively to:</p>
+        <ul>
+          <li>Understand which calculators are most useful and prioritise improvements</li>
+          <li>Identify and fix technical errors or performance issues</li>
+          <li>Ensure the security and integrity of the platform</li>
+        </ul>
+        <p>We do <strong>not</strong> sell, rent, or share any data with third-party advertisers or data brokers.</p>
+      </section>
+
+      <section class="policy-section">
+        <h2>3. Cookies & Local Storage</h2>
+        <p>CalculHub uses <strong>minimal, essential cookies</strong> required for the site to function. We do not use advertising, tracking, or third-party marketing cookies.</p>
+        <p>Some calculators may use your browser's <code>localStorage</code> to remember your last-used inputs for convenience. This data is stored entirely on your device and you can clear it at any time via your browser settings.</p>
+      </section>
+
+      <section class="policy-section">
+        <h2>4. Third-Party Services</h2>
+        <p>CalculHub may integrate with the following third-party services, each with their own privacy policies:</p>
+        <ul>
+          <li><strong>Vercel (Hosting):</strong> Our deployment and hosting provider. Standard access logs may be recorded as per Vercel's infrastructure requirements.</li>
+          <li><strong>Google Fonts:</strong> Typography resources loaded from Google's CDN. Google may process your IP address to serve font files.</li>
+          <li><strong>Open Exchange Rates / CoinGecko:</strong> Our Currency and Crypto calculators make real-time API calls to fetch live exchange rates. These requests are made from your browser and are subject to each provider's privacy policy.</li>
+        </ul>
+      </section>
+
+      <section class="policy-section">
+        <h2>5. Compliance — DPDP Act, GDPR & CCPA</h2>
+        <p>We are committed to compliance with applicable privacy laws, including:</p>
+        <ul>
+          <li><strong>India's DPDP Act (2023):</strong> As a platform primarily serving Indian users under a <code>.in</code> domain, we adhere to the Digital Personal Data Protection Act. We collect minimal data, have a clear purpose, and do not process sensitive personal data.</li>
+          <li><strong>GDPR (EU):</strong> For EU-based users, we respect the right to access, rectify, and erase any data. Since we store no personal data on our servers, there is effectively no data to erase.</li>
+          <li><strong>CCPA (California):</strong> We do not sell personal information. California residents have the right to know we collect no personal data.</li>
+        </ul>
+      </section>
+
+      <section class="policy-section">
+        <h2>6. Children's Privacy</h2>
+        <p>CalculHub is a general-purpose educational and utility platform accessible to users of all ages for mathematical, financial literacy, and health awareness purposes. We do not knowingly collect any personal information from children under the age of 13. If you believe a minor has submitted personal information, please contact us immediately.</p>
+      </section>
+
+      <section class="policy-section">
+        <h2>7. Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time to reflect improvements to the platform or changes in applicable law. The "Last updated" date at the top of this page will always reflect the most recent revision. We encourage you to review this page periodically.</p>
+      </section>
+
+      <section class="policy-section">
+        <h2>8. Contact Us</h2>
+        <p>If you have any questions, concerns, or requests regarding this Privacy Policy, please reach out to us:</p>
+        <div class="contact-box">
+          <p>📧 <strong>Email:</strong> <a href="mailto:support&#64;calculhub.in">support&#64;calculhub.in</a></p>
+          <p>🌐 <strong>Website:</strong> <a routerLink="/contact">Contact Page</a></p>
+        </div>
+      </section>
+
+    </article>
+
+    <!-- Footer Nav -->
+    <nav class="policy-footer-nav" aria-label="Legal page navigation">
+      <a routerLink="/terms">Terms &amp; Conditions</a>
+      <span class="divider">|</span>
+      <a routerLink="/contact">Contact Us</a>
+      <span class="divider">|</span>
+      <a routerLink="/about">About CalculHub</a>
+    </nav>
+
+  </div>
+</div>

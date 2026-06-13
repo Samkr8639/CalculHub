@@ -571,5 +571,35 @@ export const routes: Routes = [
       canonical: `${BASE_URL}/sitemap`,
     }
   },
+  {
+    path: 'privacy-policy',
+    loadComponent: () => import('./privacy-policy/privacy-policy.component').then(m => m.PrivacyPolicyComponent),
+    data: {
+      title: 'Privacy Policy — How CalculHub Protects Your Data',
+      description: 'CalculHub\'s privacy policy: zero server storage, no personal accounts, minimal cookies. All calculator inputs stay on your device. DPDP, GDPR, and CCPA compliant.',
+      canonical: `${BASE_URL}/privacy-policy`,
+      breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Privacy Policy', url: `${BASE_URL}/privacy-policy` }],
+    }
+  },
+  {
+    path: 'terms',
+    loadComponent: () => import('./terms/terms.component').then(m => m.TermsComponent),
+    data: {
+      title: 'Terms & Conditions — CalculHub Disclaimer & Usage Policy',
+      description: 'Terms of use for CalculHub. Includes an important YMYL disclaimer: all financial and health calculator results are estimates for informational purposes only and not professional advice.',
+      canonical: `${BASE_URL}/terms`,
+      breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Terms & Conditions', url: `${BASE_URL}/terms` }],
+    }
+  },
+  {
+    path: 'contact',
+    loadComponent: () => import('./contact/contact.component').then(m => m.ContactComponent),
+    data: {
+      title: 'Contact Us — Get Support & Send Feedback | CalculHub',
+      description: 'Contact the CalculHub team for support, bug reports, or feature requests. Reach us at support@calculhub.in. We typically respond within 24–48 hours.',
+      canonical: `${BASE_URL}/contact`,
+      breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Contact', url: `${BASE_URL}/contact` }],
+    }
+  },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

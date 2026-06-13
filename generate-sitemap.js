@@ -32,7 +32,10 @@ const paths = [
   '/health/bmr-tdee-calculator',
   '/market/currency-converter',
   '/market/crypto-calculator',
-  '/market/gold-silver-calculator'
+  '/market/gold-silver-calculator',
+  '/privacy-policy',
+  '/terms',
+  '/contact'
 ];
 
 const BASE_URL = 'https://calcul-hub.vercel.app';

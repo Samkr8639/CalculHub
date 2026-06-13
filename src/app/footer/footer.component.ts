@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-
+import { RouterLink } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-footer',
-  imports: [LucideAngularModule],
+  imports: [LucideAngularModule, RouterLink],
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
