@@ -49,6 +49,9 @@
       <div class="chart-container">
         <canvas #sipChart></canvas>
       </div>
+
+      <!-- Share Results Widget -->
+      <app-share-widget toolPath="/financial/sip-calculator" toolName="SIP Calculator" [resultText]="shareResultText"></app-share-widget>
     </section>
     } @else {
     <div class="placeholder-message">

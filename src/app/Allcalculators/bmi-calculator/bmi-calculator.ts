@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { EmbedWidgetComponent } from '../../embed-widget/embed-widget.component';
+import { ShareWidgetComponent } from '../../share-widget/share-widget.component';
 
 @Component({
   selector: 'app-bmi-calculator',
-  imports: [FormsModule, EmbedWidgetComponent],
+  imports: [FormsModule, EmbedWidgetComponent, ShareWidgetComponent],
   templateUrl: './bmi-calculator.html',
   styleUrls: ['./bmi-calculator.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -89,5 +90,12 @@ export class BmiCalculatorComponent {
     } else {
       this.category.set('Obese');
     }
+  }
+
+  get shareResultText(): string {
+    const b = this.bmi();
+    const cat = this.category();
+    if (b === null || cat === null) return '';
+    return `My Body Mass Index (BMI) is ${b.toFixed(1)} (${cat})!`;
   }
 }

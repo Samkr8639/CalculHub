@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChi
 import { CommonModule, DecimalPipe, isPlatformBrowser } from '@angular/common';
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
 import { EmbedWidgetComponent } from '../../embed-widget/embed-widget.component';
+import { ShareWidgetComponent } from '../../share-widget/share-widget.component';
 
 @Component({
   selector: 'app-home-loan-emi-calculator',
-  imports: [CommonModule, DecimalPipe, EmbedWidgetComponent],
+  imports: [CommonModule, DecimalPipe, EmbedWidgetComponent, ShareWidgetComponent],
   templateUrl: './home-loan-emi-calculator.html',
   styleUrls: ['./home-loan-emi-calculator.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -154,5 +155,14 @@ export class HomeLoanEmiCalculatorComponent {
       chart.destroy();
       this.chartInstance.set(null);
     }
+  }
+
+  get shareResultText(): string {
+    const emi = this.monthlyEmi();
+    const amount = this.loanAmount();
+    const rate = this.interestRate();
+    const tenure = this.loanTenure();
+    if (emi === null || amount === null || rate === null || tenure === null) return '';
+    return `My monthly Home Loan EMI for a loan of ₹${amount.toLocaleString('en-IN')} at ${rate}% for ${tenure} years is ₹${Math.round(emi).toLocaleString('en-IN')} on CalculHub!`;
   }
 }

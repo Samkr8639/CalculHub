@@ -40,6 +40,9 @@
           <div class="scale-segment overweight" [class.active]="category() === 'Overweight'">Over<br>25-29.9</div>
           <div class="scale-segment obese" [class.active]="category() === 'Obese'">Obese<br>&#62;30</div>
         </div>
+
+        <!-- Share Results Widget -->
+        <app-share-widget toolPath="/health/bmi-calculator" toolName="BMI Calculator" [resultText]="shareResultText"></app-share-widget>
       </div>
     }
   </div>

@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChi
 import { CommonModule, DecimalPipe, isPlatformBrowser } from '@angular/common';
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
 import { EmbedWidgetComponent } from '../../embed-widget/embed-widget.component';
+import { ShareWidgetComponent } from '../../share-widget/share-widget.component';
 
 @Component({
   selector: 'app-sip-calculator',
-  imports: [CommonModule, DecimalPipe, EmbedWidgetComponent],
+  imports: [CommonModule, DecimalPipe, EmbedWidgetComponent, ShareWidgetComponent],
   templateUrl: './sip-calculator.component.html',
   styleUrls: ['./sip-calculator.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -193,5 +194,14 @@ export class SipCalculatorComponent {
         chart.destroy();
         this.chartInstance.set(null);
     }
+  }
+
+  get shareResultText(): string {
+    const maturity = this.maturityAmount();
+    const invested = this.totalInvested();
+    const tenure = this.investmentTenureYears();
+    const monthly = this.monthlyInvestment();
+    if (maturity === null || invested === null || tenure === null || monthly === null) return '';
+    return `My monthly SIP of ₹${monthly.toLocaleString('en-IN')} for ${tenure} years will grow to a projected maturity amount of ₹${Math.round(maturity).toLocaleString('en-IN')} on CalculHub!`;
   }
 }

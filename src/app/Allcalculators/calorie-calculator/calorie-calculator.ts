@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/c
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { EmbedWidgetComponent } from '../../embed-widget/embed-widget.component';
+import { ShareWidgetComponent } from '../../share-widget/share-widget.component';
 
 interface CalorieResult {
   bmr: number;
@@ -17,7 +18,7 @@ interface CalorieResult {
   selector: 'app-calorie-calculator',
   templateUrl: './calorie-calculator.html',
   styleUrls: ['./calorie-calculator.css'],
-  imports: [FormsModule, CommonModule, EmbedWidgetComponent],
+  imports: [FormsModule, CommonModule, EmbedWidgetComponent, ShareWidgetComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalorieCalculatorComponent {
@@ -174,5 +175,11 @@ export class CalorieCalculatorComponent {
 
   toggleHeightUnit(): void {
     this.heightUnit.set(this.heightUnit() === 'cm' ? 'ft' : 'cm');
+  }
+
+  get shareResultText(): string {
+    const res = this.result();
+    if (!res) return '';
+    return `My BMR is ${Math.round(res.bmr)} kcal and my daily calorie maintenance limit (TDEE) is ${Math.round(res.tdee)} kcal!`;
   }
 }

@@ -49,6 +49,9 @@
       <div class="chart-container">
         <canvas #emiChart></canvas>
       </div>
+
+      <!-- Share Results Widget -->
+      <app-share-widget toolPath="/financial/home-loan-emi-calculator" toolName="Home Loan EMI Calculator" [resultText]="shareResultText"></app-share-widget>
     </section>
     } @else {
     <div class="placeholder-message">

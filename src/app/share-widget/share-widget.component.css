@@ -1,0 +1,112 @@
+.share-container {
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: var(--card-black);
+  border: 1px solid var(--border-grey);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 100%;
+}
+
+.share-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.share-header-icon {
+  color: var(--primary-red);
+  font-size: 1.3rem;
+}
+
+.share-title h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--pure-white-text);
+}
+
+.share-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 15px;
+  border: 1px solid var(--border-grey);
+  border-radius: 8px;
+  background-color: #0b0b0b;
+  color: var(--pure-white-text);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.share-svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.btn-icon {
+  font-size: 1.1rem;
+}
+
+/* Hover effects */
+.share-btn.whatsapp:hover {
+  background-color: #128c7e;
+  border-color: #128c7e;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(18, 140, 126, 0.3);
+}
+
+.share-btn.twitter:hover {
+  background-color: #1a1a1a;
+  border-color: #333;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.share-btn.linkedin:hover {
+  background-color: #0077b5;
+  border-color: #0077b5;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 119, 181, 0.3);
+}
+
+.share-btn.copy:hover {
+  background-color: var(--primary-red);
+  border-color: var(--primary-red);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(225, 25, 49, 0.3);
+}
+
+.share-btn.copy.copied {
+  background-color: #2e7d32;
+  border-color: #2e7d32;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+}
+
+@media (max-width: 768px) {
+  .share-buttons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .share-btn span {
+    display: none; /* Icon-only on very small screens to save space */
+  }
+  .share-btn {
+    padding: 10px;
+  }
+}

@@ -3,13 +3,14 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Chart, registerables } from 'chart.js';
 import { EmbedWidgetComponent } from '../../embed-widget/embed-widget.component';
+import { ShareWidgetComponent } from '../../share-widget/share-widget.component';
 
 @Component({
   selector: 'app-gst-calculator',
   templateUrl: './gst-calculator.component.html',
   styleUrl: './gst-calculator.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, FormsModule, EmbedWidgetComponent]
+  imports: [CommonModule, FormsModule, EmbedWidgetComponent, ShareWidgetComponent]
 })
 export class GstCalculatorComponent implements AfterViewInit, AfterViewChecked {
   private platformId = inject(PLATFORM_ID);
@@ -166,6 +167,20 @@ export class GstCalculatorComponent implements AfterViewInit, AfterViewChecked {
 
       this.chartInstance()!.data.datasets[0].data = [baseValue, gstAmount];
       this.chartInstance()!.update();
+    }
+  }
+
+  get shareResultText(): string {
+    const amount = this.amount();
+    const rate = this.gstRate();
+    const gstAmount = this.calculatedGstAmount();
+    const netPrice = this.calculatedNetPrice();
+    const mode = this.calculationMode();
+    if (amount === null || rate === null || gstAmount === null || netPrice === null) return '';
+    if (mode === 'exclude') {
+      return `Calculated GST for ₹${amount.toLocaleString('en-IN')} at ${rate}% is ₹${Math.round(gstAmount).toLocaleString('en-IN')} (Total: ₹${Math.round(netPrice).toLocaleString('en-IN')}) on CalculHub!`;
+    } else {
+      return `Extracted GST from ₹${amount.toLocaleString('en-IN')} at ${rate}% is ₹${Math.round(gstAmount).toLocaleString('en-IN')} (Base: ₹${Math.round(amount - gstAmount).toLocaleString('en-IN')}) on CalculHub!`;
     }
   }
 }
