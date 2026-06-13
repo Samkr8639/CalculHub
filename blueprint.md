@@ -124,3 +124,7 @@ We have successfully standardized and enhanced the user experience across all **
     - **Goal:** Eliminate layout shifting, viewport jitter, and cut-off headers during mobile scrolling.
     - **Implementation:** Moved fixed positioning properties (`position: fixed`, `top: 0`, etc.) from the Angular component host element selector (`:host`) to the native inner `.header` container element inside `header.component.css`.
     - **Layout Standardization:** Standardized the desktop height of category page containers (`financial.component.css`, `mathematical.css`, `health.component.css`, `market.css`) to `calc(100vh - 79px)` to match the desktop header's height exactly. This prevents vertical body scrollbars and layout shifts on desktop screens.
+
+12. **Sitemap & Robots.txt Automation (Completed):**
+    - Added missing routes (`/health/bmr-tdee-calculator`, `/market/currency-converter`, `/market/crypto-calculator`, `/market/gold-silver-calculator`) to `generate-sitemap.js`.
+    - Configured a `prebuild` npm lifecycle hook in `package.json` to run sitemap generation automatically before every build compilation.

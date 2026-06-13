@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "prebuild": "node generate-sitemap.js",
     "fix-seo:dry": "node tools/seo-fixer.js --dry-run",
     "fix-seo": "node tools/seo-fixer.js --apply",
     "watch": "ng build --watch --configuration development",

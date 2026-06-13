@@ -28,7 +28,11 @@ const paths = [
   '/health/calorie-calculator',
   '/health/bmi-calculator',
   '/health/body-fat-calculator',
-  '/health/ideal-weight-calculator'
+  '/health/ideal-weight-calculator',
+  '/health/bmr-tdee-calculator',
+  '/market/currency-converter',
+  '/market/crypto-calculator',
+  '/market/gold-silver-calculator'
 ];
 
 const BASE_URL = 'https://calcul-hub.vercel.app';
