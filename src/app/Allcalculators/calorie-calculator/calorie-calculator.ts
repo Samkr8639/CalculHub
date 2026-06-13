@@ -1,16 +1,20 @@
-import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, computed, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 interface CalorieResult {
   bmr: number;
   tdee: number;
+  goalCalories: number;
   macros: {
     protein: { grams: number; calories: number };
     carbs: { grams: number; calories: number };
     fats: { grams: number; calories: number };
   };
 }
+
+import { AiService, AiInsightResponse } from '../../services/ai.service';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-calorie-calculator',
@@ -29,9 +33,18 @@ export class CalorieCalculatorComponent {
   activityLevel = signal<number>(1.2);
   formula = signal<'mifflin' | 'harris' | 'katch'>('mifflin');
   bodyFat = signal<number | null>(null);
+  goal = signal<'maintain' | 'lose' | 'gain'>('maintain');
 
   result = signal<CalorieResult | null>(null);
   error = signal<string | null>(null);
+  
+  // AI State
+  aiInsight = signal<SafeHtml | null>(null);
+  aiError = signal<string | null>(null);
+  isLoadingInsight = signal<boolean>(false);
+  
+  private aiService = inject(AiService);
+  private sanitizer = inject(DomSanitizer);
 
   ageError = computed(() => {
     const a = this.age();
@@ -139,17 +152,25 @@ export class CalorieCalculatorComponent {
     }
 
     const tdee = bmr * this.activityLevel();
+    
+    let goalCalories = tdee;
+    if (this.goal() === 'lose') {
+      goalCalories = tdee - 500;
+    } else if (this.goal() === 'gain') {
+      goalCalories = tdee + 500;
+    }
 
     const proteinGrams = weightInKg * 1.6;
     const proteinCalories = proteinGrams * 4;
-    const fatCalories = tdee * 0.25;
+    const fatCalories = goalCalories * 0.25;
     const fatGrams = fatCalories / 9;
-    const carbCalories = tdee - proteinCalories - fatCalories;
-    const carbGrams = carbCalories / 4;
+    const carbCalories = goalCalories - proteinCalories - fatCalories;
+    const carbGrams = Math.max(0, carbCalories / 4);
 
     this.result.set({
       bmr,
       tdee,
+      goalCalories,
       macros: {
         protein: { grams: proteinGrams, calories: proteinCalories },
         carbs: { grams: carbGrams, calories: carbCalories },
@@ -165,6 +186,41 @@ export class CalorieCalculatorComponent {
     this.weight.set(null);
     this.height.set(null);
     this.bodyFat.set(null);
+    this.aiInsight.set(null);
+    this.aiError.set(null);
+  }
+
+  generateAiDietPlan(): void {
+    const currentResult = this.result();
+    if (!currentResult) return;
+
+    this.isLoadingInsight.set(true);
+    this.aiError.set(null);
+
+    const payload = {
+      goal: this.goal(),
+      calories: Math.round(currentResult.goalCalories),
+      protein: Math.round(currentResult.macros.protein.grams),
+      carbs: Math.round(currentResult.macros.carbs.grams),
+      fat: Math.round(currentResult.macros.fats.grams)
+    };
+
+    this.aiService.getCalorieInsights(payload).subscribe({
+      next: (res: AiInsightResponse) => {
+        if (res.insight) {
+          // Trust the HTML returned from the server since it's from our AI
+          this.aiInsight.set(this.sanitizer.bypassSecurityTrustHtml(res.insight));
+        } else if (res.error) {
+          this.aiError.set(res.error);
+        }
+        this.isLoadingInsight.set(false);
+      },
+      error: (err: any) => {
+        console.error('AI Insight Request Failed:', err);
+        this.aiError.set('Failed to connect to the AI service. Please try again.');
+        this.isLoadingInsight.set(false);
+      }
+    });
   }
 
   toggleWeightUnit(): void {
