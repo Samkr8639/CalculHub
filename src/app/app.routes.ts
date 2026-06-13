@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 
-const BASE_URL = 'https://calcul-hub.vercel.app';
+const BASE_URL = 'https://calculhub.in';
 
 const calcSchema = (name: string, url: string, desc: string, category = 'FinanceApplication') => ({
   '@context': 'https://schema.org',
