@@ -34,7 +34,7 @@ export class ContactComponent {
 
     this.formError.set('');
     // Build a mailto link as a simple client-side form submission
-    const mailtoUrl = `mailto:support@calculhub.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)}`;
+    const mailtoUrl = `mailto:sameervirak@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)}`;
     window.location.href = mailtoUrl;
     this.formSubmitted.set(true);
   }

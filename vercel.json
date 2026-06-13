@@ -5,6 +5,17 @@
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "calcul-hub.vercel.app"
+        }
+      ],
+      "destination": "https://calculhub.in/$1",
+      "permanent": true
+    },
     { "source": "/home", "destination": "/", "permanent": true }
   ],
   "headers": [

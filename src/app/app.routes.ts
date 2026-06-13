@@ -596,7 +596,7 @@ export const routes: Routes = [
     loadComponent: () => import('./contact/contact.component').then(m => m.ContactComponent),
     data: {
       title: 'Contact Us — Get Support & Send Feedback | CalculHub',
-      description: 'Contact the CalculHub team for support, bug reports, or feature requests. Reach us at support@calculhub.in. We typically respond within 24–48 hours.',
+      description: 'Contact the CalculHub team for support, bug reports, or feature requests. Reach us at sameervirak@gmail.com. We typically respond within 24–48 hours.',
       canonical: `${BASE_URL}/contact`,
       breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Contact', url: `${BASE_URL}/contact` }],
     }
