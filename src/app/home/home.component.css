@@ -81,9 +81,8 @@
   right: 0;
   height: 100%;
   width: 50%;
-  background-image: url('https://images.pexels.com/photos/5491023/pexels-photo-5491023.jpeg');
-  background-size: cover;
-  background-position: center;
+  object-fit: cover;
+  object-position: center;
   opacity: 0.2;
   z-index: 1;
   /* Positioned behind text but above background */
@@ -2672,11 +2671,7 @@ img[loading="lazy"]:not([data-loaded="true"]) {
 }
 
 /* Preload key images */
-@media (min-width: 1024px) {
-  .hero-background {
-    background-image: url('/assets/images/hero-bg.jpg');
-  }
-}
+/* Removed as hero image is now an explicit <img> tag */
 
 /* ════════════════════════════════════════
    FINAL TUNING
