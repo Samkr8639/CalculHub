@@ -25,7 +25,7 @@ export class SeoService {
   private document = inject(DOCUMENT);
   private readonly MAX_TITLE_CHARS = 70;
 
-  readonly baseUrl = 'https://calcul-hub.vercel.app';
+  readonly baseUrl = 'https://calculhub.in';
   readonly siteName = 'CalculHub';
 
   init(): void {
@@ -133,13 +133,14 @@ export class SeoService {
   }
 
   private clearSchemas(): void {
-    const schemas = this.document.head.querySelectorAll('script[type="application/ld+json"]');
+    const schemas = this.document.head.querySelectorAll('script[type="application/ld+json"][data-dynamic="true"]');
     schemas.forEach((s) => s.remove());
   }
 
   private injectSchema(schema: object): void {
     const script = this.document.createElement('script');
     script.type = 'application/ld+json';
+    script.setAttribute('data-dynamic', 'true');
     script.text = JSON.stringify(schema);
     this.document.head.appendChild(script);
   }
