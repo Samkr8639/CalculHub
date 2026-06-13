@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { EmbedWidgetComponent } from '../../embed-widget/embed-widget.component';
 
 interface CalorieResult {
   bmr: number;
@@ -16,7 +17,7 @@ interface CalorieResult {
   selector: 'app-calorie-calculator',
   templateUrl: './calorie-calculator.html',
   styleUrls: ['./calorie-calculator.css'],
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, EmbedWidgetComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalorieCalculatorComponent {

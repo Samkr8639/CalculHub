@@ -1,0 +1,19 @@
+<div class="embed-widget-container">
+  <div class="embed-header">
+    <span class="material-symbols-outlined embed-icon">code</span>
+    <h3>Embed this Calculator</h3>
+  </div>
+  <p class="embed-desc">
+    Want to display the <strong>{{ toolName }}</strong> directly on your blog, website, or portal? Copy the code below and paste it into your site's HTML editor:
+  </p>
+  
+  <div class="code-box-wrapper">
+    <pre class="code-box"><code>{{ embedCode }}</code></pre>
+    <button (click)="copyToClipboard()" class="copy-btn" [class.copied]="copied()">
+      <span class="material-symbols-outlined btn-icon">
+        {{ copied() ? 'check_circle' : 'content_copy' }}
+      </span>
+      <span>{{ copied() ? 'Copied to Clipboard!' : 'Copy Embed Code' }}</span>
+    </button>
+  </div>
+</div>
