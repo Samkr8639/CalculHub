@@ -259,17 +259,186 @@ export const routes: Routes = [
         path: 'bike-loan-emi-calculator',
         loadComponent: () => import('./Allcalculators/bike-loan-emi-calculator/bike-loan-emi-calculator').then(m => m.BikeLoanEmiCalculatorComponent),
         data: {
-          title: 'Bike Loan EMI Calculator — Calculate Two-Wheeler Loan EMI | CalculHub',
-          description: 'Calculate your bike or two-wheeler loan EMI. Enter loan amount, interest rate, and tenure to see monthly payments and total interest.',
+          title: 'Bike Loan EMI Calculator – Two Wheeler EMI with Down Payment | CalculHub',
+          description: 'Free Bike Loan EMI Calculator India — calculate two-wheeler EMI with down payment, compare tenures 1–5 years, view total interest and repayment instantly. No login needed.',
+          ogTitle: 'Bike Loan EMI Calculator – Calculate Two Wheeler Loan EMI Instantly',
+          ogDescription: 'Calculate bike loan EMI in seconds. Enter loan amount, interest rate and tenure. See monthly EMI, total interest and repayment. Free, accurate, no signup required.',
+          keywords: 'bike loan emi calculator, two wheeler loan emi calculator, bike emi calculator with down payment, motorcycle loan calculator, bike loan calculator india, two wheeler emi calculator, bike finance calculator',
+          publishedTime: '2025-01-01T00:00:00+05:30',
+          modifiedTime: '2026-06-19T00:00:00+05:30',
           canonical: `${BASE_URL}/financial/bike-loan-emi-calculator`,
           breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Financial', url: `${BASE_URL}/financial` }, { name: 'Bike Loan EMI Calculator', url: `${BASE_URL}/financial/bike-loan-emi-calculator` }],
-          schema: [calcSchema('Bike Loan EMI Calculator', `${BASE_URL}/financial/bike-loan-emi-calculator`, 'Calculate two-wheeler loan EMI, total interest, and repayment schedule.'),
+          schema: [
             {
-              '@context': 'https://schema.org', '@type': 'FAQPage',
-              mainEntity: [
-                { '@type': 'Question', name: 'Are processing fees included in the EMI?', acceptedAnswer: { '@type': 'Answer', text: 'No, processing fees are usually deducted upfront from the disbursed loan amount and are not part of the standard EMI calculation.' } }
+              '@context': 'https://schema.org',
+              '@graph': [
+                {
+                  '@type': 'WebPage',
+                  '@id': 'https://calculhub.in/financial/bike-loan-emi-calculator',
+                  'url': 'https://calculhub.in/financial/bike-loan-emi-calculator',
+                  'name': 'Bike Loan EMI Calculator — Calculate Two-Wheeler Loan EMI | CalculHub',
+                  'description': 'Free Bike Loan EMI Calculator — instantly calculate your two-wheeler loan EMI, total interest and repayment amount. Compare tenures from 1 to 5 years. No login required.',
+                  'inLanguage': 'en-IN',
+                  'isPartOf': {
+                    '@type': 'WebSite',
+                    '@id': 'https://calculhub.in/#website',
+                    'name': 'CalculHub',
+                    'url': 'https://calculhub.in'
+                  },
+                  'breadcrumb': {
+                    '@type': 'BreadcrumbList',
+                    'itemListElement': [
+                      {
+                        '@type': 'ListItem',
+                        'position': 1,
+                        'name': 'Home',
+                        'item': 'https://calculhub.in/home'
+                      },
+                      {
+                        '@type': 'ListItem',
+                        'position': 2,
+                        'name': 'Financial Calculators',
+                        'item': 'https://calculhub.in/financial'
+                      },
+                      {
+                        '@type': 'ListItem',
+                        'position': 3,
+                        'name': 'Bike Loan EMI Calculator',
+                        'item': 'https://calculhub.in/financial/bike-loan-emi-calculator'
+                      }
+                    ]
+                  }
+                },
+                {
+                  '@type': 'SoftwareApplication',
+                  'name': 'Bike Loan EMI Calculator',
+                  'applicationCategory': 'FinanceApplication',
+                  'operatingSystem': 'Web',
+                  'url': 'https://calculhub.in/financial/bike-loan-emi-calculator',
+                  'description': 'Calculate your bike or two-wheeler loan EMI instantly. Enter loan amount, interest rate, and tenure to see monthly EMI, total interest, and total repayment.',
+                  'offers': {
+                    '@type': 'Offer',
+                    'price': '0',
+                    'priceCurrency': 'INR'
+                  },
+                  'provider': {
+                    '@type': 'Organization',
+                    'name': 'CalculHub',
+                    'url': 'https://calculhub.in'
+                  }
+                }
               ]
-            }]
+            },
+            {
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              'mainEntity': [
+                {
+                  '@type': 'Question',
+                  'name': 'What is the ideal tenure for a bike loan?',
+                  'acceptedAnswer': {
+                    '@type': 'Answer',
+                    'text': 'Most financial experts recommend keeping the bike loan tenure between 12 and 36 months to minimize interest costs and avoid overpaying for a depreciating asset.'
+                  }
+                },
+                {
+                  '@type': 'Question',
+                  'name': 'Can I get 100% financing for a bike?',
+                  'acceptedAnswer': {
+                    '@type': 'Answer',
+                    'text': 'Some lenders finance up to 100% of the ex-showroom price, while others require a down payment. Financing policies vary between banks and dealerships.'
+                  }
+                },
+                {
+                  '@type': 'Question',
+                  'name': 'Does bike loan approval depend on credit score?',
+                  'acceptedAnswer': {
+                    '@type': 'Answer',
+                    'text': 'Yes. A higher credit score increases the chances of faster approval and lower interest rates on your bike loan.'
+                  }
+                },
+                {
+                  '@type': 'Question',
+                  'name': 'Can I prepay my bike loan?',
+                  'acceptedAnswer': {
+                    '@type': 'Answer',
+                    'text': 'Yes. Most lenders allow prepayment after a specific lock-in period, although some may charge a prepayment penalty. Always check the loan agreement terms.'
+                  }
+                },
+                {
+                  '@type': 'Question',
+                  'name': 'Which is better – dealership financing or bank loan for a bike?',
+                  'acceptedAnswer': {
+                    '@type': 'Answer',
+                    'text': 'Banks often offer lower interest rates, while dealerships provide faster approvals and convenience. Comparing both options helps find the best financing solution for your bike purchase.'
+                  }
+                },
+                {
+                  '@type': 'Question',
+                  'name': 'How is bike loan EMI calculated?',
+                  'acceptedAnswer': {
+                    '@type': 'Answer',
+                    'text': 'Bike loan EMI is calculated using the formula: EMI = [P × r × (1 + r)^n] / [(1 + r)^n - 1], where P is the principal loan amount, r is the monthly interest rate, and n is the loan tenure in months.'
+                  }
+                },
+                {
+                  '@type': 'Question',
+                  'name': 'What is the bike loan EMI for ₹1 lakh?',
+                  'acceptedAnswer': {
+                    '@type': 'Answer',
+                    'text': 'For a ₹1,00,000 bike loan at 11% annual interest for 3 years, the monthly EMI would be approximately ₹3,274. Use CalculHub\'s Bike Loan EMI Calculator to get the exact amount for your loan details.'
+                  }
+                },
+                {
+                  '@type': 'Question',
+                  'name': 'How much down payment is required for a bike loan?',
+                  'acceptedAnswer': {
+                    '@type': 'Answer',
+                    'text': 'Most lenders require a minimum down payment of 10% to 20% of the bike\'s on-road price. Some NBFCs offer zero down payment schemes for eligible borrowers with good credit scores.'
+                  }
+                }
+              ]
+            },
+            {
+              '@context': 'https://schema.org',
+              '@type': 'HowTo',
+              'name': 'How to Calculate Bike Loan EMI',
+              'description': 'Step-by-step guide to calculate your bike or two-wheeler loan EMI using the standard reducing balance formula.',
+              'step': [
+                {
+                  '@type': 'HowToStep',
+                  'position': 1,
+                  'name': 'Enter the Loan Amount',
+                  'text': 'Enter the principal loan amount — the bike price minus your down payment. For example, if the bike costs ₹2,00,000 and you pay ₹40,000 down, enter ₹1,60,000.'
+                },
+                {
+                  '@type': 'HowToStep',
+                  'position': 2,
+                  'name': 'Enter the Annual Interest Rate',
+                  'text': 'Enter the annual interest rate offered by your bank or lender. Bike loan interest rates in India typically range from 8.5% to 15% per annum.'
+                },
+                {
+                  '@type': 'HowToStep',
+                  'position': 3,
+                  'name': 'Select the Loan Tenure',
+                  'text': 'Choose the repayment duration in years (1 to 5 years). Shorter tenures mean higher EMIs but lower total interest paid.'
+                },
+                {
+                  '@type': 'HowToStep',
+                  'position': 4,
+                  'name': 'View Your EMI Results',
+                  'text': 'The calculator instantly shows your Monthly EMI, Total Interest Payable, and Total Repayment Amount using the formula: EMI = [P × r × (1+r)^n] / [(1+r)^n - 1].'
+                }
+              ],
+              'tool': [
+                {
+                  '@type': 'HowToTool',
+                  'name': 'Bike Loan EMI Calculator',
+                  'url': 'https://calculhub.in/financial/bike-loan-emi-calculator'
+                }
+              ]
+            }
+          ]
         }
       },
       {

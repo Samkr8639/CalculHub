@@ -13,6 +13,9 @@ export interface SeoData {
   ogImage?: string;
   schema?: object[];
   breadcrumbs?: Array<{ name: string; url: string }>;
+  keywords?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
 }
 
 @Injectable({
@@ -77,6 +80,25 @@ export class SeoService {
 
     // Meta description
     this.meta.updateTag({ name: 'description', content: data.description });
+
+    // Keywords
+    if (data.keywords) {
+      this.meta.updateTag({ name: 'keywords', content: data.keywords });
+    } else {
+      this.meta.removeTag("name='keywords'");
+    }
+
+    // Article Freshness Signals
+    if (data.publishedTime) {
+      this.meta.updateTag({ property: 'article:published_time', content: data.publishedTime });
+    } else {
+      this.meta.removeTag("property='article:published_time'");
+    }
+    if (data.modifiedTime) {
+      this.meta.updateTag({ property: 'article:modified_time', content: data.modifiedTime });
+    } else {
+      this.meta.removeTag("property='article:modified_time'");
+    }
 
     // Canonical
     this.setCanonical(canonical);

@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild, PLATFORM_ID, inject } from '@angular/core';
 import { CommonModule, DecimalPipe, isPlatformBrowser } from '@angular/common';
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
+import { RouterLink } from '@angular/router';
 
 
 
 @Component({
   selector: 'app-bike-loan-emi-calculator',
-  imports: [CommonModule, DecimalPipe],
+  imports: [CommonModule, DecimalPipe, RouterLink],
   templateUrl: './bike-loan-emi-calculator.html',
   styleUrls: ['./bike-loan-emi-calculator.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
