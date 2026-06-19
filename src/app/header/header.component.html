@@ -53,6 +53,7 @@
     <nav class="navigation">
       <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
       <a routerLink="/sitemap" [class.active]="isCalculatorsActive()">Calculators</a>
+      <a routerLink="/blog" routerLinkActive="active">Blog</a>
       <a routerLink="/about" routerLinkActive="active">About</a>
     </nav>
     <button class="hamburger-menu-btn" (click)="toggleMobileMenu()" [attr.aria-expanded]="isMobileMenuOpen()" aria-label="Toggle mobile menu">
@@ -66,6 +67,7 @@
   <nav class="mobile-navigation" (click)="$event.stopPropagation()">
     <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMobileMenu()">Home</a>
     <a routerLink="/sitemap" [class.active]="isCalculatorsActive()" (click)="closeMobileMenu()">Calculators</a>
+    <a routerLink="/blog" routerLinkActive="active" (click)="closeMobileMenu()">Blog</a>
     <a routerLink="/about" routerLinkActive="active" (click)="closeMobileMenu()">About</a>
   </nav>
 </div>

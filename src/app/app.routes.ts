@@ -732,6 +732,10 @@ export const routes: Routes = [
     }
   },
   {
+    path: 'blog/:slug',
+    loadComponent: () => import('./blog/blog.component').then(m => m.BlogComponent),
+  },
+  {
     path: 'sitemap',
     loadComponent: () => import('./sitemap/sitemap.component').then(m => m.SitemapComponent),
     data: {

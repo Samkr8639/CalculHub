@@ -4,6 +4,8 @@ const paths = [
   '/',
   '/about',
   '/blog',
+  '/blog/calculate-bike-loan-emi-guide',
+  '/blog/sip-vs-lumpsum-mutual-funds',
   '/sitemap',
   '/other',
   '/financial/mortgage',
