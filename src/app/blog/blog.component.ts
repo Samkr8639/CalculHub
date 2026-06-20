@@ -78,6 +78,25 @@ export class BlogComponent implements OnInit, OnDestroy {
   // Reading time options
   public readTimeOptions = ['All', 'Short (< 5 min)', 'Medium (5-10 min)', 'Long (> 10 min)'];
 
+  // Helper to compute a dynamic trending score for a post
+  private getDynamicTrendingScore(post: BlogPost): number {
+    const postDate = new Date(post.date).getTime();
+    // Using 2026-06-20 as the baseline if not in browser to prevent timezone/date discrepancies during build
+    const nowTime = isPlatformBrowser(this.platformId) ? new Date().getTime() : new Date('2026-06-20').getTime();
+    const daysAgo = Math.max(0, (nowTime - postDate) / (1000 * 60 * 60 * 24));
+    // Dynamic score = engagement + recency decay
+    const recency = 1000 / (daysAgo + 1);
+    const engagement = (post.likes || 0) * 1.5 + (post.views || 0) * 0.5;
+    return engagement + recency;
+  }
+
+  // Trending posts list for sidebar (dynamic score)
+  public trendingPosts = computed(() => {
+    return [...this.allPosts()]
+      .sort((a, b) => this.getDynamicTrendingScore(b) - this.getDynamicTrendingScore(a))
+      .slice(0, 3);
+  });
+
   // Filtered and Sorted posts
   public filteredPosts = computed(() => {
     const query = this.searchQuery().toLowerCase().trim();
@@ -137,7 +156,7 @@ export class BlogComponent implements OnInit, OnDestroy {
     } else if (sort === 'views') {
       posts.sort((a, b) => b.views - a.views);
     } else if (sort === 'trending') {
-      posts.sort((a, b) => b.trendingScore - a.trendingScore);
+      posts.sort((a, b) => this.getDynamicTrendingScore(b) - this.getDynamicTrendingScore(a));
     } else if (sort === 'alphabetical') {
       posts.sort((a, b) => a.title.localeCompare(b.title));
     }

@@ -296,7 +296,7 @@
           <div class="sidebar-card trending-widget">
             <h3>Trending Now</h3>
             <div class="trending-list">
-              @for (tPost of allPosts().slice(0, 3); track tPost.slug) {
+              @for (tPost of trendingPosts(); track tPost.slug) {
                 <div class="trending-item">
                   <div class="trending-rank">0{{ $index + 1 }}</div>
                   <div class="trending-item-content">
