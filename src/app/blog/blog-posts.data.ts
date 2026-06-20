@@ -2416,8 +2416,8 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'Finance',
     publishDate: 'May 30, 2026',
     date: '2026-05-30',
-    readTime: '7 min read',
-    readTimeMin: 7,
+    readTime: '25 min read',
+    readTimeMin: 25,
     author: {
       name: 'Finance Team',
       role: 'Loan Consultant',
@@ -2432,19 +2432,391 @@ export const BLOG_POSTS: BlogPost[] = [
     trendingScore: 89,
     tags: ['Loans', 'Home Loan', 'Prepayment', 'Savings'],
     toc: [
-      { id: 'intro', title: 'Introduction' },
-      { id: 'how-it-works', title: 'The Power of Prepayment' },
-      { id: 'simulation', title: 'Example Prepayment Math' },
-      { id: 'tips', title: 'Strategic Prepayment Tips' }
+      { id: 'intro', title: '1. Introduction: The Exponential Scale of Debt' },
+      { id: 'concept', title: '2. What Is Home Loan EMI Prepayment?' },
+      { id: 'early-years', title: '3. Why Interest Is Highest in Early Years' },
+      { id: 'savings', title: '4. How Prepayment Saves Interest' },
+      { id: 'scenarios', title: '5. Multi-Scenario Prepayment Comparison' },
+      { id: 'reduction-choice', title: '6. EMI Reduction vs. Tenure Reduction' },
+      { id: 'timing', title: '7. The Best Time to Prepay a Home Loan' },
+      { id: 'methods', title: '8. Strategic Repayment Methods' },
+      { id: 'investing', title: '9. Home Loan Prepayment vs. Investing' },
+      { id: 'makes-sense', title: '10. When Prepayment Makes Sense' },
+      { id: 'not-prepay', title: '11. When You Should NOT Prepay' },
+      { id: 'rbi-rules', title: '12. RBI Rules on Home Loan Prepayment' },
+      { id: 'taxation', title: '13. Tax Benefits and Prepayment' },
+      { id: 'mistakes', title: '14. Common Prepayment Mistakes to Avoid' },
+      { id: 'prepayment-plan', title: '15. Smart Home Loan Prepayment Plan' },
+      { id: 'table', title: '16. Home Loan Prepayment Savings Table' },
+      { id: 'faqs', title: '17. Frequently Asked Questions' },
+      { id: 'related-calculators', title: '18. Related Financial Calculators' }
     ],
     seo: {
-      title: 'Home Loan Prepayment: Save Interest Costs | CalculHub',
-      description: 'Prepaying even small parts of your home loan principal can dramatically cut your repayment tenure and total interest. See the math and plans.',
+      title: 'Home Loan Prepayment Guide: Save Lakhs in Interest | CalculHub',
+      description: 'An exhaustive guide on home loan prepayments. Learn how prepayment reduces interest, compare tenure vs EMI reduction, see savings tables and strategies.',
       keywords: 'home loan emi prepayment, home loan preclosure, save home loan interest, prepayment vs investment'
     },
+    schema: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Home Loan EMI Prepayment: How Much Interest Can You Save?",
+        "description": "An exhaustive guide on home loan prepayments. Learn how prepayment reduces interest, compare tenure vs EMI reduction, see savings tables and strategies.",
+        "author": { "@type": "Organization", "name": "CalculHub" },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CalculHub",
+          "logo": { "@type": "ImageObject", "url": "https://calculhub.in/og-image.png" }
+        },
+        "datePublished": "2026-05-30",
+        "dateModified": "2026-05-30",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://calculhub.in/blog/home-loan-prepayment-savings-guide" }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is home loan prepayment always a good idea?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For most borrowers, yes. Prepayment reduces your principal, interest burden, and loan tenure. However, it may not make sense if you do not have an emergency fund, carry higher-interest debt (like credit cards), or can reliably earn a higher return by investing your surplus cash."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are there prepayment charges on home loans in India?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For individual borrowers with floating-rate home loans, RBI guidelines prohibit lenders from charging prepayment or foreclosure penalties. However, charges may apply to fixed-rate home loans or loans taken by non-individual entities (like companies or partnership firms)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I choose EMI reduction or tenure reduction?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Unless you need to improve your monthly cash flow, choose tenure reduction. Tenure reduction keeps your monthly EMI constant, which pays down the principal faster and saves significantly more interest over the life of the loan."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How much interest can I save by paying one extra EMI per year?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "On a ₹50 Lakh, 20-year home loan at 8.5% interest, prepaying one extra EMI (₹43,391) every year can shorten your loan term by approximately 3.2 years and save you over ₹10,85,000 in interest charges."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I make prepayments every month?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, most banks and housing finance companies allow you to make partial prepayments as often as you like, though some lenders may require a minimum prepayment amount (e.g., ₹10,000 or a multiple of your EMI). Confirm the terms with your lender."
+            }
+          }
+        ]
+      }
+    ],
     contentHtml: `
       <section id="intro">
-        <p>A home loan is a decades-long commitment, and the total interest paid often exceeds the principal amount. Making periodic prepayments directly reduces the principal, compounding interest savings in your favor.</p>
+        <h2>1. Introduction: The Exponential Scale of Debt</h2>
+        <p>For most people, a home loan is the largest financial commitment they will ever make. While buying a home is an important milestone, many borrowers are surprised to discover that the total interest paid over a 20–30 year home loan can sometimes equal or even exceed the original loan amount.</p>
+        <p>The good news is that you don't have to wait until the end of the loan tenure to become debt-free. By making strategic home loan prepayments, you can significantly reduce your outstanding principal, shorten your loan tenure, and save lakhs of rupees in interest payments.</p>
+        <p>A simple annual prepayment of ₹50,000 or ₹1 lakh can dramatically reduce the total interest burden. Many borrowers who consistently make prepayments are able to close their loans 5–10 years earlier than scheduled.</p>
+      </section>
+
+      <section id="concept">
+        <h2>2. What Is Home Loan EMI Prepayment?</h2>
+        <p>In the context of retail banking, a home loan is structured as an amortizing term loan. When you take out a home loan, you agree to pay a monthly Equated Monthly Installment (EMI) over a fixed term (the tenure). This EMI consists of two components: the interest charge for that month and a partial repayment of the principal.</p>
+        <p><strong>Home loan prepayment</strong> refers to paying any amount over and above your regular monthly EMI directly toward the outstanding loan principal. Because prepayment reduces the base principal on which interest is compounded, it permanently lowers the interest charges for all subsequent periods of the loan.</p>
+        <p>Prepayments are classified into two categories:</p>
+        
+        <h3>1. Partial Prepayment (Part-Prepayment)</h3>
+        <p>Partial prepayment involves paying a lump sum amount (e.g., ₹50,000, ₹1,00,000, or a few monthly EMIs) toward your loan principal while continuing to make your regular monthly EMIs.</p>
+        <p>Borrowers typically fund partial prepayments using:</p>
+        <ul>
+          <li>Annual performance bonuses</li>
+          <li>Business profits</li>
+          <li>Maturity proceeds from investments (like mutual funds or fixed deposits)</li>
+          <li>Windfalls such as inheritances, tax refunds, or property sales</li>
+          <li>Surplus monthly savings accumulated over time</li>
+        </ul>
+        <p>This is the most flexible and common method of prepaying a loan. It allows you to chip away at your debt without committing to a full payoff.</p>
+        
+        <h3>2. Full Prepayment (Foreclosure)</h3>
+        <p>Full prepayment, or foreclosure, involves paying off the entire outstanding loan balance in a single transaction before the scheduled tenure ends.</p>
+        <p>Foreclosing a loan completely eliminates all future interest obligations and releases the lender's lien (hypothecation) on your property, allowing you to retrieve your original property deeds.</p>
+      </section>
+
+      <section id="early-years">
+        <h2>3. Why Home Loan Interest Is Highest in the Early Years</h2>
+        <p>Many borrowers assume that each EMI paid reduces their debt by an equal amount. However, in the early years of a home loan, the vast majority of your monthly payment goes toward interest, not principal.</p>
+        
+        <h3>The Mechanics of Amortization</h3>
+        <p>Interest is calculated monthly on the outstanding principal balance. The monthly interest charge is calculated using this formula:</p>
+        <div class="formula-box">Monthly Interest = Outstanding Principal &times; (Annual Interest Rate / 12)</div>
+        <p>The principal component of your EMI is simply the remainder of your payment:</p>
+        <div class="formula-box">Principal Component = EMI - Monthly Interest</div>
+        <p>Because your outstanding principal is at its highest at the start of the loan, the interest charge is also at its peak. As you pay down the principal over time, the interest charge decreases, and a larger portion of your EMI goes toward reducing the principal.</p>
+        
+        <h3>Amortization Breakdown Example</h3>
+        <p>Let's look at a concrete example to see how this works:</p>
+        <ul>
+          <li><strong>Loan Amount:</strong> ₹50,00,000 (₹50 Lakh)</li>
+          <li><strong>Interest Rate:</strong> 8.5% per annum</li>
+          <li><strong>Tenure:</strong> 20 Years (240 months)</li>
+          <li><strong>Calculated Monthly EMI:</strong> ₹43,391</li>
+        </ul>
+        <p>In the first month, <strong>81.6% of your EMI</strong> goes toward paying interest (₹35,417), while only <strong>18.4%</strong> goes toward reducing your debt (₹7,974).</p>
+        <p>After 10 years of consistent payments, you have paid a total of <strong>₹52,06,920</strong> in EMIs. However, your outstanding principal has only decreased from ₹50,00,000 to <strong>₹34,22,234</strong>. Over <strong>₹36 Lakh</strong> of your payments went toward interest, and only <strong>₹15.7 Lakh</strong> went toward reducing your debt.</p>
+        <p>This amortization structure is why <strong>early prepayments</strong> have the greatest impact. Prepaying ₹1,00,000 in Year 1 reduces your principal balance immediately, saving you 8.5% interest on that amount for the remaining 19 years of the loan.</p>
+      </section>
+
+      <section id="savings">
+        <h2>4. How Home Loan Prepayment Saves Interest</h2>
+        <p>Prepayment reduces the outstanding principal balance directly. This creates a compounding effect in your favor: by reducing the principal balance, more of your future EMI payments go toward principal reduction rather than interest charges. This accelerates the rate at which you pay down the remaining debt.</p>
+        
+        <h3>Prepayment as a Guaranteed Return</h3>
+        <p>Making a prepayment is mathematically equivalent to investing that money in a risk-free product that yields a return equal to your loan's interest rate.</p>
+        <p>If your home loan interest rate is 8.5%, prepaying ₹1,00,000 saves you ₹8,500 in interest in the first year alone, and continues to save you interest on the declining balance for the rest of the loan term. To beat this benefit by investing, you would need to find a taxable investment that consistently returns more than 8.5% per annum after taxes.</p>
+      </section>
+
+      <section id="scenarios">
+        <h2>5. Multi-Scenario Prepayment Comparison</h2>
+        <p>To see the financial impact of prepayments, let's compare four scenarios for a standard home loan of <strong>₹50,00,000 at 8.5% interest for 20 years</strong> (Monthly EMI: ₹43,391):</p>
+        
+        <h3>Scenario 1: No Prepayment (The Control Group)</h3>
+        <p>In this scenario, the borrower makes only the scheduled monthly payments.</p>
+        <ul>
+          <li>Total EMIs Paid: 240 payments of ₹43,391</li>
+          <li>Total Amount Paid: ₹1,04,13,840</li>
+          <li>Total Interest Paid: <strong>₹54,13,840</strong></li>
+        </ul>
+        
+        <h3>Scenario 2: Annual Prepayment of ₹50,000</h3>
+        <p>The borrower prepays a lump sum of <strong>₹50,000 once a year</strong>, at the end of every 12-month period, while keeping the monthly EMI constant at ₹43,391.</p>
+        <ul>
+          <li>Total Amount Invested in Prepayments: ₹8,00,000 (16 payments of ₹50,000)</li>
+          <li>Actual Tenure of the Loan: <strong>16.2 Years</strong> (194 Months)</li>
+          <li>Tenure Reduction: <strong>3.8 Years</strong> (46 Months saved)</li>
+          <li>Total Interest Paid: ₹41,18,225</li>
+          <li>Total Interest Saved: <strong>₹12,95,615</strong></li>
+        </ul>
+        
+        <h3>Scenario 3: Annual Prepayment of ₹1,00,000</h3>
+        <p>The borrower prepays a lump sum of <strong>₹1,00,000 once a year</strong> at the end of every 12-month period, maintaining the monthly EMI at ₹43,391.</p>
+        <ul>
+          <li>Total Amount Invested in Prepayments: ₹13,00,000 (13 payments of ₹1,00,000)</li>
+          <li>Actual Tenure of the Loan: <strong>13.6 Years</strong> (163 Months)</li>
+          <li>Tenure Reduction: <strong>6.4 Years</strong> (77 Months saved)</li>
+          <li>Total Interest Paid: ₹32,71,850</li>
+          <li>Total Interest Saved: <strong>₹21,41,990</strong></li>
+        </ul>
+        
+        <h3>Scenario 4: Annual Prepayment of ₹2,00,000</h3>
+        <p>The borrower prepays a lump sum of <strong>₹2,00,000 once a year</strong> at the end of every 12-month period, keeping the monthly EMI at ₹43,391.</p>
+        <ul>
+          <li>Total Amount Invested in Prepayments: ₹20,00,000 (10 payments of ₹2,00,000)</li>
+          <li>Actual Tenure of the Loan: <strong>10.5 Years</strong> (126 Months)</li>
+          <li>Tenure Reduction: <strong>9.5 Years</strong> (114 Months saved)</li>
+          <li>Total Interest Paid: ₹23,78,145</li>
+          <li>Total Interest Saved: <strong>₹30,35,695</strong></li>
+        </ul>
+      </section>
+
+      <section id="reduction-choice">
+        <h2>6. EMI Reduction vs. Tenure Reduction</h2>
+        <p>When you make a partial prepayment, banks and housing finance companies (HFCs) typically ask you to choose between two options:</p>
+        <ul>
+          <li><strong>Option 1: Reduce Loan Tenure (Recommended):</strong> Keep your monthly EMI amount constant and shorten the remaining term of the loan. This saves the maximum interest.</li>
+          <li><strong>Option 2: Reduce EMI:</strong> Keep the remaining loan tenure constant and lower the monthly EMI payment amount. This improves monthly cash flow but saves less interest.</li>
+        </ul>
+        
+        <h3>Mathematical Comparison: Tenure Reduction vs. EMI Reduction</h3>
+        <p>Imagine you have a <strong>₹50,00,000 loan at 8.5% interest for 20 years</strong>. At the end of <strong>Year 2 (Month 24)</strong>, you make a lump sum prepayment of <strong>₹5,00,000</strong>. Outstanding principal before prepayment is ₹48,01,114.</p>
+        <ul>
+          <li><strong>Option A (Reduce Tenure):</strong> Monthly EMI remains ₹43,391. The remaining tenure is reduced from 216 months to <strong>171 months</strong> (saving 3.75 years). Total Interest Saved: <strong>₹14,48,512</strong>.</li>
+          <li><strong>Option B (Reduce EMI):</strong> Remaining tenure stays at 216 months. The monthly EMI is reduced from ₹43,391 to <strong>₹38,870</strong> (saving ₹4,521/month). Total Interest Saved: <strong>₹4,74,810</strong>.</li>
+        </ul>
+        <p>By choosing <strong>Tenure Reduction</strong> instead of EMI Reduction, you save an additional <strong>₹9,73,702</strong> in interest on the same ₹5,00,000 prepayment.</p>
+      </section>
+
+      <section id="timing">
+        <h2>7. The Best Time to Prepay a Home Loan</h2>
+        <p>The timing of your prepayments is just as important as the amount. Because home loans are front-loaded with interest, prepayments made early in the loan term yield the greatest savings:</p>
+        <ul>
+          <li><strong>Years 1 to 5 (Maximum Impact):</strong> Interest makes up over 80% of your EMI. Prepayments made here have the maximum time to compound, generating the largest interest savings.</li>
+          <li><strong>Years 5 to 10 (High Impact):</strong> Interest component is still high (roughly 70% to 80% of your EMI). Prepayments are still highly effective.</li>
+          <li><strong>Years 10 to 15 (Moderate Impact):</strong> The principal component of your EMI begins to exceed the interest component. Interest savings are lower.</li>
+          <li><strong>Years 15 to 20 (Low Impact):</strong> Interest makes up a very small portion of your EMI. Prepaying here yields minimal benefit because you have already paid the bulk of the interest.</li>
+        </ul>
+      </section>
+
+      <section id="methods">
+        <h2>8. Strategic Repayment Methods</h2>
+        <p>You do not need a large windfall to prepay your home loan. Several structured strategies can help you pay down your principal over time:</p>
+        
+        <h3>Strategy 1: The "One Extra EMI" Strategy</h3>
+        <p>This simple strategy involves paying one additional EMI each year. On a ₹50 Lakh, 20-year loan at 8.5% interest, paying one extra EMI (₹43,391) once a year reduces your loan term by <strong>3.2 years</strong> and saves <strong>₹10,85,540</strong> in interest.</p>
+        
+        <h3>Strategy 2: The "10% Annual Increment" Strategy</h3>
+        <p>This strategy involves increasing your monthly EMI contribution by a fixed percentage (e.g., 5% or 10%) every year, matching your annual salary hikes. Increasing it by 10% every year pays off the loan in <strong>just 8.5 years</strong> instead of 20, saving over <strong>₹34.5 Lakh</strong> in interest.</p>
+        
+        <h3>Strategy 3: The "SIP-to-Home-Loan" Strategy</h3>
+        <p>Alongside your EMI, you start a <strong>₹5,000 monthly mutual fund SIP</strong>. Assuming a 12% annual return, you redeem the accumulated corpus after every 5 years (worth ₹4,12,000) and make lump sum prepayments. This pays off the loan years early while maintaining liquidity.</p>
+      </section>
+
+      <section id="investing">
+        <h2>9. Home Loan Prepayment vs. Investing</h2>
+        <p>Compare the interest rate of your home loan against the expected after-tax return of your investments:</p>
+        <ul>
+          <li><strong>If your loan rate is 9.0%</strong> and you expect a <strong>7.5% return</strong> on an FD, prepaying the loan is the better choice. It yields a higher, risk-free, tax-free return.</li>
+          <li><strong>If your loan rate is 8.0%</strong> and you expect a <strong>12.0% return</strong> from equity mutual funds, investing may generate more wealth over the long term. However, market investments involve volatility, while prepayment offers guaranteed savings.</li>
+        </ul>
+      </section>
+
+      <section id="makes-sense">
+        <h2>10. When Prepayment Makes Sense</h2>
+        <p>Prepayment is generally the right move if:</p>
+        <ul>
+          <li>You have a high interest rate (e.g., 9% or more).</li>
+          <li>You are in the early stages of the loan (first 5 to 7 years).</li>
+          <li>You want to reduce stress and improve financial security.</li>
+          <li>You are approaching retirement and want to enter it debt-free.</li>
+          <li>You have an adequate emergency fund (at least 6 months of expenses).</li>
+        </ul>
+      </section>
+
+      <section id="not-prepay">
+        <h2>11. When You Should NOT Prepay</h2>
+        <p>Avoid prepaying your home loan if:</p>
+        <ul>
+          <li>You lack an emergency fund (home equity is illiquid).</li>
+          <li>You carry high-interest debt like credit cards (36-42%) or personal loans (11-20%).</li>
+          <li>You are in the final stages of the loan (last 3 to 5 years).</li>
+          <li>You can reliably earn a higher return by investing in equities.</li>
+          <li>You have an unstable income and need to prioritize liquidity.</li>
+        </ul>
+      </section>
+
+      <section id="rbi-rules">
+        <h2>12. RBI Rules on Home Loan Prepayment</h2>
+        <p>Under RBI guidelines, banks and housing finance companies are prohibited from charging prepayment or foreclosure penalties on floating-rate home loans taken by individual borrowers. This allows you to prepay any amount, foreclose early, or transfer your balance to another lender without penalty charges.</p>
+        <p>Note that this zero-penalty rule does not apply to fixed-rate loans, non-individual borrowers (e.g., companies), or loans taken for commercial purposes.</p>
+      </section>
+
+      <section id="taxation">
+        <h2>13. Tax Benefits and Prepayment: A Cost-Benefit Analysis</h2>
+        <p>Many borrowers hesitate to prepay because they fear losing tax deductions under Section 24(b) (interest up to ₹2 Lakh/year) and Section 80C (principal up to ₹1.5 Lakh/year).</p>
+        <p>However, paying interest just to save taxes is a net loss. If you are in the 30% tax bracket and pay ₹2,00,000 in interest, you save ₹60,000 in taxes but still spend ₹1,40,000 out-of-pocket. Prepaying to avoid paying interest altogether is almost always the more profitable move.</p>
+      </section>
+
+      <section id="mistakes">
+        <h2>14. Common Home Loan Prepayment Mistakes to Avoid</h2>
+        <ol>
+          <li><strong>Waiting for a Large Lump Sum:</strong> Prepay smaller amounts as soon as you have them to prevent interest compounding.</li>
+          <li><strong>Choosing EMI Reduction:</strong> Tenure reduction saves significantly more interest.</li>
+          <li><strong>Exhausting Liquid Cash:</strong> Always maintain a 6-month emergency safety net.</li>
+          <li><strong>Ignoring Refinancing:</strong> Lowering your interest rate via a balance transfer can accelerate your savings.</li>
+        </ol>
+      </section>
+
+      <section id="prepayment-plan">
+        <h2>15. Smart Home Loan Prepayment Plan</h2>
+        <p>Follow this balanced framework for wealth creation and debt reduction:</p>
+        <ol>
+          <li>Set aside 6 months of expenses in an FD or liquid fund.</li>
+          <li>Secure term life and family health insurance coverage.</li>
+          <li>Maintain your monthly equity mutual fund SIPs.</li>
+          <li>Prepay an amount equal to one extra EMI every year.</li>
+          <li>Use 30% of performance bonuses and windfalls for loan prepayments.</li>
+          <li>Instruct your bank to reduce tenure, keeping the EMI constant.</li>
+        </ol>
+      </section>
+
+      <section id="table">
+        <h2>16. Home Loan Prepayment Savings Table</h2>
+        <p>Here is a projection showing the potential interest savings and tenure reduction for a <strong>₹50,00,000 home loan at 8.5% interest for 20 years</strong> (initial EMI: ₹43,391) under different prepayment amounts:</p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Prepayment Timing</th>
+                <th>Prepayment Amount (₹)</th>
+                <th>New Remaining Tenure</th>
+                <th>Tenure Saved</th>
+                <th>Total Interest Saved (₹)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>End of Year 1</td><td>₹1,00,000 (One-time)</td><td>18.7 Years</td><td>15 Months</td><td>₹5,75,410</td></tr>
+              <tr><td>End of Year 1</td><td>₹2,50,000 (One-time)</td><td>17.0 Years</td><td>35 Months</td><td>₹13,42,150</td></tr>
+              <tr class="highlight-row"><td>End of Year 1</td><td>₹5,00,000 (One-time)</td><td>14.5 Years</td><td>65 Months</td><td>₹24,01,120</td></tr>
+              <tr><td>Annual (Y1-Y15)</td><td>₹50,000 (Every Year)</td><td>16.2 Years</td><td>46 Months</td><td>₹12,95,615</td></tr>
+              <tr class="highlight-row"><td>Annual (Y1-Y13)</td><td>₹1,00,000 (Every Year)</td><td>13.6 Years</td><td>77 Months</td><td>₹21,41,990</td></tr>
+              <tr><td>Annual (Y1-Y10)</td><td>₹2,00,000 (Every Year)</td><td>10.5 Years</td><td>114 Months</td><td>₹30,35,695</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="faqs">
+        <h2>17. Frequently Asked Questions (FAQ)</h2>
+        <div class="faq-item">
+          <h4>Is home loan prepayment always a good idea?</h4>
+          <p>For most borrowers, yes. Prepayment reduces your principal, interest burden, and loan tenure. However, it may not make sense if you do not have an emergency fund, carry higher-interest debt (like credit cards), or can reliably earn a higher return by investing your surplus cash.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Are there prepayment charges on home loans in India?</h4>
+          <p>For individual borrowers with floating-rate home loans, RBI guidelines prohibit lenders from charging prepayment or foreclosure penalties. However, charges may apply to fixed-rate home loans or loans taken by non-individual entities (like companies or partnership firms).</p>
+        </div>
+        <div class="faq-item">
+          <h4>Should I choose EMI reduction or tenure reduction?</h4>
+          <p>Unless you need to improve your monthly cash flow, choose tenure reduction. Tenure reduction keeps your monthly EMI constant, which pays down the principal faster and saves significantly more interest over the life of the loan.</p>
+        </div>
+        <div class="faq-item">
+          <h4>How much interest can I save by paying one extra EMI per year?</h4>
+          <p>On a ₹50 Lakh, 20-year home loan at 8.5% interest, prepaying one extra EMI (₹43,391) every year can shorten your loan term by approximately 3.2 years and save you over ₹10,85,000 in interest charges.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Can I make prepayments every month?</h4>
+          <p>Yes, most banks and housing finance companies allow you to make partial prepayments as often as you like, though some lenders may require a minimum prepayment amount (e.g., ₹10,000 or a multiple of your EMI). Confirm the terms with your lender.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Does prepaying my home loan hurt my credit score?</h4>
+          <p>No. Prepaying your principal and closing your loan early does not hurt your credit score. In fact, maintaining a low debt-to-income ratio and a clean repayment history supports a healthy credit profile.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Should I stop my mutual fund SIPs to prepay my home loan?</h4>
+          <p>Generally, no. It is usually wiser to maintain a balanced plan. Keep up your long-term equity SIPs (which have historically outpaced home loan rates) and use annual bonuses or other surplus cash to make lump sum prepayments on your loan.</p>
+        </div>
+        <div class="faq-item">
+          <h4>How does a floating interest rate affect prepayment calculations?</h4>
+          <p>If your floating interest rate rises, your bank will typically extend your loan tenure rather than increase your EMI. This increases your total interest costs. Prepaying during rate hikes helps counteract this effect by keeping your tenure under control.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Can I claim tax deductions on prepaid amounts?</h4>
+          <p>Yes. Prepayments qualify as principal repayments under Section 80C of the Income Tax Act (up to the annual limit of ₹1.5 Lakh, under the Old Tax Regime). However, remember that Section 80C is not available under the New Tax Regime.</p>
+        </div>
+        <div class="faq-item">
+          <h4>What is the difference between part-payment and foreclosure?</h4>
+          <p>Part-payment involves paying a lump sum to reduce your principal balance while continuing to make your monthly EMIs. Foreclosure involves paying off the entire remaining loan balance to close the account early.</p>
+        </div>
+      </section>
+
+      <section id="related-calculators">
+        <h2>18. Related Financial Calculators</h2>
+        <p>Use these free, browser-only calculators to plan your loan and prepayments:</p>
+        <ul>
+          <li><a href="/financial/home-loan-emi-calculator">Home Loan EMI Calculator</a></li>
+          <li><a href="/financial/loan-eligibility-calculator">Loan Eligibility Calculator</a></li>
+          <li><a href="/financial/compound-interest">Compound Interest Calculator</a></li>
+          <li><a href="/financial/sip-calculator">SIP Calculator</a></li>
+          <li><a href="/financial/investment-calculator">Investment Calculator</a></li>
+          <li><a href="/financial/fd-calculator">Fixed Deposit Calculator</a></li>
+        </ul>
       </section>
     `
   },
