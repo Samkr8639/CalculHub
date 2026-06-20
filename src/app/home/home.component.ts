@@ -115,6 +115,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       });
 
       const splitTitle = new SplitText('.hero-title', { type: 'words,chars' });
+      document.querySelector('.hero-title')?.removeAttribute('aria-label');
       gsap.from(splitTitle.chars, {
         opacity: 0,
         scale: 0,
@@ -126,6 +127,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       });
 
       const splitSubtitle = new SplitText('.hero-subtitle', { type: 'words' });
+      document.querySelector('.hero-subtitle')?.removeAttribute('aria-label');
       gsap.from(splitSubtitle.words, {
         opacity: 0,
         y: 30,

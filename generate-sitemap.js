@@ -11,7 +11,7 @@ const paths = [
   '/blog/calorie-deficit-weight-loss-guide',
   '/blog/how-compound-interest-works-guide',
   '/blog/mental-math-percentage-hacks',
-  '/blog/fd-vs-mutual-funds-comparison',
+  '/blog/fixed-deposit-vs-mutual-funds',
   '/blog/matrix-multiplication-beginners-guide',
   '/blog/bmr-tdee-energy-expenditure-guide',
   '/blog/home-loan-prepayment-savings-guide',

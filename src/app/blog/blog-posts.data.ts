@@ -1560,19 +1560,19 @@ export const BLOG_POSTS: BlogPost[] = [
     `
   },
   {
-    slug: 'fd-vs-mutual-funds-comparison',
-    title: 'Fixed Deposit vs Mutual Funds: Safe Returns vs Wealth Growth',
+    slug: 'fixed-deposit-vs-mutual-funds',
+    title: 'Fixed Deposit vs Mutual Funds: Safe Returns vs Wealth Growth — Which Is Right for You in 2026?',
     category: 'Finance',
-    publishDate: 'June 05, 2026',
-    date: '2026-06-05',
-    readTime: '6 min read',
-    readTimeMin: 6,
+    publishDate: 'June 20, 2026',
+    date: '2026-06-20',
+    readTime: '8 min read',
+    readTimeMin: 8,
     author: {
       name: 'Finance Team',
       role: 'Portfolio Manager',
       avatar: 'assets/team-finance.png'
     },
-    summary: 'Compare FD and Mutual Funds. Weigh the safety of guaranteed bank interest against the growth potential and inflation protection of mutual funds.',
+    summary: 'FD or mutual fund — which is right for you? Compare real returns after tax and inflation, safety limits, and a goal-based allocation framework for 2026.',
     heroImage: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&auto=format&fit=crop&q=80',
     heroAlt: 'Coins stacked in jars, showing conservative saving vs active investing.',
     heroPrompt: 'Two glass jars on a dark marble surface. One contains stacked coins with a lock, the other contains coins with green plants sprouting, glowing red accent light',
@@ -1581,19 +1581,254 @@ export const BLOG_POSTS: BlogPost[] = [
     trendingScore: 81,
     tags: ['FD', 'Mutual Funds', 'Savings', 'Finance'],
     toc: [
-      { id: 'intro', title: 'Introduction' },
-      { id: 'fd', title: 'Understanding Fixed Deposits' },
-      { id: 'mf', title: 'Understanding Mutual Funds' },
-      { id: 'comparison', title: 'The Inflation Factor' }
+      { id: 'safety', title: 'The Safety Question' },
+      { id: 'returns', title: 'Current Returns' },
+      { id: 'taxation', title: 'The Tax Comparison' },
+      { id: 'real-returns', title: 'Real Returns after Tax/Inflation' },
+      { id: 'example', title: 'Real Numbers Example' },
+      { id: 'liquidity', title: 'Liquidity & Lock-In' },
+      { id: 'framework', title: 'Goal-Based Framework' },
+      { id: 'mistakes', title: 'Common Mistakes to Avoid' },
+      { id: 'takeaways', title: 'Key Takeaways' },
+      { id: 'faqs', title: 'Frequently Asked Questions' },
+      { id: 'related-calculators', title: 'Related Financial Calculators' }
     ],
     seo: {
-      title: 'Fixed Deposit vs Mutual Funds Comparison | CalculHub',
-      description: 'Compare FD and Mutual Funds. Weigh the safety of guaranteed bank interest against the growth potential and inflation protection of mutual funds.',
-      keywords: 'fd vs mutual funds, fixed deposit returns, mutual fund yield, conservative investing, inflation hedge'
+      title: 'Fixed Deposit vs Mutual Funds 2026: Safe Returns vs Wealth Growth | CalculHub',
+      description: 'FD or mutual fund — which is right for you? Compare real returns after tax and inflation, safety limits, and a goal-based allocation framework for 2026.',
+      keywords: 'fixed deposit vs mutual fund, FD vs SIP, is FD safer than mutual fund, FD vs mutual fund returns, FD vs mutual fund tax, debt fund vs FD, where to invest money in 2026 India'
     },
+    schema: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Fixed Deposit vs Mutual Funds: Safe Returns vs Wealth Growth — Which Is Right for You in 2026?",
+        "description": "FD or mutual fund — which is right for you? Compare real returns after tax and inflation, safety limits, and a goal-based allocation framework for 2026.",
+        "author": { "@type": "Organization", "name": "CalculHub" },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CalculHub",
+          "logo": { "@type": "ImageObject", "url": "https://calculhub.in/og-image.png" }
+        },
+        "datePublished": "2026-06-20",
+        "dateModified": "2026-06-20",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://calculhub.in/blog/fixed-deposit-vs-mutual-funds" }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is a Fixed Deposit completely safe?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Not entirely. FD principal and interest are protected only up to Rs 5 lakh per depositor per bank under DICGC insurance. Amounts above that limit, in the rare event of a bank failure, are not guaranteed. For deposits under Rs 5 lakh in a scheduled bank, an FD is about as safe as an investment gets in India."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are debt mutual funds still better than FD for tax savings?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Usually not anymore. Debt mutual fund units purchased on or after April 1, 2023 are taxed entirely at your income tax slab rate regardless of how long you hold them, with no indexation or long-term capital gains benefit. This is essentially the same tax treatment as FD interest, so the old 'debt funds are more tax-efficient than FD' argument no longer holds for new investments."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "FD vs mutual fund: which gives higher returns?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Equity mutual funds have historically delivered higher long-term returns than FDs — Nifty 50 has compounded at roughly 11-13% annually over the past 10-20 years, against FD rates currently around 6.5-7.1% at major banks. But equity returns are not guaranteed and can be negative in a bad year, while FD returns are fixed and known in advance. Debt mutual funds sit closer to FD in both return and now in tax treatment."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I keep my emergency fund in an FD or a mutual fund?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "An FD (or a liquid/overnight debt fund) is generally more appropriate than an equity mutual fund for an emergency fund. The defining requirement for emergency money is that it must be there, in full, exactly when you need it — equity markets can be down 20-30% at the exact moment a financial emergency hits, which is the worst possible time to be forced to sell."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What percentage of my savings should be in FD vs mutual funds?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "There's no universal number, but a common starting framework is to keep 3-6 months of expenses in FD or liquid funds as a safety net, and direct money for goals more than 5 years away mostly into equity mutual funds via SIP, with the FD/debt portion increasing as a goal gets closer and the portfolio needs to de-risk."
+            }
+          }
+        ]
+      }
+    ],
     contentHtml: `
-      <section id="intro">
-        <p>Where should you stash your savings? Fixed Deposits provide absolute security, while Mutual Funds offer stock and bond market yields. Understanding how both assets behave is key to optimizing your portfolio.</p>
+      <section id="safety">
+        <h2>The Safety Question: FD Isn't as Unlimited-Safe as You Think</h2>
+        <p>Start here, because it's the part most comparisons get wrong by omission. Bank FDs are insured by the DICGC (Deposit Insurance and Credit Guarantee Corporation, an RBI subsidiary) — but only up to <strong>₹5 lakh per depositor, per bank</strong>, covering both principal and accrued interest combined. If your FD plus interest crosses that threshold at a single bank, the excess isn't government-guaranteed. It's still very low risk with a scheduled commercial bank, but "FD = 100% safe no matter the amount" is a myth worth correcting before you put your life savings into one account at one bank.</p>
+        <p>Mutual funds carry a different kind of risk entirely — not a counterparty/bank-failure risk, but a market-value risk. Your money is held in pooled securities (regulated and ring-fenced from the fund house's own balance sheet, so the fund house going bankrupt doesn't wipe out your holding), but the value of those securities moves with the market. An equity fund can be down 15-20% in a bad year. A debt fund can lose money too, though usually by far less, if interest rates move against it or a holding defaults.</p>
+        <p><strong>The honest framing:</strong> FD risk is mostly about amount and concentration (stay under ₹5 lakh per bank, or spread across banks). Mutual fund risk is about time horizon and volatility (don't put money you need next year into equities).</p>
+      </section>
+
+      <section id="returns">
+        <h2>What Each Actually Returns Right Now</h2>
+        <p><strong>Fixed deposits</strong>, as of mid-2026, are paying roughly <strong>6.4%-7.1% per annum</strong> at major banks (SBI, HDFC, ICICI, PNB) for general citizens on medium-term tenures, a little more for senior citizens, with the RBI holding the repo rate steady at 5.25% through its recent policy reviews. Small finance banks are quoting noticeably higher — some up to 8-8.5% — in exchange for taking on a smaller, less-established institution as your counterparty. Whatever rate you lock in is exactly what you'll get; an FD's return is contractual, not a forecast.</p>
+        <p><strong>Equity mutual funds</strong> don't offer a contractual rate — only a track record. The Nifty 50, as a reference point, has compounded at roughly <strong>11-13% annually</strong> over the past 10 to 20 years on a total-return basis, though that average hides enormous year-to-year swings: +75.6% in 2009, -51.3% in 2008, and plenty of single-digit or negative years in between. A SIP smooths this out somewhat through rupee cost averaging, but it doesn't eliminate the risk — it just means your average purchase price benefits from the dips along the way.</p>
+        <p><strong>Debt mutual funds</strong> sit in between, and closer to FD than to equity in both return and (now) tax profile. They typically target returns in the high-single digits depending on the underlying bonds, with lower volatility than equity but real interest-rate and credit risk that an FD simply doesn't carry.</p>
+      </section>
+
+      <section id="taxation">
+        <h2>The Tax Comparison Most Articles Get Wrong</h2>
+        <p>This is where a 2023 rule change quietly reshuffled the entire comparison, and a lot of content online still hasn't caught up.</p>
+        <p><strong>FD interest</strong> is fully taxable, added to your total income and taxed at your income tax slab rate, every year it's earned (even before maturity, on an accrual basis) — there's no special lower rate, no holding-period benefit, nothing. Banks deduct TDS once your interest crosses the prescribed threshold in a year, and you can avoid that TDS with Form 15G/15H if your total income is below the exemption limit, but the underlying tax liability doesn't change.</p>
+        <p><strong>Equity mutual funds</strong> get preferential treatment: long-term capital gains (units held over 12 months) up to <strong>₹1.25 lakh per financial year are tax-exempt</strong>, with gains above that taxed at a flat <strong>12.5%</strong> — no slab-rate exposure at all. Short-term gains (under 12 months) are taxed at 20%. For anyone in the 20% or 30% income tax slab, this is a real, meaningful tax advantage over FD interest.</p>
+        <p><strong>Debt mutual funds</strong> are where the old conventional wisdom has gone stale. Before April 2023, debt funds held over 36 months got LTCG treatment with indexation — a genuine tax edge over FD. Since April 1, 2023, <strong>any debt fund units purchased on or after that date are taxed entirely at your slab rate, regardless of holding period</strong>, with no indexation and no long-term treatment at all. In practical terms, a debt fund bought today is taxed almost identically to an FD. The lingering "debt funds are more tax-efficient than FD" advice circulating online is, for new investments, simply outdated.</p>
+        <p><strong>What this means in practice:</strong> the tax argument for mutual funds over FD applies cleanly to <em>equity</em> funds. For <em>debt</em> funds, the tax picture is now roughly a wash against FD — so the case for choosing a debt fund over an FD today rests on other factors (liquidity, no premature-withdrawal penalty, marginally different return profile), not tax.</p>
+      </section>
+
+      <section id="real-returns">
+        <h2>Real Returns: What's Left After Tax and Inflation</h2>
+        <p>The number on the FD certificate or the mutual fund factsheet isn't what actually lands in your pocket — inflation and tax both take a bite first, and this is the comparison that actually matters for long-term planning.</p>
+        <p>India's CPI inflation has been running comparatively mild lately — around 3.4%-3.9% year-on-year through early-to-mid 2026 per official government data, well below the roughly 5-6% long-run historical average. At a 6.5% FD rate against ~3.5-4% inflation, you're currently looking at a real (inflation-adjusted) pre-tax return of roughly 2.5-3% — positive, but modest, and it shrinks further once slab-rate tax is applied. If inflation rises back toward its historical average while FD rates stay where they are, that real return compresses toward zero or negative.</p>
+        <p>Equity mutual funds, at a historical 11-13% nominal CAGR against the same inflation backdrop, have delivered a real return in the high-single digits over long periods — which is the entire reason equities are the standard recommendation for goals more than 5 years out, despite the volatility. The catch, and it's a real one: that 11-13% is a multi-decade average. Over any specific 1-3 year window you pick, the real return could easily be sharply negative. Time horizon is what converts "risky" into "historically reliable."</p>
+      </section>
+
+      <section id="example">
+        <h2>A Real Numbers Example: ₹5 Lakh Over 10 Years</h2>
+        <p>Ranges and percentages only go so far — here's the same ₹5,00,000, invested as a one-time lumpsum for 10 years, run through all three instruments using the rates discussed above. These are illustrative, not promised: FD at 6.75% (mid-point of current major-bank rates, compounded quarterly), an equity fund at a 12% historical average CAGR, and a debt fund at an assumed 7.5%. Tax is calculated assuming a 30% income tax slab for FD and debt fund interest, and the standard equity LTCG treatment for the equity fund.</p>
+        
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Fixed Deposit (6.75%)</th>
+                <th>Debt Mutual Fund (7.5%)</th>
+                <th>Equity Mutual Fund (12% CAGR)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Maturity value (pre-tax)</td>
+                <td>₹9,76,501</td>
+                <td>₹10,30,516</td>
+                <td>₹15,52,924</td>
+              </tr>
+              <tr class="highlight-row">
+                <td>Gain (pre-tax)</td>
+                <td>₹4,76,501</td>
+                <td>₹5,30,516</td>
+                <td>₹10,52,924</td>
+              </tr>
+              <tr>
+                <td>Tax on gain</td>
+                <td>₹1,42,950 (30% slab)</td>
+                <td>₹1,59,155 (30% slab)</td>
+                <td>₹1,15,991 (12.5% above ₹1.25L exemption)</td>
+              </tr>
+              <tr class="highlight-row">
+                <td>Maturity value (post-tax)</td>
+                <td>₹8,33,551</td>
+                <td>₹8,71,361</td>
+                <td>₹14,36,934</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>A few things jump out. First, the debt fund barely beats the FD post-tax despite a higher assumed pre-tax rate — exactly what you'd expect now that both are taxed at slab rate, with the debt fund's slightly higher headline return mostly absorbed by a slightly higher tax bill. Second, the equity fund's tax bill, in percentage terms, is far gentler than either fixed-income option's, on top of starting from a much larger gain — the combination of a higher historical return and concessional capital gains treatment is what does the heavy lifting in the wealth-creation case for equities. Third, none of this captures the very real possibility that the equity fund's actual 10-year return lands meaningfully above or below 12% — unlike the FD row, which is the one number in this table you can actually count on in advance.</p>
+      </section>
+
+      <section id="liquidity">
+        <h2>Liquidity and Lock-In: The Part Nobody Compares Properly</h2>
+        <p><strong>FD liquidity:</strong> Most banks allow premature withdrawal, but at a cost — typically a 0.5%-1% interest rate penalty on the original rate, and you may forfeit the higher rate you'd locked in. Tax-saving FDs are a hard exception: a mandatory 5-year lock-in with no premature withdrawal at all, full stop.</p>
+        <p><strong>Equity/debt mutual fund liquidity:</strong> Open-ended mutual funds (the vast majority) can be redeemed any business day, with proceeds typically credited in 1-3 working days. Many equity funds charge a small exit load (commonly 1%) if redeemed within 12 months, but otherwise there's no lock-in. The exception is ELSS (Equity Linked Savings Scheme) funds, which carry a mandatory <strong>3-year</strong> lock-in in exchange for Section 80C tax deduction eligibility — notably shorter than a tax-saving FD's 5-year lock-in, for a comparable tax benefit, which is one reason ELSS is often recommended over tax-saver FDs for the 80C bucket specifically if you're up for equity exposure.</p>
+        <p><strong>The practical difference:</strong> mutual funds are generally more liquid than FDs day-to-day (no penalty for redeeming an open-ended fund), but FDs are more <em>predictable</em> — you know exactly what you'll get on a given date, where a mutual fund redemption depends on the market value that day.</p>
+      </section>
+
+      <section id="framework">
+        <h2>A Goal-Based Framework, Not a Universal Answer</h2>
+        <p>The honest answer to "FD or mutual fund" depends entirely on what the money is for and when you'll need it.</p>
+        <ul>
+          <li><strong>Emergency fund (3-6 months of expenses):</strong> FD or a liquid/overnight debt fund. The one job of this money is to be fully there when you need it, and that rules out equity exposure regardless of its long-term return advantage — a medical emergency or job loss tends to coincide with bad timing more often than chance would suggest, simply because financial shocks and market downturns often share root causes (a slowing economy hits both jobs and markets together).</li>
+          <li><strong>Goals 1-3 years out (a planned purchase, a wedding, a near-term down payment):</strong> FD or short-duration debt fund. Not enough time for equity volatility to average out; capital preservation matters more than growth here.</li>
+          <li><strong>Goals 3-5 years out:</strong> A blend — increasingly weighted toward debt instruments and FD as the goal approaches, with a smaller equity component if the timeline has some flexibility.</li>
+          <li><strong>Goals 5+ years out (retirement, a child's higher education, long-term wealth building):</strong> Predominantly equity mutual funds via SIP. This is the horizon where compounding and rupee cost averaging do the most work, and where historically, equities have comfortably outpaced both FD returns and inflation.</li>
+          <li><strong>Tax-saving allocation (Section 80C):</strong> ELSS funds offer the same ₹1.5 lakh deduction as a tax-saver FD with a 3-year lock-in instead of 5, and historically higher (though not guaranteed) returns — worth strongly considering over a tax-saver FD if you're comfortable with equity exposure for that specific bucket.</li>
+        </ul>
+        <p>This isn't an either/or portfolio decision — it's normal, and usually correct, to hold both an FD and a SIP at the same time, each doing a different job.</p>
+      </section>
+
+      <section id="mistakes">
+        <h2>Common Mistakes in This Decision</h2>
+        <ul>
+          <li><strong>Treating "mutual fund" as one category.</strong> As covered above, equity and debt funds behave very differently in both return and (since 2023) tax terms. "Mutual funds beat FD" is true for equity funds and much less true for debt funds today.</li>
+          <li><strong>Putting emergency money into equity mutual funds chasing better returns.</strong> This is the single most common version of the mistake — and the one that hurts most, because it tends to force a withdrawal at the worst possible moment.</li>
+          <li><strong>Comparing FD's advertised rate to a mutual fund's best historical year instead of its long-term average.</strong> Cherry-picking either side's most favorable number distorts the decision; use multi-year averages for funds and the actual quoted rate for FD.</li>
+          <li><strong>Concentrating large FD amounts in a single bank without considering the ₹5 lakh DICGC limit.</strong> Worth splitting larger FD holdings across two or more scheduled banks if total deposits exceed that threshold.</li>
+          <li><strong>Locking a 5-year tax-saver FD by default, without comparing it to a 3-year ELSS fund for the same Section 80C benefit.</strong></li>
+        </ul>
+      </section>
+
+      <section id="takeaways">
+        <h2>Key Takeaways</h2>
+        <div class="tip-box">
+          <ul>
+            <li>FD safety is real but capped: DICGC insures only ₹5 lakh per depositor per bank — not unlimited.</li>
+            <li>FD rates are currently ~6.4-7.1% at major banks; equity mutual funds have historically compounded at ~11-13% over 10-20 years, with real year-to-year volatility.</li>
+            <li>The tax landscape changed in April 2023: debt mutual funds are now taxed at slab rate like FD interest, removing their old tax advantage. Equity funds retain a genuine tax edge (12.5% LTCG above ₹1.25 lakh/year).</li>
+            <li>Use FD and debt instruments for money you need within 3 years or can't afford to lose; use equity mutual fund SIPs for goals 5+ years out.</li>
+            <li>Most sound financial plans hold both, in different proportions based on each goal's timeline — this isn't a single either/or decision.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="faqs">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+          <h4>Is a Fixed Deposit completely safe?</h4>
+          <p>Not entirely. FD principal and interest are protected only up to ₹5 lakh per depositor per bank under DICGC insurance. Amounts above that, in the rare case of a bank failure, aren't guaranteed. Under ₹5 lakh at a scheduled bank, an FD is about as safe as an investment gets in India.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Are debt mutual funds still better than FD for tax savings?</h4>
+          <p>Usually not anymore. Debt fund units bought on or after April 1, 2023 are taxed entirely at your slab rate regardless of holding period, with no indexation or LTCG benefit — essentially the same treatment as FD interest. The old "debt funds are more tax-efficient" argument no longer applies to new investments.</p>
+        </div>
+        <div class="faq-item">
+          <h4>FD vs mutual fund: which gives higher returns?</h4>
+          <p>Equity mutual funds have historically outperformed FDs over the long term — Nifty 50 has compounded at roughly 11-13% annually over the past 10-20 years, against current FD rates of 6.5-7.1%. But equity returns aren't guaranteed and can be negative in a given year, while FD returns are fixed and known upfront. Debt funds sit closer to FD in both return and tax treatment.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Should I keep my emergency fund in an FD or a mutual fund?</h4>
+          <p>An FD, or a liquid/overnight debt fund, is generally the better fit. Emergency money needs to be fully available exactly when you need it, and equity markets can be down significantly at the exact moment a financial emergency hits — the worst time to be forced to sell.</p>
+        </div>
+        <div class="faq-item">
+          <h4>What percentage of my savings should be in FD vs mutual funds?</h4>
+          <p>There's no single right number, but a common starting framework is 3-6 months of expenses in FD or liquid funds as a safety net, with money for goals 5+ years away directed mostly into equity mutual funds via SIP — shifting more toward FD/debt as a goal gets closer.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Can I lose money in a mutual fund?</h4>
+          <p>Yes. Mutual funds are market-linked; both equity and debt funds can post negative returns over short periods, and there's no guarantee of principal protection the way there is with an FD up to the DICGC limit.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Is ELSS better than a tax-saving FD?</h4>
+          <p>For the same Section 80C deduction, ELSS carries a 3-year lock-in versus a tax-saver FD's 5-year lock-in, and has historically delivered higher (though not guaranteed) returns. It's a reasonable preference over a tax-saver FD for investors comfortable with equity market exposure.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Does FD interest get taxed even if I don't withdraw it?</h4>
+          <p>Yes. FD interest is taxed on an accrual basis each financial year as it's earned, regardless of whether you've withdrawn it or the FD has matured.</p>
+        </div>
+      </section>
+
+      <section id="related-calculators">
+        <h2>Related Financial Calculators</h2>
+        <p>Explore these useful tools to help make smarter investment decisions:</p>
+        <ul>
+          <li><a href="/financial/fd-calculator">FD Calculator</a></li>
+          <li><a href="/financial/sip-calculator">SIP Calculator</a></li>
+          <li><a href="/financial/mutual-fund-calculator">Mutual Fund Returns Calculator</a></li>
+          <li><a href="/financial/compound-interest">Compound Interest Calculator</a></li>
+          <li><a href="/financial/ppf-calculator">PPF Calculator</a></li>
+          <li><a href="/financial/investment-calculator">Investment Calculator</a></li>
+        </ul>
       </section>
     `
   },

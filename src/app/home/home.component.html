@@ -4,8 +4,13 @@
   </div>
   <div class="hero-content">
     <div class="hero-text">
-      <h1 class="hero-title">Free Online Calculators — Finance, Health & Math</h1>
-      <p class="hero-subtitle">Explore CalculHub's free online calculators for finance, health, and math. Our accurate
+      <!-- Screen reader accessible title and description -->
+      <h1 class="sr-only">Free Online Calculators — Finance, Health & Math</h1>
+      <p class="sr-only">Explore CalculHub's free online calculators for finance, health, and math. Our accurate tools help you make informed decisions with precision and ease. No login required.</p>
+
+      <!-- Animated visual-only elements -->
+      <h1 class="hero-title" aria-hidden="true">Free Online Calculators — Finance, Health & Math</h1>
+      <p class="hero-subtitle" aria-hidden="true">Explore CalculHub's free online calculators for finance, health, and math. Our accurate
         tools help you make informed decisions with precision and ease. No login required.</p>
       <button (click)="scrollToCalculators()" class="button primary-button">Explore Calculators</button>
     </div>
