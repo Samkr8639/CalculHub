@@ -10,107 +10,338 @@
   <!-- ================= INDEX VIEW ================= -->
   @if (!currentPost()) {
     <div class="blog-index">
+      
+      <!-- HERO HEADER -->
       <header class="index-hero">
         <div class="hero-glow-sphere"></div>
-        
         <div class="hero-content">
-          <span class="blog-subtitle">RESOURCES & INSIGHTS</span>
-          <h1 class="blog-main-title">CalculHub <span class="gradient-text">Blog</span></h1>
+          <span class="blog-subtitle">CalculHub Insights</span>
+          <h1 class="blog-main-title">Expert <span class="gradient-text">Calculators & Guides</span></h1>
           <p class="index-desc">Deep-dive financial guides, metabolic health insights, and mathematical concepts explained simply. Stay informed and calculate with precision.</p>
-          
-          <!-- Search Wrapper embedded directly in Hero -->
+        </div>
+      </header>
+
+      <!-- CONTROL BAR (Search, Category Tab Bar, Sort, Filter Toggle) -->
+      <section class="control-panel">
+        
+        <div class="search-sort-row">
+          <!-- Search Wrapper -->
           <div class="search-wrapper">
             <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
             <input 
               type="text" 
-              placeholder="Search articles, categories, or keywords..." 
+              placeholder="Search articles, tags, authors..." 
               (input)="onSearchChange($event)"
               [value]="searchQuery()"
               class="search-input"
             />
+            @if (searchQuery()) {
+              <button class="clear-search-btn" (click)="updateQueryParams({ q: null, page: 1 })">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              </button>
+            }
           </div>
-        </div>
 
-        <div class="hero-featured-card">
-          <div class="featured-badge">LATEST POST</div>
-          <div class="featured-card-body">
-            <span class="featured-cat-tag">FINANCIAL FINANCE</span>
-            <h2 class="featured-title">How to Calculate Bike Loan EMI</h2>
-            <p class="featured-summary">Master two-wheeler loan EMIs, down payments, and effective reducing interest rates. Read our manual calculation breakdown.</p>
-            <a [routerLink]="['/blog', 'calculate-bike-loan-emi-guide']" class="featured-cta">
-              Read Article
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
-          </div>
-        </div>
-      </header>
+          <!-- Actions Column (Sort, Advanced Filters, Mode Toggle) -->
+          <div class="actions-wrapper">
+            <div class="sort-select-wrapper">
+              <label for="sort-select">Sort By:</label>
+              <select id="sort-select" [value]="selectedSort()" (change)="setSort($any($event.target).value)" class="sort-dropdown">
+                <option value="latest">Latest First</option>
+                <option value="oldest">Oldest First</option>
+                <option value="popular">Most Popular</option>
+                <option value="views">Most Viewed</option>
+                <option value="trending">Trending Now</option>
+                <option value="alphabetical">Alphabetical</option>
+              </select>
+            </div>
 
-      <!-- Category Filter Tabs Container -->
-      <div class="filter-container">
-        <div class="category-tabs">
-          @for (cat of categories(); track cat) {
             <button 
-              [class.active]="selectedCategory() === cat"
-              (click)="setCategory(cat)"
-              class="category-btn">
-              {{ cat }}
+              class="filter-toggle-btn" 
+              [class.active]="showAdvancedFilters() || selectedTag() !== 'All' || selectedAuthor() !== 'All' || selectedReadTime() !== 'All'"
+              (click)="toggleAdvancedFilters()">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="filter-icon"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+              <span>Filters</span>
             </button>
-          }
-        </div>
-      </div>
 
-      <!-- Articles Grid -->
-      @if (filteredPosts().length > 0) {
-        <div class="articles-grid">
-          @for (post of filteredPosts(); track post.slug) {
-            <article class="post-card">
-              <div class="card-image-wrapper">
-                <img [src]="post.heroImage" [alt]="post.heroAlt" loading="lazy" />
-                <span class="card-category">{{ post.category }}</span>
-              </div>
-              <div class="card-content">
-                <div class="card-meta">
-                  <span>{{ post.publishDate }}</span>
-                  <span class="meta-dot">•</span>
-                  <span>{{ post.readTime }}</span>
-                </div>
-                <h3 class="card-title">
-                  <a [routerLink]="['/blog', post.slug]">{{ post.title }}</a>
-                </h3>
-                <p class="card-summary">{{ post.summary }}</p>
-                <div class="card-footer">
-                  <div class="author-info">
-                    <span class="author-name">{{ post.author.name }}</span>
-                  </div>
-                  <a [routerLink]="['/blog', post.slug]" class="read-more-link">
-                    Read Article
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                  </a>
-                </div>
-              </div>
-            </article>
-          }
+            <button 
+              class="mode-toggle-btn" 
+              [class.active]="isInfiniteScroll()" 
+              (click)="toggleInfiniteScroll()"
+              title="Toggle standard pagination vs infinite scroll">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mode-icon"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+              <span>{{ isInfiniteScroll() ? 'Infinite Scroll' : 'Pages' }}</span>
+            </button>
+          </div>
         </div>
-      } @else {
-        <div class="no-results">
-          <svg class="no-results-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
-          <h3>No articles found</h3>
-          <p>We couldn't find any articles matching your search query. Try checking another category or refining your search term.</p>
+
+        <!-- Category Scroll Bar -->
+        <div class="category-scrollbar-wrapper">
+          <div class="category-scrollbar">
+            @for (cat of categories(); track cat) {
+              <button 
+                [class.active]="selectedCategory() === cat"
+                (click)="setCategory(cat)"
+                class="category-tab-btn">
+                {{ cat }}
+              </button>
+            }
+          </div>
         </div>
+
+        <!-- Advanced Filters Expandable Drawer -->
+        @if (showAdvancedFilters() || selectedTag() !== 'All' || selectedAuthor() !== 'All' || selectedReadTime() !== 'All') {
+          <div class="advanced-filters-drawer">
+            <div class="drawer-grid">
+              
+              <!-- Filter by Tags -->
+              <div class="filter-group">
+                <h4>Filter by Tag</h4>
+                <div class="drawer-tags-cloud">
+                  @for (t of tags(); track t) {
+                    <button 
+                      class="tag-pill" 
+                      [class.active]="selectedTag() === t"
+                      (click)="setTag(t)">
+                      #{{ t }}
+                    </button>
+                  }
+                </div>
+              </div>
+
+              <!-- Filter by Author -->
+              <div class="filter-group">
+                <h4>Filter by Author</h4>
+                <div class="drawer-tags-cloud">
+                  @for (auth of authors(); track auth) {
+                    <button 
+                      class="tag-pill" 
+                      [class.active]="selectedAuthor() === auth"
+                      (click)="setAuthor(auth)">
+                      {{ auth }}
+                    </button>
+                  }
+                </div>
+              </div>
+
+              <!-- Filter by Reading Time -->
+              <div class="filter-group">
+                <h4>Reading Length</h4>
+                <div class="drawer-tags-cloud">
+                  @for (rt of readTimeOptions; track rt) {
+                    <button 
+                      class="tag-pill" 
+                      [class.active]="selectedReadTime() === rt"
+                      (click)="setReadTime(rt)">
+                      {{ rt }}
+                    </button>
+                  }
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Drawer Actions -->
+            <div class="drawer-actions">
+              <span class="active-filters-count">
+                Showing {{ filteredPosts().length }} matching posts
+              </span>
+              <button class="reset-all-btn" (click)="resetFilters()">Reset All Filters</button>
+            </div>
+          </div>
+        }
+      </section>
+
+      <!-- FEATURED POST (Only shown on Page 1 list under general views) -->
+      @if (featuredPost(); as fPost) {
+        <section class="featured-section">
+          <div class="featured-post-card">
+            <div class="featured-img-box">
+              <img [src]="fPost.heroImage" [alt]="fPost.heroAlt" />
+              <span class="featured-tag">FEATURED</span>
+            </div>
+            <div class="featured-content-box">
+              <div class="featured-meta">
+                <span class="featured-category-badge">{{ fPost.category }}</span>
+                <span>•</span>
+                <span>{{ fPost.publishDate }}</span>
+                <span>•</span>
+                <span>{{ fPost.readTime }}</span>
+              </div>
+              <h2 class="featured-post-title">
+                <a [routerLink]="['/blog', fPost.slug]">{{ fPost.title }}</a>
+              </h2>
+              <p class="featured-post-summary">{{ fPost.summary }}</p>
+              
+              <div class="featured-post-footer">
+                <div class="author-block">
+                  <span class="author-name">{{ fPost.author.name }}</span>
+                </div>
+                <a [routerLink]="['/blog', fPost.slug]" class="featured-read-btn">
+                  Read Article &rarr;
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
       }
 
-      <!-- Newsletter Section -->
-      <section class="newsletter-card">
-        <div class="newsletter-content">
-          <h3>Subscribe to our Finance & Health Newsletter</h3>
-          <p>Get monthly calculations, financial breakdowns, metabolic guidelines, and tool updates delivered straight to your inbox.</p>
-          <div class="newsletter-form">
-            <input type="email" placeholder="Enter your email address" class="newsletter-input" />
-            <button class="newsletter-btn">Subscribe Free</button>
+      <!-- MAIN LAYOUT: Articles Feed & Sidebar -->
+      <div class="index-body-layout">
+        
+        <!-- Left: Grid of posts -->
+        <main class="feed-main-col">
+          @if (filteredPosts().length > 0) {
+            <div class="articles-grid">
+              @for (post of gridPosts(); track post.slug) {
+                <article class="post-card">
+                  <div class="card-image-wrapper">
+                    <img [src]="post.heroImage" [alt]="post.heroAlt" loading="lazy" />
+                    <span class="card-category">{{ post.category }}</span>
+                  </div>
+                  <div class="card-content">
+                    <div class="card-meta">
+                      <span class="card-date">{{ post.publishDate }}</span>
+                      <span class="meta-dot">•</span>
+                      <span class="card-readtime">{{ post.readTime }}</span>
+                    </div>
+                    
+                    <h3 class="card-title">
+                      <a [routerLink]="['/blog', post.slug]">{{ post.title }}</a>
+                    </h3>
+                    
+                    <p class="card-summary">{{ post.summary }}</p>
+                    
+                    <!-- Compact card tags list -->
+                    <div class="card-tags">
+                      @for (tag of post.tags.slice(0, 3); track tag) {
+                        <span class="card-tag-pill">#{{ tag }}</span>
+                      }
+                    </div>
+
+                    <div class="card-footer">
+                      <div class="author-info">
+                        <span class="author-name">{{ post.author.name }}</span>
+                      </div>
+                      <div class="card-stats">
+                        <span title="Views" class="stat-badge">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                          {{ post.views }}
+                        </span>
+                        <span title="Likes" class="stat-badge">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+                          {{ post.likes }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              }
+            </div>
+
+            <!-- Standard Pagination Controls -->
+            @if (!isInfiniteScroll() && totalPages() > 1) {
+              <div class="pagination-wrapper">
+                <button 
+                  [disabled]="currentPage() === 1" 
+                  (click)="setPage(currentPage() - 1)" 
+                  class="page-nav-btn">
+                  &larr; Prev
+                </button>
+
+                <div class="page-numbers">
+                  @for (pageNum of [].constructor(totalPages()); track $index) {
+                    <button 
+                      [class.active]="currentPage() === ($index + 1)"
+                      (click)="setPage($index + 1)"
+                      class="page-number-btn">
+                      {{ $index + 1 }}
+                    </button>
+                  }
+                </div>
+
+                <button 
+                  [disabled]="currentPage() === totalPages()" 
+                  (click)="setPage(currentPage() + 1)" 
+                  class="page-nav-btn">
+                  Next &rarr;
+                </button>
+              </div>
+            }
+
+            <!-- Infinite Scroll Trigger -->
+            @if (isInfiniteScroll() && visiblePostsCount() < filteredPosts().length) {
+              <div class="load-more-wrapper">
+                <button (click)="loadMore()" class="load-more-btn">
+                  Load More Articles
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spinner-icon"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                </button>
+              </div>
+            }
+
+          } @else {
+            <div class="no-results">
+              <svg class="no-results-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+              <h3>No articles match your criteria</h3>
+              <p>Try clearing filters or search query to explore other calculations and guides.</p>
+              <button class="reset-no-results-btn" (click)="resetFilters()">Clear All Filters</button>
+            </div>
+          }
+        </main>
+
+        <!-- Right Sidebar (Desktop discovery widgets) -->
+        <aside class="sidebar-discovery-col">
+          
+          <!-- Widget: Trending articles -->
+          <div class="sidebar-card trending-widget">
+            <h3>Trending Now</h3>
+            <div class="trending-list">
+              @for (tPost of allPosts().slice(0, 3); track tPost.slug) {
+                <div class="trending-item">
+                  <div class="trending-rank">0{{ $index + 1 }}</div>
+                  <div class="trending-item-content">
+                    <span class="trending-cat">{{ tPost.category }}</span>
+                    <h4><a [routerLink]="['/blog', tPost.slug]">{{ tPost.title }}</a></h4>
+                    <span class="trending-views">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                      {{ tPost.views }} views
+                    </span>
+                  </div>
+                </div>
+              }
+            </div>
           </div>
-          <span class="newsletter-privacy">Zero spam. Unsubscribe at any time.</span>
-        </div>
-      </section>
+
+          <!-- Widget: Popular tags cloud -->
+          <div class="sidebar-card tags-widget">
+            <h3>Explore Topics</h3>
+            <div class="tags-cloud">
+              @for (tag of tags().slice(1); track tag) {
+                <button 
+                  [class.active]="selectedTag() === tag"
+                  (click)="setTag(tag)" 
+                  class="sidebar-tag-pill">
+                  #{{ tag }}
+                </button>
+              }
+            </div>
+          </div>
+
+          <!-- Widget: Subscribe Newsletter -->
+          <div class="sidebar-card newsletter-widget">
+            <h3>CalculHub Digest</h3>
+            <p>Get calculations, guides, and tools delivered straight to your inbox monthly.</p>
+            <div class="newsletter-form">
+              <input type="email" placeholder="Your Email Address" class="sidebar-input" />
+              <button class="sidebar-btn">Subscribe</button>
+            </div>
+            <span class="newsletter-privacy">Zero spam. Unsubscribe at any time.</span>
+          </div>
+
+        </aside>
+
+      </div>
+
     </div>
   }
 
@@ -126,7 +357,12 @@
 
       <!-- Article Header -->
       <header class="post-header">
-        <span class="post-badge">{{ post.category }}</span>
+        <div class="post-badge-container">
+          <span class="post-badge">{{ post.category }}</span>
+          @for (tag of post.tags; track tag) {
+            <span class="post-header-tag">#{{ tag }}</span>
+          }
+        </div>
         <h1 class="post-title">{{ post.title }}</h1>
         
         <div class="post-meta-details">
@@ -140,6 +376,11 @@
             <span class="post-date-span">{{ post.publishDate }}</span>
             <span class="meta-separator">•</span>
             <span class="post-readtime-span">{{ post.readTime }}</span>
+            <span class="meta-separator">•</span>
+            <span class="post-stats-span">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              {{ post.views }} views
+            </span>
           </div>
         </div>
       </header>
@@ -152,36 +393,46 @@
       <!-- Main Layout Columns -->
       <div class="post-body-layout">
         <!-- Content Area -->
-        <main class="post-content-area" [innerHTML]="post.contentHtml"></main>
+        <main class="post-content-area" [innerHTML]="safeContentHtml()"></main>
 
         <!-- Sticky Sidebar -->
         <aside class="post-sidebar">
           
           <!-- Table of Contents -->
-          <div class="sidebar-widget toc-widget">
-            <h3>Table of Contents</h3>
-            <ul class="toc-list">
-              @for (item of post.toc; track item.id) {
-                <li>
-                  <a 
-                    [href]="'#' + item.id" 
-                    [class.active]="activeSection() === item.id"
-                    (click)="scrollToSection($event, item.id)"
-                    class="toc-link">
-                    {{ item.title }}
-                  </a>
-                </li>
-              }
-            </ul>
-          </div>
+          @if (post.toc.length > 0) {
+            <div class="sidebar-widget toc-widget">
+              <h3>Table of Contents</h3>
+              <ul class="toc-list">
+                @for (item of post.toc; track item.id) {
+                  <li>
+                    <a 
+                      [href]="'#' + item.id" 
+                      [class.active]="activeSection() === item.id"
+                      (click)="scrollToSection($event, item.id)"
+                      class="toc-link">
+                      {{ item.title }}
+                    </a>
+                  </li>
+                }
+              </ul>
+            </div>
+          }
 
           <!-- Conversion Calculator Widget -->
           <div class="sidebar-widget calculator-widget">
             <span class="widget-tag">FEATURED TOOL</span>
-            @if (post.slug === 'calculate-bike-loan-emi-guide') {
+            @if (post.slug === 'calculate-bike-loan-emi-guide' || post.slug === 'bike-loan-financing-guide-india') {
               <h3>Bike Loan EMI Calculator</h3>
               <p>Calculate two-wheeler monthly EMIs, total interest, and download complete amortization schedules instantly.</p>
               <a href="/financial/bike-loan-emi-calculator" class="widget-cta-btn">Open Calculator</a>
+            } @else if (post.slug === 'calorie-deficit-weight-loss-guide' || post.slug === 'bmr-tdee-energy-expenditure-guide') {
+              <h3>Calorie & TDEE Calculator</h3>
+              <p>Compute daily metabolic rates, active calories, and custom deficits for health planning.</p>
+              <a href="/health/calorie-calculator" class="widget-cta-btn">Open Calorie Calculator</a>
+            } @else if (post.slug === 'understanding-bmi-health-metrics' || post.slug === 'healthy-body-fat-percentage-tracking') {
+              <h3>BMI Calculator</h3>
+              <p>Assess weight brackets and discover healthy body fat distributions instantly.</p>
+              <a href="/health/bmi-calculator" class="widget-cta-btn">Open BMI Calculator</a>
             } @else {
               <h3>Systematic Investment Plan</h3>
               <p>Model monthly contributions and compounding growth schedules over any investment period.</p>
@@ -193,19 +444,43 @@
           <div class="sidebar-widget newsletter-widget">
             <h3>Stay Updated</h3>
             <p>Get insights and online calculations sent straight to your inbox.</p>
-            <input type="email" placeholder="Email Address" class="sidebar-input" />
-            <button class="sidebar-btn">Subscribe</button>
+            <div class="newsletter-form">
+              <input type="email" placeholder="Email Address" class="sidebar-input" />
+              <button class="sidebar-btn">Subscribe</button>
+            </div>
+            <span class="newsletter-privacy">Zero spam. Unsubscribe at any time.</span>
           </div>
 
         </aside>
       </div>
+
+      <!-- Related Articles Section -->
+      @if (relatedArticles().length > 0) {
+        <section class="related-articles-section">
+          <h3>Related Articles</h3>
+          <div class="related-grid">
+            @for (rel of relatedArticles(); track rel.slug) {
+              <div class="related-card">
+                <div class="rel-img-box">
+                  <img [src]="rel.heroImage" [alt]="rel.heroAlt" />
+                </div>
+                <div class="rel-content-box">
+                  <span class="rel-cat">{{ rel.category }}</span>
+                  <h4><a [routerLink]="['/blog', rel.slug]">{{ rel.title }}</a></h4>
+                  <span class="rel-readtime">{{ rel.readTime }}</span>
+                </div>
+              </div>
+            }
+          </div>
+        </section>
+      }
 
       <!-- Article Footer / Author Bio -->
       <footer class="post-footer-section">
         <div class="author-bio-card">
           <div class="author-bio-details">
             <h4>About the Author: {{ post.author.name }}</h4>
-            <p>The CalculHub Finance Team is composed of dedicated quantitative researchers and personal finance writers committed to building transparent, accurate tools that clarify banking terms, loan rates, and investment models.</p>
+            <p>The CalculHub team is composed of dedicated quantitative researchers and health/math writers committed to building transparent, accurate tools that clarify financial terms, fitness statistics, and mathematical models.</p>
           </div>
         </div>
 

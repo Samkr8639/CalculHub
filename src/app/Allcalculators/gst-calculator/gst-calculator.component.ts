@@ -16,7 +16,7 @@ export class GstCalculatorComponent implements AfterViewInit, AfterViewChecked {
   private platformId = inject(PLATFORM_ID);
 
   @ViewChild('gstPieChart') private chartRef!: ElementRef<HTMLCanvasElement>;
-  public chartInstance = signal<Chart | null>(null);
+  public chartInstance = signal<Chart<'pie', number[], string> | null>(null);
 
   amount = signal<number | null>(null);
   gstRate = signal<number | null>(null);
