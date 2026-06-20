@@ -9,7 +9,7 @@ const paths = [
   '/blog/calculate-bike-loan-emi-guide',
   '/blog/understanding-bmi-health-metrics',
   '/blog/calorie-deficit-weight-loss-guide',
-  '/blog/how-compound-interest-works-guide',
+  '/blog/demystifying-compound-interest',
   '/blog/mental-math-percentage-hacks',
   '/blog/fixed-deposit-vs-mutual-funds',
   '/blog/matrix-multiplication-beginners-guide',
