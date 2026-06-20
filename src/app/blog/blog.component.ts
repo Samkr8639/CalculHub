@@ -215,6 +215,17 @@ export class BlogComponent implements OnInit, OnDestroy {
   });
 
   ngOnInit(): void {
+    // Load local increments for all posts initially in browser
+    if (isPlatformBrowser(this.platformId)) {
+      this.allPosts.update(posts => 
+        posts.map(p => {
+          const localInc = Number(localStorage.getItem(`calculhub_views_inc_${p.slug}`) || '0');
+          return { ...p, views: localInc };
+        })
+      );
+      this.loadAllPostViews();
+    }
+
     // Subscribe to paramMap for slug changes
     this.routeSub = this.route.paramMap.subscribe(params => {
       const slug = params.get('slug');
@@ -224,6 +235,7 @@ export class BlogComponent implements OnInit, OnDestroy {
           this.currentPost.set(post);
           this.updatePostSeo(post);
           this.resetScroll();
+          this.trackAndIncrementViews(slug);
         } else {
           this.router.navigate(['/blog']);
         }
@@ -481,5 +493,78 @@ export class BlogComponent implements OnInit, OnDestroy {
       const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
+  }
+
+  private loadAllPostViews(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    this.allPosts().forEach(post => {
+      const endpoint = `https://api.counterapi.dev/v1/calculhub_${post.slug}`;
+      const localInc = Number(localStorage.getItem(`calculhub_views_inc_${post.slug}`) || '0');
+
+      fetch(endpoint)
+        .then(res => res.json())
+        .then(data => {
+          if (data && typeof data.value === 'number') {
+            this.updatePostViewsInState(post.slug, data.value);
+          } else {
+            this.updatePostViewsInState(post.slug, localInc);
+          }
+        })
+        .catch(() => {
+          this.updatePostViewsInState(post.slug, localInc);
+        });
+    });
+  }
+
+  private trackAndIncrementViews(slug: string): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    const sessionKey = `calculhub_viewed_${slug}`;
+    const hasViewedSession = sessionStorage.getItem(sessionKey);
+    const localIncKey = `calculhub_views_inc_${slug}`;
+    let localInc = Number(localStorage.getItem(localIncKey) || '0');
+
+    const shouldIncrement = !hasViewedSession;
+
+    if (shouldIncrement) {
+      sessionStorage.setItem(sessionKey, 'true');
+      localInc += 1;
+      localStorage.setItem(localIncKey, String(localInc));
+    }
+
+    const endpoint = shouldIncrement
+      ? `https://api.counterapi.dev/v1/calculhub_${slug}/increment`
+      : `https://api.counterapi.dev/v1/calculhub_${slug}`;
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 2000);
+
+    fetch(endpoint, { signal: controller.signal })
+      .then(res => res.json())
+      .then(data => {
+        clearTimeout(timeoutId);
+        if (data && typeof data.value === 'number') {
+          this.updatePostViewsInState(slug, data.value);
+        } else {
+          this.updatePostViewsInState(slug, localInc);
+        }
+      })
+      .catch(err => {
+        clearTimeout(timeoutId);
+        console.warn('Failed to increment views on API, falling back to local tracking:', err);
+        this.updatePostViewsInState(slug, localInc);
+      });
+  }
+
+  private updatePostViewsInState(slug: string, value: number): void {
+    this.allPosts.update(posts => 
+      posts.map(p => {
+        if (p.slug === slug) {
+          return { ...p, views: value };
+        }
+        return p;
+      })
+    );
   }
 }
