@@ -1,0 +1,42 @@
+.gst-calculator-container { display: flex; justify-content: center; align-items: flex-start; padding: 20px; flex-grow: 1; }
+.financial-calculator { width: 100%; padding: 30px; border-radius: 12px; background-color: var(--card-black); box-shadow: 0 8px 16px rgba(0,0,0,0.4); border: 1px solid var(--border-grey); animation: fadeIn 0.8s ease-out; display: flex; flex-direction: column; gap: 25px; box-sizing: border-box; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.financial-calculator h2.calculator-inner-title { text-align: center; color: var(--pure-white-text); font-size: 2.2em; font-weight: 700; margin: 0; }
+.calc-subtitle { text-align: center; color: var(--light-grey-text); margin: 0; }
+
+.calculator-inputs { display: flex; flex-direction: column; gap: 20px; }
+.input-group label { display: block; margin-bottom: 8px; color: var(--light-grey-text); font-size: 1.1em; font-weight: 500; }
+.date-input, .cycle-input { width: 100%; padding: 14px 15px; border: 1px solid var(--border-grey); border-radius: 8px; background-color: #212121; color: var(--pure-white-text); font-size: 1.1em; box-sizing: border-box; transition: border-color 0.3s; }
+.date-input:focus, .cycle-input:focus { border-color: var(--primary-red); outline: none; box-shadow: 0 0 0 3px rgba(225,25,49,0.3); }
+.input-group input[type="range"] { width: 100%; -webkit-appearance: none; appearance: none; background: transparent; margin-top: 10px; }
+.input-group input[type="range"]::-webkit-slider-runnable-track { background: var(--border-grey); height: 8px; border-radius: 5px; }
+.input-group input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; height: 20px; width: 20px; background-color: var(--primary-red); border-radius: 50%; margin-top: -6px; cursor: grab; }
+.input-hint { margin: 6px 0 0; color: var(--light-grey-text); font-size: 0.85em; }
+
+.results-section { padding-top: 20px; border-top: 1px solid var(--border-grey); display: flex; flex-direction: column; gap: 20px; animation: slideIn 0.8s ease-out; }
+@keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.results-section h2 { color: var(--primary-red); text-align: center; font-size: 1.8em; font-weight: 700; margin: 0; }
+
+.fertile-alert { background: rgba(104, 211, 145, 0.12); border: 1px solid rgba(104, 211, 145, 0.4); border-radius: 10px; padding: 14px 18px; color: #68d391; font-weight: 600; font-size: 1em; text-align: center; }
+
+.key-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; }
+.stat-card { background: #212121; border-radius: 10px; padding: 16px; text-align: center; border: 1px solid var(--border-grey); }
+.stat-card.ovulation { border-color: rgba(225,25,49,0.4); background: rgba(225,25,49,0.06); }
+.stat-card.fertile { border-color: rgba(104,211,145,0.3); background: rgba(104,211,145,0.05); }
+.stat-label { color: var(--light-grey-text); font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
+.stat-value { color: var(--pure-white-text); font-size: 1.05em; font-weight: 700; }
+.stat-card.ovulation .stat-value { color: var(--primary-red); }
+.stat-card.fertile .stat-value { color: #68d391; }
+.stat-sub { color: var(--light-grey-text); font-size: 0.8em; margin-top: 6px; }
+.fertile-text { color: #68d391 !important; font-weight: 700 !important; }
+
+.next-cycle-box { background: #212121; border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+.next-cycle-box h3 { margin: 0 0 8px; color: var(--pure-white-text); font-size: 1em; font-weight: 600; }
+.next-cycle-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px dashed rgba(255,255,255,0.07); }
+.next-cycle-row:last-child { border-bottom: none; }
+.next-label { color: var(--light-grey-text); font-size: 0.9em; }
+.next-value { color: var(--pure-white-text); font-weight: 600; font-size: 0.95em; }
+
+.placeholder-message { text-align: center; color: var(--light-grey-text); padding: 40px 20px; background-color: #212121; border-radius: 10px; border: 1px dashed var(--border-grey); }
+:host { width: 100%; display: block; }
+:host > div:first-child, .gst-calculator-container { height: auto !important; overflow: visible !important; }

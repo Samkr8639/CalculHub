@@ -1,0 +1,163 @@
+<div class="gst-calculator-container">
+  <div class="financial-calculator">
+    <h2 class="calculator-inner-title">Lumpsum Calculator</h2>
+
+    <div class="calculator-inputs">
+      <div class="input-group">
+        <label for="principal">Investment Amount (₹)</label>
+        <input id="principal" type="number" [value]="principal() || ''"
+          (input)="onInputChange($event, principal.set)" placeholder="e.g., 100000" />
+        <input type="range" [value]="principal() || 0" (input)="onInputChange($event, principal.set)" min="1000"
+          max="10000000" step="1000" />
+      </div>
+
+      <div class="input-group">
+        <label for="annualReturn">Expected Annual Return (%)</label>
+        <input id="annualReturn" type="number" [value]="annualReturn() || ''"
+          (input)="onInputChange($event, annualReturn.set)" placeholder="e.g., 12" />
+        <input type="range" [value]="annualReturn() || 12" (input)="onInputChange($event, annualReturn.set)" min="1"
+          max="30" step="0.5" />
+      </div>
+
+      <div class="input-group">
+        <label for="tenure">Investment Period (Years)</label>
+        <input id="tenure" type="number" [value]="tenure() || ''"
+          (input)="onInputChange($event, tenure.set)" placeholder="e.g., 10" />
+        <input type="range" [value]="tenure() || 10" (input)="onInputChange($event, tenure.set)" min="1"
+          max="40" />
+      </div>
+    </div>
+
+    @if (maturityAmount() !== null) {
+    <section class="results-section">
+      <h2>Investment Returns</h2>
+      <div class="summary-box">
+        <div class="summary-item">
+          <p>Invested Amount</p>
+          <strong>₹{{ principal() | number: '1.0-0' }}</strong>
+        </div>
+        <div class="summary-item">
+          <p>Estimated Returns</p>
+          <strong>₹{{ wealthGained() | number: '1.0-0' }}</strong>
+        </div>
+        <div class="summary-item highlight">
+          <p>Total Value</p>
+          <strong>₹{{ maturityAmount() | number: '1.0-0' }}</strong>
+        </div>
+      </div>
+      <div class="chart-container">
+        <canvas #lumpsumChart></canvas>
+      </div>
+    </section>
+    } @else {
+    <div class="placeholder-message">
+      <p>Enter your investment details to calculate lumpsum returns.</p>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- SEO CONTENT SECTION -->
+<div class="calc-seo-content">
+
+  <div class="seo-section">
+    <h2>Lumpsum Calculator — Calculate One-Time Investment Returns</h2>
+    <p>
+      A <strong>Lumpsum Calculator</strong> helps you estimate the future value of a one-time investment in mutual
+      funds, stocks, fixed deposits, or any asset that grows at a compounded annual rate. Unlike SIP investments
+      (which involve periodic monthly contributions), a lumpsum investment means putting a single amount of money
+      to work from day one.
+    </p>
+    <p>
+      This tool is especially popular among investors who receive bonuses, gratuities, PF withdrawals, or any
+      windfall income and want to understand how much it could grow over time at a given rate of return.
+    </p>
+  </div>
+
+  <div class="seo-section">
+    <h2>Lumpsum Investment Formula</h2>
+    <p>The future value of a lumpsum investment is calculated using the compound interest formula:</p>
+    <div class="formula-box">
+      A = P × (1 + r)^t
+    </div>
+    <ul class="formula-vars">
+      <li><strong>A</strong> = Maturity Amount (Future Value)</li>
+      <li><strong>P</strong> = Principal (One-time Investment Amount)</li>
+      <li><strong>r</strong> = Expected Annual Rate of Return (as a decimal)</li>
+      <li><strong>t</strong> = Investment Tenure in Years</li>
+    </ul>
+    <p>
+      For example, investing ₹1,00,000 at 12% annual return for 10 years gives: ₹1,00,000 × (1.12)^10 = <strong>₹3,10,585</strong>.
+    </p>
+  </div>
+
+  <div class="seo-section">
+    <h2>Lumpsum vs SIP — Which is Better?</h2>
+    <div class="seo-table-wrapper">
+      <table class="seo-table">
+        <thead>
+          <tr><th>Feature</th><th>Lumpsum</th><th>SIP</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Investment Style</td><td>One-time payment</td><td>Regular monthly payments</td></tr>
+          <tr><td>Best For</td><td>Windfall income, bonuses</td><td>Salaried individuals</td></tr>
+          <tr><td>Market Timing Risk</td><td>Higher (single entry point)</td><td>Lower (cost averaging)</td></tr>
+          <tr><td>Compounding Benefit</td><td>Full amount compounds from day 1</td><td>Each instalment compounds from its entry</td></tr>
+          <tr><td>Returns in Bull Market</td><td>Higher</td><td>Lower (averaging dilutes peaks)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>For investors with a market view and a lump sum available, timing is critical. For regular savers, SIP is safer.</p>
+  </div>
+
+  <div class="seo-section">
+    <h2>Lumpsum Returns at Different Rates &amp; Tenures (₹1 Lakh invested)</h2>
+    <div class="seo-table-wrapper">
+      <table class="seo-table">
+        <thead>
+          <tr><th>Return Rate</th><th>5 Years</th><th>10 Years</th><th>15 Years</th><th>20 Years</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>8% (Debt Funds)</td><td>₹1.47L</td><td>₹2.16L</td><td>₹3.17L</td><td>₹4.66L</td></tr>
+          <tr><td>10% (Balanced)</td><td>₹1.61L</td><td>₹2.59L</td><td>₹4.18L</td><td>₹6.73L</td></tr>
+          <tr><td>12% (Equity Funds)</td><td>₹1.76L</td><td>₹3.11L</td><td>₹5.47L</td><td>₹9.65L</td></tr>
+          <tr><td>15% (High Growth)</td><td>₹2.01L</td><td>₹4.05L</td><td>₹8.14L</td><td>₹16.37L</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>Frequently Asked Questions — Lumpsum Calculator</h2>
+    <div class="seo-faq">
+      <div class="faq-item">
+        <h3>What is a lumpsum investment in mutual funds?</h3>
+        <p>A lumpsum investment means investing a large, one-time amount in a mutual fund scheme, as opposed to a SIP which spreads investments over time. It is ideal when you have a significant amount ready to invest.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Is lumpsum better than SIP for long-term wealth creation?</h3>
+        <p>In a consistently rising market, lumpsum delivers better returns because the entire amount compounds from day one. However, SIP is less risky as it averages out purchase cost across market cycles.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What return rate should I use for mutual fund lumpsum calculations?</h3>
+        <p>Historically, large-cap equity mutual funds have delivered 10–12% CAGR over 10+ year periods. Mid-cap and small-cap funds have returned 14–18% but with higher volatility. Use a conservative estimate (10–12%) for planning.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How does this calculator differ from a compound interest calculator?</h3>
+        <p>They use the same formula. The lumpsum calculator is specifically calibrated for mutual fund return scenarios (annual compounding), while compound interest calculators often support multiple compounding frequencies.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>Related Financial Calculators</h2>
+    <div class="related-calc-grid">
+      <a routerLink="/financial/sip-calculator" class="related-calc-link">SIP Calculator</a>
+      <a routerLink="/financial/cagr-calculator" class="related-calc-link">CAGR Calculator</a>
+      <a routerLink="/financial/ppf-calculator" class="related-calc-link">PPF Calculator</a>
+      <a routerLink="/financial/fd-calculator" class="related-calc-link">FD Calculator</a>
+      <a routerLink="/financial/nps-calculator" class="related-calc-link">NPS Calculator</a>
+      <a routerLink="/financial/retirement-calculator" class="related-calc-link">Retirement Calculator</a>
+    </div>
+  </div>
+</div>

@@ -458,6 +458,82 @@ export const routes: Routes = [
             }]
         }
       },
+      {
+        path: 'car-loan-emi-calculator',
+        loadComponent: () => import('./Allcalculators/car-loan-emi-calculator/car-loan-emi-calculator').then(m => m.CarLoanEmiCalculatorComponent),
+        data: {
+          title: 'Car Loan EMI Calculator — Calculate Monthly Car Loan Payments | CalculHub',
+          description: 'Calculate your car loan EMI instantly. Enter loan amount, interest rate, and tenure to see monthly EMI, total interest, and total repayment. Free auto loan calculator India.',
+          canonical: `${BASE_URL}/financial/car-loan-emi-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Financial', url: `${BASE_URL}/financial` }, { name: 'Car Loan EMI Calculator', url: `${BASE_URL}/financial/car-loan-emi-calculator` }],
+          schema: [calcSchema('Car Loan EMI Calculator', `${BASE_URL}/financial/car-loan-emi-calculator`, 'Calculate monthly car loan EMI, total interest, and total repayment amount instantly.'),
+            {
+              '@context': 'https://schema.org', '@type': 'FAQPage',
+              mainEntity: [
+                { '@type': 'Question', name: 'What is the car loan EMI for ₹10 lakh?', acceptedAnswer: { '@type': 'Answer', text: 'For a ₹10,00,000 car loan at 9% annual interest for 5 years, the monthly EMI is approximately ₹20,758. Use this calculator for exact figures based on your loan details.' } },
+                { '@type': 'Question', name: 'What is the ideal car loan tenure?', acceptedAnswer: { '@type': 'Answer', text: 'Financial experts recommend keeping car loan tenure within 5 years to avoid paying more in interest than the car depreciates in value.' } },
+                { '@type': 'Question', name: 'How is car loan EMI calculated?', acceptedAnswer: { '@type': 'Answer', text: 'Car loan EMI = [P × r × (1+r)^n] / [(1+r)^n − 1], where P is principal, r is monthly interest rate, and n is tenure in months.' } }
+              ]
+            }]
+        }
+      },
+      {
+        path: 'lumpsum-calculator',
+        loadComponent: () => import('./Allcalculators/lumpsum-calculator/lumpsum-calculator').then(m => m.LumpsumCalculatorComponent),
+        data: {
+          title: 'Lumpsum Calculator — Calculate One-Time Investment Returns | CalculHub',
+          description: 'Calculate the future value of your lumpsum investment in mutual funds or stocks. Enter principal, expected return, and tenure for instant returns. Free lumpsum SIP calculator.',
+          canonical: `${BASE_URL}/financial/lumpsum-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Financial', url: `${BASE_URL}/financial` }, { name: 'Lumpsum Calculator', url: `${BASE_URL}/financial/lumpsum-calculator` }],
+          schema: [calcSchema('Lumpsum Calculator', `${BASE_URL}/financial/lumpsum-calculator`, 'Calculate the future value of a one-time lumpsum investment using compound interest.'),
+            {
+              '@context': 'https://schema.org', '@type': 'FAQPage',
+              mainEntity: [
+                { '@type': 'Question', name: 'What is a lumpsum investment in mutual funds?', acceptedAnswer: { '@type': 'Answer', text: 'A lumpsum investment means putting a single large amount into a mutual fund at one time, as opposed to SIP which spreads investments over monthly instalments.' } },
+                { '@type': 'Question', name: 'Is lumpsum better than SIP?', acceptedAnswer: { '@type': 'Answer', text: 'In a consistently rising market, lumpsum delivers higher returns as the full amount compounds from day one. SIP is safer as it averages purchase cost over market cycles.' } },
+                { '@type': 'Question', name: 'What return rate should I use for lumpsum calculations?', acceptedAnswer: { '@type': 'Answer', text: 'Large-cap equity mutual funds have historically delivered 10–12% CAGR over 10+ years. Use 10–12% for conservative long-term planning.' } }
+              ]
+            }]
+        }
+      },
+      {
+        path: 'nps-calculator',
+        loadComponent: () => import('./Allcalculators/nps-calculator/nps-calculator').then(m => m.NpsCalculatorComponent),
+        data: {
+          title: 'NPS Calculator — Calculate National Pension System Retirement Corpus | CalculHub',
+          description: 'Calculate your NPS retirement corpus, monthly pension, and lumpsum withdrawal. Free National Pension System calculator India with tax benefit details.',
+          canonical: `${BASE_URL}/financial/nps-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Financial', url: `${BASE_URL}/financial` }, { name: 'NPS Calculator', url: `${BASE_URL}/financial/nps-calculator` }],
+          schema: [calcSchema('NPS Calculator', `${BASE_URL}/financial/nps-calculator`, 'Calculate NPS retirement corpus, monthly pension estimate, and 60% lumpsum withdrawal amount.'),
+            {
+              '@context': 'https://schema.org', '@type': 'FAQPage',
+              mainEntity: [
+                { '@type': 'Question', name: 'What is the tax benefit on NPS under 80CCD(1B)?', acceptedAnswer: { '@type': 'Answer', text: 'Section 80CCD(1B) allows an additional deduction of up to ₹50,000 per year for NPS contributions, over and above the ₹1.5L limit under Section 80C.' } },
+                { '@type': 'Question', name: 'How much of NPS corpus can I withdraw at retirement?', acceptedAnswer: { '@type': 'Answer', text: 'At age 60, you can withdraw up to 60% of the total NPS corpus as a tax-free lump sum. The remaining 40% must be used to purchase an annuity plan for monthly pension.' } },
+                { '@type': 'Question', name: 'Is NPS safe?', acceptedAnswer: { '@type': 'Answer', text: 'NPS is regulated by PFRDA, a government body. While returns are market-linked (not guaranteed), the auto-choice lifecycle fund reduces equity exposure automatically as you age.' } }
+              ]
+            }]
+        }
+      },
+      {
+        path: 'cagr-calculator',
+        loadComponent: () => import('./Allcalculators/cagr-calculator/cagr-calculator').then(m => m.CagrCalculatorComponent),
+        data: {
+          title: 'CAGR Calculator — Calculate Compound Annual Growth Rate | CalculHub',
+          description: 'Calculate CAGR (Compound Annual Growth Rate) of any investment. Enter initial value, final value, and time period for instant annualised return calculation.',
+          canonical: `${BASE_URL}/financial/cagr-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Financial', url: `${BASE_URL}/financial` }, { name: 'CAGR Calculator', url: `${BASE_URL}/financial/cagr-calculator` }],
+          schema: [calcSchema('CAGR Calculator', `${BASE_URL}/financial/cagr-calculator`, 'Calculate Compound Annual Growth Rate (CAGR) from initial value, final value, and time period.'),
+            {
+              '@context': 'https://schema.org', '@type': 'FAQPage',
+              mainEntity: [
+                { '@type': 'Question', name: 'What is a good CAGR for mutual funds?', acceptedAnswer: { '@type': 'Answer', text: 'For equity mutual funds, a CAGR of 12–15% over a 10-year period is considered strong. Always compare against the fund\'s benchmark index.' } },
+                { '@type': 'Question', name: 'Can CAGR be negative?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. If the final value is less than the initial value, CAGR will be negative, indicating the investment lost value on an annualised basis.' } },
+                { '@type': 'Question', name: 'What is the CAGR formula?', acceptedAnswer: { '@type': 'Answer', text: 'CAGR = (Final Value / Initial Value)^(1/n) − 1, where n is the number of years.' } }
+              ]
+            }]
+        }
+      },
       { path: '', redirectTo: 'mortgage', pathMatch: 'full' },
     ],
   },
@@ -546,6 +622,44 @@ export const routes: Routes = [
               '@context': 'https://schema.org', '@type': 'FAQPage',
               mainEntity: [
                 { '@type': 'Question', name: 'What is the difference between sample and population standard deviation?', acceptedAnswer: { '@type': 'Answer', text: 'If your data includes every member of the group you are studying, use Population. If your data is only a small representative subset of the whole, use Sample (which uses n-1 in the denominator to correct for bias).' } }
+              ]
+            }]
+        }
+      },
+      {
+        path: 'gpa-calculator',
+        loadComponent: () => import('./Allcalculators/gpa-calculator/gpa-calculator').then(m => m.GpaCalculatorComponent),
+        data: {
+          title: 'GPA Calculator — Calculate Your Grade Point Average | CalculHub',
+          description: 'Calculate your weighted GPA instantly. Add courses, credits, and letter grades for instant cumulative GPA results. Free online GPA calculator for students.',
+          canonical: `${BASE_URL}/mathematical/gpa-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Mathematical', url: `${BASE_URL}/mathematical` }, { name: 'GPA Calculator', url: `${BASE_URL}/mathematical/gpa-calculator` }],
+          schema: [calcSchema('GPA Calculator', `${BASE_URL}/mathematical/gpa-calculator`, 'Calculate weighted cumulative GPA from course grades and credit hours.', 'EducationalApplication'),
+            {
+              '@context': 'https://schema.org', '@type': 'FAQPage',
+              mainEntity: [
+                { '@type': 'Question', name: 'What GPA do I need for a scholarship?', acceptedAnswer: { '@type': 'Answer', text: 'Most merit scholarships require a minimum GPA of 3.0 (B average). Competitive scholarships and honors programs often require 3.5 or higher.' } },
+                { '@type': 'Question', name: 'What is the difference between GPA and CGPA?', acceptedAnswer: { '@type': 'Answer', text: 'GPA refers to a single semester. CGPA (Cumulative GPA) is the weighted average across all semesters. Indian universities often use a 10-point CGPA scale.' } },
+                { '@type': 'Question', name: 'How is GPA calculated?', acceptedAnswer: { '@type': 'Answer', text: 'GPA = Σ (Grade Points × Credit Hours) / Σ (Credit Hours). Each course is weighted by its credit hours.' } }
+              ]
+            }]
+        }
+      },
+      {
+        path: 'fraction-calculator',
+        loadComponent: () => import('./Allcalculators/fraction-calculator/fraction-calculator').then(m => m.FractionCalculatorComponent),
+        data: {
+          title: 'Fraction Calculator — Add, Subtract, Multiply & Divide Fractions | CalculHub',
+          description: 'Perform fraction arithmetic instantly. Add, subtract, multiply, or divide any two fractions. Results are automatically simplified to lowest terms. Free online fraction calculator.',
+          canonical: `${BASE_URL}/mathematical/fraction-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Mathematical', url: `${BASE_URL}/mathematical` }, { name: 'Fraction Calculator', url: `${BASE_URL}/mathematical/fraction-calculator` }],
+          schema: [calcSchema('Fraction Calculator', `${BASE_URL}/mathematical/fraction-calculator`, 'Add, subtract, multiply, and divide fractions with automatic simplification to lowest terms.', 'EducationalApplication'),
+            {
+              '@context': 'https://schema.org', '@type': 'FAQPage',
+              mainEntity: [
+                { '@type': 'Question', name: 'How do you add fractions with different denominators?', acceptedAnswer: { '@type': 'Answer', text: 'Find the Least Common Denominator (LCD), convert both fractions, then add numerators. This calculator does this automatically.' } },
+                { '@type': 'Question', name: 'How do I convert a fraction to a percentage?', acceptedAnswer: { '@type': 'Answer', text: 'Divide the numerator by the denominator and multiply by 100. For example, 3/4 = 0.75 × 100 = 75%.' } },
+                { '@type': 'Question', name: 'What is an improper fraction?', acceptedAnswer: { '@type': 'Answer', text: 'An improper fraction has a numerator equal to or larger than its denominator (e.g., 5/3). It can also be written as a mixed number (1 and 2/3).' } }
               ]
             }]
         }
@@ -642,7 +756,90 @@ export const routes: Routes = [
           schema: [calcSchema('BMR TDEE Calculator', `${BASE_URL}/health/bmr-tdee-calculator`, 'Calculate your BMR and TDEE based on physical details and activity level.', 'HealthApplication')]
         }
       },
+      {
+        path: 'pregnancy-calculator',
+        loadComponent: () => import('./Allcalculators/pregnancy-calculator/pregnancy-calculator').then(m => m.PregnancyCalculatorComponent),
+        data: {
+          title: 'Pregnancy Due Date Calculator — Calculate EDD & Pregnancy Weeks | CalculHub',
+          description: 'Calculate your pregnancy due date (EDD), current week, trimester, and key milestones from your last menstrual period (LMP). Free online pregnancy calculator.',
+          canonical: `${BASE_URL}/health/pregnancy-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Health', url: `${BASE_URL}/health` }, { name: 'Pregnancy Calculator', url: `${BASE_URL}/health/pregnancy-calculator` }],
+          schema: [calcSchema('Pregnancy Due Date Calculator', `${BASE_URL}/health/pregnancy-calculator`, 'Calculate pregnancy due date, current week, trimester, and key pregnancy milestones from LMP.', 'HealthApplication'),
+            {
+              '@context': 'https://schema.org', '@type': 'FAQPage',
+              mainEntity: [
+                { '@type': 'Question', name: 'How is the pregnancy due date calculated?', acceptedAnswer: { '@type': 'Answer', text: "The estimated due date is calculated using Naegele's Rule: add 280 days (40 weeks) to the first day of your last menstrual period (LMP). This assumes a 28-day cycle." } },
+                { '@type': 'Question', name: 'What week is considered full term?', acceptedAnswer: { '@type': 'Answer', text: 'Full term is defined as 39–40 weeks. Early term is 37–38 weeks. Babies born before 37 weeks are considered premature.' } },
+                { '@type': 'Question', name: 'What is gestational age vs fetal age?', acceptedAnswer: { '@type': 'Answer', text: 'Gestational age counts from the LMP and is what doctors use. Fetal age starts from fertilisation, which is approximately 2 weeks after LMP.' } }
+              ]
+            }]
+        }
+      },
+      {
+        path: 'ovulation-calculator',
+        loadComponent: () => import('./Allcalculators/ovulation-calculator/ovulation-calculator').then(m => m.OvulationCalculatorComponent),
+        data: {
+          title: 'Ovulation Calculator — Find Your Fertile Window & Ovulation Date | CalculHub',
+          description: 'Calculate your ovulation date and most fertile days from your last period. Free online ovulation calculator to track your menstrual cycle and plan for conception.',
+          canonical: `${BASE_URL}/health/ovulation-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Health', url: `${BASE_URL}/health` }, { name: 'Ovulation Calculator', url: `${BASE_URL}/health/ovulation-calculator` }],
+          schema: [calcSchema('Ovulation Calculator', `${BASE_URL}/health/ovulation-calculator`, 'Calculate ovulation date and fertile window from last menstrual period and cycle length.', 'HealthApplication'),
+            {
+              '@context': 'https://schema.org', '@type': 'FAQPage',
+              mainEntity: [
+                { '@type': 'Question', name: 'What are the signs of ovulation?', acceptedAnswer: { '@type': 'Answer', text: 'Common signs include clear stretchy cervical mucus (like raw egg whites), a slight rise in basal body temperature, mild pelvic pain, and an LH surge detectable by ovulation predictor kits.' } },
+                { '@type': 'Question', name: 'How is the ovulation date calculated?', acceptedAnswer: { '@type': 'Answer', text: 'Ovulation typically occurs 14 days before the next expected period. Formula: Ovulation Day = LMP + (Cycle Length − 14).' } },
+                { '@type': 'Question', name: 'Can I get pregnant outside the fertile window?', acceptedAnswer: { '@type': 'Answer', text: 'Pregnancy is theoretically only possible during the fertile window (5 days before ovulation + ovulation day). However, cycles vary, so this should not be used as a contraception method.' } }
+              ]
+            }]
+        }
+      },
       { path: '', redirectTo: 'calorie-calculator', pathMatch: 'full' },
+    ],
+  },
+  {
+    path: 'utility',
+    loadComponent: () => import('./utility/utility.component').then(m => m.UtilityComponent),
+    children: [
+      {
+        path: 'age-calculator',
+        loadComponent: () => import('./Allcalculators/age-calculator/age-calculator').then(m => m.AgeCalculatorComponent),
+        data: {
+          title: 'Age Calculator — Calculate Your Exact Age in Years, Months & Days | CalculHub',
+          description: 'Find your exact age from your date of birth — in years, months, days, weeks, and hours. Includes next birthday countdown. Free online age calculator.',
+          canonical: `${BASE_URL}/utility/age-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Utility', url: `${BASE_URL}/utility` }, { name: 'Age Calculator', url: `${BASE_URL}/utility/age-calculator` }],
+          schema: [calcSchema('Age Calculator', `${BASE_URL}/utility/age-calculator`, 'Calculate exact age in years, months, days, weeks, and hours from date of birth.', 'UtilityApplication'),
+            {
+              '@context': 'https://schema.org', '@type': 'FAQPage',
+              mainEntity: [
+                { '@type': 'Question', name: 'How do I calculate my age for a government form?', acceptedAnswer: { '@type': 'Answer', text: 'Enter your date of birth and set the "Age As Of" date to the form\'s cut-off date. The calculator will give your exact age as of that specific date.' } },
+                { '@type': 'Question', name: 'What is the minimum age to vote in India?', acceptedAnswer: { '@type': 'Answer', text: '18 years of age is the minimum age to vote in India, as of the date of the electoral roll revision.' } },
+                { '@type': 'Question', name: 'Are leap years accounted for in the age calculation?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. This calculator correctly handles leap years and gives accurate day-level precision for all dates.' } }
+              ]
+            }]
+        }
+      },
+      {
+        path: 'hours-calculator',
+        loadComponent: () => import('./Allcalculators/hours-calculator/hours-calculator').then(m => m.HoursCalculatorComponent),
+        data: {
+          title: 'Hours Calculator — Add Up Work Hours & Calculate Pay | CalculHub',
+          description: 'Add up work hours across multiple days and calculate total pay with an hourly rate. Free online timesheet hours calculator for freelancers, HR, and employees.',
+          canonical: `${BASE_URL}/utility/hours-calculator`,
+          breadcrumbs: [{ name: 'Home', url: BASE_URL }, { name: 'Utility', url: `${BASE_URL}/utility` }, { name: 'Hours Calculator', url: `${BASE_URL}/utility/hours-calculator` }],
+          schema: [calcSchema('Hours Calculator', `${BASE_URL}/utility/hours-calculator`, 'Add up work hours across multiple days and calculate total pay from an hourly rate.', 'UtilityApplication'),
+            {
+              '@context': 'https://schema.org', '@type': 'FAQPage',
+              mainEntity: [
+                { '@type': 'Question', name: 'How many hours is a standard work week in India?', acceptedAnswer: { '@type': 'Answer', text: 'Under most Indian labour laws, the standard work week is 48 hours (8 hours/day × 6 days). IT companies often follow a 40-hour, 5-day week.' } },
+                { '@type': 'Question', name: 'How do I calculate my weekly pay from an hourly rate?', acceptedAnswer: { '@type': 'Answer', text: 'Enter your daily work hours, input your hourly rate, and the calculator multiplies total hours by your rate to show weekly earnings.' } },
+                { '@type': 'Question', name: 'Can this handle minutes exceeding 60?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. The calculator converts all time to total minutes first, then back to hours and minutes. So 75 minutes is correctly shown as 1 hour 15 minutes.' } }
+              ]
+            }]
+        }
+      },
+      { path: '', redirectTo: 'age-calculator', pathMatch: 'full' },
     ],
   },
   {

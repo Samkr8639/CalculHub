@@ -56,6 +56,10 @@ interface CalcEntry { name: string; link: string; desc: string; icon: string; }
             [class.active]="selectedCategory() === 'market'"
             (click)="selectedCategory.set('market')"
             class="tab-btn">Markets & Rates</button>
+          <button
+            [class.active]="selectedCategory() === 'utility'"
+            (click)="selectedCategory.set('utility')"
+            class="tab-btn">Utility</button>
         </div>
       </div>
 
@@ -65,7 +69,7 @@ interface CalcEntry { name: string; link: string; desc: string; icon: string; }
             <h2 class="category-title">
               <span class="category-icon">
                 <lucide-icon
-                  [name]="cat.key === 'financial' ? 'banknote' : cat.key === 'mathematical' ? 'sigma' : cat.key === 'health' ? 'HeartPulse' : 'bitcoin'"
+                  [name]="cat.key === 'financial' ? 'banknote' : cat.key === 'mathematical' ? 'sigma' : cat.key === 'health' ? 'HeartPulse' : cat.key === 'utility' ? 'wrench' : 'bitcoin'"
                   [size]="22"
                 ></lucide-icon>
               </span>
@@ -80,7 +84,7 @@ interface CalcEntry { name: string; link: string; desc: string; icon: string; }
                       <lucide-icon [name]="c.icon" [size]="22"></lucide-icon>
                     </div>
                     <span class="card-badge" [class]="cat.key">
-                      {{ cat.key === 'financial' ? 'Finance' : cat.key === 'mathematical' ? 'Math' : cat.key === 'health' ? 'Health' : 'Market' }}
+                      {{ cat.key === 'financial' ? 'Finance' : cat.key === 'mathematical' ? 'Math' : cat.key === 'health' ? 'Health' : cat.key === 'utility' ? 'Utility' : 'Market' }}
                     </span>
                   </div>
                   
@@ -359,6 +363,7 @@ interface CalcEntry { name: string; link: string; desc: string; icon: string; }
     .card-badge.mathematical { background: rgba(192, 132, 252, 0.08); color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.15); }
     .card-badge.health { background: rgba(52, 211, 153, 0.08); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.15); }
     .card-badge.market { background: rgba(251, 191, 36, 0.08); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.15); }
+    .card-badge.utility { background: rgba(225, 25, 49, 0.08); color: #e11931; border: 1px solid rgba(225, 25, 49, 0.15); }
 
     .calc-card h3 {
       font-size: 1.2rem;
@@ -495,6 +500,8 @@ export class SitemapComponent {
 
   financial: CalcEntry[] = [
     { name: 'Mortgage Calculator', link: '/financial/mortgage', desc: 'Calculate monthly mortgage payments and amortization schedule.', icon: 'Landmark' },
+    { name: 'Car Loan EMI Calculator', link: '/financial/car-loan-emi-calculator', desc: 'Calculate your monthly car loan payments (EMI) and see a breakdown of principal and interest.', icon: 'Car' },
+    { name: 'Lumpsum Calculator', link: '/financial/lumpsum-calculator', desc: 'Estimate maturity returns for your one-time wealth investments.', icon: 'Coins' },
     { name: 'Compound Interest Calculator', link: '/financial/compound-interest', desc: 'See how investments grow with compound interest.', icon: 'TrendingUp' },
     { name: 'GST Calculator', link: '/financial/gst-calculator', desc: 'Add or remove GST from any amount instantly.', icon: 'Receipt' },
     { name: 'SIP Calculator', link: '/financial/sip-calculator', desc: 'Estimate future value of Systematic Investment Plans.', icon: 'PiggyBank' },
@@ -504,6 +511,8 @@ export class SitemapComponent {
     { name: 'PPF Calculator', link: '/financial/ppf-calculator', desc: 'Estimate PPF maturity value after 15 years.', icon: 'BadgeCheck' },
     { name: 'Loan Eligibility Calculator', link: '/financial/loan-eligibility-calculator', desc: 'Find the maximum loan amount you qualify for.', icon: 'Building' },
     { name: 'Home Loan EMI Calculator', link: '/financial/home-loan-emi-calculator', desc: 'Calculate monthly home loan EMI.', icon: 'House' },
+    { name: 'NPS Calculator', link: '/financial/nps-calculator', desc: 'Estimate pension and lumpsum withdrawal under the National Pension Scheme.', icon: 'Wallet' },
+    { name: 'CAGR Calculator', link: '/financial/cagr-calculator', desc: 'Compute compound annual growth rate of investments over time.', icon: 'TrendingUp' },
     { name: 'Retirement Calculator', link: '/financial/retirement-calculator', desc: 'Plan retirement corpus based on expenses and returns.', icon: 'Calendar' },
     { name: 'Investment Calculator', link: '/financial/investment-calculator', desc: 'Calculate future value of investments.', icon: 'Coins' },
     { name: 'Bike Loan EMI Calculator', link: '/financial/bike-loan-emi-calculator', desc: 'Calculate two-wheeler loan EMI.', icon: 'Bike' },
@@ -516,6 +525,8 @@ export class SitemapComponent {
     { name: 'Algebra Calculator', link: '/mathematical/algebra-calculator', desc: 'Solve equations and factor polynomials.', icon: 'SquareFunction' },
     { name: 'Matrix Calculator', link: '/mathematical/matrix-calculator', desc: 'Perform matrix addition, multiplication, and inversion.', icon: 'Grid2x2' },
     { name: 'Statistics Calculator', link: '/mathematical/statistics-calculator', desc: 'Calculate mean, median, mode, and standard deviation.', icon: 'Sigma' },
+    { name: 'GPA Calculator', link: '/mathematical/gpa-calculator', desc: 'Calculate your semester or cumulative grade point average.', icon: 'GraduationCap' },
+    { name: 'Fraction Calculator', link: '/mathematical/fraction-calculator', desc: 'Add, subtract, multiply, and divide fractions easily.', icon: 'Divide' },
   ];
 
   health: CalcEntry[] = [
@@ -524,12 +535,19 @@ export class SitemapComponent {
     { name: 'Body Fat Calculator', link: '/health/body-fat-calculator', desc: 'Estimate body fat percentage using body measurements.', icon: 'Target' },
     { name: 'Ideal Weight Calculator', link: '/health/ideal-weight-calculator', desc: 'Find your ideal healthy weight range.', icon: 'Heart' },
     { name: 'BMR TDEE Calculator', link: '/health/bmr-tdee-calculator', desc: 'Calculate Basal Metabolic Rate (BMR) and Total Daily Energy Expenditure (TDEE).', icon: 'Activity' },
+    { name: 'Pregnancy Due Date Calculator', link: '/health/pregnancy-calculator', desc: 'Calculate your estimated due date, trimester, and milestones.', icon: 'Baby' },
+    { name: 'Ovulation Calculator', link: '/health/ovulation-calculator', desc: 'Track your fertile window and ovulation date cycles.', icon: 'CalendarDays' },
   ];
 
   market: CalcEntry[] = [
     { name: 'Currency Converter', link: '/market/currency-converter', desc: 'Convert between 150+ currencies instantly with real-time exchange rates.', icon: 'Coins' },
     { name: 'Crypto Calculator', link: '/market/crypto-calculator', desc: 'Calculate cryptocurrency conversions for Bitcoin, Ethereum, and more.', icon: 'Bitcoin' },
     { name: 'Gold & Silver Calculator', link: '/market/gold-silver-calculator', desc: 'Calculate gold and silver rates based on live spot rates.', icon: 'Gem' },
+  ];
+
+  utility: CalcEntry[] = [
+    { name: 'Age Calculator', link: '/utility/age-calculator', desc: 'Find your exact age in years, months, weeks, and days.', icon: 'Calendar' },
+    { name: 'Hours Calculator', link: '/utility/hours-calculator', desc: 'Sum work hours, track timesheets, and calculate total pay.', icon: 'Clock' },
   ];
 
   categories = computed(() => {
@@ -548,6 +566,7 @@ export class SitemapComponent {
     const math = filterList(this.mathematical);
     const hlth = filterList(this.health);
     const mkt = filterList(this.market);
+    const utl = filterList(this.utility);
 
     const result = [];
     if (cat === 'all' || cat === 'financial') {
@@ -561,6 +580,9 @@ export class SitemapComponent {
     }
     if (cat === 'all' || cat === 'market') {
       if (mkt.length > 0) result.push({ title: 'Market & Exchange Rate Calculators', items: mkt, key: 'market' });
+    }
+    if (cat === 'all' || cat === 'utility') {
+      if (utl.length > 0) result.push({ title: 'Utility Calculators', items: utl, key: 'utility' });
     }
     return result;
   });

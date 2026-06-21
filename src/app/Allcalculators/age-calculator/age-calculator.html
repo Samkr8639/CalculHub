@@ -1,0 +1,134 @@
+<div class="gst-calculator-container">
+  <div class="financial-calculator age-calc">
+    <h2 class="calculator-inner-title">Age Calculator</h2>
+    <p class="calc-subtitle">Find your exact age in years, months, days, weeks, and more.</p>
+
+    <div class="calculator-inputs">
+      <div class="input-group">
+        <label for="dob">Date of Birth</label>
+        <input id="dob" type="date" class="date-input"
+          [value]="dob()" (input)="onDobChange($event)" [max]="today" />
+      </div>
+      <div class="input-group">
+        <label for="asOf">Age As Of</label>
+        <input id="asOf" type="date" class="date-input"
+          [value]="asOfDate()" (input)="onAsOfChange($event)" [max]="today" />
+      </div>
+    </div>
+
+    @if (result(); as r) {
+    <section class="results-section">
+      <h2>Your Age</h2>
+
+      <div class="age-primary">
+        <div class="age-number">{{ r.years }}</div>
+        <div class="age-unit">Years Old</div>
+        <div class="age-detail">{{ r.months }} months, {{ r.days }} days</div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="age-stat-card">
+          <div class="age-stat-value">{{ r.totalMonths | number }}</div>
+          <div class="age-stat-label">Total Months</div>
+        </div>
+        <div class="age-stat-card">
+          <div class="age-stat-value">{{ r.totalWeeks | number }}</div>
+          <div class="age-stat-label">Total Weeks</div>
+        </div>
+        <div class="age-stat-card">
+          <div class="age-stat-value">{{ r.totalDays | number }}</div>
+          <div class="age-stat-label">Total Days</div>
+        </div>
+        <div class="age-stat-card">
+          <div class="age-stat-value">{{ r.totalHours | number }}</div>
+          <div class="age-stat-label">Total Hours</div>
+        </div>
+      </div>
+
+      <div class="birthday-box">
+        @if (r.daysToNextBirthday <= 0 || (r.isBirthdayToday && r.daysToNextBirthday > 0)) {
+          <div class="birthday-today">🎂 Happy Birthday!</div>
+        } @else {
+          <div class="birthday-info">
+            <span class="birthday-emoji">🎂</span>
+            <div>
+              <div class="birthday-next">Next birthday: {{ r.nextBirthday | date: 'EEEE, dd MMM yyyy' }}</div>
+              <div class="birthday-countdown">{{ r.daysToNextBirthday }} days away</div>
+            </div>
+          </div>
+        }
+        <div class="born-on">Born on a <strong>{{ r.bornOnDay }}</strong></div>
+      </div>
+    </section>
+    } @else if (dob()) {
+    <div class="placeholder-message"><p>Please enter a valid date of birth (before today).</p></div>
+    } @else {
+    <div class="placeholder-message"><p>Enter your date of birth to calculate your exact age.</p></div>
+    }
+  </div>
+</div>
+
+<!-- SEO CONTENT SECTION -->
+<div class="calc-seo-content">
+  <div class="seo-section">
+    <h2>Age Calculator — Calculate Your Exact Age in Years, Months, and Days</h2>
+    <p>
+      The <strong>Age Calculator</strong> helps you find your exact age from your date of birth — down to years,
+      months, days, total weeks, and total days. It is one of the most widely searched tools online, used for
+      everything from filling government forms and job applications to insurance queries, pension eligibility,
+      school admissions, and simply satisfying curiosity.
+    </p>
+    <p>
+      You can also calculate the age as of any specific date — useful for determining age on a particular
+      historical date, exam eligibility cut-offs, or age verification for legal documents.
+    </p>
+  </div>
+
+  <div class="seo-section">
+    <h2>Where is Age Calculation Required?</h2>
+    <div class="info-grid">
+      <div class="info-card"><h4>Government Documents</h4><p>Passports, Aadhaar, PAN card age verification, and voter ID eligibility require exact age proof.</p></div>
+      <div class="info-card"><h4>Job Applications</h4><p>Many government and private job postings specify age limits (e.g., 18–30 years) as of a specific application date.</p></div>
+      <div class="info-card"><h4>Insurance &amp; Finance</h4><p>Life insurance premiums, senior citizen discounts, and pension eligibility depend on exact age.</p></div>
+      <div class="info-card"><h4>School Admissions</h4><p>Admission cut-off ages for schools (e.g., 3 years as of 1st June) require precise age calculation.</p></div>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>How Age is Calculated</h2>
+    <p>
+      Age is calculated by subtracting the date of birth from the reference date, accounting for varying
+      month lengths and leap years. The formula accounts for cases where the current day/month is before
+      the birth day/month, requiring borrowing from the higher unit.
+    </p>
+    <p>For example, if DOB is 15 August 1990 and today is 21 June 2026: Age = 35 years, 10 months, 6 days.</p>
+  </div>
+
+  <div class="seo-section">
+    <h2>Frequently Asked Questions — Age Calculator</h2>
+    <div class="seo-faq">
+      <div class="faq-item">
+        <h3>How do I calculate my age for a government form?</h3>
+        <p>Enter your date of birth and set the "Age As Of" date to the form's cut-off date (often the last date of application). The calculator will give your exact age as of that specific date.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What is the minimum age for different services in India?</h3>
+        <p>Voting: 18 years. Driving license (motorcycle): 16 years. Driving license (car): 18 years. Bank account independently: 18 years. Marriage (women): 18 years, (men): 21 years. PAN card: Any age.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How are leap years handled in age calculation?</h3>
+        <p>This calculator correctly accounts for leap years. A person born on 29 February celebrates their birthday on 28 February or 1 March in non-leap years, depending on convention. The total days count includes all leap day occurrences.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>Related Calculators</h2>
+    <div class="related-calc-grid">
+      <a routerLink="/utility/hours-calculator" class="related-calc-link">Hours Calculator</a>
+      <a routerLink="/health/bmi-calculator" class="related-calc-link">BMI Calculator</a>
+      <a routerLink="/health/pregnancy-calculator" class="related-calc-link">Pregnancy Calculator</a>
+      <a routerLink="/mathematical/percentage-calculator" class="related-calc-link">Percentage Calculator</a>
+    </div>
+  </div>
+</div>

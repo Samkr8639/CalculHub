@@ -53,6 +53,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   calculatorCards = signal<CalculatorCard[]>([
     { icon: 'house', title: 'Mortgage Calculator', description: 'Calculate your monthly mortgage payments and amortization schedule.', link: '/financial/mortgage', category: 'Financial' },
+    { icon: 'car', title: 'Car Loan EMI Calculator', description: 'Calculate your monthly car loan payments (EMI) with principal and interest breakdown.', link: '/financial/car-loan-emi-calculator', category: 'Financial' },
+    { icon: 'coins', title: 'Lumpsum Calculator', description: 'Estimate maturity returns for your one-time wealth investments.', link: '/financial/lumpsum-calculator', category: 'Financial' },
     { icon: 'trending-up', title: 'Compound Interest', description: 'See how your investments grow over time with compound interest.', link: '/financial/compound-interest', category: 'Financial' },
     { icon: 'receipt', title: 'GST Calculator', description: 'Quickly add or remove GST from any amount.', link: '/financial/gst-calculator', category: 'Financial' },
     { icon: 'piggy-bank', title: 'SIP Calculator', description: 'Estimate the future value of your Systematic Investment Plans.', link: '/financial/sip-calculator', category: 'Financial' },
@@ -62,18 +64,26 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     { icon: 'file-text', title: 'Income Tax Calculator', description: 'Determine your annual tax liability and effective tax rate.', link: '/financial/tax-calculator', category: 'Financial' },
     { icon: 'badge-check', title: 'Loan Eligibility / Affordability Calculator', description: 'Estimates the maximum loan amount you are likely to be approved for based on your income and existing debts.', link: '/financial/loan-eligibility-calculator', category: 'Financial' },
     { icon: 'building', title: 'Home Loan EMI Calculator', description: 'Calculate your monthly home loan payments (EMI) and see a breakdown of principal and interest.', link: '/financial/home-loan-emi-calculator', category: 'Financial' },
+    { icon: 'wallet', title: 'NPS Calculator', description: 'Estimate your pension and lumpsum withdrawal under the National Pension Scheme.', link: '/financial/nps-calculator', category: 'Financial' },
+    { icon: 'trending-up', title: 'CAGR Calculator', description: 'Compute compound annual growth rate of investments over time.', link: '/financial/cagr-calculator', category: 'Financial' },
     { icon: 'percent', title: 'Percentage Calculator', description: 'Solve various percentage problems instantly.', link: '/mathematical/percentage-calculator', category: 'Mathematical' },
     { icon: 'calculator', title: 'Scientific Calculator', description: 'Perform complex scientific and mathematical operations.', link: '/mathematical/scientific-calculator', category: 'Mathematical' },
     { icon: 'square-function', title: 'Algebra Calculator', description: 'Solve equations, factor polynomials, and graph inequalities.', link: '/mathematical/algebra-calculator', category: 'Mathematical' },
     { icon: 'grid-2x2', title: 'Matrix Calculator', description: 'Perform matrix operations, such as addition, subtraction, and multiplication.', link: '/mathematical/matrix-calculator', category: 'Mathematical' },
     { icon: 'sigma', title: 'Statistics Calculator', description: 'Calculate various statistics, such as mean, median, and mode.', link: '/mathematical/statistics-calculator', category: 'Mathematical' },
+    { icon: 'graduation-cap', title: 'GPA Calculator', description: 'Calculate your semester or cumulative grade point average.', link: '/mathematical/gpa-calculator', category: 'Mathematical' },
+    { icon: 'divide', title: 'Fraction Calculator', description: 'Add, subtract, multiply, and divide fractions easily.', link: '/mathematical/fraction-calculator', category: 'Mathematical' },
     { icon: 'activity', title: 'Calorie Calculator', description: 'Find your daily calorie needs for weight loss, gain, or maintenance.', link: '/health/calorie-calculator', category: 'Health & Fitness' },
     { icon: 'scale', title: 'BMI Calculator', description: 'Measure weight relative to height to categorize body mass index.', link: '/health/bmi-calculator', category: 'Health & Fitness' },
     { icon: 'user', title: 'Body Fat Calculator', description: 'Estimate fat percentage, lean body mass, and fat mass using body measurements.', link: '/health/body-fat-calculator', category: 'Health & Fitness' },
     { icon: 'target', title: 'Ideal Weight Calculator', description: 'Determine a target healthy weight range based on height, age, and gender.', link: '/health/ideal-weight-calculator', category: 'Health & Fitness' },
+    { icon: 'baby', title: 'Pregnancy Due Date Calculator', description: 'Calculate your estimated due date, trimester, and milestones.', link: '/health/pregnancy-calculator', category: 'Health & Fitness' },
+    { icon: 'calendar-days', title: 'Ovulation Calculator', description: 'Track your fertile window and ovulation date cycles.', link: '/health/ovulation-calculator', category: 'Health & Fitness' },
     { icon: 'coins', title: 'Currency Converter', description: 'Convert between 150+ fiat currencies with live, real-time exchange rates.', link: '/market/currency-converter', category: 'Markets & Rates' },
     { icon: 'bitcoin', title: 'Crypto Calculator', description: 'Estimate cryptocurrency swaps and transaction fee costs.', link: '/market/crypto-calculator', category: 'Markets & Rates' },
     { icon: 'gem', title: 'Gold & Silver Rate Calculator', description: 'Calculate live gold and silver prices with purity, weight, and GST taxes.', link: '/market/gold-silver-calculator', category: 'Markets & Rates' },
+    { icon: 'calendar', title: 'Age Calculator', description: 'Find your exact age in years, months, weeks, and days.', link: '/utility/age-calculator', category: 'Utility' },
+    { icon: 'clock', title: 'Hours Calculator', description: 'Sum work hours, track timesheets, and calculate total pay.', link: '/utility/hours-calculator', category: 'Utility' },
   ]);
 
   categorizedCalculators = computed(() => {

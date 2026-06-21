@@ -1,0 +1,218 @@
+<div class="gst-calculator-container">
+  <div class="financial-calculator">
+    <h2 class="calculator-inner-title">Car Loan EMI Calculator</h2>
+
+    <div class="calculator-inputs">
+      <div class="input-group">
+        <label for="loanAmount">Loan Amount (₹)</label>
+        <input id="loanAmount" type="number" [value]="loanAmount() || ''"
+          (input)="onInputChange($event, loanAmount.set)" placeholder="e.g., 800000" />
+        <input type="range" [value]="loanAmount() || 0" (input)="onInputChange($event, loanAmount.set)" min="50000"
+          max="5000000" step="10000" />
+      </div>
+
+      <div class="input-group">
+        <label for="interestRate">Annual Interest Rate (%)</label>
+        <input id="interestRate" type="number" [value]="interestRate() || ''"
+          (input)="onInputChange($event, interestRate.set)" placeholder="e.g., 9.5" />
+        <input type="range" [value]="interestRate() || 9.5" (input)="onInputChange($event, interestRate.set)" min="1"
+          max="20" step="0.1" />
+      </div>
+
+      <div class="input-group">
+        <label for="loanTenure">Loan Tenure (Years)</label>
+        <input id="loanTenure" type="number" [value]="loanTenure() || ''"
+          (input)="onInputChange($event, loanTenure.set)" placeholder="e.g., 5" />
+        <input type="range" [value]="loanTenure() || 5" (input)="onInputChange($event, loanTenure.set)" min="1"
+          max="7" />
+      </div>
+    </div>
+
+    @if (monthlyEMI() !== null && monthlyEMI()! > 0) {
+    <section class="results-section">
+      <h2>Car Loan EMI Details</h2>
+      <div class="summary-box">
+        <div class="summary-item">
+          <p>Monthly EMI</p>
+          <strong>₹{{ monthlyEMI() | number: '1.2-2' }}</strong>
+        </div>
+        <div class="summary-item">
+          <p>Total Interest</p>
+          <strong>₹{{ totalInterest() | number: '1.2-2' }}</strong>
+        </div>
+        <div class="summary-item">
+          <p>Total Payment</p>
+          <strong>₹{{ totalPayment() | number: '1.2-2' }}</strong>
+        </div>
+      </div>
+      <div class="chart-container">
+        <canvas #emiChart></canvas>
+      </div>
+    </section>
+    } @else {
+    <div class="placeholder-message">
+      <p>Enter your car loan details to calculate your EMI.</p>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- SEO CONTENT SECTION -->
+<div class="calc-seo-content">
+
+  <div class="seo-section">
+    <h2>Car Loan EMI Calculator — Calculate Monthly Car Loan Payments Instantly</h2>
+    <p>
+      A <strong>Car Loan EMI Calculator</strong> is an essential tool for anyone planning to finance a new or used car
+      in India. With vehicle prices rising year after year, most buyers rely on auto loans to spread the cost into
+      affordable monthly instalments. Before visiting a dealership or applying for a loan, knowing your exact EMI
+      helps you plan your budget more confidently.
+    </p>
+    <p>
+      This free online car loan calculator lets you estimate your monthly EMI, total interest payable, and total
+      repayment amount — all in real time. Simply enter your loan amount, interest rate, and tenure to get instant
+      results.
+    </p>
+  </div>
+
+  <div class="seo-section">
+    <h2>Car Loan EMI Formula</h2>
+    <p>
+      Car loan EMIs are calculated using the standard reducing balance (flat rate) method used by all banks and
+      NBFCs in India.
+    </p>
+    <div class="formula-box">
+      EMI = [ P × r × (1 + r)^n ] / [ (1 + r)^n − 1 ]
+    </div>
+    <ul class="formula-vars">
+      <li><strong>P</strong> = Principal Loan Amount</li>
+      <li><strong>r</strong> = Monthly Interest Rate (Annual Rate ÷ 12 ÷ 100)</li>
+      <li><strong>n</strong> = Loan Tenure in Months</li>
+    </ul>
+  </div>
+
+  <div class="seo-section">
+    <h2>Car Loan Interest Rates in India 2026</h2>
+    <div class="seo-table-wrapper">
+      <table class="seo-table">
+        <thead>
+          <tr>
+            <th>Lender</th>
+            <th>Interest Rate (p.a.)</th>
+            <th>Max Tenure</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>SBI Car Loan</td><td>8.85% – 12.85%</td><td>84 months</td></tr>
+          <tr><td>HDFC Bank</td><td>9.25% – 13.50%</td><td>84 months</td></tr>
+          <tr><td>ICICI Bank</td><td>9.00% – 13.75%</td><td>84 months</td></tr>
+          <tr><td>Axis Bank</td><td>9.05% – 13.50%</td><td>84 months</td></tr>
+          <tr><td>Kotak Mahindra</td><td>8.99% – 14.00%</td><td>60 months</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><em>Note: Rates are indicative. Actual rates vary based on credit profile, vehicle type, and lender policy.</em></p>
+  </div>
+
+  <div class="seo-section">
+    <h2>Car Loan EMI for Popular Loan Amounts</h2>
+    <div class="seo-table-wrapper">
+      <table class="seo-table">
+        <thead>
+          <tr>
+            <th>Loan Amount</th>
+            <th>5 Years @ 9%</th>
+            <th>5 Years @ 10%</th>
+            <th>7 Years @ 9%</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>₹5,00,000</td><td>₹10,379</td><td>₹10,624</td><td>₹8,025</td></tr>
+          <tr><td>₹8,00,000</td><td>₹16,607</td><td>₹16,998</td><td>₹12,840</td></tr>
+          <tr><td>₹12,00,000</td><td>₹24,911</td><td>₹25,497</td><td>₹19,260</td></tr>
+          <tr><td>₹15,00,000</td><td>₹31,139</td><td>₹31,871</td><td>₹24,075</td></tr>
+          <tr><td>₹20,00,000</td><td>₹41,519</td><td>₹42,494</td><td>₹32,100</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>Factors That Affect Your Car Loan EMI</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>Loan Amount</h4>
+        <p>A higher loan amount directly increases your monthly EMI and total interest paid.</p>
+      </div>
+      <div class="info-card">
+        <h4>Interest Rate</h4>
+        <p>Even a 0.5% difference in rate can save thousands over a 5-year tenure.</p>
+      </div>
+      <div class="info-card">
+        <h4>Loan Tenure</h4>
+        <p>Longer tenure reduces EMI but increases total interest outflow significantly.</p>
+      </div>
+      <div class="info-card">
+        <h4>Down Payment</h4>
+        <p>Paying more upfront reduces the loan principal and lowers your EMI burden.</p>
+      </div>
+      <div class="info-card">
+        <h4>Credit Score</h4>
+        <p>A CIBIL score above 750 can get you lower interest rates and faster approval.</p>
+      </div>
+      <div class="info-card">
+        <h4>Vehicle Type</h4>
+        <p>New cars usually get lower rates than used cars. EVs may get special green loan rates.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>Tips to Reduce Your Car Loan EMI</h2>
+    <ul class="seo-steps">
+      <li><strong>Make a larger down payment:</strong> Aim for at least 20% of the car's on-road price.</li>
+      <li><strong>Improve your credit score:</strong> A score above 750 typically gets the best rates.</li>
+      <li><strong>Choose a shorter tenure carefully:</strong> Lower interest overall, but higher monthly EMI.</li>
+      <li><strong>Negotiate the interest rate:</strong> Banks often have flexibility, especially for salaried employees.</li>
+      <li><strong>Compare lenders:</strong> Always check at least 3–4 bank/NBFC offers before deciding.</li>
+    </ul>
+  </div>
+
+  <div class="seo-section">
+    <h2>Frequently Asked Questions — Car Loan EMI Calculator</h2>
+    <div class="seo-faq">
+      <div class="faq-item">
+        <h3>What is the typical car loan tenure in India?</h3>
+        <p>Most car loans in India are offered for 1 to 7 years (12 to 84 months). A 5-year tenure is the most popular choice as it balances EMI affordability with lower total interest cost.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I get 100% financing for a car?</h3>
+        <p>While some lenders advertise 100% on-road price financing, most banks finance 80–90% of the ex-showroom price. Expect to pay at least 10–20% as a down payment plus registration and insurance charges.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What is the car loan EMI for ₹10 lakh?</h3>
+        <p>For a ₹10,00,000 car loan at 9% annual interest for 5 years, the monthly EMI is approximately ₹20,758. At 10% interest for the same tenure, it rises to ₹21,247. Use this calculator for your exact figures.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Is it better to choose a shorter or longer loan tenure?</h3>
+        <p>A shorter tenure means higher EMIs but saves significantly on total interest. Financial experts recommend keeping auto loan tenure within 5 years to avoid paying more in interest than the car depreciates.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Does foreclosing a car loan save money?</h3>
+        <p>Yes. Foreclosing in the early years of the loan (when interest component is highest) saves the most interest. However, check for prepayment penalties — typically 2–5% of outstanding principal for fixed-rate loans.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>Related Financial Calculators</h2>
+    <div class="related-calc-grid">
+      <a routerLink="/financial/bike-loan-emi-calculator" class="related-calc-link">Bike Loan EMI Calculator</a>
+      <a routerLink="/financial/home-loan-emi-calculator" class="related-calc-link">Home Loan EMI Calculator</a>
+      <a routerLink="/financial/loan-eligibility-calculator" class="related-calc-link">Loan Eligibility Calculator</a>
+      <a routerLink="/financial/lumpsum-calculator" class="related-calc-link">Lumpsum Calculator</a>
+      <a routerLink="/financial/cagr-calculator" class="related-calc-link">CAGR Calculator</a>
+      <a routerLink="/financial/sip-calculator" class="related-calc-link">SIP Calculator</a>
+    </div>
+  </div>
+</div>

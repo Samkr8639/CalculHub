@@ -1,0 +1,179 @@
+<div class="gst-calculator-container">
+  <div class="financial-calculator">
+    <h2 class="calculator-inner-title">NPS Calculator</h2>
+
+    <div class="calculator-inputs">
+      <div class="input-group">
+        <label for="monthlyContribution">Monthly Contribution (₹)</label>
+        <input id="monthlyContribution" type="number" [value]="monthlyContribution() || ''"
+          (input)="onInputChange($event, monthlyContribution.set)" placeholder="e.g., 5000" />
+        <input type="range" [value]="monthlyContribution() || 5000" (input)="onInputChange($event, monthlyContribution.set)"
+          min="500" max="100000" step="500" />
+      </div>
+
+      <div class="input-group">
+        <label for="expectedReturn">Expected Annual Return (%)</label>
+        <input id="expectedReturn" type="number" [value]="expectedReturn() || ''"
+          (input)="onInputChange($event, expectedReturn.set)" placeholder="e.g., 10" />
+        <input type="range" [value]="expectedReturn() || 10" (input)="onInputChange($event, expectedReturn.set)"
+          min="6" max="15" step="0.5" />
+      </div>
+
+      <div class="input-group">
+        <label for="annuityRate">Annuity Rate (%)</label>
+        <input id="annuityRate" type="number" [value]="annuityRate() || ''"
+          (input)="onInputChange($event, annuityRate.set)" placeholder="e.g., 6" />
+        <input type="range" [value]="annuityRate() || 6" (input)="onInputChange($event, annuityRate.set)"
+          min="4" max="10" step="0.5" />
+      </div>
+
+      <div class="input-group">
+        <label for="currentAge">Current Age (Years)</label>
+        <input id="currentAge" type="number" [value]="currentAge() || ''"
+          (input)="onInputChange($event, currentAge.set)" placeholder="e.g., 30" />
+        <input type="range" [value]="currentAge() || 30" (input)="onInputChange($event, currentAge.set)"
+          min="18" max="59" />
+      </div>
+
+      <div class="input-group">
+        <label for="retirementAge">Retirement Age (Years)</label>
+        <input id="retirementAge" type="number" [value]="retirementAge() || ''"
+          (input)="onInputChange($event, retirementAge.set)" placeholder="e.g., 60" />
+        <input type="range" [value]="retirementAge() || 60" (input)="onInputChange($event, retirementAge.set)"
+          min="40" max="70" />
+      </div>
+    </div>
+
+    @if (totalCorpus() !== null) {
+    <section class="results-section">
+      <h2>NPS Retirement Corpus</h2>
+      <div class="summary-box">
+        <div class="summary-item">
+          <p>Total Invested</p>
+          <strong>₹{{ totalInvested() | number: '1.0-0' }}</strong>
+        </div>
+        <div class="summary-item">
+          <p>Wealth Gained</p>
+          <strong>₹{{ wealthGained() | number: '1.0-0' }}</strong>
+        </div>
+        <div class="summary-item highlight">
+          <p>Total Corpus at Retirement</p>
+          <strong>₹{{ totalCorpus() | number: '1.0-0' }}</strong>
+        </div>
+        <div class="summary-item">
+          <p>Lumpsum Withdrawal (60%)</p>
+          <strong>₹{{ lumpsum() | number: '1.0-0' }}</strong>
+        </div>
+        <div class="summary-item">
+          <p>Annuity Purchase (40%)</p>
+          <strong>₹{{ annuityCorpus() | number: '1.0-0' }}</strong>
+        </div>
+        <div class="summary-item highlight">
+          <p>Est. Monthly Pension</p>
+          <strong>₹{{ monthlyPension() | number: '1.0-0' }}</strong>
+        </div>
+      </div>
+      <div class="chart-container">
+        <canvas #npsChart></canvas>
+      </div>
+    </section>
+    } @else {
+    <div class="placeholder-message">
+      <p>Enter your NPS contribution details to calculate your retirement corpus.</p>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- SEO CONTENT SECTION -->
+<div class="calc-seo-content">
+
+  <div class="seo-section">
+    <h2>NPS Calculator — Estimate Your National Pension System Retirement Corpus</h2>
+    <p>
+      The <strong>NPS Calculator</strong> (National Pension System Calculator) helps you estimate the retirement
+      corpus you will accumulate through your monthly NPS contributions, and calculate the monthly pension you
+      can expect after retirement. NPS is a government-backed, market-linked retirement savings scheme regulated
+      by PFRDA (Pension Fund Regulatory and Development Authority).
+    </p>
+    <p>
+      NPS is especially popular among salaried individuals and government employees as it offers significant
+      tax benefits under Section 80C, Section 80CCD(1B), and Section 80CCD(2) of the Income Tax Act — making
+      it one of the most tax-efficient retirement instruments in India.
+    </p>
+  </div>
+
+  <div class="seo-section">
+    <h2>How NPS Works at Retirement</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>60% Lumpsum Withdrawal</h4>
+        <p>At age 60, you can withdraw up to 60% of the total NPS corpus as a tax-free lump sum amount.</p>
+      </div>
+      <div class="info-card">
+        <h4>40% Mandatory Annuity</h4>
+        <p>The remaining 40% must be used to purchase an annuity plan, which pays you a monthly pension for life.</p>
+      </div>
+      <div class="info-card">
+        <h4>Tax Benefits</h4>
+        <p>₹1.5L under 80C + additional ₹50,000 under 80CCD(1B) — total up to ₹2L annual deduction.</p>
+      </div>
+      <div class="info-card">
+        <h4>Market-Linked Returns</h4>
+        <p>NPS invests in equity, corporate bonds, and government securities. Equity allocation can be up to 75% till age 50.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>NPS vs PPF vs EPF — Comparison</h2>
+    <div class="seo-table-wrapper">
+      <table class="seo-table">
+        <thead>
+          <tr><th>Feature</th><th>NPS</th><th>PPF</th><th>EPF</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Who Can Invest</td><td>Any Indian citizen 18–70</td><td>Any Indian citizen</td><td>Salaried employees only</td></tr>
+          <tr><td>Return Type</td><td>Market-linked (8–12%)</td><td>Fixed (7.1%)</td><td>Fixed (8.15%)</td></tr>
+          <tr><td>Tax on Maturity</td><td>60% tax-free + 40% annuity</td><td>Fully tax-free (EEE)</td><td>Fully tax-free after 5 years</td></tr>
+          <tr><td>Lock-in</td><td>Till age 60</td><td>15 years</td><td>Till retirement</td></tr>
+          <tr><td>Pension Guarantee</td><td>Yes (annuity)</td><td>No</td><td>Yes (EPS component)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>Frequently Asked Questions — NPS Calculator</h2>
+    <div class="seo-faq">
+      <div class="faq-item">
+        <h3>What is the minimum monthly NPS contribution?</h3>
+        <p>The minimum annual contribution for Tier-I NPS is ₹1,000 (approximately ₹84/month). However, financial planners recommend contributing at least ₹3,000–₹5,000 per month for meaningful retirement corpus building.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Is NPS safe?</h3>
+        <p>NPS is regulated by PFRDA, a government body. While it is market-linked (so returns are not guaranteed), the debt and government securities portions provide stability. The auto-choice lifecycle fund automatically reduces equity exposure as you age.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I withdraw NPS before 60?</h3>
+        <p>Partial withdrawals up to 25% of own contributions are allowed after 3 years for specific purposes like home purchase, children's education, or medical emergencies. Full withdrawal before 60 requires purchasing a 80% annuity.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What is the tax benefit on NPS under Section 80CCD(1B)?</h3>
+        <p>Section 80CCD(1B) allows an additional deduction of up to ₹50,000 per year for NPS contributions — over and above the ₹1.5L limit under Section 80C. This makes NPS the only instrument with this exclusive additional tax benefit.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>Related Financial Calculators</h2>
+    <div class="related-calc-grid">
+      <a routerLink="/financial/ppf-calculator" class="related-calc-link">PPF Calculator</a>
+      <a routerLink="/financial/retirement-calculator" class="related-calc-link">Retirement Calculator</a>
+      <a routerLink="/financial/sip-calculator" class="related-calc-link">SIP Calculator</a>
+      <a routerLink="/financial/lumpsum-calculator" class="related-calc-link">Lumpsum Calculator</a>
+      <a routerLink="/financial/tax-calculator" class="related-calc-link">Income Tax Calculator</a>
+      <a routerLink="/financial/fd-calculator" class="related-calc-link">FD Calculator</a>
+    </div>
+  </div>
+</div>

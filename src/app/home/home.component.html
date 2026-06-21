@@ -79,7 +79,7 @@
       @for (card of categorizedCalculators()[category]; track card.title) {
       <swiper-slide>
         <div class="calculator-card">
-          <div class="icon"><lucide-icon [name]="card.icon" [size]="32" /></div>
+          <div class="icon floating-icon"><lucide-icon [name]="card.icon" [size]="32" /></div>
           <h4>{{ card.title }}</h4>
           <p>{{ card.description }}</p>
           <a [routerLink]="card.link" class="button small-button calculator-button">Use {{ card.title }}</a>
@@ -93,7 +93,7 @@
       @for (card of categorizedCalculators()[category]; track card.title) {
       <swiper-slide>
         <div class="calculator-card">
-          <div class="icon"><lucide-icon [name]="card.icon" [size]="32" /></div>
+          <div class="icon floating-icon"><lucide-icon [name]="card.icon" [size]="32" /></div>
           <h4>{{ card.title }}</h4>
           <p>{{ card.description }}</p>
           <a [routerLink]="card.link" class="button small-button calculator-button">Use {{ card.title }}</a>
@@ -107,7 +107,35 @@
       @for (card of categorizedCalculators()[category]; track card.title) {
       <swiper-slide>
         <div class="calculator-card">
-          <div class="icon"><lucide-icon [name]="card.icon" [size]="32" /></div>
+          <div class="icon floating-icon"><lucide-icon [name]="card.icon" [size]="32" /></div>
+          <h4>{{ card.title }}</h4>
+          <p>{{ card.description }}</p>
+          <a [routerLink]="card.link" class="button small-button calculator-button">Use {{ card.title }}</a>
+        </div>
+      </swiper-slide>
+      }
+    </swiper-container>
+    } @else if (category === 'Markets & Rates' && categorizedCalculators()[category].length > 0) {
+    <swiper-container class="calculator-swiper" [breakpoints]="swiperBreakpoints" speed="500" loop="true"
+      autoplay-delay="2500" autoplay-disable-on-interaction="false" pagination="false">
+      @for (card of categorizedCalculators()[category]; track card.title) {
+      <swiper-slide>
+        <div class="calculator-card">
+          <div class="icon floating-icon"><lucide-icon [name]="card.icon" [size]="32" /></div>
+          <h4>{{ card.title }}</h4>
+          <p>{{ card.description }}</p>
+          <a [routerLink]="card.link" class="button small-button calculator-button">Use {{ card.title }}</a>
+        </div>
+      </swiper-slide>
+      }
+    </swiper-container>
+    } @else if (category === 'Utility' && categorizedCalculators()[category].length > 0) {
+    <swiper-container class="calculator-swiper" [breakpoints]="swiperBreakpoints" speed="500" loop="true"
+      autoplay-delay="2500" autoplay-disable-on-interaction="false" pagination="false">
+      @for (card of categorizedCalculators()[category]; track card.title) {
+      <swiper-slide>
+        <div class="calculator-card">
+          <div class="icon floating-icon"><lucide-icon [name]="card.icon" [size]="32" /></div>
           <h4>{{ card.title }}</h4>
           <p>{{ card.description }}</p>
           <a [routerLink]="card.link" class="button small-button calculator-button">Use {{ card.title }}</a>
@@ -121,7 +149,7 @@
     <div class="calculator-grid">
       @for (card of categorizedCalculators()[category]; track card.title) {
       <div class="calculator-card">
-        <div class="icon"><lucide-icon [name]="card.icon" [size]="32" /></div>
+        <div class="icon floating-icon"><lucide-icon [name]="card.icon" [size]="32" /></div>
         <h4>{{ card.title }}</h4>
         <p>{{ card.description }}</p>
         <a [routerLink]="card.link" class="button small-button calculator-button">Use {{ card.title }}</a>

@@ -1,0 +1,161 @@
+<div class="gst-calculator-container">
+  <div class="financial-calculator">
+    <h2 class="calculator-inner-title">CAGR Calculator</h2>
+
+    <div class="calculator-inputs">
+      <div class="input-group">
+        <label for="initialValue">Initial Investment Value (₹)</label>
+        <input id="initialValue" type="number" [value]="initialValue() || ''"
+          (input)="onInputChange($event, initialValue.set)" placeholder="e.g., 100000" />
+        <input type="range" [value]="initialValue() || 100000" (input)="onInputChange($event, initialValue.set)"
+          min="1000" max="10000000" step="1000" />
+      </div>
+
+      <div class="input-group">
+        <label for="finalValue">Final Investment Value (₹)</label>
+        <input id="finalValue" type="number" [value]="finalValue() || ''"
+          (input)="onInputChange($event, finalValue.set)" placeholder="e.g., 250000" />
+        <input type="range" [value]="finalValue() || 250000" (input)="onInputChange($event, finalValue.set)"
+          min="1000" max="50000000" step="1000" />
+      </div>
+
+      <div class="input-group">
+        <label for="timePeriod">Time Period (Years)</label>
+        <input id="timePeriod" type="number" [value]="timePeriod() || ''"
+          (input)="onInputChange($event, timePeriod.set)" placeholder="e.g., 5" />
+        <input type="range" [value]="timePeriod() || 5" (input)="onInputChange($event, timePeriod.set)"
+          min="1" max="30" />
+      </div>
+    </div>
+
+    @if (cagr() !== null) {
+    <section class="results-section">
+      <h2>CAGR Results</h2>
+      <div class="summary-box">
+        <div class="summary-item highlight">
+          <p>CAGR (Compound Annual Growth Rate)</p>
+          <strong>{{ cagr() | number: '1.2-2' }}%</strong>
+        </div>
+        <div class="summary-item">
+          <p>Absolute Return</p>
+          <strong>{{ absoluteReturn() | number: '1.2-2' }}%</strong>
+        </div>
+        <div class="summary-item">
+          <p>Total Gain</p>
+          <strong>₹{{ (finalValue()! - initialValue()!) | number: '1.0-0' }}</strong>
+        </div>
+      </div>
+      <div class="chart-container">
+        <canvas #cagrChart></canvas>
+      </div>
+    </section>
+    } @else {
+    <div class="placeholder-message">
+      <p>Enter initial value, final value, and time period to calculate CAGR.</p>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- SEO CONTENT SECTION -->
+<div class="calc-seo-content">
+
+  <div class="seo-section">
+    <h2>CAGR Calculator — Calculate Compound Annual Growth Rate</h2>
+    <p>
+      The <strong>CAGR Calculator</strong> (Compound Annual Growth Rate Calculator) helps investors, analysts, and
+      students determine the mean annual growth rate of an investment over a specified time period, assuming the
+      profits are reinvested at the end of each period. CAGR is the most widely used metric for evaluating the
+      performance of stocks, mutual funds, businesses, and any investment where you know the starting value,
+      ending value, and time span.
+    </p>
+    <p>
+      Unlike absolute return (which only tells you how much something grew in total), CAGR annualises the return,
+      allowing fair comparison between investments of different durations.
+    </p>
+  </div>
+
+  <div class="seo-section">
+    <h2>CAGR Formula</h2>
+    <div class="formula-box">
+      CAGR = (Final Value / Initial Value)^(1/n) − 1
+    </div>
+    <ul class="formula-vars">
+      <li><strong>Final Value</strong> = Ending value of the investment</li>
+      <li><strong>Initial Value</strong> = Starting value of the investment</li>
+      <li><strong>n</strong> = Number of years (time period)</li>
+    </ul>
+    <p>
+      Example: ₹1,00,000 grows to ₹2,50,000 in 5 years. CAGR = (2,50,000/1,00,000)^(1/5) − 1 = <strong>20.11%</strong>.
+    </p>
+  </div>
+
+  <div class="seo-section">
+    <h2>CAGR vs Absolute Return vs XIRR</h2>
+    <div class="seo-table-wrapper">
+      <table class="seo-table">
+        <thead>
+          <tr><th>Metric</th><th>What It Measures</th><th>Best Used For</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>CAGR</td><td>Annualised return assuming single investment</td><td>Comparing stocks, FDs, and long-term investments</td></tr>
+          <tr><td>Absolute Return</td><td>Total percentage change over entire period</td><td>Short-term performance overview</td></tr>
+          <tr><td>XIRR</td><td>Annualised return with multiple cash flows</td><td>SIP investments, irregular cash flows</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>CAGR of Popular Asset Classes in India (Historical)</h2>
+    <div class="seo-table-wrapper">
+      <table class="seo-table">
+        <thead>
+          <tr><th>Asset Class</th><th>5-Year CAGR</th><th>10-Year CAGR</th><th>15-Year CAGR</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Nifty 50 (Equity)</td><td>~14–16%</td><td>~12–14%</td><td>~12–13%</td></tr>
+          <tr><td>Large-Cap Mutual Funds</td><td>~12–15%</td><td>~11–13%</td><td>~11–12%</td></tr>
+          <tr><td>Gold</td><td>~10–13%</td><td>~8–10%</td><td>~10–12%</td></tr>
+          <tr><td>Fixed Deposits</td><td>~6–7%</td><td>~6–7%</td><td>~6–7%</td></tr>
+          <tr><td>Real Estate</td><td>~5–8%</td><td>~6–9%</td><td>~7–10%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><em>Historical CAGR figures are approximate and not indicative of future performance.</em></p>
+  </div>
+
+  <div class="seo-section">
+    <h2>Frequently Asked Questions — CAGR Calculator</h2>
+    <div class="seo-faq">
+      <div class="faq-item">
+        <h3>What is a good CAGR for mutual funds?</h3>
+        <p>For equity mutual funds, a CAGR of 12–15% over a 10-year period is generally considered strong. Anything above 15% is excellent. For debt funds, 6–8% CAGR is typical. Always compare the fund's CAGR against its benchmark index.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What is the difference between CAGR and IRR?</h3>
+        <p>CAGR assumes a single investment with no additional cash flows. IRR (Internal Rate of Return) works with multiple uneven cash flows. For SIP investments, XIRR is used — which is IRR applied to dated cash flows.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can CAGR be negative?</h3>
+        <p>Yes. If the final value is less than the initial value, the CAGR will be negative — indicating the investment lost value on an annualised basis. For example, if ₹1,00,000 became ₹70,000 in 3 years, CAGR = −11.04%.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How is CAGR different from average annual return?</h3>
+        <p>Average annual return is the simple arithmetic mean of yearly returns. CAGR is the geometric mean — it accounts for compounding and is always lower than the arithmetic average when there is volatility. CAGR is the more accurate representation of actual investor returns.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>Related Financial Calculators</h2>
+    <div class="related-calc-grid">
+      <a routerLink="/financial/sip-calculator" class="related-calc-link">SIP Calculator</a>
+      <a routerLink="/financial/lumpsum-calculator" class="related-calc-link">Lumpsum Calculator</a>
+      <a routerLink="/financial/mutual-fund-calculator" class="related-calc-link">Mutual Fund Calculator</a>
+      <a routerLink="/financial/compound-interest" class="related-calc-link">Compound Interest Calculator</a>
+      <a routerLink="/financial/investment-calculator" class="related-calc-link">Investment Calculator</a>
+      <a routerLink="/financial/fd-calculator" class="related-calc-link">FD Calculator</a>
+    </div>
+  </div>
+</div>

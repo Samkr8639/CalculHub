@@ -1,0 +1,49 @@
+.gst-calculator-container { display: flex; justify-content: center; align-items: flex-start; padding: 20px; flex-grow: 1; }
+.financial-calculator { width: 100%; padding: 30px; border-radius: 12px; background-color: var(--card-black); box-shadow: 0 8px 16px rgba(0,0,0,0.4); border: 1px solid var(--border-grey); animation: fadeIn 0.8s ease-out; display: flex; flex-direction: column; gap: 25px; box-sizing: border-box; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.financial-calculator h2.calculator-inner-title { text-align: center; color: var(--pure-white-text); font-size: 2.2em; font-weight: 700; margin: 0; }
+.calc-subtitle { text-align: center; color: var(--light-grey-text); margin: 0; }
+
+.hours-table-wrapper { overflow-x: auto; }
+.hours-table { width: 100%; border-collapse: collapse; }
+.hours-table thead tr { background: #1a1a1a; border-bottom: 2px solid var(--border-grey); }
+.hours-table th { padding: 12px 10px; color: var(--light-grey-text); font-size: 0.85em; font-weight: 600; text-align: left; text-transform: uppercase; letter-spacing: 0.05em; }
+.hours-table tbody tr { border-bottom: 1px solid var(--border-grey); transition: background 0.2s; }
+.hours-table tbody tr:hover { background: rgba(255,255,255,0.03); }
+.hours-table td { padding: 10px 8px; vertical-align: middle; }
+
+.label-input, .time-input { padding: 10px 12px; border: 1px solid var(--border-grey); border-radius: 6px; background: #1e1e1e; color: var(--pure-white-text); font-size: 0.95em; box-sizing: border-box; transition: border-color 0.3s; }
+.label-input { width: 100%; }
+.time-input { width: 70px; text-align: center; }
+.label-input:focus, .time-input:focus { border-color: var(--primary-red); outline: none; }
+
+.row-total { color: var(--pure-white-text); font-weight: 600; white-space: nowrap; }
+.remove-btn { background: transparent; border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; color: var(--light-grey-text); width: 28px; height: 28px; cursor: pointer; font-size: 0.75em; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+.remove-btn:hover { background: rgba(225,25,49,0.2); border-color: var(--primary-red); color: var(--primary-red); }
+
+.bottom-bar { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.add-entry-btn { padding: 10px 20px; background: transparent; border: 1px dashed var(--border-grey); border-radius: 8px; color: var(--light-grey-text); cursor: pointer; font-size: 0.95em; transition: all 0.2s; }
+.add-entry-btn:hover { border-color: var(--primary-red); color: var(--primary-red); }
+
+.rate-input-group { display: flex; flex-direction: column; gap: 6px; }
+.rate-input-group label { color: var(--light-grey-text); font-size: 0.9em; }
+.rate-input-wrapper { display: flex; align-items: center; border: 1px solid var(--border-grey); border-radius: 8px; background: #212121; overflow: hidden; }
+.currency-symbol { padding: 12px 12px; color: var(--light-grey-text); font-size: 1em; background: #1a1a1a; border-right: 1px solid var(--border-grey); }
+.rate-input { padding: 12px; border: none; background: transparent; color: var(--pure-white-text); font-size: 1em; width: 120px; }
+.rate-input:focus { outline: none; }
+
+.results-section { padding-top: 20px; border-top: 1px solid var(--border-grey); display: flex; flex-direction: column; gap: 16px; }
+.results-section h2 { color: var(--primary-red); text-align: center; font-size: 1.8em; font-weight: 700; margin: 0; }
+
+.hours-result-display { background: #212121; border-radius: 12px; padding: 28px; text-align: center; border: 1px solid rgba(225,25,49,0.3); }
+.hours-big { font-size: 4em; font-weight: 900; color: var(--primary-red); line-height: 1; }
+.hours-big .unit { font-size: 0.45em; color: var(--light-grey-text); font-weight: 400; }
+.hours-sub { color: var(--light-grey-text); margin-top: 8px; font-size: 0.95em; }
+
+.pay-result { background: rgba(104,211,145,0.08); border-radius: 10px; padding: 20px; text-align: center; border: 1px solid rgba(104,211,145,0.3); }
+.pay-label { color: var(--light-grey-text); font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.1em; }
+.pay-value { color: #68d391; font-size: 2.5em; font-weight: 800; margin: 8px 0; }
+.pay-sub { color: var(--light-grey-text); font-size: 0.85em; }
+
+:host { width: 100%; display: block; }
+:host > div:first-child, .gst-calculator-container { height: auto !important; overflow: visible !important; }

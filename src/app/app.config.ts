@@ -14,6 +14,7 @@ import {
   Facebook, Twitter, Linkedin, Instagram, Github,
   ChevronDown, ChevronRight, Heart, Scale, Target, User, Info, Map,
   Coins, Bitcoin, Gem, Menu, X, Cpu,
+  Car, Wallet, Divide, Baby, CalendarDays, Clock, Wrench
 } from 'lucide-angular';
 
 export const appConfig: ApplicationConfig = {
@@ -33,7 +34,8 @@ export const appConfig: ApplicationConfig = {
       Facebook, Twitter, Linkedin, Instagram, Github,
       ChevronDown, ChevronRight, Heart, Scale, Target, User, Info, Map,
       Coins, Bitcoin, Gem, ChartNoAxesColumnIncreasing, ChartLine, Banknote, HeartPulse, Star, ChartNoAxesCombined, Menu, X,
-      Flame, Search, ArrowRight, Home, Cpu
+      Flame, Search, ArrowRight, Home, Cpu,
+      Car, Wallet, Divide, Baby, CalendarDays, Clock, Wrench
     }))
   ]
 };

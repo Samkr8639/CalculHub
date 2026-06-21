@@ -1,0 +1,132 @@
+<div class="gst-calculator-container">
+  <div class="financial-calculator hours-calc">
+    <h2 class="calculator-inner-title">Hours Calculator</h2>
+    <p class="calc-subtitle">Add up your work hours across multiple days. Optionally enter an hourly rate to calculate pay.</p>
+
+    <!-- Time Entries Table -->
+    <div class="hours-table-wrapper">
+      <table class="hours-table">
+        <thead>
+          <tr>
+            <th>Label / Day</th>
+            <th>Hours</th>
+            <th>Minutes</th>
+            <th>Total Time</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (entry of entries(); track entry.id) {
+          <tr>
+            <td>
+              <input type="text" class="label-input" [value]="entry.label"
+                (input)="updateLabel(entry.id, $any($event.target).value)" placeholder="e.g. Monday" />
+            </td>
+            <td>
+              <input type="number" class="time-input" [value]="entry.hours ?? ''"
+                (input)="updateHours(entry.id, +$any($event.target).value || 0)"
+                min="0" max="24" placeholder="0" />
+            </td>
+            <td>
+              <input type="number" class="time-input" [value]="entry.minutes ?? ''"
+                (input)="updateMinutes(entry.id, +$any($event.target).value || 0)"
+                min="0" max="59" placeholder="0" />
+            </td>
+            <td class="row-total">
+              {{ (entry.hours ?? 0) }}h {{ (entry.minutes ?? 0) }}m
+            </td>
+            <td>
+              <button class="remove-btn" (click)="removeEntry(entry.id)" title="Remove">✕</button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bottom-bar">
+      <button class="add-entry-btn" (click)="addEntry()">+ Add Day / Entry</button>
+      <div class="rate-input-group">
+        <label for="hourlyRate">Hourly Rate (optional)</label>
+        <div class="rate-input-wrapper">
+          <span class="currency-symbol">₹</span>
+          <input id="hourlyRate" type="number" class="rate-input"
+            [value]="hourlyRate() ?? ''" (input)="updateRate($event)"
+            min="0" placeholder="e.g. 500" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <section class="results-section">
+      <h2>Total Hours</h2>
+      <div class="hours-result-display">
+        <div class="hours-big">{{ totalResult().hours }}<span class="unit">h</span> {{ totalResult().minutes }}<span class="unit">m</span></div>
+        <div class="hours-sub">{{ totalResult().totalMins }} total minutes</div>
+      </div>
+
+      @if (totalResult().totalPay !== null) {
+      <div class="pay-result">
+        <div class="pay-label">Total Pay</div>
+        <div class="pay-value">₹{{ totalResult().totalPay! | number: '1.2-2' }}</div>
+        <div class="pay-sub">{{ totalResult().hours }}h {{ totalResult().minutes }}m × ₹{{ hourlyRate() }}/hr</div>
+      </div>
+      }
+    </section>
+  </div>
+</div>
+
+<!-- SEO CONTENT SECTION -->
+<div class="calc-seo-content">
+  <div class="seo-section">
+    <h2>Hours Calculator — Add Up Work Hours and Calculate Pay</h2>
+    <p>
+      The <strong>Hours Calculator</strong> (also called a Time Calculator or Work Hours Calculator) helps
+      freelancers, contractors, hourly employees, HR managers, and students quickly add up hours worked across
+      multiple days or shifts. Enter your hours and minutes for each day, and the calculator instantly totals them.
+      Enter an optional hourly rate to automatically calculate your total pay.
+    </p>
+    <p>
+      This tool is commonly used for timesheet calculations, weekly payroll summaries, project time tracking,
+      and checking overtime eligibility.
+    </p>
+  </div>
+
+  <div class="seo-section">
+    <h2>Common Use Cases for an Hours Calculator</h2>
+    <div class="info-grid">
+      <div class="info-card"><h4>Freelancers &amp; Contractors</h4><p>Track billable hours per project per day and calculate your invoice amount at your hourly rate.</p></div>
+      <div class="info-card"><h4>HR &amp; Payroll</h4><p>Calculate total weekly work hours per employee from daily timesheets for salary processing.</p></div>
+      <div class="info-card"><h4>Overtime Calculation</h4><p>In India, any work beyond 9 hours/day (48 hours/week) qualifies for overtime pay at double the rate.</p></div>
+      <div class="info-card"><h4>Student Assignments</h4><p>Track study hours, project time, or internship hours as required by universities or scholarship programs.</p></div>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>Frequently Asked Questions — Hours Calculator</h2>
+    <div class="seo-faq">
+      <div class="faq-item">
+        <h3>How many hours is a standard work week in India?</h3>
+        <p>Under the Factories Act 1948 and most state labour laws, the standard work week is 48 hours (8 hours/day × 6 days). IT companies often follow a 40-hour, 5-day week. Anything beyond the contracted hours typically requires overtime compensation.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How do I calculate my weekly salary from an hourly rate?</h3>
+        <p>Enter your total working hours per day for each day of the week, enter your hourly rate, and the calculator will multiply total hours by your rate to show your weekly earnings.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can this calculator handle minutes that exceed 60?</h3>
+        <p>Yes. The calculator converts all time to total minutes first, then converts back to hours and minutes. So 1 hour 75 minutes is correctly displayed as 2 hours 15 minutes.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>Related Calculators</h2>
+    <div class="related-calc-grid">
+      <a routerLink="/utility/age-calculator" class="related-calc-link">Age Calculator</a>
+      <a routerLink="/financial/salary-calculator" class="related-calc-link">Salary Calculator</a>
+      <a routerLink="/financial/tax-calculator" class="related-calc-link">Income Tax Calculator</a>
+      <a routerLink="/mathematical/percentage-calculator" class="related-calc-link">Percentage Calculator</a>
+    </div>
+  </div>
+</div>

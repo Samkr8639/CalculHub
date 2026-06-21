@@ -1,0 +1,186 @@
+<div class="gst-calculator-container">
+  <div class="financial-calculator fraction-calc">
+    <h2 class="calculator-inner-title">Fraction Calculator</h2>
+    <p class="calc-subtitle">Add, subtract, multiply, or divide fractions. Results are automatically simplified.</p>
+
+    <div class="fraction-grid">
+      <!-- Fraction 1 -->
+      <div class="fraction-entry">
+        <label>First Fraction</label>
+        <div class="fraction-inputs">
+          <input type="number" class="frac-input" [ngModel]="num1()" (ngModelChange)="num1.set($event)" placeholder="3" />
+          <div class="frac-divider">─</div>
+          <input type="number" class="frac-input" [ngModel]="den1()" (ngModelChange)="den1.set($event)" placeholder="4" min="1" />
+        </div>
+        <div class="frac-preview">{{ num1() }}/{{ den1() }} = {{ den1() !== 0 ? (num1() / den1() | number: '1.4-4') : '∞' }}</div>
+      </div>
+
+      <!-- Operation -->
+      <div class="operation-selector">
+        <label>Operation</label>
+        <select class="op-select" [value]="operation()" (change)="onOpChange($event)">
+          @for (op of operations; track op) {
+            <option [value]="op">{{ op }}</option>
+          }
+        </select>
+      </div>
+
+      <!-- Fraction 2 -->
+      <div class="fraction-entry">
+        <label>Second Fraction</label>
+        <div class="fraction-inputs">
+          <input type="number" class="frac-input" [ngModel]="num2()" (ngModelChange)="num2.set($event)" placeholder="1" />
+          <div class="frac-divider">─</div>
+          <input type="number" class="frac-input" [ngModel]="den2()" (ngModelChange)="den2.set($event)" placeholder="3" min="1" />
+        </div>
+        <div class="frac-preview">{{ num2() }}/{{ den2() }} = {{ den2() !== 0 ? (num2() / den2() | number: '1.4-4') : '∞' }}</div>
+      </div>
+    </div>
+
+    @if (result(); as r) {
+    <section class="results-section">
+      <h2>Result</h2>
+      <div class="result-display">
+        <div class="equation-line">
+          <span class="eq-frac">{{ num1() }}/{{ den1() }}</span>
+          <span class="eq-op">{{ operation() }}</span>
+          <span class="eq-frac">{{ num2() }}/{{ den2() }}</span>
+          <span class="eq-op">=</span>
+          <span class="eq-result">{{ r.num }}/{{ r.den }}</span>
+        </div>
+
+        <div class="result-cards">
+          <div class="result-card">
+            <div class="result-card-label">Simplified Fraction</div>
+            <div class="result-fraction">
+              <span class="big-num">{{ r.num }}</span>
+              <div class="fraction-bar"></div>
+              <span class="big-num">{{ r.den }}</span>
+            </div>
+          </div>
+
+          @if (wholeNumber() !== null && mixedRemainder() !== null) {
+          <div class="result-card">
+            <div class="result-card-label">Mixed Number</div>
+            <div class="mixed-number">
+              <span class="big-num">{{ wholeNumber() }}</span>
+              <div class="mixed-fraction">
+                <span>{{ mixedRemainder()!.num }}</span>
+                <div class="frac-line"></div>
+                <span>{{ mixedRemainder()!.den }}</span>
+              </div>
+            </div>
+          </div>
+          }
+
+          <div class="result-card">
+            <div class="result-card-label">Decimal</div>
+            <div class="big-num decimal-result">{{ r.decimal | number: '1.4-6' }}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    } @else {
+    <div class="placeholder-message">
+      <p>Enter valid fractions (denominators cannot be zero).</p>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- SEO CONTENT SECTION -->
+<div class="calc-seo-content">
+
+  <div class="seo-section">
+    <h2>Fraction Calculator — Add, Subtract, Multiply &amp; Divide Fractions</h2>
+    <p>
+      A <strong>Fraction Calculator</strong> helps you perform arithmetic operations on fractions instantly and
+      accurately. Whether you're a student solving math homework, a parent helping your child with K-12 assignments,
+      or a professional dealing with ratios and proportions, this tool simplifies any fraction operation — and
+      automatically reduces results to their simplest form.
+    </p>
+    <p>
+      Fractions are used everywhere: cooking recipes (½ cup, ¾ teaspoon), measurements (3/8 inch), financial ratios,
+      probability calculations, and more. Knowing how to add, subtract, multiply, and divide fractions is a
+      fundamental mathematical skill.
+    </p>
+  </div>
+
+  <div class="seo-section">
+    <h2>Fraction Operations — Quick Reference</h2>
+    <div class="seo-table-wrapper">
+      <table class="seo-table">
+        <thead>
+          <tr><th>Operation</th><th>Method</th><th>Example</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Addition (a/b + c/d)</td>
+            <td>(a×d + c×b) / (b×d), then simplify</td>
+            <td>1/2 + 1/3 = 5/6</td>
+          </tr>
+          <tr>
+            <td>Subtraction (a/b − c/d)</td>
+            <td>(a×d − c×b) / (b×d), then simplify</td>
+            <td>3/4 − 1/4 = 1/2</td>
+          </tr>
+          <tr>
+            <td>Multiplication (a/b × c/d)</td>
+            <td>(a×c) / (b×d), then simplify</td>
+            <td>2/3 × 3/4 = 1/2</td>
+          </tr>
+          <tr>
+            <td>Division (a/b ÷ c/d)</td>
+            <td>(a×d) / (b×c), then simplify</td>
+            <td>3/4 ÷ 1/2 = 3/2</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>How to Simplify Fractions (Finding GCD)</h2>
+    <p>
+      A fraction is simplified (in lowest terms) when the numerator and denominator share no common factors
+      other than 1. To simplify, find the <strong>Greatest Common Divisor (GCD)</strong> of the numerator and
+      denominator, then divide both by it.
+    </p>
+    <p>
+      Example: Simplify 12/18. GCD(12, 18) = 6. So 12/18 = <strong>2/3</strong>.
+    </p>
+    <p>This calculator uses the Euclidean algorithm to find the GCD automatically, ensuring all results are in their simplest form.</p>
+  </div>
+
+  <div class="seo-section">
+    <h2>Frequently Asked Questions — Fraction Calculator</h2>
+    <div class="seo-faq">
+      <div class="faq-item">
+        <h3>How do you add fractions with different denominators?</h3>
+        <p>To add fractions with different denominators (unlike fractions), find the Least Common Denominator (LCD), convert both fractions to equivalent fractions with that LCD, then add the numerators. This calculator handles all of that automatically.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What is a proper vs improper fraction?</h3>
+        <p>A proper fraction has the numerator smaller than the denominator (e.g., 3/4). An improper fraction has the numerator equal to or larger than the denominator (e.g., 5/3). An improper fraction can also be written as a mixed number (1 and 2/3).</p>
+      </div>
+      <div class="faq-item">
+        <h3>How do I convert a fraction to a percentage?</h3>
+        <p>Divide the numerator by the denominator and multiply by 100. For example, 3/4 = 0.75 × 100 = <strong>75%</strong>.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What happens when you divide by zero?</h3>
+        <p>Division by zero is undefined in mathematics. A fraction with a denominator of 0 (like 5/0) does not have a valid value. This calculator will display an error if you enter 0 as a denominator.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>Related Calculators</h2>
+    <div class="related-calc-grid">
+      <a routerLink="/mathematical/percentage-calculator" class="related-calc-link">Percentage Calculator</a>
+      <a routerLink="/mathematical/scientific-calculator" class="related-calc-link">Scientific Calculator</a>
+      <a routerLink="/mathematical/gpa-calculator" class="related-calc-link">GPA Calculator</a>
+      <a routerLink="/mathematical/statistics-calculator" class="related-calc-link">Statistics Calculator</a>
+    </div>
+  </div>
+</div>

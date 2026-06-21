@@ -1,0 +1,173 @@
+<div class="gst-calculator-container">
+  <div class="financial-calculator pregnancy-calc">
+    <h2 class="calculator-inner-title">Pregnancy Due Date Calculator</h2>
+    <p class="calc-subtitle">Calculate your estimated due date (EDD), current week, and key pregnancy milestones.</p>
+
+    <div class="calculator-inputs">
+      <div class="input-group">
+        <label for="lmpDate">First Day of Last Menstrual Period (LMP)</label>
+        <input id="lmpDate" type="date" class="date-input"
+          [value]="lmpDate()" (input)="onLmpChange($event)"
+          [max]="today | date:'yyyy-MM-dd'" />
+      </div>
+    </div>
+
+    @if (result(); as r) {
+    <section class="results-section">
+      <h2>Your Pregnancy Overview</h2>
+
+      <!-- Key Stats -->
+      <div class="key-stats">
+        <div class="stat-card primary">
+          <div class="stat-label">Estimated Due Date</div>
+          <div class="stat-value">{{ r.dueDate | date: 'dd MMM yyyy' }}</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Current Week</div>
+          <div class="stat-value">Week {{ r.currentWeek }}, Day {{ r.currentDay }}</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Days Remaining</div>
+          <div class="stat-value">{{ r.daysRemaining }} days</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Trimester</div>
+          <div class="stat-value trimester-badge">{{ r.trimesterName }}</div>
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress-section">
+        <div class="progress-label">
+          <span>Pregnancy Progress</span>
+          <span class="progress-pct">{{ r.progressPct }}% complete</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" [style.width.%]="r.progressPct">
+            <div class="progress-markers">
+              <div class="marker" style="left: 32.5%" title="Week 13 — End of 1st Trimester"></div>
+              <div class="marker" style="left: 67.5%" title="Week 27 — End of 2nd Trimester"></div>
+            </div>
+          </div>
+        </div>
+        <div class="trimester-labels">
+          <span>1st Trimester</span>
+          <span>2nd Trimester</span>
+          <span>3rd Trimester</span>
+        </div>
+      </div>
+
+      <!-- Milestones -->
+      <div class="milestones-section">
+        <h3>Key Pregnancy Milestones</h3>
+        <div class="milestones-list">
+          @for (m of r.milestones; track m.week) {
+          <div class="milestone-item" [class.passed]="m.passed" [class.due-date]="m.week === 40">
+            <div class="milestone-dot"></div>
+            <div class="milestone-content">
+              <div class="milestone-label">{{ m.label }}</div>
+              <div class="milestone-date">{{ m.date | date: 'EEEE, dd MMM yyyy' }}</div>
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+    </section>
+    } @else {
+    <div class="placeholder-message">
+      <p>Enter the first day of your last menstrual period (LMP) to calculate your due date.</p>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- SEO CONTENT SECTION -->
+<div class="calc-seo-content">
+
+  <div class="seo-section">
+    <h2>Pregnancy Due Date Calculator — Calculate Your Estimated Delivery Date</h2>
+    <p>
+      A <strong>Pregnancy Due Date Calculator</strong> helps expectant mothers calculate their Estimated Due Date
+      (EDD) based on the first day of their Last Menstrual Period (LMP). The due date is calculated by adding
+      280 days (40 weeks) to the LMP date — a method known as Naegele's Rule, which is the standard used by
+      OBGYNs and midwives worldwide.
+    </p>
+    <p>
+      This calculator also shows your current pregnancy week, trimester, days remaining, and key milestone dates
+      so you can plan doctor visits, scans, and baby preparation.
+    </p>
+    <p><strong>⚕️ Medical Disclaimer:</strong> This calculator provides estimates for informational purposes only. Always confirm your due date and pregnancy details with a qualified healthcare provider.</p>
+  </div>
+
+  <div class="seo-section">
+    <h2>How is Due Date Calculated? (Naegele's Rule)</h2>
+    <div class="formula-box">
+      Due Date = LMP + 280 days (40 weeks)
+    </div>
+    <p>
+      Naegele's Rule: Add 7 days to the first day of LMP, then add 9 months (or subtract 3 months and add 1 year).
+      This assumes a 28-day cycle with ovulation on Day 14. For cycles longer or shorter than 28 days,
+      the due date is adjusted accordingly.
+    </p>
+  </div>
+
+  <div class="seo-section">
+    <h2>Pregnancy Trimesters — What Happens Each Stage</h2>
+    <div class="seo-table-wrapper">
+      <table class="seo-table">
+        <thead>
+          <tr><th>Trimester</th><th>Weeks</th><th>Key Developments</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>First Trimester</td>
+            <td>Weeks 1–13</td>
+            <td>Embryo forms; heartbeat detectable at week 6; risk of miscarriage highest; morning sickness common</td>
+          </tr>
+          <tr>
+            <td>Second Trimester</td>
+            <td>Weeks 14–27</td>
+            <td>Baby movements begin; anatomy scan at week 20; gender can be determined; energy often improves</td>
+          </tr>
+          <tr>
+            <td>Third Trimester</td>
+            <td>Weeks 28–40</td>
+            <td>Rapid growth; lung development; baby positions for birth; Braxton Hicks contractions begin</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>Frequently Asked Questions — Pregnancy Due Date Calculator</h2>
+    <div class="seo-faq">
+      <div class="faq-item">
+        <h3>How accurate is the due date calculator?</h3>
+        <p>The LMP-based due date is an estimate. Only about 5% of babies are born exactly on their EDD. Most births occur within 2 weeks before or after the estimated date. An ultrasound (especially in the first trimester) is more accurate for dating.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What if my cycle is not 28 days?</h3>
+        <p>Naegele's Rule assumes a standard 28-day cycle. If your cycle is shorter or longer, your actual ovulation date differs. A healthcare provider or an ultrasound will adjust the gestational age accordingly.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What is gestational age vs fetal age?</h3>
+        <p>Gestational age counts from the LMP (start of pregnancy by medical convention) and is what this calculator shows. Fetal age (also called conception age) starts from fertilisation — usually 2 weeks later. A doctor always uses gestational age.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What week is considered full term?</h3>
+        <p>Full term is defined as 39–40 weeks of gestation. Early term is 37–38 weeks. Late term is 41 weeks and post-term is 42+ weeks. Babies born before 37 weeks are considered premature (preterm).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>Related Health Calculators</h2>
+    <div class="related-calc-grid">
+      <a routerLink="/health/ovulation-calculator" class="related-calc-link">Ovulation Calculator</a>
+      <a routerLink="/health/bmi-calculator" class="related-calc-link">BMI Calculator</a>
+      <a routerLink="/health/calorie-calculator" class="related-calc-link">Calorie Calculator</a>
+      <a routerLink="/health/ideal-weight-calculator" class="related-calc-link">Ideal Weight Calculator</a>
+    </div>
+  </div>
+</div>

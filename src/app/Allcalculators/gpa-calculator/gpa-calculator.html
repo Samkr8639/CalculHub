@@ -1,0 +1,155 @@
+<div class="gst-calculator-container">
+  <div class="financial-calculator gpa-calc">
+    <h2 class="calculator-inner-title">GPA Calculator</h2>
+    <p class="calc-subtitle">Add your courses, credits, and grades to calculate your weighted GPA.</p>
+
+    <div class="courses-table-wrapper">
+      <table class="courses-table">
+        <thead>
+          <tr>
+            <th>Course Name</th>
+            <th>Credits</th>
+            <th>Grade</th>
+            <th>Points</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (course of courses(); track course.id) {
+          <tr>
+            <td>
+              <input type="text" class="course-name-input" [value]="course.name"
+                (input)="updateCourseName(course.id, $any($event.target).value)" placeholder="Course name" />
+            </td>
+            <td>
+              <input type="number" class="credits-input" [value]="course.credits ?? ''"
+                (input)="updateCourseCredits(course.id, +$any($event.target).value || null)"
+                min="1" max="6" placeholder="3" />
+            </td>
+            <td>
+              <select class="grade-select" [value]="course.grade"
+                (change)="updateCourseGrade(course.id, $any($event.target).value)">
+                @for (g of gradeOptions; track g) {
+                  <option [value]="g">{{ g }} ({{ gradePointOf(g).toFixed(1) }})</option>
+                }
+              </select>
+            </td>
+            <td class="points-cell">
+              {{ (course.credits ?? 0) > 0 ? ((course.credits! * gradePointOf(course.grade)) | number: '1.2-2') : '—' }}
+            </td>
+            <td>
+              <button class="remove-btn" (click)="removeCourse(course.id)" title="Remove course">✕</button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <button class="add-course-btn" (click)="addCourse()">+ Add Course</button>
+
+    @if (gpa() !== null) {
+    <section class="results-section">
+      <h2>Your GPA Results</h2>
+      <div class="gpa-result-card">
+        <div class="gpa-big">{{ gpa() | number: '1.2-2' }}</div>
+        <div class="gpa-label">Cumulative GPA</div>
+        <div class="gpa-category">{{ gpaCategory() }}</div>
+      </div>
+      <div class="summary-box">
+        <div class="summary-item">
+          <p>Total Credit Hours</p>
+          <strong>{{ totalCredits() }}</strong>
+        </div>
+        <div class="summary-item">
+          <p>Courses Entered</p>
+          <strong>{{ courses().length }}</strong>
+        </div>
+      </div>
+    </section>
+    }
+  </div>
+</div>
+
+<!-- SEO CONTENT SECTION -->
+<div class="calc-seo-content">
+
+  <div class="seo-section">
+    <h2>GPA Calculator — Calculate Your Cumulative Grade Point Average</h2>
+    <p>
+      A <strong>GPA Calculator</strong> (Grade Point Average Calculator) helps students instantly compute their
+      weighted cumulative GPA based on their course grades and credit hours. Whether you're tracking your academic
+      standing after midterms, planning what grades you need to maintain your scholarship, or applying to graduate
+      school, your GPA is a critical metric.
+    </p>
+    <p>
+      This calculator supports the standard 4.0 GPA scale used by most universities in the US, Canada, India
+      (CGPA converted), and other international institutions.
+    </p>
+  </div>
+
+  <div class="seo-section">
+    <h2>GPA Grading Scale (4.0 System)</h2>
+    <div class="seo-table-wrapper">
+      <table class="seo-table">
+        <thead>
+          <tr><th>Letter Grade</th><th>GPA Points</th><th>Percentage (India)</th><th>Classification</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>A+ / A</td><td>4.0</td><td>90–100%</td><td>Excellent / Distinction</td></tr>
+          <tr><td>A−</td><td>3.7</td><td>85–89%</td><td>Excellent</td></tr>
+          <tr><td>B+</td><td>3.3</td><td>80–84%</td><td>Very Good</td></tr>
+          <tr><td>B</td><td>3.0</td><td>75–79%</td><td>Good</td></tr>
+          <tr><td>B−</td><td>2.7</td><td>70–74%</td><td>Above Average</td></tr>
+          <tr><td>C+</td><td>2.3</td><td>65–69%</td><td>Average</td></tr>
+          <tr><td>C</td><td>2.0</td><td>60–64%</td><td>Average</td></tr>
+          <tr><td>D</td><td>1.0</td><td>50–59%</td><td>Below Average / Pass</td></tr>
+          <tr><td>F</td><td>0.0</td><td>Below 50%</td><td>Fail</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>How is GPA Calculated?</h2>
+    <div class="formula-box">
+      GPA = Σ (Grade Points × Credit Hours) / Σ (Credit Hours)
+    </div>
+    <p>
+      Each course is weighted by its credit hours. A 4-credit course has double the impact of a 2-credit course
+      on your final GPA. This is called a <strong>weighted GPA</strong>.
+    </p>
+  </div>
+
+  <div class="seo-section">
+    <h2>Frequently Asked Questions — GPA Calculator</h2>
+    <div class="seo-faq">
+      <div class="faq-item">
+        <h3>What GPA do I need for a scholarship?</h3>
+        <p>Most merit scholarships require a minimum GPA of 3.0 (B average), while top competitive scholarships and honors programs often require 3.5 or higher. Graduate school programs in the US typically look for a minimum GPA of 3.0 in your undergraduate studies.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What is the difference between GPA and CGPA?</h3>
+        <p>GPA (Grade Point Average) typically refers to a single semester's performance. CGPA (Cumulative GPA) is the weighted average of all semesters combined. In India, many universities use a 10-point CGPA scale instead of the 4.0 scale used in the US.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How do I convert CGPA to percentage?</h3>
+        <p>Most Indian universities use: Percentage = CGPA × 9.5 (for a 10-point scale). For a 4.0 scale: Percentage ≈ GPA × 25. Always check your institution's official conversion formula.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Does one bad grade ruin my GPA?</h3>
+        <p>One bad grade has more impact on a lower credit hour course than a higher one. A C (2.0) in a 3-credit course brings your GPA down less than a C in a 4-credit course. Retaking the course and replacing the grade is often the best remedy if your institution allows grade replacement.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>Related Calculators</h2>
+    <div class="related-calc-grid">
+      <a routerLink="/mathematical/percentage-calculator" class="related-calc-link">Percentage Calculator</a>
+      <a routerLink="/mathematical/statistics-calculator" class="related-calc-link">Statistics Calculator</a>
+      <a routerLink="/mathematical/fraction-calculator" class="related-calc-link">Fraction Calculator</a>
+      <a routerLink="/financial/education-loan-emi-calculator" class="related-calc-link">Education Loan EMI Calculator</a>
+    </div>
+  </div>
+</div>

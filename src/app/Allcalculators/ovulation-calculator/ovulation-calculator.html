@@ -1,0 +1,162 @@
+<div class="gst-calculator-container">
+  <div class="financial-calculator ovulation-calc">
+    <h2 class="calculator-inner-title">Ovulation Calculator</h2>
+    <p class="calc-subtitle">Find your fertile window and predicted ovulation date based on your cycle.</p>
+
+    <div class="calculator-inputs">
+      <div class="input-group">
+        <label for="lmpDate">First Day of Last Period (LMP)</label>
+        <input id="lmpDate" type="date" class="date-input"
+          [value]="lmpDate()" (input)="onLmpChange($event)"
+          [max]="today | date:'yyyy-MM-dd'" />
+      </div>
+      <div class="input-group">
+        <label for="cycleLength">Average Cycle Length (Days)</label>
+        <input id="cycleLength" type="number" class="cycle-input"
+          [value]="cycleLength()" (input)="onCycleChange($event)"
+          min="21" max="35" placeholder="28" />
+        <input type="range" [value]="cycleLength()" (input)="onCycleChange($event)" min="21" max="35" />
+        <p class="input-hint">Most cycles are 21–35 days. The average is 28 days.</p>
+      </div>
+    </div>
+
+    @if (result(); as r) {
+    <section class="results-section">
+      <h2>Your Fertile Window</h2>
+
+      @if (r.isInFertileWindow) {
+      <div class="fertile-alert">
+        🌸 You are currently in your fertile window! Peak fertility is around ovulation day.
+      </div>
+      }
+
+      <div class="key-stats">
+        <div class="stat-card ovulation">
+          <div class="stat-label">Ovulation Date</div>
+          <div class="stat-value">{{ r.ovulationDate | date: 'dd MMM yyyy' }}</div>
+          @if (r.daysToOvulation > 0) {
+            <div class="stat-sub">in {{ r.daysToOvulation }} days</div>
+          } @else if (r.daysToOvulation < 0) {
+            <div class="stat-sub">{{ r.daysToOvulation * -1 }} days ago</div>
+          } @else {
+            <div class="stat-sub fertile-text">Today!</div>
+          }
+        </div>
+        <div class="stat-card fertile">
+          <div class="stat-label">Fertile Window Starts</div>
+          <div class="stat-value">{{ r.fertileStart | date: 'dd MMM yyyy' }}</div>
+        </div>
+        <div class="stat-card fertile">
+          <div class="stat-label">Fertile Window Ends</div>
+          <div class="stat-value">{{ r.fertileEnd | date: 'dd MMM yyyy' }}</div>
+        </div>
+        <div class="stat-card next">
+          <div class="stat-label">Next Period Expected</div>
+          <div class="stat-value">{{ r.nextPeriod | date: 'dd MMM yyyy' }}</div>
+        </div>
+      </div>
+
+      <div class="next-cycle-box">
+        <h3>Next Cycle Predictions</h3>
+        <div class="next-cycle-row">
+          <span class="next-label">Next Fertile Window:</span>
+          <span class="next-value">{{ r.nextFertileStart | date: 'dd MMM' }} – {{ r.nextOvulation | date: 'dd MMM yyyy' }}</span>
+        </div>
+        <div class="next-cycle-row">
+          <span class="next-label">Next Ovulation:</span>
+          <span class="next-value">{{ r.nextOvulation | date: 'EEEE, dd MMM yyyy' }}</span>
+        </div>
+      </div>
+    </section>
+    } @else {
+    <div class="placeholder-message">
+      <p>Enter the first day of your last period to calculate your ovulation date and fertile window.</p>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- SEO CONTENT SECTION -->
+<div class="calc-seo-content">
+  <div class="seo-section">
+    <h2>Ovulation Calculator — Find Your Most Fertile Days</h2>
+    <p>
+      An <strong>Ovulation Calculator</strong> helps women track their menstrual cycle and predict their most
+      fertile days — the window during which pregnancy is most likely to occur. By entering the first day of
+      your last menstrual period (LMP) and your average cycle length, this tool estimates your ovulation date
+      and the full fertile window (typically 6 days: the 5 days before ovulation plus ovulation day itself).
+    </p>
+    <p>
+      Whether you're trying to conceive (TTC) or simply want to understand your reproductive health better,
+      knowing your cycle pattern is empowering.
+    </p>
+    <p><strong>⚕️ Medical Disclaimer:</strong> This tool provides estimates only. Consult a gynecologist or fertility specialist for medical guidance on conception planning.</p>
+  </div>
+
+  <div class="seo-section">
+    <h2>How is Ovulation Date Calculated?</h2>
+    <div class="formula-box">
+      Ovulation Day = LMP + (Cycle Length − 14 days)
+    </div>
+    <p>
+      Ovulation typically occurs 14 days before the next expected period. Since cycle length varies, the
+      calculation adjusts accordingly. For a 28-day cycle, ovulation is on Day 14. For a 32-day cycle,
+      ovulation is on Day 18.
+    </p>
+    <p>
+      The <strong>fertile window</strong> includes the 5 days before ovulation plus ovulation day. Sperm can survive
+      up to 5 days in the female reproductive tract, but an egg is viable for only 12–24 hours after release.
+    </p>
+  </div>
+
+  <div class="seo-section">
+    <h2>Ovulation Days by Cycle Length</h2>
+    <div class="seo-table-wrapper">
+      <table class="seo-table">
+        <thead>
+          <tr><th>Cycle Length</th><th>Ovulation Day</th><th>Fertile Window</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>21 days</td><td>Day 7</td><td>Days 2–8</td></tr>
+          <tr><td>24 days</td><td>Day 10</td><td>Days 5–11</td></tr>
+          <tr><td>28 days</td><td>Day 14</td><td>Days 9–15</td></tr>
+          <tr><td>30 days</td><td>Day 16</td><td>Days 11–17</td></tr>
+          <tr><td>32 days</td><td>Day 18</td><td>Days 13–19</td></tr>
+          <tr><td>35 days</td><td>Day 21</td><td>Days 16–22</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>Frequently Asked Questions — Ovulation Calculator</h2>
+    <div class="seo-faq">
+      <div class="faq-item">
+        <h3>What are the signs of ovulation?</h3>
+        <p>Common signs include: a change in cervical mucus (becomes clear and stretchy like raw egg whites), a slight rise in basal body temperature (BBT), mild pelvic pain or cramping (mittelschmerz), breast tenderness, and an increased sex drive. An LH surge detectable by ovulation predictor kits (OPKs) is the most reliable sign.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I get pregnant outside the fertile window?</h3>
+        <p>Pregnancy is theoretically possible only during the fertile window (the 5 days before ovulation + ovulation day), as sperm can survive up to 5 days. However, cycles can vary month-to-month, so relying solely on a calculator is not a reliable contraception method.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How accurate is this ovulation calculator?</h3>
+        <p>This calculator provides estimates based on your average cycle length. It is most accurate for women with regular, predictable cycles. Stress, illness, travel, and hormonal changes can shift ovulation by several days. For greater accuracy, combine this with BBT tracking or OPK kits.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What is irregular ovulation?</h3>
+        <p>Irregular ovulation (oligoovulation) or absent ovulation (anovulation) can be caused by PCOS, thyroid disorders, extreme weight changes, stress, or perimenopause. If you suspect irregular cycles, consult a gynecologist for hormonal testing.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>Related Health Calculators</h2>
+    <div class="related-calc-grid">
+      <a routerLink="/health/pregnancy-calculator" class="related-calc-link">Pregnancy Due Date Calculator</a>
+      <a routerLink="/health/bmi-calculator" class="related-calc-link">BMI Calculator</a>
+      <a routerLink="/health/calorie-calculator" class="related-calc-link">Calorie Calculator</a>
+      <a routerLink="/health/ideal-weight-calculator" class="related-calc-link">Ideal Weight Calculator</a>
+    </div>
+  </div>
+</div>
