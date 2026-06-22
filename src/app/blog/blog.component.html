@@ -157,7 +157,7 @@
         <section class="featured-section">
           <div class="featured-post-card">
             <div class="featured-img-box">
-              <img [src]="fPost.heroImage" [alt]="fPost.heroAlt" />
+              <img [ngSrc]="fPost.heroImage" [alt]="fPost.heroAlt" fill priority />
               <span class="featured-tag">FEATURED</span>
             </div>
             <div class="featured-content-box">
@@ -196,7 +196,7 @@
               @for (post of gridPosts(); track post.slug) {
                 <article class="post-card">
                   <div class="card-image-wrapper">
-                    <img [src]="post.heroImage" [alt]="post.heroAlt" loading="lazy" />
+                    <img [ngSrc]="post.heroImage" [alt]="post.heroAlt" fill />
                     <span class="card-category">{{ post.category }}</span>
                   </div>
                   <div class="card-content">
@@ -387,7 +387,7 @@
 
       <!-- Hero image -->
       <div class="post-hero-wrapper">
-        <img [src]="post.heroImage" [alt]="post.heroAlt" class="post-hero-image" />
+        <img [ngSrc]="post.heroImage" [alt]="post.heroAlt" width="1200" height="480" priority class="post-hero-image" />
       </div>
 
       <!-- Main Layout Columns -->
@@ -498,7 +498,7 @@
             @for (rel of relatedArticles(); track rel.slug) {
               <div class="related-card">
                 <div class="rel-img-box">
-                  <img [src]="rel.heroImage" [alt]="rel.heroAlt" />
+                  <img [ngSrc]="rel.heroImage" [alt]="rel.heroAlt" fill />
                 </div>
                 <div class="rel-content-box">
                   <span class="rel-cat">{{ rel.category }}</span>
