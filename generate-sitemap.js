@@ -4,6 +4,7 @@ const paths = [
   '/',
   '/about',
   '/blog',
+  '/blog/car-loan-emi-calculator-india',
   '/blog/bike-loan-financing-guide-india',
   '/blog/sip-vs-lumpsum-vs-fd',
   '/blog/calculate-bike-loan-emi-guide',
