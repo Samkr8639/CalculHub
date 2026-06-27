@@ -32,6 +32,343 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: 'home-loan-vs-rent-india',
+    title: 'Home Loan vs Rent in India 2026: The Real Math Nobody Shows You',
+    category: 'Finance',
+    publishDate: 'June 27, 2026',
+    date: '2026-06-27',
+    readTime: '10 min read',
+    readTimeMin: 10,
+    author: {
+      name: 'Finance Team',
+      role: 'Financial Analyst',
+      avatar: 'assets/team-finance.png'
+    },
+    summary: 'EMI vs rent is the wrong comparison. Use the price-to-rent ratio, opportunity cost framework, and 20-year wealth calculator to decide whether buying or renting makes sense for you in 2026.',
+    heroImage: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&auto=format&fit=crop&q=80',
+    heroAlt: 'A person holding the keys to a new house, representing home ownership.',
+    heroPrompt: 'A modern high-rise residential building in India, sunny day, architectural photography, premium design, 1200x630',
+    views: 0,
+    likes: 189,
+    trendingScore: 85,
+    tags: ['Loans', 'Home', 'Rent', 'Finance'],
+    toc: [
+      { id: 'introduction', title: 'Introduction' },
+      { id: 'why-emi-vs-rent-wrong', title: 'Why EMI vs Rent is Wrong' },
+      { id: 'price-to-rent-ratio', title: 'Price-to-Rent Ratio' },
+      { id: 'affordability-reality', title: '2026 Affordability Reality' },
+      { id: 'true-cost-buying', title: 'The True Cost of Buying' },
+      { id: 'opportunity-cost', title: 'Opportunity Cost' },
+      { id: 'tax-benefits', title: 'Home Loan Tax Benefits' },
+      { id: 'when-buying-makes-sense', title: 'When Buying Makes Sense' },
+      { id: 'when-renting-makes-sense', title: 'When Renting Makes Sense' },
+      { id: 'five-year-rule', title: 'The 5-Year Rule' },
+      { id: 'pmay-eligibility', title: 'PMAY-U 2.0 Eligibility' },
+      { id: 'decision-framework', title: 'Decision Framework' },
+      { id: 'useful-calculators', title: 'Useful Calculators' },
+      { id: 'faq-section', title: 'FAQ Section' }
+    ],
+    seo: {
+      title: 'Home Loan vs Rent in India 2026: Real Numbers, Real Decision | CalculHub',
+      description: 'EMI vs rent is the wrong comparison. Use the price-to-rent ratio, opportunity cost framework, and 20-year wealth calculator to decide whether buying or renting makes sense for you in 2026.',
+      keywords: 'home loan vs rent India, rent vs buy India 2026, buying vs renting a house India, should I buy or rent a house India, home loan EMI vs rent, price to rent ratio India cities 2026, opportunity cost of down payment India, rent vs buy calculator India'
+    },
+    schema: [
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is it better to buy or rent a house in India in 2026?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It depends on how long you plan to stay, your city's price-to-rent ratio, and whether you're on the old or new income tax regime. In high-cost cities like Mumbai and Bangalore where the price-to-rent ratio exceeds 30, renting and investing the difference often builds more wealth over 10 years. In Tier-2 cities with PTR ratios below 20, buying makes stronger financial sense. The break-even point for buying vs renting in most Indian cities falls between 5 and 8 years."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the price-to-rent ratio and how does it apply in India?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The price-to-rent ratio is the property's purchase price divided by its annual rent. A ratio below 15 favours buying; 15–25 is neutral; above 25 generally favours renting. In 2026, Mumbai prime areas have PTR ratios of 35–45, Bangalore tech corridors 28–35, and Tier-2 cities like Ahmedabad, Lucknow, and Jaipur typically 15–22. The higher the ratio, the more sense renting makes purely on the numbers."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do home loan tax benefits still apply under the new tax regime?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Under the new tax regime (which became the default from FY 2024-25), home loan interest deductions under Section 24(b) and principal repayment under Section 80C are not available. These benefits only apply if you opt for the old tax regime. Since the new regime has lower tax slabs and is now the default, most first-time buyers — especially those earning under ₹15 lakh — will not benefit from home loan tax deductions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the true cost of buying a house in India beyond the purchase price?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Beyond the EMI, buying a home in India involves: stamp duty (4–8% of property value depending on state), registration charges (1%), brokerage (1–2%), interior fit-out (₹5–15 lakh for a mid-segment flat), annual maintenance charges (₹3–5 per sq ft per month), property tax, home insurance, and society fees. These add up to 10–20% of the property value upfront and 1–1.5% annually. Always factor these into your comparison against renting."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How much home loan EMI can I afford on my salary?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A widely used guideline is to keep your total EMI obligations below 40% of take-home monthly income, with the home loan EMI ideally not exceeding 30–35%. For example, with a ₹1 lakh take-home salary, a comfortable home loan EMI would be ₹30,000–35,000, which supports a loan of approximately ₹35–40 lakh at 8.5% for 20 years. Use the CalculHub Home Loan EMI Calculator and Loan Eligibility Calculator to find your exact numbers."
+            }
+          }
+        ]
+      }
+    ],
+    contentHtml: `
+      <section id="introduction">
+        <p>Every Indian family has an opinion on this. Parents say buying is the only smart move. Financial Twitter says renting and investing the difference builds more wealth. Your colleague just bought a 2BHK and swears the EMI feels like rent anyway.</p>
+        <p>Almost everyone is working from incomplete data.</p>
+        <p>The EMI-vs-rent comparison that most articles run is the wrong starting point. It ignores the opportunity cost of your down payment, the true cost of buying (which runs 10–20% over the purchase price before you move in), the impact of your tax regime on home loan benefits, and what your city's property prices actually say about the rent-vs-buy math.</p>
+        <p>This article runs the real numbers — without a home loan product to sell you.</p>
+        <p>Use the <strong><a href="/financial/home-loan-emi-calculator">CalculHub Home Loan EMI Calculator</a></strong> alongside this guide to plug in your specific numbers as we work through each section.</p>
+      </section>
+
+      <section id="why-emi-vs-rent-wrong">
+        <h2>Why EMI vs. Rent Is the Wrong Comparison</h2>
+        <p>The most common framing of this debate goes: "My EMI would be ₹40,000 and I'm currently paying ₹22,000 in rent. But I'd be building equity, so it's worth it."</p>
+        <p>This comparison is incomplete in three important ways:</p>
+        <p><strong>1. It ignores the opportunity cost of the down payment.</strong> A ₹20 lakh down payment on a ₹1 crore property isn't just money "invested in real estate." It's ₹20 lakh that could compound in equity mutual funds at 12% annually — reaching roughly ₹62 lakh in 10 years and ₹1.93 crore in 20 years. That compounding is a real cost of buying that the EMI-vs-rent comparison never captures.</p>
+        <p><strong>2. It ignores the true cost of buying.</strong> The EMI covers only your loan repayment. Owning a home also involves annual maintenance charges, property tax, home insurance, society fees, and periodic repairs — typically adding 1–1.5% of the property value every year. On a ₹1 crore property, that's ₹1–1.5 lakh per year in non-EMI costs.</p>
+        <p><strong>3. It ignores the 8–12% you lose upfront in transaction costs.</strong> Stamp duty, registration, brokerage, and interior fit-out on a ₹1 crore property in most Indian states costs ₹8–12 lakh before you hang a single picture. This is money that earns you nothing and must be recovered through appreciation before you break even.</p>
+        <p>The right comparison isn't EMI vs. rent. It's <strong>total cost of ownership vs. rent + what you could earn investing the difference</strong>.</p>
+      </section>
+
+      <section id="price-to-rent-ratio">
+        <h2>The Price-to-Rent Ratio: Your First Filter</h2>
+        <p>Before running any detailed calculation, the price-to-rent ratio (PTR) gives you a fast read on whether buying or renting makes financial sense in your specific area.</p>
+        <p><strong>Formula:</strong> PTR = Property price ÷ Annual rent for comparable property</p>
+        <p><strong>Interpretation:</strong></p>
+        <ul>
+          <li>PTR below 15: Buying is financially attractive</li>
+          <li>PTR 15–20: Borderline — depends on tenure, appreciation expectations, and your tax situation</li>
+          <li>PTR 20–25: Renting becomes more competitive</li>
+          <li>PTR above 25: Renting often makes stronger financial sense unless you're planning a very long stay (10+ years) and expecting above-average appreciation</li>
+        </ul>
+        <p><strong>City-wise PTR estimates for 2026:</strong></p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>City / Area</th>
+                <th>Approximate PTR</th>
+                <th>Implication</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Mumbai (prime — Bandra, Worli)</td><td>35–45</td><td>Renting strongly favoured financially</td></tr>
+              <tr class="highlight-row"><td>Bangalore (Koramangala, Indiranagar)</td><td>28–35</td><td>Renting favoured; long-term buyers may break even</td></tr>
+              <tr><td>Gurgaon / Delhi NCR prime</td><td>28–38</td><td>Similar to Bangalore</td></tr>
+              <tr class="highlight-row"><td>Pune (Baner, Kothrud)</td><td>22–28</td><td>Borderline — depends on expected appreciation</td></tr>
+              <tr><td>Hyderabad (Hitech City)</td><td>22–30</td><td>Borderline</td></tr>
+              <tr class="highlight-row"><td>Chennai (Anna Nagar, Velachery)</td><td>20–26</td><td>Borderline</td></tr>
+              <tr><td>Ahmedabad, Jaipur, Lucknow</td><td>15–22</td><td>Buying increasingly attractive</td></tr>
+              <tr class="highlight-row"><td>Tier-2 cities (general)</td><td>12–18</td><td>Buying typically favoured</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><em>Note: PTR varies sharply within cities. A suburb 15 km out may have a PTR of 18 where the city centre is 35. Always calculate using the actual property price and realistic rent for your specific locality.</em></p>
+        <p><strong>How to calculate your area's PTR:</strong> Check current rental listings for 2BHK apartments in the area you'd buy. Multiply the monthly rent by 12 to get annual rent. Divide the property price by that number. If the result is above 20–25, renting deserves serious consideration on pure financial logic.</p>
+      </section>
+
+      <section id="affordability-reality">
+        <h2>The 2026 Affordability Reality</h2>
+        <p>Something important has shifted in Indian housing finance in the last few years that most "buy vs. rent" articles aren't acknowledging.</p>
+        <p>The EMI-to-income ratio for urban Indian homebuyers has risen from around 28% in 2020 to approximately <strong>40% in 2026</strong>. The international benchmark for financial health is 28–30%. At 40%, a household's capacity to save for retirement, build an emergency fund, invest in children's education, and maintain day-to-day lifestyle is meaningfully compressed.</p>
+        <p>Compounding this: affordable housing — properties priced below ₹45 lakh — has fallen from about 38% of new project launches in 2019 to under 20% in 2025. Developers have moved upmarket where margins are better. The ₹45 lakh threshold that defines "affordable housing" under government schemes hasn't been revised for inflation, meaning qualifying properties are now typically in urban fringes, far from employment.</p>
+        <p>For many first-generation urban buyers in their late 20s and early 30s, the honest question in 2026 isn't "should I buy or rent" — it's "can I actually afford to buy without compromising every other financial goal I have?"</p>
+      </section>
+
+      <section id="true-cost-buying">
+        <h2>The True Cost of Buying — What Most Articles Skip</h2>
+        <p>Let's use a real-world example: a ₹80 lakh 2BHK apartment in a mid-segment locality in Pune.</p>
+        <p><strong>Upfront costs:</strong></p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Estimated Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Down payment (20%)</td><td>₹16,00,000</td></tr>
+              <tr class="highlight-row"><td>Stamp duty (6% in Maharashtra)</td><td>₹4,80,000</td></tr>
+              <tr><td>Registration charges (1%)</td><td>₹80,000</td></tr>
+              <tr class="highlight-row"><td>Broker fee (1–2%)</td><td>₹80,000–1,60,000</td></tr>
+              <tr><td>Interior fit-out (basic)</td><td>₹4,00,000–8,00,000</td></tr>
+              <tr class="highlight-row"><td><strong>Total upfront outflow</strong></td><td><strong>₹26,40,000–31,40,000</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>On an ₹80 lakh property, you're spending ₹26–31 lakh before your first EMI. That's real money that needs to be factored into your break-even calculation.</p>
+        <p><strong>Ongoing monthly costs (beyond EMI):</strong></p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Estimated Monthly Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Home loan EMI (₹64L at 8.5%, 20 years)</td><td>₹55,600</td></tr>
+              <tr class="highlight-row"><td>Maintenance charges (₹4/sq ft × 1,000 sq ft)</td><td>₹4,000</td></tr>
+              <tr><td>Property tax (annual ₹18,000 ÷ 12)</td><td>₹1,500</td></tr>
+              <tr class="highlight-row"><td>Home insurance</td><td>₹500</td></tr>
+              <tr><td>Periodic repairs (provision)</td><td>₹1,500</td></tr>
+              <tr class="highlight-row"><td><strong>Total monthly outflow</strong></td><td><strong>₹63,100</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>A comparable 2BHK in the same locality might rent for ₹22,000–28,000 per month.</p>
+        <p>The gap — ₹35,000–41,000 per month — is real money. And over 20 years, that gap, if invested consistently in diversified equity mutual funds, compounds to a very large number. This is the heart of the rent-and-invest argument.</p>
+      </section>
+
+      <section id="opportunity-cost">
+        <h2>The Opportunity Cost Calculation — Run the Real Numbers</h2>
+        <p>Here's a 20-year wealth comparison for the Pune example above, run at two scenarios:</p>
+        <p><strong>Scenario A: You Buy</strong></p>
+        <ul>
+          <li>₹80 lakh property in 2026</li>
+          <li>₹64 lakh loan at 8.5% for 20 years → EMI ₹55,600/month</li>
+          <li>Total interest paid over 20 years: ~₹69 lakh</li>
+          <li>Property appreciation at 6% annually: ₹80 lakh → ₹2.57 crore by 2046</li>
+          <li>Net value after subtracting total interest and transaction costs: approximately <strong>₹1.65–1.75 crore</strong></li>
+        </ul>
+        <p><strong>Scenario B: You Rent + Invest</strong></p>
+        <ul>
+          <li>Rent ₹25,000/month (assume 7% annual rent inflation)</li>
+          <li>Down payment of ₹16 lakh invested in diversified equity funds at 12% annually → grows to <strong>₹1.54 crore</strong> in 20 years</li>
+          <li>Monthly EMI-rent difference (₹55,600 – ₹25,000 = ₹30,600, growing as rent rises) invested via SIP at 12% annually → adds approximately <strong>₹1.8–2.1 crore</strong> more</li>
+          <li><strong>Total wealth generated (rent scenario): ₹3.3–3.6 crore</strong></li>
+        </ul>
+        <p>On these numbers, renting and investing wins — by a substantial margin in the Pune example.</p>
+        <p><strong>But here's what changes that conclusion:</strong></p>
+        <ol>
+          <li><strong>Property appreciation above 6%.</strong> If that Pune flat appreciates at 9–10% (which some micro-markets have delivered), buying closes the gap significantly.</li>
+          <li><strong>Rental inflation above 7%.</strong> At 10% annual rent increases, the compounding rental cost erodes the renter's advantage.</li>
+          <li><strong>Investment discipline.</strong> The rent-and-invest scenario only wins if the renter actually invests the difference every month — not just spends it. Most people don't.</li>
+          <li><strong>Emotional and lifestyle value.</strong> Ownership gives stability, personalisation freedom, and a psychological security that genuine financial models can't fully price.</li>
+        </ol>
+        <p>There is no clean universal winner. The right answer is specific to your city's PTR ratio, your expected stay duration, your investment discipline, and how much you value ownership for non-financial reasons.</p>
+      </section>
+
+      <section id="tax-benefits">
+        <h2>Home Loan Tax Benefits in 2026 — A Critical Update</h2>
+        <p>Most "buy vs. rent" articles written before 2024 heavily factor in home loan tax deductions as a major buying advantage. In 2026, this calculation has changed significantly.</p>
+        <p><strong>Under the old tax regime:</strong></p>
+        <ul>
+          <li>Section 24(b): Deduct up to ₹2 lakh per year on home loan interest (self-occupied property)</li>
+          <li>Section 80C: Deduct up to ₹1.5 lakh per year on principal repayment (combined with other 80C investments)</li>
+          <li>Section 80EEA: Additional ₹1.5 lakh for first-time buyers on affordable housing (income and property value limits apply)</li>
+          <li>For joint co-owners: Each owner can claim the full limits, effectively doubling the benefit</li>
+        </ul>
+        <p><strong>Under the new tax regime (default from FY 2024-25):</strong></p>
+        <ul>
+          <li><strong>None of the above deductions are available</strong></li>
+          <li>The new regime offers lower slab rates but removes most deductions including home loan benefits</li>
+        </ul>
+        <p>The new tax regime is now the default for most salaried taxpayers. For anyone earning below ₹15 lakh annually, the new regime's lower tax rates typically make it the better financial choice — which means home loan tax benefits don't apply.</p>
+        <p><strong>Before factoring tax benefits into your buy-vs-rent calculation, confirm which regime you're on.</strong> If you've switched to the new regime (or plan to), strike home loan tax benefits from your buying-side calculation entirely.</p>
+      </section>
+
+      <section id="when-buying-makes-sense">
+        <h2>When Buying Genuinely Makes More Sense</h2>
+        <p>The rent-and-invest math favours renting in many high-PTR Indian cities. But buying is the smarter move under these conditions:</p>
+        <p><strong>You plan to stay 7+ years in the same city.</strong> Transaction costs of 8–12% take years to recover through appreciation. Buyers who move in under 5 years almost always lose money after accounting for stamp duty, brokerage, and selling costs (typically another 2–3%).</p>
+        <p><strong>Your city has a PTR below 18–20.</strong> In Tier-2 cities where ₹60–70 lakh buys a good 3BHK and rent for the same would be ₹18,000–22,000, the PTR is favourable and EMIs are closer to rent.</p>
+        <p><strong>You're in the old tax regime and in the 30% slab.</strong> At the 30% tax bracket with old regime, Section 24(b) and 80C save you ₹1.05 lakh per year — roughly ₹8,750 per month. That meaningfully reduces the effective EMI and shifts the math toward buying.</p>
+        <p><strong>You value housing security over financial optimisation.</strong> Annual rent hikes of 8–12% in metro cities are real. Being asked to vacate is real. Owning eliminates both. If stability matters more than maximising net wealth — which is a legitimate personal preference — buying is the right call even when the pure numbers favour renting.</p>
+        <p><strong>You have the corpus ready without depleting your emergency fund or retirement savings.</strong> Stretching your savings to buy means every unexpected expense becomes a financial crisis. The down payment should come from surplus savings, not from liquidating your PPF or clearing out your FD.</p>
+      </section>
+
+      <section id="when-renting-makes-sense">
+        <h2>When Renting Makes More Sense</h2>
+        <p><strong>Your stay is under 5 years.</strong> No property appreciates fast enough to recover 10–12% in transaction and setup costs in under 5 years — not reliably. If your job might require relocation, or if you're not settled on a city, renting is the financially and logistically safer choice.</p>
+        <p><strong>PTR is above 25 in your target area.</strong> This is the single clearest quantitative signal that rent + invest will outperform buying over a 10-year horizon in that specific location.</p>
+        <p><strong>Your EMI would exceed 35% of take-home pay.</strong> At this level, you lose the financial buffer that protects against job changes, health emergencies, and market downturns. The stress of a high EMI-to-income ratio is also real and often underestimated before signing.</p>
+        <p><strong>You're early in your career and haven't built an emergency fund.</strong> Buying a home before having 6 months of expenses in liquid savings is one of the most common financial mistakes Indian urban professionals make. An emergency should not require a home loan top-up.</p>
+        <p><strong>You would invest the down payment and monthly difference.</strong> This is the critical condition. If you'll genuinely put the ₹16 lakh down payment and the monthly EMI-rent gap into a diversified equity SIP, renting builds more wealth in most high-PTR cities. If that money would sit in a savings account or be spent, buying forces the discipline of asset accumulation.</p>
+      </section>
+
+      <section id="five-year-rule">
+        <h2>The 5-Year Rule — A Simple Framework</h2>
+        <p>When the numbers are close or you're struggling to decide, the <strong>5-year rule</strong> is a reasonable starting point:</p>
+        <ul>
+          <li><strong>Under 3 years:</strong> Rent almost always wins. Transaction costs alone make buying a loss.</li>
+          <li><strong>3–5 years:</strong> It depends. Run the PTR for your area. If PTR is above 22 and appreciation is uncertain, rent. If PTR is below 18 and you can get a competitive rate, buying may work.</li>
+          <li><strong>5–7 years:</strong> Buying becomes increasingly viable in most Indian markets.</li>
+          <li><strong>7+ years:</strong> Buying is the stronger financial choice in most scenarios, assuming a manageable EMI-to-income ratio and a PTR that isn't extreme.</li>
+        </ul>
+      </section>
+
+      <section id="pmay-eligibility">
+        <h2>PMAY-U 2.0 — Check Your Eligibility Before Deciding</h2>
+        <p>If you're a first-time homebuyer in India, don't make the rent-vs-buy decision without checking PMAY-U 2.0 (Pradhan Mantri Awas Yojana Urban 2.0) eligibility.</p>
+        <p>Launched with effect from September 2024, PMAY-U 2.0 offers interest subsidies of up to ₹1.80 lakh for eligible first-time buyers under the Interest Subsidy Scheme (ISS). The subsidy is credited directly to the loan account, reducing effective interest outflow. Income limits, property size limits, and city-specific caps apply — check pmay-urban.gov.in for current eligibility criteria.</p>
+        <p>For eligible buyers in the EWS (Economically Weaker Section) and LIG (Lower Income Group) categories, PMAY benefits can meaningfully shift the buy-vs-rent calculation toward buying.</p>
+      </section>
+
+      <section id="decision-framework">
+        <h2>A Practical Decision Framework</h2>
+        <p>Run through these four questions in order:</p>
+        <p><strong>1. How long will you realistically stay?</strong><br>Under 5 years → Rent. 7+ years → Buying becomes viable.</p>
+        <p><strong>2. What is the PTR in your target area?</strong><br>Calculate it: property price ÷ (monthly rent × 12). Above 25 → rent. Below 18 → buying is financially attractive.</p>
+        <p><strong>3. What is your EMI-to-income ratio?</strong><br>Use the <a href="/financial/home-loan-emi-calculator">CalculHub Home Loan EMI Calculator</a> to get your EMI, then divide by take-home monthly income. Above 40% → reconsider. Below 35% → proceed.</p>
+        <p><strong>4. Are you on the old or new tax regime?</strong><br>New regime (default) → remove tax benefit savings from your buying calculation. Old regime at 30% → add ₹8,750/month effective savings from Section 24(b) and 80C.</p>
+        <p>If three of four answers point the same direction, follow that. If they split, the 5-year rule and your PTR ratio should be the tiebreakers.</p>
+      </section>
+
+      <section id="useful-calculators">
+        <h2>Useful CalculHub Calculators for This Decision</h2>
+        <p>Running this analysis properly requires actual numbers, not estimates. These calculators handle the math:</p>
+        <ul>
+          <li><strong><a href="/financial/home-loan-emi-calculator">Home Loan EMI Calculator</a></strong> — Get your exact monthly EMI for any loan amount, rate, and tenure</li>
+          <li><strong><a href="/financial/loan-eligibility-calculator">Loan Eligibility Calculator</a></strong> — Check how much loan you actually qualify for before setting a property budget</li>
+          <li><strong><a href="/financial/mortgage">Mortgage Calculator</a></strong> — Model different scenarios including extra EMIs and prepayments</li>
+          <li><strong><a href="/financial/sip-calculator">SIP Calculator</a></strong> — Calculate what the down payment and monthly savings compound to if invested</li>
+          <li><strong><a href="/financial/compound-interest">Compound Interest Calculator</a></strong> — Model the opportunity cost of your down payment over 10–20 years</li>
+          <li><strong><a href="/financial/tax-calculator">Income Tax Calculator</a></strong> — Confirm which tax regime applies to you before factoring in home loan deductions</li>
+        </ul>
+      </section>
+
+      <section id="faq-section">
+        <h2>FAQ — Home Loan vs Rent India 2026</h2>
+        <div class="faq-item">
+          <h4>Is it better to buy or rent a house in India in 2026?</h4>
+          <p>It depends on your city's price-to-rent ratio, how long you plan to stay, and whether you're on the old or new income tax regime. In high-cost cities like Mumbai and Bangalore where PTR exceeds 30, renting and investing the difference often builds more wealth over 10 years. In Tier-2 cities with PTR below 20, buying makes stronger financial sense. There is no universal answer — the right one is specific to your numbers.</p>
+        </div>
+        <div class="faq-item">
+          <h4>What is the price-to-rent ratio and how does it apply in Indian cities?</h4>
+          <p>PTR = Property price ÷ Annual rent for a comparable property. Below 15 favours buying, above 25 generally favours renting. In 2026, Mumbai prime areas carry PTR ratios of 35–45, Bangalore tech corridors 28–35, and Tier-2 cities like Ahmedabad and Jaipur typically 15–22.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Do home loan tax benefits apply under the new tax regime?</h4>
+          <p>No. Section 24(b) interest deductions and Section 80C principal deductions are not available under the new tax regime, which became the default from FY 2024-25. These benefits only apply if you opt for the old regime. For most buyers earning under ₹15 lakh, the new regime offers lower rates and is the better choice — but that means losing home loan tax deductions entirely.</p>
+        </div>
+        <div class="faq-item">
+          <h4>What is the true cost of buying a home beyond the EMI?</h4>
+          <p>Beyond your monthly EMI, expect: stamp duty (4–8% of property value), registration charges (1%), brokerage (1–2%), interior fit-out (₹4–10 lakh for a mid-segment flat), annual maintenance charges, property tax, home insurance, and society fees. These upfront and recurring costs add 10–20% to the purchase price and 1–1.5% annually — and must be factored into any honest comparison with renting.</p>
+        </div>
+        <div class="faq-item">
+          <h4>How long should I plan to stay to justify buying?</h4>
+          <p>Most financial planners in the Indian context recommend at least 5–7 years to break even on buying, after accounting for transaction costs and setup expenses. Under 5 years, selling costs (stamp duty on your side, brokerage, capital gains) mean most buyers lose money net of appreciation. At 7+ years, buying wins in most scenarios where the PTR is reasonable.</p>
+        </div>
+        <div class="faq-item">
+          <h4>How much home loan EMI can I afford?</h4>
+          <p>A practical guideline is to keep your total EMI obligations below 40% of take-home monthly income, with the home loan EMI ideally at 30–35%. For ₹1 lakh take-home pay, that's a home loan EMI of ₹30,000–35,000 — which supports approximately ₹35–40 lakh in loan amount at 8.5% for 20 years. Use the <a href="/financial/loan-eligibility-calculator">CalculHub Loan Eligibility Calculator</a> for your exact eligibility.</p>
+        </div>
+      </section>
+    `
+  },
+  {
     slug: 'car-loan-emi-calculator-india',
     title: 'Car Loan EMI Calculator India 2026: Everything You Need to Know Before You Sign',
     category: 'Finance',
