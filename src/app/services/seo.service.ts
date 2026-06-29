@@ -28,7 +28,7 @@ export class SeoService {
   private document = inject(DOCUMENT);
   private readonly MAX_TITLE_CHARS = 70;
 
-  readonly baseUrl = 'https://calculhub.in';
+  readonly baseUrl = 'https://www.calculhub.in';
   readonly siteName = 'CalculHub';
 
   init(): void {

@@ -64,7 +64,7 @@ const paths = [
   '/contact'
 ];
 
-const BASE_URL = 'https://calculhub.in';
+const BASE_URL = 'https://www.calculhub.in';
 const date = new Date().toISOString();
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

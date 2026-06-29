@@ -14,7 +14,7 @@
           "value": "calcul-hub.vercel.app"
         }
       ],
-      "destination": "https://calculhub.in/$1",
+      "destination": "https://www.calculhub.in/$1",
       "permanent": true
     },
     { "source": "/home", "destination": "/", "permanent": true }

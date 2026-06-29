@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://calculhub.in/sitemap.xml
+Sitemap: https://www.calculhub.in/sitemap.xml

@@ -2,7 +2,7 @@ const fs = require('fs');
 const https = require('https');
 
 // 1. Configuration
-const BASE_URL = 'https://calculhub.in';
+const BASE_URL = 'https://www.calculhub.in';
 const KEY = '5c363d6b0e8b4e72ba6f7c6e00c3b0df'; // Generated static verification key
 const KEY_FILE = `public/${KEY}.txt`;
 
@@ -86,7 +86,7 @@ try {
 
 // 4. Submit to IndexNow API (Bing)
 const payload = JSON.stringify({
-  host: 'calculhub.in',
+  host: 'www.calculhub.in',
   key: KEY,
   keyLocation: `${BASE_URL}/${KEY}.txt`,
   urlList: urls

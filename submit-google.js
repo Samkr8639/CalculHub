@@ -20,7 +20,7 @@ const indexing = google.indexing({
 });
 
 // 2. Load URLs to notify Google about
-const BASE_URL = 'https://calculhub.in';
+const BASE_URL = 'https://www.calculhub.in';
 const paths = [
   '/',
   '/about',
