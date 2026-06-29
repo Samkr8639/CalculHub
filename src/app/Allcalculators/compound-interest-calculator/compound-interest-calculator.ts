@@ -1,3 +1,4 @@
+import { RouterLink } from '@angular/router';
 import { ChangeDetectionStrategy, Component, signal, computed, effect, AfterViewInit, OnDestroy, ViewChild, ElementRef, PLATFORM_ID, inject } from '@angular/core';
 import { CommonModule, CurrencyPipe, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -10,7 +11,7 @@ import { Chart, registerables } from 'chart.js';
   templateUrl: './compound-interest-calculator.html',
   styleUrl: './compound-interest-calculator.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, FormsModule, CurrencyPipe]
+  imports: [CommonModule, FormsModule, CurrencyPipe, RouterLink]
 })
 export class CompoundInterestCalculatorComponent implements AfterViewInit, OnDestroy {
   private platformId = inject(PLATFORM_ID);

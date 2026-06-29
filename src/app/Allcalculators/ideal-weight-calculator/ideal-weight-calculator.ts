@@ -1,10 +1,11 @@
+import { RouterLink } from '@angular/router';
 import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-ideal-weight-calculator',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './ideal-weight-calculator.html',
   styleUrls: ['./ideal-weight-calculator.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

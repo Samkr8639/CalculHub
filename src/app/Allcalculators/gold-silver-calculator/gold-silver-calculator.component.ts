@@ -1,3 +1,4 @@
+import { RouterLink } from '@angular/router';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -57,7 +58,7 @@ interface CurrencyInfo {
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule
-  ]
+  , RouterLink]
 })
 export class GoldSilverCalculatorComponent
   implements OnInit, AfterViewInit {

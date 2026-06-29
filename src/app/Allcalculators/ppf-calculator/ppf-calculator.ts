@@ -1,3 +1,4 @@
+import { RouterLink } from '@angular/router';
 import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild, computed, PLATFORM_ID, inject } from '@angular/core';
 import { CommonModule, DecimalPipe, isPlatformBrowser } from '@angular/common';
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
@@ -6,7 +7,7 @@ import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
 
 @Component({
   selector: 'app-ppf-calculator',
-  imports: [CommonModule, DecimalPipe],
+  imports: [CommonModule, DecimalPipe, RouterLink],
   templateUrl: './ppf-calculator.html',
   styleUrls: ['./ppf-calculator.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

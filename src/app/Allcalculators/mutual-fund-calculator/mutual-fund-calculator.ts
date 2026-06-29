@@ -1,3 +1,4 @@
+import { RouterLink } from '@angular/router';
 import { ChangeDetectionStrategy, Component, signal, effect, ElementRef, viewChild, computed, PLATFORM_ID, inject } from '@angular/core';
 import { CommonModule, DecimalPipe, isPlatformBrowser } from '@angular/common';
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
@@ -6,7 +7,7 @@ import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
 
 @Component({
   selector: 'app-mutual-fund-calculator',
-  imports: [CommonModule, DecimalPipe],
+  imports: [CommonModule, DecimalPipe, RouterLink],
   templateUrl: './mutual-fund-calculator.html',
   styleUrls: ['./mutual-fund-calculator.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

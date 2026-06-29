@@ -1,3 +1,4 @@
+import { RouterLink } from '@angular/router';
 import { Component, ChangeDetectionStrategy, OnInit, AfterViewChecked, inject, PLATFORM_ID, ViewChild, ElementRef, signal, computed } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -29,7 +30,7 @@ interface FxResponse {
     MatInputModule,
     MatAutocompleteModule,
     MatOptionModule,
-  ]
+  RouterLink, ]
 })
 export class CurrencyConverterComponent implements OnInit, AfterViewChecked {
   private http = inject(HttpClient);

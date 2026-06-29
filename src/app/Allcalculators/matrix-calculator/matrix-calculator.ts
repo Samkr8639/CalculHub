@@ -1,3 +1,4 @@
+import { RouterLink } from '@angular/router';
 import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -7,7 +8,7 @@ type Operation = 'add' | 'subtract' | 'multiply' | 'scalar-multiply' | 'transpos
 
 @Component({
   selector: 'app-matrix-calculator',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './matrix-calculator.html',
   styleUrls: ['./matrix-calculator.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

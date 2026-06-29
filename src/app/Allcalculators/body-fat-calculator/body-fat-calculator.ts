@@ -1,10 +1,11 @@
+import { RouterLink } from '@angular/router';
 import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-body-fat-calculator',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './body-fat-calculator.html',
   styleUrls: ['./body-fat-calculator.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

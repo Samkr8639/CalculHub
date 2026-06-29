@@ -1,3 +1,4 @@
+import { RouterLink } from '@angular/router';
 import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { EmbedWidgetComponent } from '../../embed-widget/embed-widget.component';
@@ -5,7 +6,7 @@ import { ShareWidgetComponent } from '../../share-widget/share-widget.component'
 
 @Component({
   selector: 'app-bmi-calculator',
-  imports: [FormsModule, EmbedWidgetComponent, ShareWidgetComponent],
+  imports: [FormsModule, EmbedWidgetComponent, ShareWidgetComponent, RouterLink],
   templateUrl: './bmi-calculator.html',
   styleUrls: ['./bmi-calculator.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

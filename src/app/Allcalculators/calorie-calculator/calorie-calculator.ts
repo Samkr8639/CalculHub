@@ -1,3 +1,4 @@
+import { RouterLink } from '@angular/router';
 import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -18,7 +19,7 @@ interface CalorieResult {
   selector: 'app-calorie-calculator',
   templateUrl: './calorie-calculator.html',
   styleUrls: ['./calorie-calculator.css'],
-  imports: [FormsModule, CommonModule, EmbedWidgetComponent, ShareWidgetComponent],
+  imports: [FormsModule, CommonModule, EmbedWidgetComponent, ShareWidgetComponent, RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalorieCalculatorComponent {

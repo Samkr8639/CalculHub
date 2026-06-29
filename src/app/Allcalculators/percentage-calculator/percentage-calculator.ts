@@ -1,9 +1,10 @@
+import { RouterLink } from '@angular/router';
 import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-percentage-calculator',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './percentage-calculator.html',
   styleUrls: ['./percentage-calculator.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,10 +1,11 @@
+import { RouterLink } from '@angular/router';
 import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-bmr-tdee-calculator',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './bmr-tdee-calculator.html',
   styleUrls: ['./bmr-tdee-calculator.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

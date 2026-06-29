@@ -1,3 +1,4 @@
+import { RouterLink } from '@angular/router';
 import { CommonModule, CurrencyPipe, isPlatformBrowser } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, computed, effect, ElementRef, OnDestroy, signal, ViewChild, PLATFORM_ID, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +15,7 @@ interface AmortizationEntry {
 
 @Component({
   selector: 'app-mortgage-calculator',
-  imports: [CommonModule, FormsModule, CurrencyPipe,],
+  imports: [CommonModule, FormsModule, CurrencyPipe,RouterLink, ],
   templateUrl: './mortgage-calculator.html',
   styleUrl: './mortgage-calculator.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

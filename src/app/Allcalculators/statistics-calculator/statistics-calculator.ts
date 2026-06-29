@@ -1,10 +1,11 @@
+import { RouterLink } from '@angular/router';
 import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-statistics-calculator',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './statistics-calculator.html',
   styleUrls: ['./statistics-calculator.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

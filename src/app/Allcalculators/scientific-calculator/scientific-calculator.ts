@@ -1,3 +1,4 @@
+import { RouterLink } from '@angular/router';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 
 import * as math from 'mathjs';

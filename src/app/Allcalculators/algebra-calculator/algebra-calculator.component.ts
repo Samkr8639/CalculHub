@@ -1,3 +1,4 @@
+import { RouterLink } from '@angular/router';
 import { ChangeDetectionStrategy, Component, signal, ViewChild, ElementRef, AfterViewInit, WritableSignal, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -14,7 +15,7 @@ interface Inequality {
 
 @Component({
   selector: 'app-algebra-calculator',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './algebra-calculator.component.html',
   styleUrls: ['./algebra-calculator.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

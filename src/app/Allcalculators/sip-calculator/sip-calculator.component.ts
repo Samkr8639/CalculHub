@@ -3,16 +3,19 @@ import { CommonModule, DecimalPipe, isPlatformBrowser } from '@angular/common';
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
 import { EmbedWidgetComponent } from '../../embed-widget/embed-widget.component';
 import { ShareWidgetComponent } from '../../share-widget/share-widget.component';
+import { AnalyticsService } from '../../services/analytics.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sip-calculator',
-  imports: [CommonModule, DecimalPipe, EmbedWidgetComponent, ShareWidgetComponent],
+  imports: [CommonModule, DecimalPipe, EmbedWidgetComponent, ShareWidgetComponent, RouterLink],
   templateUrl: './sip-calculator.component.html',
   styleUrls: ['./sip-calculator.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SipCalculatorComponent {
   private platformId = inject(PLATFORM_ID);
+  private analytics = inject(AnalyticsService);
 
   monthlyInvestment = signal<number | null>(10000);
   annualReturnRate = signal<number | null>(12);
@@ -47,18 +50,21 @@ export class SipCalculatorComponent {
     const value = (event.target as HTMLInputElement).value;
     this.monthlyInvestment.set(parseFloat(value) || null);
     this.calculateSip();
+    this.analytics.trackEvent('sip_slider_changed', { field: 'monthlyInvestment', value: parseFloat(value) || 0 });
   }
 
   onAnnualReturnRateChange(event: Event) {
     const value = (event.target as HTMLInputElement).value;
     this.annualReturnRate.set(parseFloat(value) || null);
     this.calculateSip();
+    this.analytics.trackEvent('sip_slider_changed', { field: 'annualReturn', value: parseFloat(value) || 0 });
   }
 
   onInvestmentTenureChange(event: Event) {
     const value = (event.target as HTMLInputElement).value;
     this.investmentTenureYears.set(parseFloat(value) || null);
     this.calculateSip();
+    this.analytics.trackEvent('sip_slider_changed', { field: 'tenure', value: parseFloat(value) || 0 });
   }
 
   calculateSip() {
