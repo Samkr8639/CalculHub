@@ -3,7 +3,7 @@ const https = require('https');
 
 // 1. Configuration
 const BASE_URL = 'https://www.calculhub.in';
-const KEY = '5c363d6b0e8b4e72ba6f7c6e00c3b0df'; // Generated static verification key
+const KEY = '7d8e9a2b3c4d5e6f7a8b9c0d1e2f3a4b'; // Generated static verification key
 const KEY_FILE = `public/${KEY}.txt`;
 
 // 2. Load URLs from the sitemap generation file
