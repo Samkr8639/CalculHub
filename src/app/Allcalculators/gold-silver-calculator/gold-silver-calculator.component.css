@@ -28,7 +28,7 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-.financial-calculator h1 {
+.financial-calculator h2.calculator-inner-title {
   text-align: center;
   color: var(--pure-white-text);
   margin-bottom: 10px;
