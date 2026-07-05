@@ -107,8 +107,8 @@ const req = https.request(options, (res) => {
   let responseData = '';
   res.on('data', (chunk) => { responseData += chunk; });
   res.on('end', () => {
-    if (res.statusCode === 200) {
-      console.log('Success! IndexNow has accepted the URL list for crawling.');
+    if (res.statusCode === 200 || res.statusCode === 202) {
+      console.log(`Success! IndexNow has accepted the URL list for crawling (Status: ${res.statusCode}).`);
     } else {
       console.error(`Error: Received status code ${res.statusCode} from IndexNow.`);
       console.error('Response data:', responseData);
