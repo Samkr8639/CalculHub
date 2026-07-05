@@ -47,6 +47,7 @@ export class CurrencyConverterComponent implements OnInit, AfterViewChecked {
   isLoading = signal<boolean>(false);
   hasError = signal<boolean>(false);
   errorMessage = signal<string>('');
+  lastUpdated = signal<string>('');
   public chartInstance = signal<Chart | null>(null);
   private chartShouldBeCreated = false;
 
@@ -116,6 +117,30 @@ export class CurrencyConverterComponent implements OnInit, AfterViewChecked {
   // Popular currencies for the quick summary list and chart
   popularCurrencies = ['USD', 'INR', 'EUR', 'GBP', 'JPY', 'AUD', 'CAD', 'SGD', 'AED', 'CNY'];
 
+  // Quick pair buttons for one-click preset
+  readonly quickPairs: { base: string; target: string; label: string }[] = [
+    { base: 'USD', target: 'INR', label: 'USD → INR' },
+    { base: 'EUR', target: 'INR', label: 'EUR → INR' },
+    { base: 'GBP', target: 'INR', label: 'GBP → INR' },
+    { base: 'AED', target: 'INR', label: 'AED → INR' },
+    { base: 'CAD', target: 'INR', label: 'CAD → INR' },
+    { base: 'USD', target: 'EUR', label: 'USD → EUR' },
+    { base: 'USD', target: 'GBP', label: 'USD → GBP' },
+  ];
+
+  // Popular amounts for conversion tables
+  readonly popularAmountsForward = [1, 5, 10, 25, 50, 100, 500, 1000, 5000, 10000];
+  readonly popularAmountsReverse = [1, 5, 10, 50, 100, 500, 1000, 5000, 10000, 50000];
+
+  setQuickPair(base: string, target: string): void {
+    this.baseCurrency.set(base);
+    this.targetCurrency.set(target);
+    this.searchBase.set('');
+    this.searchTarget.set('');
+    this.amount.set(100);
+    this.fetchRates(base);
+  }
+
   // Validation
   validationError = signal<string>('');
 
@@ -140,7 +165,6 @@ export class CurrencyConverterComponent implements OnInit, AfterViewChecked {
   });
 
   ngOnInit() {
-    console.log('CurrencyConverterComponent ngOnInit, baseCurrency=', this.baseCurrency());
     this.fetchRates(this.baseCurrency());
   }
 
@@ -161,9 +185,10 @@ export class CurrencyConverterComponent implements OnInit, AfterViewChecked {
 
     this.http.get<any>(url).subscribe({
       next: (data) => {
-        console.log('API response:', data);
-
         // Response: { date: "2026-05-22", usd: { inr: 84.5, eur: 0.92, ... } }
+        if (data.date) {
+          this.lastUpdated.set(data.date);
+        }
         const ratesRaw = data[baseLower];
 
         if (ratesRaw && typeof ratesRaw === 'object') {

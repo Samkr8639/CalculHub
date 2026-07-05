@@ -56,6 +56,18 @@
       </div>
     </div>
 
+    <!-- Quick Pair Buttons -->
+    <div class="quick-pairs">
+      <span class="quick-pairs-label">Popular:</span>
+      @for (pair of quickPairs; track pair.label) {
+        <button class="quick-pair-btn"
+          [class.active]="baseCurrency() === pair.base && targetCurrency() === pair.target"
+          (click)="setQuickPair(pair.base, pair.target)">
+          {{ pair.label }}
+        </button>
+      }
+    </div>
+
     <!-- API Loading & Error Handling -->
     @if (isLoading()) {
     <div class="loading-state">
@@ -87,6 +99,12 @@
           <p>1 {{ baseCurrency() }} = {{ rates()[targetCurrency()] | number:'1.2-6' }} {{ targetCurrency() }}</p>
           <p>1 {{ targetCurrency() }} = {{ inverseRate() | number:'1.2-6' }} {{ baseCurrency() }}</p>
         </div>
+        @if (lastUpdated()) {
+        <div class="freshness-badge">
+          <span class="freshness-dot"></span>
+          Rates as of {{ lastUpdated() }}
+        </div>
+        }
       </div>
       } @else {
       <div class="placeholder-message">
@@ -129,6 +147,51 @@
         </div>
       </div>
 
+      <!-- Popular Amounts Conversion Tables -->
+      @if (rates()[targetCurrency()]) {
+      <div class="popular-amounts-section">
+        <h3>Popular {{ baseCurrency() }} to {{ targetCurrency() }} Conversions</h3>
+        <div class="popular-amounts-grid">
+          <div class="amounts-table-container">
+            <table class="amounts-table">
+              <thead>
+                <tr>
+                  <th>{{ baseCurrency() }}</th>
+                  <th>{{ targetCurrency() }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (amt of popularAmountsForward; track amt) {
+                <tr>
+                  <td>{{ amt | number:'1.0-0' }} {{ baseCurrency() }}</td>
+                  <td>{{ amt * rates()[targetCurrency()] | number:'1.2-2' }} {{ targetCurrency() }}</td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+          <div class="amounts-table-container">
+            <table class="amounts-table">
+              <thead>
+                <tr>
+                  <th>{{ targetCurrency() }}</th>
+                  <th>{{ baseCurrency() }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (amt of popularAmountsReverse; track amt) {
+                <tr>
+                  <td>{{ amt | number:'1.0-0' }} {{ targetCurrency() }}</td>
+                  <td>{{ amt / rates()[targetCurrency()] | number:'1.2-2' }} {{ baseCurrency() }}</td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      }
+
     </section>
     }
     @else if (!isLoading() && !hasError() && (safeAmount() <= 0)) { <div class="placeholder-message">
@@ -136,6 +199,21 @@
   </div>
   }
 </div>
+</div>
+<!-- Trust Signals -->
+<div class="trust-signals">
+  <div class="trust-item">
+    <strong>170+</strong><span>Currencies Supported</span>
+  </div>
+  <div class="trust-item">
+    <strong>ECB</strong><span>Exchange Rate Source</span>
+  </div>
+  <div class="trust-item">
+    <strong>Free</strong><span>No Signup Required</span>
+  </div>
+  <div class="trust-item">
+    <strong>Daily</strong><span>Rate Updates</span>
+  </div>
 </div>
 
 <!-- SEO Content Section -->
@@ -245,7 +323,7 @@
 
       <div class="faq-item">
         <h3>Can I use this converter for cryptocurrency exchanges?</h3>
-        <p>This converter is designed for traditional fiat currencies and sources rates from central bank reference data. It does not cover cryptocurrency pairs such as BTC/USD or ETH/INR. For crypto conversions, please use our dedicated Crypto Calculator, which sources live prices from digital asset exchanges.</p>
+        <p>This converter is designed for traditional fiat currencies and sources rates from central bank reference data. It does not cover cryptocurrency pairs such as BTC/USD or ETH/INR. For crypto conversions, please use our dedicated <a routerLink="/market/crypto-calculator">Crypto Calculator</a>, which sources live prices from digital asset exchanges.</p>
       </div>
 
       <div class="faq-item">
@@ -253,14 +331,126 @@
         <p>Our rates are sourced from the Frankfurter API, which publishes European Central Bank reference rates. These are updated on every business day at approximately 16:00 CET. While not tick-by-tick live data, ECB reference rates are widely used as an objective, commercially neutral benchmark for informational and accounting purposes.</p>
       </div>
 
+      <div class="faq-item">
+        <h3>How do I convert USD to INR?</h3>
+        <p>Simply enter your amount in the converter above, select USD as the "From" currency and INR as the "To" currency. The tool instantly calculates the equivalent amount using the latest ECB reference rate. You can also click the "USD → INR" quick button below the input fields for an instant one-click preset. The conversion works for any amount — from ₹1 to ₹1 crore.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Why does Google show a different exchange rate than my bank?</h3>
+        <p>Google displays the mid-market (interbank) rate, which is the wholesale price at which banks trade with each other. Your bank adds a markup (spread) on top of this rate as profit, sometimes 1–3% for retail customers and even higher for cash transactions. The rate shown on this converter is also the mid-market rate, making it a fair benchmark. Always compare your bank's offered rate against the mid-market rate to understand the true cost of your conversion.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>What is the mid-market exchange rate?</h3>
+        <p>The mid-market rate is the midpoint between the buy (bid) and sell (ask) prices of a currency pair on global forex markets. It represents the true, unbiased value of one currency against another — without any provider markup or commission built in. No retail customer ever gets this exact rate, but it serves as the fairest benchmark to evaluate any quote you receive from banks, exchange services, or fintech apps.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Which currency converter is most accurate?</h3>
+        <p>The most accurate converters use mid-market (interbank) rates sourced from central banks or aggregated from major financial data providers. This converter uses European Central Bank reference rates via the Frankfurter API, providing a transparent, commercially neutral benchmark without hidden markups. For intraday precision, professional forex platforms offer tick-by-tick data, but for everyday conversions and comparisons, ECB-referenced rates are considered the gold standard for accuracy and neutrality.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Can banks charge different exchange rates?</h3>
+        <p>Yes, each bank sets its own retail exchange rate by adding a spread (markup) to the mid-market rate. The size of this spread varies significantly — from less than 0.5% at competitive fintech providers to 3–5% at traditional high-street banks, and as much as 8–10% at airport kiosks. Additionally, many banks charge a separate transaction or wire fee on top of the spread. Always request the total cost of conversion in your home currency before committing to a transaction.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>What is SWIFT and how does it affect international transfers?</h3>
+        <p>SWIFT (Society for Worldwide Interbank Financial Telecommunication) is a messaging network that banks use to securely transmit payment instructions across borders. It is not a payment system itself but enables banks to communicate the details of a transfer. A typical SWIFT transfer passes through one or more intermediary (correspondent) banks, each of which may deduct a fee from the transferred amount. This means the recipient can receive less than the sender intended. SWIFT transfers usually take 1–5 business days and are best for large sums where security and traceability are paramount.</p>
+      </div>
+
     </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>RBI Reference Rate &amp; How It Affects Your Transactions</h2>
+    <p>The Reserve Bank of India publishes a daily reference rate for four major currency pairs: USD/INR, EUR/INR, GBP/INR, and JPY/INR. This rate is calculated by the Financial Benchmarks India Limited (FBIL) based on a polling methodology that surveys a panel of contributing banks at a specific time each business day. The resulting rate reflects the prevailing market conditions at that snapshot and serves as the official benchmark for government transactions, customs duty calculations, and accounting valuations across India.</p>
+    <p>While the RBI reference rate is widely quoted in financial media and official documents, it is important to understand that it is <strong>not the rate you will receive</strong> when you walk into a bank branch or use an online remittance service. Banks use the reference rate as a starting point and then add their own spread — typically 0.5% to 2% for digital transfers and 2% to 5% for over-the-counter cash exchanges. The spread represents the bank's profit margin and also covers operational costs, regulatory compliance, and counterparty risk.</p>
+    <p>For NRI (Non-Resident Indian) remittances, the difference between the RBI reference rate and the rate offered by your bank or transfer service can translate to thousands of rupees on a large transfer. For example, on a $10,000 remittance, even a 1% spread difference means ₹8,500 more or less in the recipient's account (assuming an 85.00 rate). This is why comparing rates across multiple providers — using the mid-market rate displayed on this converter as your benchmark — is so important before initiating any transfer.</p>
+    <p>The FBIL also publishes historical reference rates going back several years, which businesses use for accounting, tax compliance, and transfer pricing documentation. If you need to report a transaction at the "RBI rate" for regulatory purposes, always use the FBIL published rate for the specific date of the transaction, not the rate from a commercial provider.</p>
+  </div>
+
+  <div class="seo-section">
+    <h2>Floating vs. Fixed Exchange Rate Systems</h2>
+    <p>Countries around the world adopt different exchange rate regimes depending on their economic objectives, trade relationships, and monetary policy goals. Understanding these systems helps explain why some currencies fluctuate constantly while others remain remarkably stable.</p>
+    <p><strong>Free-floating exchange rates</strong> are determined entirely by market forces — supply and demand in the global forex market. The US Dollar, Euro, British Pound, Japanese Yen, Australian Dollar, and Canadian Dollar all operate under free-floating regimes. Central banks in these countries influence their currency indirectly through interest rate policy and quantitative easing, but they do not set or defend specific exchange rate targets. Free-floating rates adjust automatically to economic shocks, but can experience significant short-term volatility.</p>
+    <p><strong>Fixed (pegged) exchange rates</strong> are set and maintained by the government or central bank at a specific value against another currency — most commonly the US Dollar. The UAE Dirham (AED) has been pegged to the USD at 3.6725 since 1997, and the Hong Kong Dollar (HKD) operates a linked exchange rate system maintaining a narrow band around 7.80 per USD. Fixed rates provide stability and predictability for trade and investment, but require the central bank to hold large foreign exchange reserves to defend the peg and can limit monetary policy flexibility.</p>
+    <p><strong>Managed float (dirty float)</strong> is a hybrid system where the currency is generally market-determined but the central bank intervenes periodically to smooth out excessive volatility or prevent the rate from moving to levels it considers destabilising. India's Rupee operates under this regime: the RBI allows the Rupee to respond to market forces but steps in when movements become disorderly. China's Yuan also operates as a managed float, with the People's Bank of China setting a daily midpoint rate and allowing trading within a 2% band.</p>
+    <p>For users of this converter, the practical implication is that rates for free-floating currencies (USD, EUR, GBP) will show more day-to-day variation than rates for pegged currencies (AED, SAR, HKD). If you are budgeting for travel or planning a large transfer involving a free-floating currency, checking the rate regularly and setting price alerts is advisable. For pegged currencies, the rate will remain effectively constant unless the peg itself is adjusted — a rare but impactful event.</p>
+  </div>
+
+  <div class="seo-section">
+    <h2>International Money Transfer: Choosing the Best Method</h2>
+    <p>Sending money across borders involves navigating a complex landscape of providers, fees, and exchange rate markups. The right choice depends on the amount being sent, the destination country, the urgency of the transfer, and how the recipient needs to access the funds. Here is a practical comparison of the most common methods.</p>
+    <div class="transfer-comparison-table">
+      <table class="rates-table">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Typical Fee</th>
+            <th>Rate Markup</th>
+            <th>Speed</th>
+            <th>Best For</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Bank Wire (SWIFT)</strong></td>
+            <td>₹500–₹2,000 + intermediary fees</td>
+            <td>1.5%–3%</td>
+            <td>1–5 business days</td>
+            <td>Large sums, business payments</td>
+          </tr>
+          <tr>
+            <td><strong>Specialist Services (Wise, OFX)</strong></td>
+            <td>0.3%–1% of amount</td>
+            <td>0%–0.5%</td>
+            <td>1–2 business days</td>
+            <td>Best rates for personal transfers</td>
+          </tr>
+          <tr>
+            <td><strong>PayPal International</strong></td>
+            <td>Free to 4.99%</td>
+            <td>2.5%–4%</td>
+            <td>Instant to 3 days</td>
+            <td>Small amounts, freelancers</td>
+          </tr>
+          <tr>
+            <td><strong>Western Union / MoneyGram</strong></td>
+            <td>₹200–₹1,500</td>
+            <td>2%–5%</td>
+            <td>Minutes to 1 day</td>
+            <td>Cash pickup in remote locations</td>
+          </tr>
+          <tr>
+            <td><strong>Forex Cards (Travel Cards)</strong></td>
+            <td>₹100–₹500 issuance fee</td>
+            <td>1.5%–2.5%</td>
+            <td>Pre-loaded</td>
+            <td>Travel spending, ATM withdrawals</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The total cost of a transfer consists of two components: the <strong>upfront fee</strong> and the <strong>exchange rate markup</strong>. Many providers advertise "zero fees" but compensate by offering a significantly worse exchange rate. To calculate the true cost, compare the amount the recipient will actually receive (in their local currency) across multiple providers for the same source amount. The provider that delivers the most to the recipient is the cheapest — regardless of what their fee structure looks like on the surface.</p>
+    <p>For Indian users sending or receiving money internationally, the Liberalised Remittance Scheme (LRS) allows resident individuals to remit up to $250,000 per financial year for permissible current and capital account transactions. Amounts above ₹7 lakh (approximately $8,300 USD) attract a Tax Collected at Source (TCS) of 20% under the 2023 budget rules, which is adjustable against your tax liability at filing time. Always factor in TCS when planning large outbound remittances, as it affects your immediate cash flow even though it is ultimately recoverable.</p>
   </div>
 
   <div class="seo-section">
     <h2>Related Calculators</h2>
     <div class="related-calc-grid">
-      <a routerLink="/financial/tax-calculator" class="related-calc-link">Income Tax Calculator</a>
       <a routerLink="/market/crypto-calculator" class="related-calc-link">Crypto Calculator</a>
+      <a routerLink="/market/gold-silver-calculator" class="related-calc-link">Gold &amp; Silver Rate Calculator</a>
+      <a routerLink="/financial/sip-calculator" class="related-calc-link">SIP Calculator</a>
+      <a routerLink="/financial/compound-interest" class="related-calc-link">Compound Interest Calculator</a>
+      <a routerLink="/financial/tax-calculator" class="related-calc-link">Income Tax Calculator</a>
+      <a routerLink="/financial/loan-eligibility-calculator" class="related-calc-link">Loan Eligibility Calculator</a>
+      <a routerLink="/financial/gst-calculator" class="related-calc-link">GST Calculator</a>
+      <a routerLink="/financial/lumpsum-calculator" class="related-calc-link">Lumpsum Calculator</a>
+      <a routerLink="/financial/fd-calculator" class="related-calc-link">Fixed Deposit Calculator</a>
+      <a routerLink="/financial/nps-calculator" class="related-calc-link">NPS Calculator</a>
     </div>
   </div>
 
