@@ -8,6 +8,8 @@
     "prebuild": "node generate-sitemap.js",
     "fix-seo:dry": "node tools/seo-fixer.js --dry-run",
     "fix-seo": "node tools/seo-fixer.js --apply",
+    "submit-indexnow": "node submit-indexnow.js",
+    "submit-google": "node submit-google.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:myapp": "node dist/myapp/server/server.mjs"
