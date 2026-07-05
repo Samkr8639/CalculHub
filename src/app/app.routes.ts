@@ -943,6 +943,11 @@ export const routes: Routes = [
     }
   },
   {
+    path: 'blog/how-compound-interest-works-guide',
+    redirectTo: 'blog/demystifying-compound-interest',
+    pathMatch: 'full'
+  },
+  {
     path: 'blog/:slug',
     loadComponent: () => import('./blog/blog.component').then(m => m.BlogComponent),
   },
