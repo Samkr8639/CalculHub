@@ -99,13 +99,18 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   categoryKeys = computed(() => Object.keys(this.categorizedCalculators()));
 
-  // Eagerly kick off Swiper registration so it's ready before view renders
-  private swiperReady = isPlatformBrowser(this.platformId)
-    ? import('swiper/element/bundle').then(({ register }) => register())
-    : Promise.resolve();
-
   ngOnInit() {
-    // Swiper registration is already in-flight from the field initializer above
+    if (isPlatformBrowser(this.platformId)) {
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(() => {
+          import('swiper/element/bundle').then(({ register }) => register());
+        });
+      } else {
+        setTimeout(() => {
+          import('swiper/element/bundle').then(({ register }) => register());
+        }, 1500);
+      }
+    }
   }
 
   ngAfterViewInit() {
