@@ -45,3 +45,6 @@ Thumbs.db
 # Google API Credentials (Private keys)
 google-key.json
 
+# Gemini local config/caches
+.gemini/
+
