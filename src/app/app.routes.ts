@@ -259,8 +259,8 @@ export const routes: Routes = [
         path: 'bike-loan-emi-calculator',
         loadComponent: () => import('./Allcalculators/bike-loan-emi-calculator/bike-loan-emi-calculator').then(m => m.BikeLoanEmiCalculatorComponent),
         data: {
-          title: 'Bike Loan EMI Calculator – Two Wheeler EMI with Down Payment | CalculHub',
-          description: 'Free Bike Loan EMI Calculator India — calculate two-wheeler EMI with down payment, compare tenures 1–5 years, view total interest and repayment instantly. No login needed.',
+          title: 'Bike EMI Calculator with Down Payment – See Your Monthly Payment in Seconds | CalculHub',
+          description: 'Calculate your bike or two-wheeler EMI with down payment instantly. Compare interest rates, tenures, and monthly payments for scooters and motorcycles.',
           ogTitle: 'Bike Loan EMI Calculator – Calculate Two Wheeler Loan EMI Instantly',
           ogDescription: 'Calculate bike loan EMI in seconds. Enter loan amount, interest rate and tenure. See monthly EMI, total interest and repayment. Free, accurate, no signup required.',
           keywords: 'bike loan emi calculator, two wheeler loan emi calculator, bike emi calculator with down payment, motorcycle loan calculator, bike loan calculator india, two wheeler emi calculator, bike finance calculator',
